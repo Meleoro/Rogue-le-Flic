@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMovements : MonoBehaviour
+public class MovementsChara : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
