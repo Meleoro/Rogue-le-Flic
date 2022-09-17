@@ -15,10 +15,15 @@ public class GenerationPro : MonoBehaviour
     
     public Map map = new Map();
     
+    [Header("Rooms")]
     public GameObject spawn;
     public GameObject room;
     public GameObject boss;
-
+    
+    [Header("Mini Map")]
+    public GameObject miniSpawn;
+    public GameObject miniRoom;
+    public GameObject miniBoss;
 
     public Vector2 spawnLocation;
     private int saveX;
@@ -56,7 +61,7 @@ public class GenerationPro : MonoBehaviour
                 int y = Random.Range(3, 5);
 
                 map.list[x].list[y] = spawn;
-                
+
                 saveX = x;
                 saveY = y;
 

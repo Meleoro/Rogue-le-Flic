@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 67480014}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -17.48152, y: -1.6198106, z: 1.2357332}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1343446341}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 190732183}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -307,8 +307,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459bbf3a225e89d4b853db46388e4b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 5.5
-  speedY: 4.5
+  speedX: 17
+  speedY: 14
+  dragDeceleration: 5
+  dragMultiplier: 3
 --- !u!114 &190732184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +344,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &190732186
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -447,7 +449,7 @@ Transform:
   m_GameObject: {fileID: 225499249}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -17.52152, y: -3.4998107, z: 1.2357332}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1343446341}
@@ -561,6 +563,9 @@ MonoBehaviour:
   spawn: {fileID: 1332099545113867345, guid: 5d2426e9f53200945ac1f547226decda, type: 3}
   room: {fileID: 6460342174784775937, guid: 3e05245da97979c47985c145a182feba, type: 3}
   boss: {fileID: 1456235560539892883, guid: 140442aea99aab14ba094f7f5dc2f580, type: 3}
+  miniSpawn: {fileID: 0}
+  miniRoom: {fileID: 0}
+  miniBoss: {fileID: 0}
   spawnLocation: {x: 0, y: 0}
 --- !u!4 &294740677
 Transform:
@@ -591,6 +596,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerX: 0
   playerY: 0
+  activeRoom: {fileID: 0}
+  mapActive:
+    list:
+    - list:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - list:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - list:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - list:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - list:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - list:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - list:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - list:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
 --- !u!1 &1343446340
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,7 +933,7 @@ Transform:
   m_GameObject: {fileID: 1713657076}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -17.45152, y: -5.3498106, z: 1.2357332}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1343446341}

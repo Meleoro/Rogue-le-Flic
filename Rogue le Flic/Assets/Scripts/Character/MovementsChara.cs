@@ -8,11 +8,13 @@ public class MovementsChara : MonoBehaviour
     public static MovementsChara Instance;
     private Controls controls;
 
-    [Header("Movements X")] 
+    [Header("Movement Speeds")] 
     public float speedX;
-    
-    [Header("Movements Y")] 
     public float speedY;
+
+    [Header("Deceleration")] 
+    public float dragDeceleration;
+    public float dragMultiplier;
 
 
     private void Awake()
@@ -37,10 +39,15 @@ public class MovementsChara : MonoBehaviour
     }
 
 
+    private void Start()
+    {
+        ManagerChara.Instance.rb.drag = dragDeceleration * dragMultiplier;
+    }
+
     public void MoveCharacter()
     {
         Vector2 direction = controls.Character.Movements.ReadValue<Vector2>();
-        
-        ManagerChara.Instance.rb.velocity = new Vector2(direction.x * speedX, direction.y* speedY);
+
+        ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * speedX, direction.y* speedY));
     }
 }
