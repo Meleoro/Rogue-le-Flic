@@ -35,6 +35,33 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Tir"",
+                    ""type"": ""Button"",
+                    ""id"": ""855400ff-3eb1-4a6f-bdf8-30dcb59db666"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Enter"",
+                    ""type"": ""Button"",
+                    ""id"": ""63b2acc3-36d4-402f-a4ce-3b7067cff890"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""8e4cb25b-1ac9-4440-92d7-b7fe4f857d95"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -92,6 +119,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Movements"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c9c3c2d-73f6-4fa6-bdbe-764af8dff296"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Character"",
+                    ""action"": ""Tir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""caf1eea5-6894-4c0f-ae45-f1841c37147c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Character"",
+                    ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1e9a425-7ebe-4f46-ba8b-bd88574d89da"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Character"",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -107,8 +167,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isOR"": false
                 },
                 {
-                    ""devicePath"": ""<Gamepad>"",
-                    ""isOptional"": true,
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
                     ""isOR"": false
                 }
             ]
@@ -118,6 +178,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         // Character
         m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
         m_Character_Movements = m_Character.FindAction("Movements", throwIfNotFound: true);
+        m_Character_Tir = m_Character.FindAction("Tir", throwIfNotFound: true);
+        m_Character_Enter = m_Character.FindAction("Enter", throwIfNotFound: true);
+        m_Character_MousePosition = m_Character.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -178,11 +241,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Character;
     private ICharacterActions m_CharacterActionsCallbackInterface;
     private readonly InputAction m_Character_Movements;
+    private readonly InputAction m_Character_Tir;
+    private readonly InputAction m_Character_Enter;
+    private readonly InputAction m_Character_MousePosition;
     public struct CharacterActions
     {
         private @Controls m_Wrapper;
         public CharacterActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movements => m_Wrapper.m_Character_Movements;
+        public InputAction @Tir => m_Wrapper.m_Character_Tir;
+        public InputAction @Enter => m_Wrapper.m_Character_Enter;
+        public InputAction @MousePosition => m_Wrapper.m_Character_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -195,6 +264,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Movements.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovements;
                 @Movements.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovements;
                 @Movements.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMovements;
+                @Tir.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnTir;
+                @Tir.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnTir;
+                @Tir.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnTir;
+                @Enter.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEnter;
+                @Enter.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEnter;
+                @Enter.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEnter;
+                @MousePosition.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMousePosition;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -202,6 +280,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Movements.started += instance.OnMovements;
                 @Movements.performed += instance.OnMovements;
                 @Movements.canceled += instance.OnMovements;
+                @Tir.started += instance.OnTir;
+                @Tir.performed += instance.OnTir;
+                @Tir.canceled += instance.OnTir;
+                @Enter.started += instance.OnEnter;
+                @Enter.performed += instance.OnEnter;
+                @Enter.canceled += instance.OnEnter;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
             }
         }
     }
@@ -218,5 +305,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     public interface ICharacterActions
     {
         void OnMovements(InputAction.CallbackContext context);
+        void OnTir(InputAction.CallbackContext context);
+        void OnEnter(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }
