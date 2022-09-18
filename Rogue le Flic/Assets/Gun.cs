@@ -1,9 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class Gun : MonoBehaviour
 {
@@ -46,16 +50,18 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        // ON POSITIONNE LE GUN SI LE JOUEUR LE PORTE
         if (!onGround)
         {
             transform.position = ManagerChara.Instance.transform.position;
-            
-            float angle = OrientateGun();
+
+            Vector2 mousePos = OrientateGun().normalized;
+            float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
             
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
         
-        if (controls.Character.Tir.WasPerformedThisFrame())
+        if (controls.Character.Tir.IsPressed())
         {
             Shoot();
         }
@@ -77,12 +83,14 @@ public class Gun : MonoBehaviour
             for (int k = 0; k < nrbBulletsShot; k++)
             {
                 float dispersion = Random.Range(-shotDispersion, shotDispersion);
-
-                float angle = OrientateGun();
-                Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 
+                Vector2 mousePos = OrientateGun();
+                Vector2 gunPos = ReferenceCamera.Instance.camera.ScreenToWorldPoint(transform.position);
+                
+                float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+
                 GameObject refBullet = Instantiate(bullet, transform.position, 
-                    Quaternion.EulerAngles(rotation.x, rotation.y, rotation.z + dispersion));
+                    Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
 
                 Destroy(refBullet, 4f);
             }
@@ -93,11 +101,9 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public float OrientateGun()
+    public Vector2 OrientateGun()
     {
-        Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToWorldPoint(controls.Character.MousePosition.ReadValue<Vector2>());
-        
-        return Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+        return ReferenceCamera.Instance.camera.ScreenToWorldPoint(controls.Character.MousePosition.ReadValue<Vector2>());
     }
 
     private void OnTriggerEnter2D(Collider2D col)
