@@ -54,9 +54,8 @@ public class Gun : MonoBehaviour
         if (!onGround)
         {
             transform.position = ManagerChara.Instance.transform.position;
-
-            Vector2 mousePos = OrientateGun().normalized;
-            float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+            
+            float angle = OrientateGun();
             
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
@@ -83,11 +82,8 @@ public class Gun : MonoBehaviour
             for (int k = 0; k < nrbBulletsShot; k++)
             {
                 float dispersion = Random.Range(-shotDispersion, shotDispersion);
-                
-                Vector2 mousePos = OrientateGun();
-                Vector2 gunPos = ReferenceCamera.Instance.camera.ScreenToWorldPoint(transform.position);
-                
-                float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+
+                float angle = OrientateGun();
 
                 GameObject refBullet = Instantiate(bullet, transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
@@ -100,10 +96,15 @@ public class Gun : MonoBehaviour
             StartCoroutine(ShotCooldown());
         }
     }
-
-    public Vector2 OrientateGun()
+    
+    
+    public float OrientateGun()
     {
-        return ReferenceCamera.Instance.camera.ScreenToWorldPoint(controls.Character.MousePosition.ReadValue<Vector2>());
+        Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToViewportPoint(controls.Character.MousePosition.ReadValue<Vector2>());
+        Vector2 charaPos = ReferenceCamera.Instance.camera.WorldToViewportPoint(ManagerChara.Instance.transform.position);
+
+        float angle = Mathf.Atan2(mousePos.y - charaPos.y, mousePos.x - charaPos.x) * Mathf.Rad2Deg;
+        return angle;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
