@@ -9,16 +9,30 @@ using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
+using DG.Tweening;
+using UnityEngine.Rendering.Universal;
+
 public class Gun : MonoBehaviour
 {
     [Header("References")]
     public GameObject bullet;
+
+    public Light2D lightShot;
     private Controls controls;
 
     [Header("Shot Proprieties")] 
     public int nrbBulletsShot;
     public float cooldownShot;
     public float shotDispersion;
+
+    [Header("Camera Shake")] 
+    public float shakeDuration;
+    public float shakeAmplitude;
+
+    [Header("Light")] 
+    public float lightShotIntensity;
+    public float lightShotDuration;
+    private float timerLight;
 
     [Header("Others")] 
     public float rotationSpeed;
@@ -45,6 +59,8 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         onGround = true;
+
+        lightShot.intensity = 0;
     }
 
 
@@ -60,11 +76,13 @@ public class Gun : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
         
+        // TIR
         if (controls.Character.Tir.IsPressed())
         {
             Shoot();
         }
 
+        // ON RAMASSE L'ARME
         if (controls.Character.Enter.WasPerformedThisFrame())
         {
             if (canBePicked)
@@ -72,6 +90,14 @@ public class Gun : MonoBehaviour
                 onGround = false;
             }
         }
+
+        if (timerLight > 0)
+        {
+            timerLight -= Time.deltaTime;
+            lightShot.intensity = timerLight * lightShotIntensity;
+        }
+        else
+            lightShot.intensity = 0;
     }
 
 
@@ -79,21 +105,24 @@ public class Gun : MonoBehaviour
     {
         if (!onGround && !onCooldown)
         {
+            // BOUCLE QUI GENERE TOUTES LES BALLES
             for (int k = 0; k < nrbBulletsShot; k++)
             {
                 float dispersion = Random.Range(-shotDispersion, shotDispersion);
-
+                
                 float angle = OrientateGun();
 
                 GameObject refBullet = Instantiate(bullet, transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
 
-                Destroy(refBullet, 4f);
+                Destroy(refBullet, 3f);
             }
             
             onCooldown = true;
-
+            timerLight = lightShotDuration;
             StartCoroutine(ShotCooldown());
+            
+            ReferenceCamera.Instance.camera.DOShakePosition(shakeDuration, shakeAmplitude);
         }
     }
     
@@ -102,9 +131,8 @@ public class Gun : MonoBehaviour
     {
         Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToViewportPoint(controls.Character.MousePosition.ReadValue<Vector2>());
         Vector2 charaPos = ReferenceCamera.Instance.camera.WorldToViewportPoint(ManagerChara.Instance.transform.position);
-
-        float angle = Mathf.Atan2(mousePos.y - charaPos.y, mousePos.x - charaPos.x) * Mathf.Rad2Deg;
-        return angle;
+        
+        return Mathf.Atan2(mousePos.y - charaPos.y, mousePos.x - charaPos.x) * Mathf.Rad2Deg;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
