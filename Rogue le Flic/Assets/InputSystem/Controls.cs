@@ -62,6 +62,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Module1"",
+                    ""type"": ""Button"",
+                    ""id"": ""2f385c1e-4299-457f-957d-f7116cbe4c32"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Module2"",
+                    ""type"": ""Button"",
+                    ""id"": ""122a1fd4-f53f-4507-a00b-3b0f99408dbd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +170,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33f35110-6f26-43e6-8bab-ba125da92ca9"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Character"",
+                    ""action"": ""Module1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""558ee6c1-99c6-42df-9ed0-69eff131ca36"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Character"",
+                    ""action"": ""Module2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -181,6 +221,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Character_Tir = m_Character.FindAction("Tir", throwIfNotFound: true);
         m_Character_Enter = m_Character.FindAction("Enter", throwIfNotFound: true);
         m_Character_MousePosition = m_Character.FindAction("MousePosition", throwIfNotFound: true);
+        m_Character_Module1 = m_Character.FindAction("Module1", throwIfNotFound: true);
+        m_Character_Module2 = m_Character.FindAction("Module2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -244,6 +286,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Tir;
     private readonly InputAction m_Character_Enter;
     private readonly InputAction m_Character_MousePosition;
+    private readonly InputAction m_Character_Module1;
+    private readonly InputAction m_Character_Module2;
     public struct CharacterActions
     {
         private @Controls m_Wrapper;
@@ -252,6 +296,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Tir => m_Wrapper.m_Character_Tir;
         public InputAction @Enter => m_Wrapper.m_Character_Enter;
         public InputAction @MousePosition => m_Wrapper.m_Character_MousePosition;
+        public InputAction @Module1 => m_Wrapper.m_Character_Module1;
+        public InputAction @Module2 => m_Wrapper.m_Character_Module2;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -273,6 +319,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @MousePosition.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMousePosition;
+                @Module1.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnModule1;
+                @Module1.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnModule1;
+                @Module1.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnModule1;
+                @Module2.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnModule2;
+                @Module2.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnModule2;
+                @Module2.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnModule2;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -289,6 +341,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @Module1.started += instance.OnModule1;
+                @Module1.performed += instance.OnModule1;
+                @Module1.canceled += instance.OnModule1;
+                @Module2.started += instance.OnModule2;
+                @Module2.performed += instance.OnModule2;
+                @Module2.canceled += instance.OnModule2;
             }
         }
     }
@@ -308,5 +366,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnTir(InputAction.CallbackContext context);
         void OnEnter(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnModule1(InputAction.CallbackContext context);
+        void OnModule2(InputAction.CallbackContext context);
     }
 }

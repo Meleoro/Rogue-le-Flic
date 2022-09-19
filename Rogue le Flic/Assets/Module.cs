@@ -12,42 +12,23 @@ public class Module : MonoBehaviour
 
     private void Update()
     {
-        if (MovementsChara.Instance.controls.Character.Enter.WasPerformedThisFrame() && canBeGrab)
+        if (MovementsChara.Instance.controls.Character.Module1.WasPerformedThisFrame() && canBeGrab)
         {
-            if (numberEffect == 1)
-            {
-                Effet1();
-            }
+            ModuleManager.Instance.Module1 = numberEffect;
             
-            else if (numberEffect == 2)
-            {
-                Effet2();
-            }
-
             Destroy(gameObject);
         }
-        
+
+        else if (MovementsChara.Instance.controls.Character.Module2.WasPerformedThisFrame() && canBeGrab)
+        {
+            ModuleManager.Instance.Module2 = numberEffect;
+            
+            Destroy(gameObject);
+        }
     }
 
 
-    // GROSSISSEMENT DES BALLES
-    public void Effet1()
-    {
-        Gun gun = ManagerChara.Instance.activeGun.GetComponent<Gun>();
 
-        gun.bulletSize *= 4;
-    }
-    
-    // DOUBLE TIRE
-    public void Effet2()
-    {
-        Gun gun = ManagerChara.Instance.activeGun.GetComponent<Gun>();
-
-        gun.doubleBullet = true;
-    }
-    
-    
-    
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player")

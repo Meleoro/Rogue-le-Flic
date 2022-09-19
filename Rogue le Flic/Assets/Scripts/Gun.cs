@@ -38,7 +38,8 @@ public class Gun : MonoBehaviour
     private float timerLight;
 
     [Header("Effets Modules")] 
-    public float bulletSize;
+    public float originalBulletSize;
+    [HideInInspector] public float bulletSize;
     public bool doubleBullet;
 
     [Header("Others")] 
@@ -67,6 +68,7 @@ public class Gun : MonoBehaviour
     {
         onGround = true;
 
+        bulletSize = originalBulletSize;
         lightShot.intensity = 0;
     }
 
