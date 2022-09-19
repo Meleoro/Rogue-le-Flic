@@ -16,9 +16,12 @@ public class Gun : MonoBehaviour
 {
     [Header("References")]
     public GameObject bullet;
-
     public Light2D lightShot;
     private Controls controls;
+
+    [Header("Positions")] 
+    public Vector2 posLeft;
+    public Vector2 posRight;
 
     [Header("Shot Proprieties")] 
     public int nrbBulletsShot;
@@ -35,7 +38,7 @@ public class Gun : MonoBehaviour
     private float timerLight;
 
     [Header("Others")] 
-    public float rotationSpeed;
+    public float knockback;
     private bool onGround;
     private bool canBePicked;
     private bool onCooldown;
@@ -69,11 +72,20 @@ public class Gun : MonoBehaviour
         // ON POSITIONNE LE GUN SI LE JOUEUR LE PORTE
         if (!onGround)
         {
-            transform.position = ManagerChara.Instance.transform.position;
-            
             float angle = OrientateGun();
             
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            
+            if (angle > 90 || angle < -90)
+            {
+                transform.position = ManagerChara.Instance.transform.position + (Vector3) posLeft;
+                transform.Rotate(180, 0, 0);
+            }
+            else
+            {
+                transform.position = ManagerChara.Instance.transform.position + (Vector3) posRight;
+            }
         }
         
         // TIR
@@ -91,6 +103,7 @@ public class Gun : MonoBehaviour
             }
         }
 
+        // GESTION DE LA LUMIERE QUAND LE JOUEUR TIRE
         if (timerLight > 0)
         {
             timerLight -= Time.deltaTime;
@@ -120,10 +133,22 @@ public class Gun : MonoBehaviour
             
             onCooldown = true;
             timerLight = lightShotDuration;
+            
             StartCoroutine(ShotCooldown());
+            Knockback();
             
             ReferenceCamera.Instance.camera.DOShakePosition(shakeDuration, shakeAmplitude);
         }
+    }
+
+    public void Knockback()
+    {
+        Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToViewportPoint(controls.Character.MousePosition.ReadValue<Vector2>());
+        Vector2 charaPos = ReferenceCamera.Instance.camera.WorldToViewportPoint(ManagerChara.Instance.transform.position);
+
+        Vector2 direction = charaPos - mousePos;
+
+        ManagerChara.Instance.rb.AddForce(direction.normalized * knockback, ForceMode2D.Impulse);
     }
     
     

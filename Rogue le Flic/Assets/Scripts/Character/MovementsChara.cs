@@ -48,6 +48,6 @@ public class MovementsChara : MonoBehaviour
     {
         Vector2 direction = controls.Character.Movements.ReadValue<Vector2>();
 
-        ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * speedX, direction.y* speedY));
+        ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * speedX, direction.y* speedY), ForceMode2D.Force);
     }
 }

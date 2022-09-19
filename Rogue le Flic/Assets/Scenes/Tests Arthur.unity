@@ -307,8 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459bbf3a225e89d4b853db46388e4b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 14
-  speedY: 11.5
+  speedX: 12
+  speedY: 10.5
   dragDeceleration: 5
   dragMultiplier: 3
 --- !u!114 &190732184
@@ -396,7 +396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 199436472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.054, y: 0.019, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -420,7 +420,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.449
   m_Color: {r: 1, g: 0.48424423, b: 0.0141509175, a: 1}
-  m_Intensity: 1.5
+  m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 0.58
+  m_PointLightOuterRadius: 0.52
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -953,7 +953,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e64428afc7f9f0545877d01e9a84befa, type: 3}
-  m_Color: {r: 0.9056604, g: 0.7274495, b: 0.41960785, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1038,14 +1038,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 751115274}
   lightShot: {fileID: 1516472487}
+  posLeft: {x: -0.3, y: 0}
+  posRight: {x: 0.3, y: 0}
   nrbBulletsShot: 8
-  cooldownShot: 1
-  shotDispersion: 6
+  cooldownShot: 0.8
+  shotDispersion: 5
   shakeDuration: 0.5
   shakeAmplitude: 0.3
   lightShotIntensity: 15
   lightShotDuration: 0.1
-  rotationSpeed: 10
+  knockback: 11
 --- !u!212 &1029428172
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1088,7 +1090,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 8eff8b1396c349942a6c95e55ea25786, type: 3}
-  m_Color: {r: 0.7075472, g: 0.3037113, b: 0.3343436, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1106,7 +1108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029428169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.29, y: -1.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
