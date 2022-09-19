@@ -703,6 +703,7 @@ GameObject:
   - component: {fileID: 294740677}
   - component: {fileID: 294740676}
   - component: {fileID: 294740678}
+  - component: {fileID: 294740679}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -984,6 +985,20 @@ MonoBehaviour:
       - {fileID: 0}
       - {fileID: 0}
       - {fileID: 0}
+--- !u!114 &294740679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294740675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6191f9c43a22f1a45a736129cf04b528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Module1: 0
+  Module2: 0
 --- !u!1 &751115274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,6 +1188,7 @@ MonoBehaviour:
   shakeAmplitude: 0.3
   lightShotIntensity: 15
   lightShotDuration: 0.1
+  originalBulletSize: 1
   bulletSize: 1
   doubleBullet: 0
   knockback: 11

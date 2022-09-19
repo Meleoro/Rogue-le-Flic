@@ -23,24 +23,36 @@ public class ModuleManager : MonoBehaviour
     {
         if (Module1 != 0)
         {
-            if(Module1 == 1)
-                Effet1();
-            
-            else if(Module1 == 2)
-                Effet2();
+            Search(Module1);
         }
-
-
+        
         if (Module2 != 0)
         {
-            if(Module2 == 1)
-                Effet1();
-            
-            else if(Module2 == 2)
-                Effet2();
+            Search(Module2);
         }
     }
 
+    private void LateUpdate()
+    {
+        Gun gun = ManagerChara.Instance.activeGun.GetComponent<Gun>();
+
+        if (gun is not null)
+        {
+            gun.bulletSize = gun.originalBulletSize;
+            gun.doubleBullet = false;
+        }
+    }
+
+
+    public void Search(int module)
+    {
+        if(module == 1)
+            Effet1();
+            
+        else if(module == 2)
+            Effet2();
+    }
+    
 
     // GROSSISSEMENT DES BALLES
     public void Effet1()
