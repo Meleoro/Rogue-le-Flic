@@ -37,6 +37,10 @@ public class Gun : MonoBehaviour
     public float lightShotDuration;
     private float timerLight;
 
+    [Header("Effets Modules")] 
+    public float bulletSize;
+    public bool doubleBullet;
+
     [Header("Others")] 
     public float knockback;
     private bool onGround;
@@ -100,6 +104,8 @@ public class Gun : MonoBehaviour
             if (canBePicked)
             {
                 onGround = false;
+
+                ManagerChara.Instance.activeGun = gameObject;
             }
         }
 
@@ -124,11 +130,21 @@ public class Gun : MonoBehaviour
                 float dispersion = Random.Range(-shotDispersion, shotDispersion);
                 
                 float angle = OrientateGun();
-
+                
                 GameObject refBullet = Instantiate(bullet, transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
 
+                // DOUBLE TIR ?
+                if (doubleBullet)
+                {
+                    StartCoroutine(DoubleShot());
+                }
+                
+                // TAILLE DES TIRS ?
+                refBullet.transform.localScale = new Vector3(bulletSize, bulletSize, bulletSize);
+                
                 Destroy(refBullet, 3f);
+                
             }
             
             onCooldown = true;
@@ -151,7 +167,6 @@ public class Gun : MonoBehaviour
         ManagerChara.Instance.rb.AddForce(direction.normalized * knockback, ForceMode2D.Impulse);
     }
     
-    
     public float OrientateGun()
     {
         Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToViewportPoint(controls.Character.MousePosition.ReadValue<Vector2>());
@@ -160,6 +175,7 @@ public class Gun : MonoBehaviour
         return Mathf.Atan2(mousePos.y - charaPos.y, mousePos.x - charaPos.x) * Mathf.Rad2Deg;
     }
 
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.tag == "Player")
@@ -177,5 +193,23 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(cooldownShot);
 
         onCooldown = false;
+    }
+
+    IEnumerator DoubleShot()
+    {
+        yield return new WaitForSeconds(0.05f);
+
+        float dispersion = Random.Range(-shotDispersion, shotDispersion);
+                
+        float angle = OrientateGun();
+                
+        GameObject refBullet = Instantiate(bullet, transform.position, 
+            Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
+        
+        // TAILLE DES TIRS ?
+        refBullet.transform.localScale = new Vector3(bulletSize, bulletSize, bulletSize);
+
+        Destroy(refBullet, 3f);
+        
     }
 }

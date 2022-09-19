@@ -6,7 +6,7 @@ using UnityEngine;
 public class MovementsChara : MonoBehaviour
 {
     public static MovementsChara Instance;
-    private Controls controls;
+    public Controls controls;
 
     [Header("Movement Speeds")] 
     public float speedX;

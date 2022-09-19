@@ -6,7 +6,9 @@ using UnityEngine;
 public class ManagerChara : MonoBehaviour
 {
     public static ManagerChara Instance;
+    
     [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public GameObject activeGun;
 
     private void Awake()
     {
