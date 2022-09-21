@@ -10,6 +10,8 @@ public class ModuleManager : MonoBehaviour
     public int Module1;
     public int Module2;
 
+    private Gun gun;
+
     private void Awake()
     {
         if (Instance == null)
@@ -34,7 +36,8 @@ public class ModuleManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        Gun gun = ManagerChara.Instance.activeGun.GetComponent<Gun>();
+        if(ManagerChara.Instance.activeGun != null)
+            gun = ManagerChara.Instance.activeGun.GetComponent<Gun>();
 
         if (gun is not null)
         {

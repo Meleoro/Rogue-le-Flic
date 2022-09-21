@@ -73,7 +73,7 @@ public class Gun : MonoBehaviour
     }
 
 
-    private void Update()
+    private void LateUpdate()
     {
         // ON POSITIONNE LE GUN SI LE JOUEUR LE PORTE
         if (!onGround)
@@ -130,7 +130,7 @@ public class Gun : MonoBehaviour
             for (int k = 0; k < nrbBulletsShot; k++)
             {
                 float dispersion = Random.Range(-shotDispersion, shotDispersion);
-                
+
                 float angle = OrientateGun();
                 
                 GameObject refBullet = Instantiate(bullet, transform.position, 
@@ -154,7 +154,7 @@ public class Gun : MonoBehaviour
             
             StartCoroutine(ShotCooldown());
             Knockback();
-            
+
             ReferenceCamera.Instance.camera.DOShakePosition(shakeDuration, shakeAmplitude);
         }
     }
@@ -171,8 +171,8 @@ public class Gun : MonoBehaviour
     
     public float OrientateGun()
     {
-        Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToViewportPoint(controls.Character.MousePosition.ReadValue<Vector2>());
-        Vector2 charaPos = ReferenceCamera.Instance.camera.WorldToViewportPoint(ManagerChara.Instance.transform.position);
+        Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToWorldPoint(controls.Character.MousePosition.ReadValue<Vector2>());
+        Vector2 charaPos = ManagerChara.Instance.transform.position;
         
         return Mathf.Atan2(mousePos.y - charaPos.y, mousePos.x - charaPos.x) * Mathf.Rad2Deg;
     }
