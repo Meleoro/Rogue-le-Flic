@@ -54,10 +54,35 @@ public class CameraMovements : MonoBehaviour
             newY =  charaPos.y;
         }
 
+        else
+        {
+            if (limites.limitUp.transform.position.y <= charaPos.y + height)
+            {
+                newY = limites.limitUp.transform.position.y - height;
+            }
+            else
+            {
+                newY = limites.limitBottom.transform.position.y + height;
+            }
+        }
+        
+
         if (limites.limitLeft.transform.position.x < charaPos.x - width && 
             limites.limitRight.transform.position.x > charaPos.x + width)
         {
             newX = charaPos.x;
+        }
+        
+        else
+        {
+            if (limites.limitLeft.transform.position.x >= charaPos.x - width)
+            {
+                newX = limites.limitLeft.transform.position.x + width;
+            }
+            else
+            {
+                newX = limites.limitRight.transform.position.x - width;
+            }
         }
 
 
