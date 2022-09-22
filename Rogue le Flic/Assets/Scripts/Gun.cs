@@ -27,6 +27,8 @@ public class Gun : MonoBehaviour
     public int nrbBulletsShot;
     public float cooldownShot;
     public float shotDispersion;
+    public AnimationCurve gunRotate;
+    private float timerShot;
 
     [Header("Camera Shake")] 
     public float shakeDuration;
@@ -47,6 +49,7 @@ public class Gun : MonoBehaviour
     private bool onGround;
     private bool canBePicked;
     private bool onCooldown;
+    private bool lookLeft;
 
 
     private void Awake()
@@ -82,6 +85,18 @@ public class Gun : MonoBehaviour
             
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+            if (timerShot > 0)
+            {
+                timerShot -= Time.deltaTime;
+
+                float addValue = gunRotate.Evaluate(1 - timerShot);
+            
+                transform.rotation = Quaternion.AngleAxis(angle + addValue * 20, Vector3.forward);
+            }
+            else
+            {
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
             
             if (angle > 90 || angle < -90)
             {
@@ -110,6 +125,7 @@ public class Gun : MonoBehaviour
                 ManagerChara.Instance.activeGun = gameObject;
             }
         }
+
 
         // GESTION DE LA LUMIERE QUAND LE JOUEUR TIRE
         if (timerLight > 0)
@@ -151,6 +167,7 @@ public class Gun : MonoBehaviour
             
             onCooldown = true;
             timerLight = lightShotDuration;
+            timerShot = 1;
             
             StartCoroutine(ShotCooldown());
             Knockback();
