@@ -73,7 +73,7 @@ public class Gun : MonoBehaviour
     }
 
 
-    private void LateUpdate()
+    private void Update()
     {
         // ON POSITIONNE LE GUN SI LE JOUEUR LE PORTE
         if (!onGround)
@@ -155,7 +155,7 @@ public class Gun : MonoBehaviour
             StartCoroutine(ShotCooldown());
             Knockback();
 
-            ReferenceCamera.Instance.camera.DOShakePosition(shakeDuration, shakeAmplitude);
+            ReferenceCamera.Instance.transform.DOShakePosition(shakeDuration, shakeAmplitude);
         }
     }
 
