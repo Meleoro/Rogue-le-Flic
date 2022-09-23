@@ -8,9 +8,9 @@ using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
-
 using DG.Tweening;
 using UnityEngine.Rendering.Universal;
+
 
 public class Gun : MonoBehaviour
 {
@@ -90,8 +90,15 @@ public class Gun : MonoBehaviour
                 timerShot -= Time.deltaTime;
 
                 float addValue = gunRotate.Evaluate(1 - timerShot);
-            
-                transform.rotation = Quaternion.AngleAxis(angle + addValue * 20, Vector3.forward);
+
+                if (angle > 90 || angle < -90)
+                {
+                    transform.rotation = Quaternion.AngleAxis(angle - addValue * 20, Vector3.forward);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.AngleAxis(angle + addValue * 20, Vector3.forward);
+                }
             }
             else
             {
