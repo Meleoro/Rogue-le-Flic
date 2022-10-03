@@ -23,6 +23,9 @@ public class ModuleManager : MonoBehaviour
 
     private void Update()
     {
+        if(ManagerChara.Instance.activeGun != null)
+            gun = ManagerChara.Instance.activeGun.GetComponent<Gun>();
+        
         if (Module1 != 0)
         {
             Search(Module1);
@@ -36,14 +39,11 @@ public class ModuleManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(ManagerChara.Instance.activeGun != null)
-            gun = ManagerChara.Instance.activeGun.GetComponent<Gun>();
-
-        if (gun is not null)
+        /*if (gun is not null)
         {
             gun.bulletSize = gun.originalBulletSize;
             gun.doubleBullet = false;
-        }
+        }*/
     }
 
 
@@ -60,16 +60,12 @@ public class ModuleManager : MonoBehaviour
     // GROSSISSEMENT DES BALLES
     public void Effet1()
     {
-        Gun gun = ManagerChara.Instance.activeGun.GetComponent<Gun>();
-
         gun.bulletSize = gun.originalBulletSize * 3;
     }
     
     // DOUBLE TIRE
     public void Effet2()
     {
-        Gun gun = ManagerChara.Instance.activeGun.GetComponent<Gun>();
-
         gun.doubleBullet = true;
     }
 }

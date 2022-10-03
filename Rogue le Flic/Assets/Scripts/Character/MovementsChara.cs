@@ -19,13 +19,9 @@ public class MovementsChara : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        
-        else
-            Destroy(gameObject);
-
         controls = new Controls();
+
+        Instance = this;
     }
 
     private void OnEnable()

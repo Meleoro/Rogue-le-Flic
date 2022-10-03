@@ -158,7 +158,8 @@ public class Gun : MonoBehaviour
                 
                 GameObject refBullet = Instantiate(bullet, transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
-
+                
+                
                 // DOUBLE TIR ?
                 if (doubleBullet)
                 {
@@ -169,7 +170,6 @@ public class Gun : MonoBehaviour
                 refBullet.transform.localScale = new Vector3(bulletSize, bulletSize, bulletSize);
                 
                 Destroy(refBullet, 3f);
-                
             }
             
             onCooldown = true;

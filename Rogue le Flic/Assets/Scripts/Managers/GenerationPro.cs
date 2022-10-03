@@ -17,14 +17,10 @@ public class GenerationPro : MonoBehaviour
     
     [Header("Rooms")]
     public GameObject spawn;
-    public GameObject room;
+    public List<GameObject> basicRooms;
     public GameObject boss;
     
-    [Header("Mini Map")]
-    public GameObject miniSpawn;
-    public GameObject miniRoom;
-    public GameObject miniBoss;
-
+    [Header("Autres")]
     public Vector2 spawnLocation;
     private int saveX;
     private int saveY;
@@ -57,8 +53,8 @@ public class GenerationPro : MonoBehaviour
             // ON FAIT APPARAITRE LE SPAWN
             if (i == 0)
             {
-                int x = Random.Range(3, 5);
-                int y = Random.Range(3, 5);
+                int x = 4;
+                int y = 4;
 
                 map.list[x].list[y] = spawn;
 
@@ -75,8 +71,9 @@ public class GenerationPro : MonoBehaviour
             {
                 for (int k = 0; k < 4; k++)
                 {
-                    // Détermination de la direction de la salle à ajouter
+                    // Détermination de la direction de la salle à ajouter et de la salle en elle-même
                     int direction = Random.Range(0, 4);
+                    int generatedRoom = Random.Range(0, basicRooms.Count);
                     
                     while (direction == saveDirection)
                     {
@@ -90,7 +87,7 @@ public class GenerationPro : MonoBehaviour
                     {
                         if (map.list[saveX + 1].list[saveY] == null)
                         {
-                            map.list[saveX + 1].list[saveY] = room;
+                            map.list[saveX + 1].list[saveY] = basicRooms[generatedRoom];
 
                             i += 1;
 
@@ -104,7 +101,7 @@ public class GenerationPro : MonoBehaviour
                     {
                         if (map.list[saveX].list[saveY - 1] == null)
                         {
-                            map.list[saveX].list[saveY - 1] = room;
+                            map.list[saveX].list[saveY - 1] = basicRooms[generatedRoom];
                             
                             i += 1;
 
@@ -118,7 +115,7 @@ public class GenerationPro : MonoBehaviour
                     {
                         if (map.list[saveX - 1].list[saveY] == null)
                         {
-                            map.list[saveX - 1].list[saveY] = room;
+                            map.list[saveX - 1].list[saveY] = basicRooms[generatedRoom];
                             
                             i += 1;
                             
@@ -132,7 +129,7 @@ public class GenerationPro : MonoBehaviour
                     {
                         if (map.list[saveX].list[saveY + 1] == null)
                         {
-                            map.list[saveX].list[saveY + 1] = room;
+                            map.list[saveX].list[saveY + 1] = basicRooms[generatedRoom];
                             
                             i += 1;
                             

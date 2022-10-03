@@ -8,4 +8,6 @@ public class CameraManager : MonoBehaviour
     public GameObject limitBottom;
     public GameObject limitLeft;
     public GameObject limitUp;
+
+    public float cameraSize;
 }

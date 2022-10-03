@@ -10,6 +10,10 @@ public class ManagerChara : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public GameObject activeGun;
 
+    public Controls controls;
+    
+    
+
     private void Awake()
     {
         if (Instance == null)
@@ -19,13 +23,25 @@ public class ManagerChara : MonoBehaviour
             Destroy(gameObject);
 
         rb = GetComponent<Rigidbody2D>();
+        
+        controls = new Controls();
+    }
+    
+    private void OnEnable()
+    {
+        controls.Enable();
     }
 
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+    
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
 
     private void Update()
     {

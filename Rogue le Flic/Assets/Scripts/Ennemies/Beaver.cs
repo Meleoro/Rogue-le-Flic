@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.TextCore.Text;
 
 public class Beaver : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Beaver : MonoBehaviour
 
     [Header("Autres")] 
     public AIPath AIPath;
+    public AIDestinationSetter AIDestination;
     private Rigidbody2D rb;
     private bool canMove;
 
@@ -33,6 +35,8 @@ public class Beaver : MonoBehaviour
         rb.drag = dragDeceleration * dragMultiplier;
 
         canMove = true;
+        
+        AIDestination.target = ManagerChara.Instance.transform;
     }
 
 

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class MapManager : MonoBehaviour
 {
@@ -20,15 +22,20 @@ public class MapManager : MonoBehaviour
     {
         Instance = this;
     }
-    
+
+    private void Start()
+    {
+        Spawn();
+    }
+
     void Update()
     {
-        if (!spawnRoom)
+        /*if (!spawnRoom)
         {
             Spawn();
 
             spawnRoom = true;
-        }
+        }*/
     }
 
     void Spawn()
@@ -47,6 +54,8 @@ public class MapManager : MonoBehaviour
         activeRoom.GetComponent<DoorManager>().roomPosY = playerY;
         
         activeRoom.GetComponent<DoorManager>().PortesActives();
+        
+        EnterRoom(activeRoom.GetComponent<DoorManager>().currentEnnemies);
     }
 
 
@@ -54,14 +63,30 @@ public class MapManager : MonoBehaviour
     {
         mapActive.list[playerX].list[playerY].SetActive(false);
 
+        ExitRoom(activeRoom.GetComponent<DoorManager>().currentEnnemies);
+        
+        
         if (doorNumber == 0)
         {
             playerX += 1;
 
-            activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], Vector3.zero,
-                Quaternion.identity);
-
-            mapActive.list[playerX].list[playerY] = activeRoom;
+            if (mapActive.list[playerX].list[playerY] == null)
+            {
+                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], Vector3.zero,
+                    Quaternion.identity);
+                
+                mapActive.list[playerX].list[playerY] = activeRoom;
+                
+                activeRoom.GetComponent<DoorManager>().GenerateEnnemies();
+            }
+            
+            else
+            {
+                activeRoom = mapActive.list[playerX].list[playerY];
+                
+                mapActive.list[playerX].list[playerY].SetActive(true);
+            }
+            
 
             MovementsChara.Instance.transform.position = activeRoom.GetComponent<DoorManager>().left.transform.position;
         }
@@ -70,10 +95,22 @@ public class MapManager : MonoBehaviour
         {
             playerY -= 1;
 
-            activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], Vector3.zero,
-                Quaternion.identity);
-            
-            mapActive.list[playerX].list[playerY] = activeRoom;
+            if (mapActive.list[playerX].list[playerY] == null)
+            {
+                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], Vector3.zero,
+                    Quaternion.identity);
+                
+                mapActive.list[playerX].list[playerY] = activeRoom;
+                
+                activeRoom.GetComponent<DoorManager>().GenerateEnnemies();
+            }
+
+            else
+            {
+                activeRoom = mapActive.list[playerX].list[playerY];
+                
+                mapActive.list[playerX].list[playerY].SetActive(true);
+            }
 
             MovementsChara.Instance.transform.position = activeRoom.GetComponent<DoorManager>().up.transform.position;
         }
@@ -82,10 +119,22 @@ public class MapManager : MonoBehaviour
         {
             playerX -= 1;
 
-            activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], Vector3.zero,
-                Quaternion.identity);
+            if (mapActive.list[playerX].list[playerY] == null)
+            {
+                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], Vector3.zero,
+                    Quaternion.identity);
             
-            mapActive.list[playerX].list[playerY] = activeRoom;
+                mapActive.list[playerX].list[playerY] = activeRoom;
+                
+                activeRoom.GetComponent<DoorManager>().GenerateEnnemies();
+            }
+
+            else
+            {
+                activeRoom = mapActive.list[playerX].list[playerY];
+                
+                mapActive.list[playerX].list[playerY].SetActive(true);
+            }
             
             MovementsChara.Instance.transform.position = activeRoom.GetComponent<DoorManager>().right.transform.position;
         }
@@ -94,10 +143,22 @@ public class MapManager : MonoBehaviour
         {
             playerY += 1;
 
-            activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], Vector3.zero,
-                Quaternion.identity);
+            if (mapActive.list[playerX].list[playerY] == null)
+            {
+                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], Vector3.zero,
+                    Quaternion.identity);
             
-            mapActive.list[playerX].list[playerY] = activeRoom;
+                mapActive.list[playerX].list[playerY] = activeRoom;
+                
+                activeRoom.GetComponent<DoorManager>().GenerateEnnemies();
+            }
+
+            else
+            {
+                activeRoom = mapActive.list[playerX].list[playerY];
+                
+                mapActive.list[playerX].list[playerY].SetActive(true);
+            }
             
             MovementsChara.Instance.transform.position = activeRoom.GetComponent<DoorManager>().bottom.transform.position;
         }
@@ -106,5 +167,28 @@ public class MapManager : MonoBehaviour
         activeRoom.GetComponent<DoorManager>().roomPosY = playerY;
 
         activeRoom.GetComponent<DoorManager>().PortesActives();
+        
+        EnterRoom(activeRoom.GetComponent<DoorManager>().currentEnnemies);
+    }
+
+
+    void EnterRoom(List<GameObject> ennemies)
+    {
+        foreach (GameObject k in ennemies)
+        {
+            if(k != null)
+                k.SetActive(true);
+        }
+        
+        ReferenceCamera.Instance.camera.orthographicSize = activeRoom.GetComponent<CameraManager>().cameraSize;
+    }
+
+    void ExitRoom(List<GameObject> ennemies)
+    {
+        foreach (GameObject k in ennemies)
+        {
+            if(k != null)
+                k.SetActive(false);
+        }
     }
 }
