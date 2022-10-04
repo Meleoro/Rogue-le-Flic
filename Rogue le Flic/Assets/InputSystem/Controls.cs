@@ -80,6 +80,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b00caf6-28bc-4185-8b5c-20fedf101397"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Kick"",
+                    ""type"": ""Button"",
+                    ""id"": ""d47d93a1-abae-4731-ad0e-cf365565df29"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +210,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Module2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c38b6714-19a6-448b-bebe-0cf216a63755"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Character"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80e041c8-55a0-4460-adb7-c4ab6c2e7b72"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Character"",
+                    ""action"": ""Kick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -223,6 +263,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Character_MousePosition = m_Character.FindAction("MousePosition", throwIfNotFound: true);
         m_Character_Module1 = m_Character.FindAction("Module1", throwIfNotFound: true);
         m_Character_Module2 = m_Character.FindAction("Module2", throwIfNotFound: true);
+        m_Character_Dash = m_Character.FindAction("Dash", throwIfNotFound: true);
+        m_Character_Kick = m_Character.FindAction("Kick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -288,6 +330,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_MousePosition;
     private readonly InputAction m_Character_Module1;
     private readonly InputAction m_Character_Module2;
+    private readonly InputAction m_Character_Dash;
+    private readonly InputAction m_Character_Kick;
     public struct CharacterActions
     {
         private @Controls m_Wrapper;
@@ -298,6 +342,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_Character_MousePosition;
         public InputAction @Module1 => m_Wrapper.m_Character_Module1;
         public InputAction @Module2 => m_Wrapper.m_Character_Module2;
+        public InputAction @Dash => m_Wrapper.m_Character_Dash;
+        public InputAction @Kick => m_Wrapper.m_Character_Kick;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -325,6 +371,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Module2.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnModule2;
                 @Module2.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnModule2;
                 @Module2.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnModule2;
+                @Dash.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDash;
+                @Kick.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnKick;
+                @Kick.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnKick;
+                @Kick.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnKick;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -347,6 +399,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Module2.started += instance.OnModule2;
                 @Module2.performed += instance.OnModule2;
                 @Module2.canceled += instance.OnModule2;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
+                @Kick.started += instance.OnKick;
+                @Kick.performed += instance.OnKick;
+                @Kick.canceled += instance.OnKick;
             }
         }
     }
@@ -368,5 +426,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnModule1(InputAction.CallbackContext context);
         void OnModule2(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+        void OnKick(InputAction.CallbackContext context);
     }
 }

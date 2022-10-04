@@ -1255,7 +1255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687291210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.19, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1511,6 +1511,22 @@ PrefabInstance:
     - target: {fileID: 1503478015596987166, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500281233397896041, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
+      propertyPath: kickReach
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500281233397896041, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
+      propertyPath: kickDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500281233397896041, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
+      propertyPath: kickStrenght
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500281233397896041, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
+      propertyPath: ennemies.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 018796ef7819d5844bf672f133a680ea, type: 3}

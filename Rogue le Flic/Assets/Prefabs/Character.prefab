@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1503478015596987154}
   - component: {fileID: 1503478015596987165}
   - component: {fileID: 1503478015596987153}
+  - component: {fileID: 8500281233397896041}
   m_Layer: 8
   m_Name: Character
   m_TagString: Player
@@ -178,3 +179,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367835680b6c22c4ab1a98cf9568fa8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashForceX: 45
+  dashForceY: 45
+  noHitTime: 0.2
+  duration: 0.2
+  amplitude: 0.5
+--- !u!114 &8500281233397896041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503478015596987166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dde6ac0f0b1a66438f9ab720d7d32b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kickDuration: 0
+  kickReach: 0
+  kickStrenght: 0
