@@ -68,17 +68,31 @@ public class Beaver : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Bullet")
+        if (col.gameObject.CompareTag("Bullet"))
         {
             health -= 1;
             Destroy(col.gameObject);
 
             rb.velocity = Vector2.zero;
-            rb.AddForce(new Vector2(col.gameObject.GetComponent<Rigidbody2D>().velocity.x / 2, 
-                col.gameObject.GetComponent<Rigidbody2D>().velocity.y / 2), ForceMode2D.Impulse);
+
+            StopCoroutine();
+
+            // RECUL
+            rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet, ForceMode2D.Impulse);
         }
     }
-    
+
+    public void StopCoroutine()
+    {
+        if (!canMove)
+        {
+            StopAllCoroutines();
+            canMove = true;
+            transform.DOComplete();
+                
+            StartCoroutine(Wait());
+        }
+    }
 
     IEnumerator Jump(Vector2 direction)
     {
@@ -96,7 +110,14 @@ public class Beaver : MonoBehaviour
         canMove = true;
         
         yield return new WaitForSeconds(3);
-        
+
+        isJumping = false;
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2);
+
         isJumping = false;
     }
 }

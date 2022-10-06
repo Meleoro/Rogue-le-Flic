@@ -18,34 +18,19 @@ public class Gun : MonoBehaviour
     public GameObject bullet;
     public Light2D lightShot;
     private Controls controls;
+    public GunData gunData;
 
     [Header("Positions")] 
     public Vector2 posLeft;
     public Vector2 posRight;
-
-    [Header("Shot Proprieties")] 
-    public int nrbBulletsShot;
-    public float cooldownShot;
-    public float shotDispersion;
-    public AnimationCurve gunRotate;
-    private float timerShot;
-
-    [Header("Camera Shake")] 
-    public float shakeDuration;
-    public float shakeAmplitude;
-
-    [Header("Light")] 
-    public float lightShotIntensity;
-    public float lightShotDuration;
-    private float timerLight;
-
-    [Header("Effets Modules")] 
-    public float originalBulletSize;
+    
+    [Header("Effets Modules")]
     [HideInInspector] public float bulletSize;
-    public bool doubleBullet;
+    [HideInInspector] public bool doubleBullet;
 
-    [Header("Others")] 
-    public float knockback;
+    [Header("Others")]
+    private float timerShot;
+    private float timerLight;
     private bool onGround;
     private bool canBePicked;
     private bool onCooldown;
@@ -71,7 +56,7 @@ public class Gun : MonoBehaviour
     {
         onGround = true;
 
-        bulletSize = originalBulletSize;
+        bulletSize = gunData.originalBulletSize;
         lightShot.intensity = 0;
     }
 
@@ -89,7 +74,7 @@ public class Gun : MonoBehaviour
             {
                 timerShot -= Time.deltaTime;
 
-                float addValue = gunRotate.Evaluate(1 - timerShot);
+                float addValue = gunData.gunKnockback.Evaluate(1 - timerShot);
 
                 if (angle > 90 || angle < -90)
                 {
@@ -138,7 +123,7 @@ public class Gun : MonoBehaviour
         if (timerLight > 0)
         {
             timerLight -= Time.deltaTime;
-            lightShot.intensity = timerLight * lightShotIntensity;
+            lightShot.intensity = timerLight * gunData.lightShotIntensity;
         }
         else
             lightShot.intensity = 0;
@@ -150,9 +135,9 @@ public class Gun : MonoBehaviour
         if (!onGround && !onCooldown)
         {
             // BOUCLE QUI GENERE TOUTES LES BALLES
-            for (int k = 0; k < nrbBulletsShot; k++)
+            for (int k = 0; k < gunData.nbrBulletPerShot; k++)
             {
-                float dispersion = Random.Range(-shotDispersion, shotDispersion);
+                float dispersion = Random.Range(-gunData.shotDispersion, gunData.shotDispersion);
 
                 float angle = OrientateGun();
                 
@@ -173,13 +158,13 @@ public class Gun : MonoBehaviour
             }
             
             onCooldown = true;
-            timerLight = lightShotDuration;
+            timerLight = gunData.lightShotDuration;
             timerShot = 1;
             
             StartCoroutine(ShotCooldown());
             Knockback();
 
-            ReferenceCamera.Instance.transform.DOShakePosition(shakeDuration, shakeAmplitude);
+            ReferenceCamera.Instance.transform.DOShakePosition(gunData.shakeDuration, gunData.shakeAmplitude);
         }
     }
 
@@ -190,7 +175,7 @@ public class Gun : MonoBehaviour
 
         Vector2 direction = charaPos - mousePos;
 
-        ManagerChara.Instance.rb.AddForce(direction.normalized * knockback, ForceMode2D.Impulse);
+        ManagerChara.Instance.rb.AddForce(direction.normalized * gunData.charaKnockback, ForceMode2D.Impulse);
     }
     
     public float OrientateGun()
@@ -216,7 +201,7 @@ public class Gun : MonoBehaviour
 
     IEnumerator ShotCooldown()
     {
-        yield return new WaitForSeconds(cooldownShot);
+        yield return new WaitForSeconds(gunData.cooldownShot);
 
         onCooldown = false;
     }
@@ -225,7 +210,7 @@ public class Gun : MonoBehaviour
     {
         yield return new WaitForSeconds(0.05f);
 
-        float dispersion = Random.Range(-shotDispersion, shotDispersion);
+        float dispersion = Random.Range(-gunData.shotDispersion, gunData.shotDispersion);
                 
         float angle = OrientateGun();
                 
