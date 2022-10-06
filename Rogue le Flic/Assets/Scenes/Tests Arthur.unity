@@ -1464,6 +1464,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1351326057, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
+      propertyPath: m_TagString
+      value: Kick
+      objectReference: {fileID: 0}
     - target: {fileID: 1503478015596987164, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1512,22 +1516,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
-    - target: {fileID: 8500281233397896041, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
-      propertyPath: kickReach
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8500281233397896041, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
-      propertyPath: kickDuration
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8500281233397896041, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
-      propertyPath: kickStrenght
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8500281233397896041, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
-      propertyPath: ennemies.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
 --- !u!1001 &4404858516140141104
@@ -1545,6 +1533,14 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 4177285485063945854, guid: 05306da631c114c4582d4acfad6d76cb, type: 3}
+    - target: {fileID: 4404858517026568699, guid: 0079c9710dd48c240bffecf26d3f7535, type: 3}
+      propertyPath: gunData
+      value: 
+      objectReference: {fileID: 11400000, guid: 532aaf10be902b448914b384c1b9f760, type: 2}
+    - target: {fileID: 4404858517026568699, guid: 0079c9710dd48c240bffecf26d3f7535, type: 3}
+      propertyPath: nrbBulletsShot
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4404858517026568701, guid: 0079c9710dd48c240bffecf26d3f7535, type: 3}
       propertyPath: m_RootOrder
       value: 4

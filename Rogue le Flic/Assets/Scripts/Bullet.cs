@@ -1,12 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     public int bulletSpeed;
+    public float bulletKnockback;
+    public int bulletDamages;
     
+    [HideInInspector] public Vector2 directionBullet;
     private Rigidbody2D rb;
 
     private void Start()
@@ -17,6 +21,11 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         rb.velocity = transform.right * bulletSpeed;
+    }
+
+    private void LateUpdate()
+    {
+        directionBullet = rb.velocity;
     }
 
     private void OnCollisionEnter2D(Collision2D col)

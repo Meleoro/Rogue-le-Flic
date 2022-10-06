@@ -60,7 +60,7 @@ public class ModuleManager : MonoBehaviour
     // GROSSISSEMENT DES BALLES
     public void Effet1()
     {
-        gun.bulletSize = gun.originalBulletSize * 3;
+        gun.bulletSize = gun.gunData.originalBulletSize * 3;
     }
     
     // DOUBLE TIRE
