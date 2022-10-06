@@ -12,6 +12,10 @@ public class GunData : ScriptableObject
     public float charaKnockback;
     public AnimationCurve gunKnockback;
 
+    [Header("Ammo")] 
+    public int maxAmmo;
+    public float reloadTime;
+
     [Header("CameraShake")] 
     public float shakeDuration;
     public float shakeAmplitude;

@@ -70,7 +70,7 @@ public class Beaver : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Bullet"))
         {
-            health -= 1;
+            health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
             Destroy(col.gameObject);
 
             rb.velocity = Vector2.zero;
@@ -78,7 +78,7 @@ public class Beaver : MonoBehaviour
             StopCoroutine();
 
             // RECUL
-            rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet, ForceMode2D.Impulse);
+            rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet * col.gameObject.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
         }
     }
 

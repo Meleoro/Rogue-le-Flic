@@ -13,16 +13,64 @@ MonoBehaviour:
   m_Name: Nerf1
   m_EditorClassIdentifier: 
   nbrBulletPerShot: 1
-  cooldownShot: 0.3
-  shotDispersion: 0
-  charaKnockback: 0
+  cooldownShot: 0.33
+  shotDispersion: 1
+  charaKnockback: 6
   gunKnockback:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 40.000004
+      outSlope: 40.000004
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.049999997
+      value: 2
+      inSlope: 5.483884
+      outSlope: 5.483884
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.18030617
+    - serializedVersion: 3
+      time: 0.22781488
+      value: -0.4
+      inSlope: -9.403669
+      outSlope: -9.403669
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.24086699
+    - serializedVersion: 3
+      time: 0.30111977
+      value: 0.1
+      inSlope: 6.8302083
+      outSlope: 6.8302083
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5236197
+    - serializedVersion: 3
+      time: 0.37286827
+      value: 0
+      inSlope: -1.3937575
+      outSlope: -1.3937575
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shakeDuration: 0
-  shakeAmplitude: 0
-  lightShotDuration: 0
-  lightShotIntensity: 0
+  maxAmmo: 10
+  reloadTime: 2
+  shakeDuration: 0.5
+  shakeAmplitude: 0.3
+  lightShotDuration: 0.1
+  lightShotIntensity: 15
+  originalBulletSize: 3

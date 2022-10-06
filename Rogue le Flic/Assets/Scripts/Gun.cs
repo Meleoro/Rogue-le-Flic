@@ -23,18 +23,21 @@ public class Gun : MonoBehaviour
     [Header("Positions")] 
     public Vector2 posLeft;
     public Vector2 posRight;
-    
+
     [Header("Effets Modules")]
     [HideInInspector] public float bulletSize;
     [HideInInspector] public bool doubleBullet;
-
+    
     [Header("Others")]
     private float timerShot;
     private float timerLight;
+    private int currentAmmo;
+    
     private bool onGround;
     private bool canBePicked;
     private bool onCooldown;
     private bool lookLeft;
+    private bool isReloading;
 
 
     private void Awake()
@@ -58,6 +61,8 @@ public class Gun : MonoBehaviour
 
         bulletSize = gunData.originalBulletSize;
         lightShot.intensity = 0;
+
+        currentAmmo = gunData.maxAmmo;
     }
 
 
@@ -132,7 +137,7 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        if (!onGround && !onCooldown)
+        if (!onGround && !onCooldown && !isReloading)
         {
             // BOUCLE QUI GENERE TOUTES LES BALLES
             for (int k = 0; k < gunData.nbrBulletPerShot; k++)
@@ -155,6 +160,14 @@ public class Gun : MonoBehaviour
                 refBullet.transform.localScale = new Vector3(bulletSize, bulletSize, bulletSize);
                 
                 Destroy(refBullet, 3f);
+            }
+
+            currentAmmo -= 1;
+
+            if (currentAmmo <= 0)
+            {
+                isReloading = true;
+                StartCoroutine(ReloadCooldown());
             }
             
             onCooldown = true;
@@ -199,11 +212,20 @@ public class Gun : MonoBehaviour
             canBePicked = false;
     }
 
+    
     IEnumerator ShotCooldown()
     {
         yield return new WaitForSeconds(gunData.cooldownShot);
 
         onCooldown = false;
+    }
+    
+    IEnumerator ReloadCooldown()
+    {
+        yield return new WaitForSeconds(gunData.reloadTime);
+
+        isReloading = false;
+        currentAmmo = gunData.maxAmmo;
     }
 
     IEnumerator DoubleShot()

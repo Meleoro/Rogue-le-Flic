@@ -7,8 +7,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int bulletSpeed;
-    public Vector2 directionBullet;
+    public float bulletKnockback;
+    public int bulletDamages;
     
+    [HideInInspector] public Vector2 directionBullet;
     private Rigidbody2D rb;
 
     private void Start()

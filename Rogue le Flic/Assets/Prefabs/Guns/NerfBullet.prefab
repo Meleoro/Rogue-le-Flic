@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 4177285485063945855}
   - component: {fileID: 4177285485063945851}
   m_Layer: 7
-  m_Name: Bullet
+  m_Name: NerfBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,6 +212,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 20
+  bulletKnockback: 0.5
+  bulletDamages: 1
+  directionBullet: {x: 0, y: 0}
 --- !u!50 &4177285485063945855
 Rigidbody2D:
   serializedVersion: 4
