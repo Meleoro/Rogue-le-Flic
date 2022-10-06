@@ -181,6 +181,8 @@ public class MapManager : MonoBehaviour
         }
         
         ReferenceCamera.Instance.camera.orthographicSize = activeRoom.GetComponent<CameraManager>().cameraSize;
+        
+        MiniMapManager.Instance.ActualiseMap(mapActive);
     }
 
     void ExitRoom(List<GameObject> ennemies)
