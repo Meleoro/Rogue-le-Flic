@@ -9,7 +9,7 @@ public class MiniMapManager : MonoBehaviour
     
     public Vector3 origin;
 
-    public GameObject camera;
+    public GameObject cameraMini;
     public GameObject room;
 
 
@@ -34,6 +34,6 @@ public class MiniMapManager : MonoBehaviour
             }
         }
 
-        camera.transform.position = origin + new Vector3(MapManager.Instance.playerX, MapManager.Instance.playerY, -10);
+        cameraMini.transform.position = origin + new Vector3(MapManager.Instance.playerX, MapManager.Instance.playerY, -10);
     }
 }
