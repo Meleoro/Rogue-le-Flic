@@ -147,7 +147,7 @@ public class Gun : MonoBehaviour
             onGround = false;
             canBePicked = false;
 
-            explanation.SetActive(false);
+            //explanation.SetActive(false);
             
             if (ManagerChara.Instance.activeGun == null)
             {

@@ -163,7 +163,10 @@ MonoBehaviour:
   spawn: {fileID: 1332099545113867345, guid: 5d2426e9f53200945ac1f547226decda, type: 3}
   basicRooms:
   - {fileID: 6460342174784775937, guid: 3e05245da97979c47985c145a182feba, type: 3}
-  - {fileID: 6460342174784775937, guid: 60421086fef63e740b62bdff9a8526e1, type: 3}
+  - {fileID: 6460342174784775937, guid: 0a29b1d54da641340922a599b768f1fb, type: 3}
+  - {fileID: 6460342174784775937, guid: fcb2daf54a7b8244c895677ab59d22e9, type: 3}
+  bigRooms:
+  - {fileID: 6460342174784775937, guid: 6e597860d60bfbd46b2e19d2ef59a74f, type: 3}
   boss: {fileID: 1456235560539892883, guid: 140442aea99aab14ba094f7f5dc2f580, type: 3}
   spawnLocation: {x: 0, y: 0}
 --- !u!114 &8180513429589223060
@@ -319,6 +322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1993e9bf1b51dff4dbe7a9ba66f1aad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origin: {x: -40, y: 40, z: 0}
-  camera: {fileID: 0}
-  room: {fileID: 0}
+  origin: {x: -100, y: 100, z: 0}
+  cameraMini: {fileID: 0}
+  room: {fileID: 5917814786928162047, guid: e1e2c9602dde8aa4f8340d8733a46548, type: 3}
