@@ -45,6 +45,7 @@ public class Beaver : MonoBehaviour
         if (health < 0)
         {
             Destroy(gameObject);
+            ScoreManager.instance.AddPoint();
         }
 
         if (canMove)

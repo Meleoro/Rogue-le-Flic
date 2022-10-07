@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,24 +8,34 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public TextMeshPro scoreText; 
-    public Text highscoreText;
-    public TextMeshPro oziejr;
+    public static ScoreManager instance;
     
-
+    public TMP_Text scoreText;
+    public TMP_Text highscoreText;
+    
+    
     private int score = 0;
     private int highscore = 0;
-    
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        scoreText.text = score.ToString() + "Points";
+        scoreText.text = score.ToString() + " Points";
         highscoreText.text = "Highscore: " + highscore.ToString();
+        Debug.Log("score =" + score);
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddPoint()
     {
-        
+        score += 100;
+        scoreText.text = score.ToString() + " Points";
+        Debug.Log("score =" + score);
     }
+    
 }
