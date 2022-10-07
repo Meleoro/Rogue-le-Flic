@@ -9,6 +9,8 @@ public class ScoreManager : MonoBehaviour
 {
     public TextMeshPro scoreText; 
     public Text highscoreText;
+    public TextMeshPro oziejr;
+    
 
     private int score = 0;
     private int highscore = 0;
