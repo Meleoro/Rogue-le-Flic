@@ -8,7 +8,8 @@ public class ManagerChara : MonoBehaviour
     public static ManagerChara Instance;
     
     [HideInInspector] public Rigidbody2D rb;
-    [HideInInspector] public GameObject activeGun;
+    public GameObject activeGun;
+    public GameObject stockWeapon;
 
     public Controls controls;
     public bool noControl;
@@ -20,6 +21,10 @@ public class ManagerChara : MonoBehaviour
     [Header("Kick")] 
     private bool isKicking;
     private float timerKick;
+
+    [Header("Autres")] 
+    public float switchCooldown;
+    public bool canSwitch;
     
     
 
@@ -50,6 +55,8 @@ public class ManagerChara : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        canSwitch = true;
     }
 
     private void Update()
@@ -81,6 +88,39 @@ public class ManagerChara : MonoBehaviour
                     isDashing = false;
                 }
             }
+            
+            // SWITCH WEAPONS
+            if (controls.Character.SwitchWeapon.ReadValue<float>() != 0 && canSwitch)
+            {
+                SwitchWeapons();
+            }
         }
+    }
+
+    void SwitchWeapons()
+    {
+        if (stockWeapon != null)
+        {
+            GameObject save = activeGun;
+
+            activeGun = stockWeapon;
+            stockWeapon = save;
+
+            activeGun.GetComponent<Gun>().isStocked = false;
+            stockWeapon.GetComponent<Gun>().isStocked = true;
+            
+            stockWeapon.GetComponent<Gun>().Stocking();
+
+            StartCoroutine(CooldownSwitch());
+        }
+    }
+
+    private IEnumerator CooldownSwitch()
+    {
+        canSwitch = false;
+        
+        yield return new WaitForSeconds(switchCooldown);
+
+        canSwitch = true;
     }
 }

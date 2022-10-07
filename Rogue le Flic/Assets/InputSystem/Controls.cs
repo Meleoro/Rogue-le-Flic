@@ -98,6 +98,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchWeapon"",
+                    ""type"": ""Value"",
+                    ""id"": ""611e1b48-6057-4250-8650-6ae49983017c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -232,6 +241,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Kick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec8a8a7b-ab86-4cd6-9786-25392c1e4b3a"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Character"",
+                    ""action"": ""SwitchWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -250,6 +270,11 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""devicePath"": ""<Mouse>"",
                     ""isOptional"": false,
                     ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<VirtualMouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
                 }
             ]
         }
@@ -265,6 +290,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Character_Module2 = m_Character.FindAction("Module2", throwIfNotFound: true);
         m_Character_Dash = m_Character.FindAction("Dash", throwIfNotFound: true);
         m_Character_Kick = m_Character.FindAction("Kick", throwIfNotFound: true);
+        m_Character_SwitchWeapon = m_Character.FindAction("SwitchWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -332,6 +358,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Module2;
     private readonly InputAction m_Character_Dash;
     private readonly InputAction m_Character_Kick;
+    private readonly InputAction m_Character_SwitchWeapon;
     public struct CharacterActions
     {
         private @Controls m_Wrapper;
@@ -344,6 +371,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Module2 => m_Wrapper.m_Character_Module2;
         public InputAction @Dash => m_Wrapper.m_Character_Dash;
         public InputAction @Kick => m_Wrapper.m_Character_Kick;
+        public InputAction @SwitchWeapon => m_Wrapper.m_Character_SwitchWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -377,6 +405,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Kick.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnKick;
                 @Kick.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnKick;
                 @Kick.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnKick;
+                @SwitchWeapon.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchWeapon;
+                @SwitchWeapon.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchWeapon;
+                @SwitchWeapon.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchWeapon;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -405,6 +436,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Kick.started += instance.OnKick;
                 @Kick.performed += instance.OnKick;
                 @Kick.canceled += instance.OnKick;
+                @SwitchWeapon.started += instance.OnSwitchWeapon;
+                @SwitchWeapon.performed += instance.OnSwitchWeapon;
+                @SwitchWeapon.canceled += instance.OnSwitchWeapon;
             }
         }
     }
@@ -428,5 +462,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnModule2(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnKick(InputAction.CallbackContext context);
+        void OnSwitchWeapon(InputAction.CallbackContext context);
     }
 }

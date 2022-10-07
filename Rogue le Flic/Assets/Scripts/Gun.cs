@@ -32,12 +32,14 @@ public class Gun : MonoBehaviour
     private float timerShot;
     private float timerLight;
     private int currentAmmo;
-    
+
+    [HideInInspector] public bool isStocked;
     private bool onGround;
     private bool canBePicked;
     private bool onCooldown;
     private bool lookLeft;
     private bool isReloading;
+    private bool stopStock;
 
 
     private void Awake()
@@ -68,73 +70,105 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        // ON POSITIONNE LE GUN SI LE JOUEUR LE PORTE
-        if (!onGround)
+        if (!isStocked)
         {
-            float angle = OrientateGun();
-            
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            if (timerShot > 0)
+            // ON POSITIONNE LE GUN SI LE JOUEUR LE PORTE
+            if (!onGround)
             {
-                timerShot -= Time.deltaTime;
+                float angle = OrientateGun();
+            
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-                float addValue = gunData.gunKnockback.Evaluate(1 - timerShot);
-
-                if (angle > 90 || angle < -90)
+                if (timerShot > 0)
                 {
-                    transform.rotation = Quaternion.AngleAxis(angle - addValue * 20, Vector3.forward);
+                    timerShot -= Time.deltaTime;
+
+                    float addValue = gunData.gunKnockback.Evaluate(1 - timerShot);
+
+                    if (angle > 90 || angle < -90)
+                    {
+                        transform.rotation = Quaternion.AngleAxis(angle - addValue * 20, Vector3.forward);
+                    }
+                    else
+                    {
+                        transform.rotation = Quaternion.AngleAxis(angle + addValue * 20, Vector3.forward);
+                    }
                 }
                 else
                 {
-                    transform.rotation = Quaternion.AngleAxis(angle + addValue * 20, Vector3.forward);
+                    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                }
+            
+                if (angle > 90 || angle < -90)
+                {
+                    transform.position = ManagerChara.Instance.transform.position + (Vector3) posLeft;
+                    transform.Rotate(180, 0, 0);
+                }
+                else
+                {
+                    transform.position = ManagerChara.Instance.transform.position + (Vector3) posRight;
                 }
             }
-            else
-            {
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            }
-            
-            if (angle > 90 || angle < -90)
-            {
-                transform.position = ManagerChara.Instance.transform.position + (Vector3) posLeft;
-                transform.Rotate(180, 0, 0);
-            }
-            else
-            {
-                transform.position = ManagerChara.Instance.transform.position + (Vector3) posRight;
-            }
-        }
         
-        // TIR
-        if (controls.Character.Tir.IsPressed())
-        {
-            Shoot();
-        }
-
-        // ON RAMASSE L'ARME
-        if (controls.Character.Enter.WasPerformedThisFrame())
-        {
-            if (canBePicked)
+            // TIR
+            if (controls.Character.Tir.IsPressed())
             {
-                onGround = false;
-
-                ManagerChara.Instance.activeGun = gameObject;
+                Shoot();
             }
-        }
+
+            // ON RAMASSE L'ARME
+            if (controls.Character.Enter.WasPerformedThisFrame())
+            {
+                if (canBePicked)
+                {
+                    PickWeapon();
+                }
+            }
 
 
-        // GESTION DE LA LUMIERE QUAND LE JOUEUR TIRE
-        if (timerLight > 0)
-        {
-            timerLight -= Time.deltaTime;
-            lightShot.intensity = timerLight * gunData.lightShotIntensity;
+            // GESTION DE LA LUMIERE QUAND LE JOUEUR TIRE
+            if (timerLight > 0)
+            {
+                timerLight -= Time.deltaTime;
+                lightShot.intensity = timerLight * gunData.lightShotIntensity;
+            }
+            else
+                lightShot.intensity = 0;
         }
-        else
-            lightShot.intensity = 0;
     }
 
 
+    public void PickWeapon()
+    {
+        if (canBePicked)
+        {
+            onGround = false;
+            canBePicked = false;
+            
+            if (ManagerChara.Instance.activeGun == null)
+            {
+                ManagerChara.Instance.activeGun = gameObject;
+            }
+            
+            else if (ManagerChara.Instance.stockWeapon == null)
+            {
+                ManagerChara.Instance.stockWeapon = gameObject;
+                
+                isStocked = true;
+                
+                Stocking();
+            }
+
+            else if(ManagerChara.Instance.stockWeapon != null)
+            {
+                ManagerChara.Instance.activeGun.GetComponent<Gun>().onGround = true;
+                ManagerChara.Instance.activeGun.GetComponent<Gun>().canBePicked = true;
+                
+                ManagerChara.Instance.activeGun = gameObject;
+            }
+        }
+    }
+    
     public void Shoot()
     {
         if (!onGround && !onCooldown && !isReloading)
@@ -197,6 +231,20 @@ public class Gun : MonoBehaviour
         Vector2 charaPos = ManagerChara.Instance.transform.position;
         
         return Mathf.Atan2(mousePos.y - charaPos.y, mousePos.x - charaPos.x) * Mathf.Rad2Deg;
+    }
+
+    public void Stocking()
+    {
+        transform.position = new Vector2(1000, 1000);
+
+        onCooldown = false;
+
+        StopAllCoroutines();
+
+        if (currentAmmo < gunData.maxAmmo)
+        {
+            StartCoroutine(ReloadCooldown());
+        }
     }
 
     
