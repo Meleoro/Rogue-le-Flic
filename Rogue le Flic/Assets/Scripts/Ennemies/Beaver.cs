@@ -25,6 +25,8 @@ public class Beaver : MonoBehaviour
     [Header("Autres")] 
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
+    public GameObject coins;
+    public Transform beaverPos;
     private Rigidbody2D rb;
     private bool canMove;
 
@@ -44,6 +46,7 @@ public class Beaver : MonoBehaviour
     {
         if (health < 0)
         {
+            Instantiate(coins,beaverPos.position, Quaternion.identity);
             Destroy(gameObject);
             ScoreManager.instance.AddPoint();
         }
