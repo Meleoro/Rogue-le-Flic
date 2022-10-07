@@ -514,6 +514,7 @@ MonoBehaviour:
   basicRooms:
   - {fileID: 6460342174784775937, guid: 3e05245da97979c47985c145a182feba, type: 3}
   - {fileID: 6460342174784775937, guid: 60421086fef63e740b62bdff9a8526e1, type: 3}
+  bigRooms: []
   boss: {fileID: 1456235560539892883, guid: 140442aea99aab14ba094f7f5dc2f580, type: 3}
   spawnLocation: {x: 0, y: 0}
 --- !u!4 &294740677
@@ -1953,6 +1954,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4404858517026568699, guid: 0079c9710dd48c240bffecf26d3f7535, type: 3}
+      propertyPath: explanation
+      value: 
+      objectReference: {fileID: 1636156866}
     - target: {fileID: 4404858517026568701, guid: 0079c9710dd48c240bffecf26d3f7535, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -2079,14 +2084,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1351326057, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
-      propertyPath: m_TagString
-      value: Kick
-      objectReference: {fileID: 0}
-    - target: {fileID: 1503478015596987154, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
-      propertyPath: switchCooldown
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1503478015596987164, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2152,6 +2149,10 @@ PrefabInstance:
       propertyPath: gunData
       value: 
       objectReference: {fileID: 11400000, guid: 532aaf10be902b448914b384c1b9f760, type: 2}
+    - target: {fileID: 4404858517026568699, guid: 0079c9710dd48c240bffecf26d3f7535, type: 3}
+      propertyPath: explanation
+      value: 
+      objectReference: {fileID: 1636156866}
     - target: {fileID: 4404858517026568701, guid: 0079c9710dd48c240bffecf26d3f7535, type: 3}
       propertyPath: m_RootOrder
       value: 6
