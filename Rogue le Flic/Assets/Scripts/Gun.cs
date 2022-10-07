@@ -41,6 +41,8 @@ public class Gun : MonoBehaviour
     private bool isReloading;
     private bool stopStock;
 
+    public GameObject explanation;
+
 
     private void Awake()
     {
@@ -144,6 +146,8 @@ public class Gun : MonoBehaviour
         {
             onGround = false;
             canBePicked = false;
+
+            explanation.SetActive(false);
             
             if (ManagerChara.Instance.activeGun == null)
             {
@@ -250,14 +254,20 @@ public class Gun : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "Player")
+        if (col.tag == "Player")
+        {
             canBePicked = true;
+            explanation.SetActive(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
+        {
             canBePicked = false;
+            explanation.SetActive(false);
+        }
     }
 
     
