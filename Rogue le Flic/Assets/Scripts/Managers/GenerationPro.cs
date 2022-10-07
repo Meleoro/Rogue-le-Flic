@@ -18,6 +18,7 @@ public class GenerationPro : MonoBehaviour
     [Header("Rooms")]
     public GameObject spawn;
     public List<GameObject> basicRooms;
+    public List<GameObject> bigRooms;
     public GameObject boss;
     
     [Header("Autres")]
@@ -27,6 +28,11 @@ public class GenerationPro : MonoBehaviour
     private int newSaveX;
     private int newSaveY;
     private int saveDirection;
+    
+    [Header("BigRoom")]
+    private int voisinsNbr;
+    private int boucleNbr;
+    private int nbrBigRoom;
 
     private bool bossRoom;
     private float maxDistance;
@@ -43,13 +49,16 @@ public class GenerationPro : MonoBehaviour
     void Start()
     {
         GenerateMap();
-        //DisplayMap();
+
+        boucleNbr = 0;
     }
     
     public void GenerateMap()
     {
         for (int i = 0; i < roomNumber; i++)
         {
+            boucleNbr += 1;
+            
             // ON FAIT APPARAITRE LE SPAWN
             if (i == 0)
             {
@@ -69,6 +78,8 @@ public class GenerationPro : MonoBehaviour
             // BOUCLE PRINCIPALE QUI GENERE LA MAP
             else
             {
+                voisinsNbr = 0;
+                
                 for (int k = 0; k < 4; k++)
                 {
                     // Détermination de la direction de la salle à ajouter et de la salle en elle-même
@@ -93,6 +104,8 @@ public class GenerationPro : MonoBehaviour
 
                             newSaveX = saveX + 1;
                             newSaveY = saveY;
+
+                            voisinsNbr += 1;
                         }
                     }
                     
@@ -107,6 +120,8 @@ public class GenerationPro : MonoBehaviour
 
                             newSaveX = saveX;
                             newSaveY = saveY - 1;
+                            
+                            voisinsNbr += 1;
                         }
                     }
                     
@@ -121,6 +136,8 @@ public class GenerationPro : MonoBehaviour
                             
                             newSaveX = saveX - 1;
                             newSaveY = saveY;
+                            
+                            voisinsNbr += 1;
                         }
                     }
 
@@ -135,10 +152,19 @@ public class GenerationPro : MonoBehaviour
                             
                             newSaveX = saveX;
                             newSaveY = saveY + 1;
+                            
+                            voisinsNbr += 1;
                         }
                     }
                 }
 
+                if (voisinsNbr >= 2 && boucleNbr >= 3 && nbrBigRoom < 1)
+                {
+                    nbrBigRoom += 1;
+
+                    map.list[saveX].list[saveY] = bigRooms[0];
+                }
+                
                 saveX = newSaveX;
                 saveY = newSaveY;
             }
@@ -202,19 +228,7 @@ public class GenerationPro : MonoBehaviour
             }
         }
     }
-
     
-    public void DisplayMap()
-    {
-        for (int x = 0; x < map.list.Count; x++)
-        {
-            for (int y = 0; y < map.list.Count; y++)
-            {
-                if(map.list[x].list[y] != null)
-                    Instantiate(map.list[x].list[y], new Vector3(x * 2 - map.list.Count, y * 2 - map.list.Count, 0), Quaternion.identity);
-            }
-        }
-    }
 
     
     public void DistantRoom()
