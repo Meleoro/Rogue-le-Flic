@@ -16,4 +16,12 @@ public class Shop : MonoBehaviour
             shopMenu.SetActive(true);
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            shopMenu.SetActive(false);
+        }
+    }
 }
