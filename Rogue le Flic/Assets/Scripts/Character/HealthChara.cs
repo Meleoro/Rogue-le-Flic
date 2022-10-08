@@ -9,6 +9,7 @@ public class HealthChara : MonoBehaviour
     public int health;
     public int damage;
     public static HealthChara instance;
+    public GameObject player;
     
     
     private void Awake()
@@ -42,7 +43,7 @@ public class HealthChara : MonoBehaviour
         
         if (health <= 0)
         {
-            Destroy(gameObject);
+            Destroy(player);
         }
     }
 
