@@ -44,5 +44,14 @@ public class FrogTongue : MonoBehaviour
             
             Destroy(gameObject);
         }
+        
+
+    }
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Player"))
+        {
+            HealthChara.instance.TakeDamage(30);
+        }
     }
 }
