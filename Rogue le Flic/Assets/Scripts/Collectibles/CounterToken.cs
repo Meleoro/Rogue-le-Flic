@@ -28,8 +28,13 @@ public class CounterToken : MonoBehaviour
     public void AddCounterToken(int count)
     {
         currentTokenCount += count;
-        interactCountText.text = currentTokenCount.ToString();   
+        interactCountText.text = "Coins : " + currentTokenCount.ToString();
         //SaveToken();
+    }
+
+    private void Update()
+    {
+        interactCountText.text = "Coins : " + currentTokenCount.ToString();
     }
 
     public void SaveToken()
