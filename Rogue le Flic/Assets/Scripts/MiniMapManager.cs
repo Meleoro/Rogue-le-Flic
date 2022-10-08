@@ -11,6 +11,8 @@ public class MiniMapManager : MonoBehaviour
 
     public GameObject cameraMini;
     public GameObject room;
+    
+    List<GameObject> activeRooms = new List<GameObject>();
 
 
     private void Awake()
@@ -21,6 +23,13 @@ public class MiniMapManager : MonoBehaviour
 
     public void ActualiseMap(Map activeMap)
     {
+        foreach (GameObject k in activeRooms)
+        {
+            Destroy(k);
+        }
+        
+        activeRooms.Clear();
+        
         for (int i = 0; i < activeMap.list.Count; i++)
         {
             for (int k = 0; k < activeMap.list[i].list.Count; k++)
@@ -29,7 +38,7 @@ public class MiniMapManager : MonoBehaviour
                 {
                     Vector2 newPos = origin + new Vector3(i, k, 0);
                     
-                    Instantiate(room, newPos, Quaternion.identity);
+                    activeRooms.Add(Instantiate(room, newPos, Quaternion.identity));
                 }
             }
         }
