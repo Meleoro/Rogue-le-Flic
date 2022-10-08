@@ -13,11 +13,15 @@ public class ShopManager : MonoBehaviour
     public float coins;
     public TMP_Text CoinsTXT;
     
+    public SpriteRenderer spriteRenderer;
+    public Sprite newSprite;
+    
+    
     
     // Start is called before the first frame update
     void Start()
     {
-        CoinsTXT.text = "Coins:" + coins.ToString();
+        CoinsTXT.text = "Coins:" + CounterToken.instance.currentTokenCount.ToString();
 
         
         //ID's
@@ -28,36 +32,47 @@ public class ShopManager : MonoBehaviour
         
         
         //Price
-        shopItems[2, 1] = 10;
-        shopItems[2, 2] = 20;
-        shopItems[2, 3] = 30;
-        shopItems[2, 4] = 40;
+        shopItems[2, 1] = 1;
+        shopItems[2, 2] = 2;
+        shopItems[2, 3] = 3;
+        shopItems[2, 4] = 4;
         
         
         //Quantity
         shopItems[3, 1] = 0;
-        shopItems[3, 2] = 0;
+        shopItems[3, 2] = 0; 
         shopItems[3, 3] = 0;
         shopItems[3, 4] = 0;
     }
 
+    void Update()
+    {
+        CoinsTXT.text = "Coins:" + CounterToken.instance.currentTokenCount.ToString();
+    }
     public void Buy()
     {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>()
             .currentSelectedGameObject;
 
-        if (coins >= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID])
+        if (CounterToken.instance.currentTokenCount >= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID])
         {
-            coins -= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID];
+            CounterToken.instance.currentTokenCount -= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID];
             shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID] ++;
-            CoinsTXT.text = "Coins:" + coins.ToString();
+            CoinsTXT.text = "Coins:" + CounterToken.instance.currentTokenCount.ToString();
             ButtonRef.GetComponent<ButtonInfo>().QuantityTxt.text =
                 shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID].ToString();
 
+           // newSprite = ButtonRef.GetComponent<Sprite>();
+           //spriteRenderer.sprite = newSprite;
+            
+            ChangeSprite();
+
         }
     }
-    void Update()
+
+    public void ChangeSprite()
     {
-        
+        spriteRenderer.sprite = newSprite;
     }
+
 }
