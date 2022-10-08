@@ -25,17 +25,17 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
-        Spawn();
+        //Spawn();
     }
 
     void Update()
     {
-        /*if (!spawnRoom)
+        if (!spawnRoom)
         {
             Spawn();
 
             spawnRoom = true;
-        }*/
+        }
     }
 
     void Spawn()
@@ -72,7 +72,7 @@ public class MapManager : MonoBehaviour
 
             if (mapActive.list[playerX].list[playerY] == null)
             {
-                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], new Vector2(playerX * 20, playerY * 20),
+                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], new Vector2(playerX * 100, playerY * 100),
                     Quaternion.identity);
                 
                 mapActive.list[playerX].list[playerY] = activeRoom;
@@ -97,7 +97,7 @@ public class MapManager : MonoBehaviour
 
             if (mapActive.list[playerX].list[playerY] == null)
             {
-                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], new Vector2(playerX * 20, playerY * 20),
+                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], new Vector2(playerX * 100, playerY * 100),
                     Quaternion.identity);
                 
                 mapActive.list[playerX].list[playerY] = activeRoom;
@@ -121,7 +121,7 @@ public class MapManager : MonoBehaviour
 
             if (mapActive.list[playerX].list[playerY] == null)
             {
-                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], new Vector2(playerX * 20, playerY * 20),
+                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], new Vector2(playerX * 100, playerY * 100),
                     Quaternion.identity);
             
                 mapActive.list[playerX].list[playerY] = activeRoom;
@@ -145,7 +145,7 @@ public class MapManager : MonoBehaviour
 
             if (mapActive.list[playerX].list[playerY] == null)
             {
-                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], new Vector2(playerX * 20, playerY * 20),
+                activeRoom = Instantiate(GenerationPro.Instance.map.list[playerX].list[playerY], new Vector2(playerX * 100, playerY * 100),
                     Quaternion.identity);
             
                 mapActive.list[playerX].list[playerY] = activeRoom;
