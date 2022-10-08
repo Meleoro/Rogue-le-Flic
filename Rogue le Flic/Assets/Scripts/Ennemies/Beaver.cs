@@ -84,7 +84,14 @@ public class Beaver : MonoBehaviour
             // RECUL
             rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet * col.gameObject.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
         }
+
+        
+        if (col.gameObject.CompareTag("Player"))
+        {
+            HealthChara.instance.TakeDamage(15);
+        }
     }
+    
 
     public void StopCoroutine()
     {
