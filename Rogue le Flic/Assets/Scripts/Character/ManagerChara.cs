@@ -63,6 +63,8 @@ public class ManagerChara : MonoBehaviour
     {
         if (!noControl)
         {
+            MovementsChara.Instance.RotateCharacter();
+
             if(!isDashing)
                 MovementsChara.Instance.MoveCharacter();
 

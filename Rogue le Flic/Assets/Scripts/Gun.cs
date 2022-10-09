@@ -77,6 +77,9 @@ public class Gun : MonoBehaviour
             // ON POSITIONNE LE GUN SI LE JOUEUR LE PORTE
             if (!onGround)
             {
+                // ON RETIRE LE TEXTE
+                explanation.SetActive(false);
+
                 float angle = OrientateGun();
             
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

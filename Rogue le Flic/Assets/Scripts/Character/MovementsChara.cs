@@ -46,4 +46,17 @@ public class MovementsChara : MonoBehaviour
 
         ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * speedX, direction.y* speedY), ForceMode2D.Force);
     }
+
+    public void RotateCharacter()
+    {
+        if(ManagerChara.Instance.controls.Character.Movements.ReadValue<Vector2>().x > 0.1f)
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
+
+        else if (ManagerChara.Instance.controls.Character.Movements.ReadValue<Vector2>().x < -0.1f)
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+    }
 }
