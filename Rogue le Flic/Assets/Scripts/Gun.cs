@@ -124,7 +124,7 @@ public class Gun : MonoBehaviour
             // ON RAMASSE L'ARME
             if (controls.Character.Enter.WasPerformedThisFrame())
             {
-                if (canBePicked)
+                if (canBePicked && (ManagerChara.Instance.stockWeapon == null || ManagerChara.Instance.activeGun == null))
                 {
                     PickWeapon();
                 }
