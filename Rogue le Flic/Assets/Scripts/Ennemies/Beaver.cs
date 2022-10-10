@@ -50,7 +50,10 @@ public class Beaver : MonoBehaviour
             Destroy(gameObject);
             ScoreManager.instance.AddPoint();
         }
+    }
 
+    private void FixedUpdate()
+    {
         if (canMove)
         {
             Vector2 direction = AIPath.targetDirection;
@@ -64,7 +67,7 @@ public class Beaver : MonoBehaviour
 
             else
             {
-                rb.AddForce(new Vector2(direction.x * speedX, direction.y* speedY), ForceMode2D.Force);
+                rb.AddForce(new Vector2(direction.x * speedX, direction.y* speedY) * 5, ForceMode2D.Force);
             }
         }
     }
