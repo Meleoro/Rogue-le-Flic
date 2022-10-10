@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 1503478015596987165}
   - component: {fileID: 1503478015596987153}
   - component: {fileID: 8500281233397896041}
+  - component: {fileID: 1990982738}
   m_Layer: 8
   m_Name: Character
   m_TagString: Player
@@ -275,8 +276,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 875cc121b85b86644bb1bbc622a5ca85, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -324,7 +325,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -363,8 +364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459bbf3a225e89d4b853db46388e4b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 12
-  speedY: 10.5
+  speedX: 1
+  speedY: 0.9
   dragDeceleration: 5
   dragMultiplier: 3
 --- !u!114 &1503478015596987153
@@ -400,3 +401,30 @@ MonoBehaviour:
   kickDuration: 0.3
   kickStrenght: 60
   propulsionChara: 20
+--- !u!114 &1990982738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503478015596987166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.5102978, y: -0.7524586, z: 0}
+  - {x: -0.17665386, y: -0.16775131, z: 0}
+  - {x: 0.4941535, y: -0.7005043, z: 0}
+  - {x: 0.32733202, y: -0.82241535, z: 0}
+  m_ShapePathHash: 1347242869
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 56996

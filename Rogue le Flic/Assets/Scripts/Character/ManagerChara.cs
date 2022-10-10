@@ -65,9 +65,6 @@ public class ManagerChara : MonoBehaviour
         {
             MovementsChara.Instance.RotateCharacter();
 
-            if(!isDashing)
-                MovementsChara.Instance.MoveCharacter();
-
             if (controls.Character.Dash.WasPerformedThisFrame() && !isDashing)
             {
                 DashChara.Instance.Dash();
@@ -97,6 +94,13 @@ public class ManagerChara : MonoBehaviour
                 SwitchWeapons();
             }
         }
+    }
+
+
+    private void FixedUpdate()
+    {
+        if(!isDashing && !noControl)
+            MovementsChara.Instance.MoveCharacter();
     }
 
     void SwitchWeapons()

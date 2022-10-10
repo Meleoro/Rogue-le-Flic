@@ -44,7 +44,7 @@ public class MovementsChara : MonoBehaviour
     {
         Vector2 direction = controls.Character.Movements.ReadValue<Vector2>();
 
-        ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * speedX, direction.y* speedY), ForceMode2D.Force);
+        ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * speedX, direction.y* speedY) * 10, ForceMode2D.Force);
     }
 
     public void RotateCharacter()
