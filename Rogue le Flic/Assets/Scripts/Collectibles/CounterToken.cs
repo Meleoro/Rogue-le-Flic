@@ -21,7 +21,7 @@ public class CounterToken : MonoBehaviour
         }
         instance = this;
         //LoadSaveToken();
-        interactCountText.text = currentTokenCount.ToString(); 
+        //interactCountText.text = currentTokenCount.ToString(); 
         //TokenLevel = PlayerPrefs.GetFloat("Token");
     }
 
@@ -34,7 +34,7 @@ public class CounterToken : MonoBehaviour
 
     private void Update()
     {
-        interactCountText.text = "Coins : " + currentTokenCount.ToString();
+        //interactCountText.text = "Coins : " + currentTokenCount.ToString();
     }
 
     public void SaveToken()

@@ -21,7 +21,7 @@ public class ShopManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CoinsTXT.text = "Coins:" + CounterToken.instance.currentTokenCount.ToString();
+        //CoinsTXT.text = "Coins:" + CounterToken.instance.currentTokenCount.ToString();
 
         
         //ID's
@@ -47,7 +47,7 @@ public class ShopManager : MonoBehaviour
 
     void Update()
     {
-        CoinsTXT.text = "Coins:" + CounterToken.instance.currentTokenCount.ToString();
+        //CoinsTXT.text = "Coins:" + CounterToken.instance.currentTokenCount.ToString();
     }
     public void Buy()
     {
