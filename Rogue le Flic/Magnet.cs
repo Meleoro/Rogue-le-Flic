@@ -1,19 +1,11 @@
+using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Reflection;
 
-public class Magnet : MonoBehaviour
+public class Magnet: MonoBehaviour
 {
-    public float radius;
-    public CircleCollider2D magnet;
-
-    private void Update()
-    {
-        
-    }
-
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!collision.CompareTag("Ennemy"))
