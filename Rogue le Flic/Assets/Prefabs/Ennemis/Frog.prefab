@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3801439837385764995}
   - component: {fileID: 3801439837385765000}
   - component: {fileID: 3801439837385765001}
+  - component: {fileID: -4226709946824038215}
   - component: {fileID: 8231922795629884000}
   m_Layer: 9
   m_Name: Frog
@@ -221,6 +222,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-4226709946824038215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3801439837385764994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8f4959e23bf5349b91a065d722e876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ennemyType: 1
+  beaverScript: {fileID: 0}
+  frogScript: {fileID: 8231922795629884000}
 --- !u!114 &8231922795629884000
 MonoBehaviour:
   m_ObjectHideFlags: 0

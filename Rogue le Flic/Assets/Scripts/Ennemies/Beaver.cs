@@ -29,7 +29,7 @@ public class Beaver : MonoBehaviour
     public Transform beaverPos;
     private Rigidbody2D rb;
     private bool canMove;
-
+    
 
     private void Start()
     {
@@ -40,9 +40,9 @@ public class Beaver : MonoBehaviour
         
         AIDestination.target = ManagerChara.Instance.transform;
     }
+    
 
-
-    private void Update()
+    public void BeaverBehavior()
     {
         if (health < 0)
         {
@@ -51,8 +51,9 @@ public class Beaver : MonoBehaviour
             ScoreManager.instance.AddPoint();
         }
     }
+    
 
-    private void FixedUpdate()
+    public void BeaverFixedBehavior()
     {
         if (canMove)
         {
@@ -71,7 +72,6 @@ public class Beaver : MonoBehaviour
             }
         }
     }
-
 
     private void OnCollisionEnter2D(Collision2D col)
     {

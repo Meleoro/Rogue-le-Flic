@@ -37,9 +37,9 @@ public class Frog : MonoBehaviour
         
         AIDestination.target = ManagerChara.Instance.transform;
     }
+    
 
-
-    private void Update()
+    public void FrogBehavior()
     {
         if (health < 0)
         {
