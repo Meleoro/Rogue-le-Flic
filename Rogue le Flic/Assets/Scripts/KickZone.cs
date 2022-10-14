@@ -11,7 +11,7 @@ public class KickZone : MonoBehaviour
     {
         if (col.CompareTag("Ennemy"))
         {
-            col.gameObject.GetComponent<Beaver>().StopCoroutine();
+            col.gameObject.GetComponent<Ennemy>().StopCoroutines();
             
             Vector2 direction = col.transform.position - transform.position;
             

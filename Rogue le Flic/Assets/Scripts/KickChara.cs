@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Rendering;
 
 public class KickChara : MonoBehaviour
 {
@@ -22,7 +23,16 @@ public class KickChara : MonoBehaviour
     [Range(0.1f, 5)] public float slowMoSpeed;
     [Range(1, 50)] public float slowMoStrenght;
     private bool slowMoActive;
+    private bool slowMoStrongActive;
     private float timerSlowMo;
+
+    [Header("CameraZoom")] 
+    public float newZoom;
+    [Range(0.001f, 0.3f)] public float zoomMoment;
+    [Range(0.001f, 0.3f)] public float dezoomMoment;
+    private float originalZoom;
+
+    [Header("References")] public Volume kickVolume;
 
 
     public void Awake()
@@ -34,13 +44,58 @@ public class KickChara : MonoBehaviour
 
     private void Update()
     {
-        if (slowMoActive)
+        if (slowMoStrongActive)
         {
             timerSlowMo += Time.fixedDeltaTime * slowMoSpeed;
-            
+
+            // Gestion du déroulement du temps
             Time.timeScale = Mathf.Lerp(1 / slowMoStrenght, 1, timerSlowMo);
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             
+            // Effets visuels
+            kickVolume.weight = Mathf.Lerp(1, 0, timerSlowMo);
+
+            // Mouvements camera
+            if (timerSlowMo < zoomMoment)
+            {
+                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(originalZoom, newZoom, timerSlowMo / zoomMoment);
+                /*ReferenceCamera.Instance.transform.position = new Vector3(Mathf.Lerp(transform.position.x, kick.transform.position.x, timerSlowMo / zoomMoment), 
+                    Mathf.Lerp(transform.position.y, kick.transform.position.y, timerSlowMo / zoomMoment), -10);*/
+            }
+            else if (timerSlowMo >= zoomMoment + dezoomMoment)
+            {
+                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(newZoom, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
+                /*ReferenceCamera.Instance.transform.position = new Vector3(Mathf.Lerp(kick.transform.position.x, transform.position.x, timerSlowMo), 
+                    Mathf.Lerp(kick.transform.position.y, transform.position.y, timerSlowMo), -10);*/
+            }
+
+            if (timerSlowMo >= 1)
+            {
+                slowMoStrongActive = false;
+            }
+        }
+        
+        else if (slowMoActive)
+        {
+            timerSlowMo += Time.fixedDeltaTime * slowMoSpeed * 3;
+
+            // Gestion du déroulement du temps
+            Time.timeScale = Mathf.Lerp(1 / slowMoStrenght, 1, timerSlowMo);
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            
+            // Effets visuels
+            kickVolume.weight = Mathf.Lerp(0.75f, 0, timerSlowMo);
+
+            // Mouvements camera
+            if (timerSlowMo < zoomMoment)
+            {
+                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(originalZoom, originalZoom - 0.8f, timerSlowMo / zoomMoment);
+            }
+            else if (timerSlowMo >= zoomMoment + dezoomMoment)
+            {
+                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(originalZoom - 0.8f, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
+            }
+
             if (timerSlowMo >= 1)
             {
                 slowMoActive = false;
@@ -75,13 +130,31 @@ public class KickChara : MonoBehaviour
         ReferenceCamera.Instance.transform.DOShakePosition(cameraShakeDuration, cameraShakeAmplitude);
     }
 
+    public void SlowMoStrong()
+    {
+        if (!slowMoStrongActive)
+        {
+            Time.timeScale = 1 / slowMoStrenght;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+            originalZoom = ReferenceCamera.Instance.camera.orthographicSize;
+
+            timerSlowMo = 0;
+            slowMoStrongActive = true;
+        }
+    }
+
     public void SlowMo()
     {
-        Time.timeScale = 1 / slowMoStrenght;
+        if (!slowMoActive)
+        {
+            Time.timeScale = 1 / slowMoStrenght;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
-        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            originalZoom = ReferenceCamera.Instance.camera.orthographicSize;
 
-        timerSlowMo = 0;
-        slowMoActive = true;
+            timerSlowMo = 0;
+            slowMoActive = true;
+        }
     }
 }

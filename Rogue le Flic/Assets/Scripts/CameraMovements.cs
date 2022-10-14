@@ -89,8 +89,6 @@ public class CameraMovements : MonoBehaviour
         Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToViewportPoint(controls.Character.MousePosition.ReadValue<Vector2>());
         
         Vector2 newPos = new Vector2( mousePos.x * multiplierMouse - multiplierMouse / 2,  mousePos.y * multiplierMouse- multiplierMouse / 2);
-        
-        Debug.Log(newPos);
 
         transform.position = new Vector3(newX + newPos.x, newY + newPos.y, transform.position.z);
         
