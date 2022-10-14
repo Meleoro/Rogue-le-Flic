@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
 
 public class KickZone : MonoBehaviour
 {
@@ -15,6 +16,13 @@ public class KickZone : MonoBehaviour
             Vector2 direction = col.transform.position - transform.position;
             
             col.GetComponent<Rigidbody2D>().AddForce(direction.normalized * KickChara.Instance.kickStrenght, ForceMode2D.Impulse);
+            
+            // EFFETS VISUELS
+            KickChara.Instance.SlowMo();
+            KickChara.Instance.CameraShake();
         }
     }
+    
+    
+    
 }
