@@ -50,6 +50,14 @@ public class Beaver : MonoBehaviour
             Destroy(gameObject);
             ScoreManager.instance.AddPoint();
         }
+        
+        float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
+                                    Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
+        
+        if (distance < distanceJumpTrigger && !isJumping)
+        {
+            StartCoroutine(Jump(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
+        }
     }
     
 
@@ -58,18 +66,8 @@ public class Beaver : MonoBehaviour
         if (canMove)
         {
             Vector2 direction = AIPath.targetDirection;
-            float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
-                                        Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
-
-            if (distance < distanceJumpTrigger && !isJumping)
-            {
-                StartCoroutine(Jump(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
-            }
-
-            else
-            {
-                rb.AddForce(new Vector2(direction.x * speedX, direction.y* speedY) * 5, ForceMode2D.Force);
-            }
+            
+            rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
         }
     }
 
@@ -81,8 +79,6 @@ public class Beaver : MonoBehaviour
             Destroy(col.gameObject);
 
             rb.velocity = Vector2.zero;
-
-            StopCoroutine();
 
             // RECUL
             rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet * col.gameObject.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
@@ -114,10 +110,14 @@ public class Beaver : MonoBehaviour
         canMove = false;
         
         transform.DOShakePosition(0.75f, 0.3f);
+
+        GetComponent<Ennemy>().isCharging = true;
         
         yield return new WaitForSeconds(0.75f);
 
         rb.AddForce(direction.normalized * strenghtJump, ForceMode2D.Impulse);
+        
+        GetComponent<Ennemy>().isCharging = false;
         
         yield return new WaitForSeconds(0.25f);
         

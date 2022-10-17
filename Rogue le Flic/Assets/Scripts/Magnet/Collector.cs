@@ -7,7 +7,7 @@ public class Collector : MonoBehaviour
 
    private void OnTriggerEnter2D(Collider2D collision)
    {
-      if (!collision.CompareTag("Ennemy"))
+      /*if (!collision.CompareTag("Ennemy"))
       {
          var exp = collision.GetComponent<EXP>();
          if (exp != null)
@@ -18,6 +18,6 @@ public class Collector : MonoBehaviour
          }
       
          ICollectible collectible = collision.GetComponent<ICollectible>();
-      }
+      }*/
    }
 }

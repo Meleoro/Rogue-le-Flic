@@ -32,7 +32,11 @@ public class KickChara : MonoBehaviour
     [Range(0.001f, 0.3f)] public float dezoomMoment;
     private float originalZoom;
 
-    [Header("References")] public Volume kickVolume;
+    [Header("Auto-Aim")] 
+    private bool autoAimActive;
+
+    [Header("References")] 
+    public Volume kickVolume;
 
 
     public void Awake()
@@ -44,6 +48,7 @@ public class KickChara : MonoBehaviour
 
     private void Update()
     {
+        // INTERRUPTION D'UN ADVERSAIRE
         if (slowMoStrongActive)
         {
             timerSlowMo += Time.fixedDeltaTime * slowMoSpeed;
@@ -59,15 +64,14 @@ public class KickChara : MonoBehaviour
             if (timerSlowMo < zoomMoment)
             {
                 ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(originalZoom, newZoom, timerSlowMo / zoomMoment);
-                /*ReferenceCamera.Instance.transform.position = new Vector3(Mathf.Lerp(transform.position.x, kick.transform.position.x, timerSlowMo / zoomMoment), 
-                    Mathf.Lerp(transform.position.y, kick.transform.position.y, timerSlowMo / zoomMoment), -10);*/
             }
             else if (timerSlowMo >= zoomMoment + dezoomMoment)
             {
                 ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(newZoom, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
-                /*ReferenceCamera.Instance.transform.position = new Vector3(Mathf.Lerp(kick.transform.position.x, transform.position.x, timerSlowMo), 
-                    Mathf.Lerp(kick.transform.position.y, transform.position.y, timerSlowMo), -10);*/
             }
+            
+            // Auto-Aim
+            
 
             if (timerSlowMo >= 1)
             {
@@ -75,25 +79,26 @@ public class KickChara : MonoBehaviour
             }
         }
         
+        // KICK NORMAL
         else if (slowMoActive)
         {
-            timerSlowMo += Time.fixedDeltaTime * slowMoSpeed * 3;
+            timerSlowMo += Time.fixedDeltaTime * slowMoSpeed * 4;
 
             // Gestion du déroulement du temps
             Time.timeScale = Mathf.Lerp(1 / slowMoStrenght, 1, timerSlowMo);
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             
             // Effets visuels
-            kickVolume.weight = Mathf.Lerp(0.75f, 0, timerSlowMo);
+            kickVolume.weight = Mathf.Lerp(0.70f, 0, timerSlowMo);
 
             // Mouvements camera
             if (timerSlowMo < zoomMoment)
             {
-                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(originalZoom, originalZoom - 0.8f, timerSlowMo / zoomMoment);
+                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(originalZoom, originalZoom - 0.7f, timerSlowMo / zoomMoment);
             }
             else if (timerSlowMo >= zoomMoment + dezoomMoment)
             {
-                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(originalZoom - 0.8f, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
+                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(originalZoom - 0.7f, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
             }
 
             if (timerSlowMo >= 1)

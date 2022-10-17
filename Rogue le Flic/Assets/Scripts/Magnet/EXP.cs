@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class EXP : Collectible, ICollectible
+/*public class EXP : Collectible, ICollectible
 {
     public static event Action OnExCollected;
     Rigidbody2D rb;
@@ -33,14 +33,14 @@ public class EXP : Collectible, ICollectible
         Destroy(gameObject);
     }
     
-    /*public interface ICollectible
+    public interface ICollectible
     {
         public void Collect()
         {
             Debug.Log("it works now");
         }
         
-    }*/
+    }
 
     private void FixedUpdate()
     {
@@ -56,4 +56,4 @@ public class EXP : Collectible, ICollectible
         targetPosition = position;
         hasTarget = true;
     }
-}
+}*/

@@ -11,15 +11,26 @@ public class KickZone : MonoBehaviour
     {
         if (col.CompareTag("Ennemy"))
         {
-            col.gameObject.GetComponent<Ennemy>().StopCoroutines();
+            if (col.gameObject.GetComponent<Ennemy>().isCharging)
+            {
+                col.gameObject.GetComponent<Ennemy>().StopCoroutines();
+                
+                // EFFETS VISUELS
+                KickChara.Instance.SlowMoStrong();
+                KickChara.Instance.CameraShake();
+            }
+            else
+            {
+                col.gameObject.GetComponent<Ennemy>().StopCoroutines();
+                
+                // EFFETS VISUELS
+                KickChara.Instance.SlowMo();
+                KickChara.Instance.CameraShake();
+            }
             
             Vector2 direction = col.transform.position - transform.position;
             
             col.GetComponent<Rigidbody2D>().AddForce(direction.normalized * KickChara.Instance.kickStrenght, ForceMode2D.Impulse);
-            
-            // EFFETS VISUELS
-            KickChara.Instance.SlowMo();
-            KickChara.Instance.CameraShake();
         }
     }
     

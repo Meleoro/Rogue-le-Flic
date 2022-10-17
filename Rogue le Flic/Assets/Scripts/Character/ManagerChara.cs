@@ -8,8 +8,8 @@ public class ManagerChara : MonoBehaviour
     public static ManagerChara Instance;
     
     [HideInInspector] public Rigidbody2D rb;
-    public GameObject activeGun;
-    public GameObject stockWeapon;
+    [HideInInspector] public GameObject activeGun;
+    [HideInInspector] public GameObject stockWeapon;
 
     public Controls controls;
     public bool noControl;
@@ -25,6 +25,7 @@ public class ManagerChara : MonoBehaviour
     [Header("Autres")] 
     public float switchCooldown;
     public bool canSwitch;
+    public Animator anim;
     
     
 

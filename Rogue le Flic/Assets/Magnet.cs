@@ -6,7 +6,7 @@ public class Magnet : MonoBehaviour
 {
     void Update()
     { 
-        void OnTriggerStay2D(Collider2D collision)
+        /*void OnTriggerStay2D(Collider2D collision)
             {
                 if (!collision.CompareTag("Ennemy"))
                 {
@@ -15,7 +15,7 @@ public class Magnet : MonoBehaviour
                         exp.SetTarget(transform.parent.position);
                     }
                 }
-            }
+            }*/
     }
     
 }

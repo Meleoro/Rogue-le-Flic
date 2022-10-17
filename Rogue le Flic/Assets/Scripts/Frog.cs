@@ -45,21 +45,25 @@ public class Frog : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+        float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
+                                    Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
+        
+        if (distance <= distanceShotTrigger && !cooldownShot)
+        {
+            Shoot();
 
+            StartCoroutine(Cooldown());
+        }
+    }
+
+    public void FrogFixedBehavior()
+    {
         if (canMove)
         {
             Vector2 direction = AIPath.targetDirection;
-            float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
-                                        Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
-            
-            rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY), ForceMode2D.Force);
 
-            if (distance <= distanceShotTrigger && !cooldownShot)
-            {
-                Shoot();
-
-                StartCoroutine(Cooldown());
-            }
+            rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
         }
     }
 

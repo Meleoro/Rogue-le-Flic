@@ -13,9 +13,26 @@ public class Ennemy : MonoBehaviour
 
     public ennemies ennemyType;
 
-    public Beaver beaverScript;
-    public Frog frogScript;
-    
+    private Beaver beaverScript;
+    private Frog frogScript;
+
+    [HideInInspector] public bool isCharging;
+
+
+    private void Start()
+    {
+        switch (ennemyType)
+        {
+            case ennemies.Beaver :
+                beaverScript = GetComponent<Beaver>();
+                break;
+            
+            case ennemies.Frog :
+                frogScript = GetComponent<Frog>();
+                break;
+        }
+    }
+
 
     private void Update()
     {
@@ -40,6 +57,7 @@ public class Ennemy : MonoBehaviour
                 break;
             
             case ennemies.Frog :
+                frogScript.FrogFixedBehavior();
                 break;
         }
     }
@@ -47,6 +65,8 @@ public class Ennemy : MonoBehaviour
 
     public void StopCoroutines()
     {
+        isCharging = false;
+        
         switch (ennemyType)
         {
             case ennemies.Beaver :
