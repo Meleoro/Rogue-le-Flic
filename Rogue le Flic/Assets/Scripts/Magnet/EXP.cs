@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class EXP : Collectible, ICollectible
+public class EXP : MonoBehaviour
 {
     public static event Action OnExCollected;
     Rigidbody2D rb;
@@ -16,15 +16,15 @@ public class EXP : Collectible, ICollectible
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
-        valeurXp = ComboManager.Instance.currentMultiplier;
+        //valeurXp = ComboManager.Instance.currentMultiplier;
     }
 
-    public override void Collect()
+    /*public override void Collect()
     {
         ExpBar.Instance.currentXp += valeurXp - 1;
         
@@ -33,7 +33,7 @@ public class EXP : Collectible, ICollectible
         Destroy(gameObject);
     }
     
-    /*public interface ICollectible
+    public interface ICollectible
     {
         public void Collect()
         {

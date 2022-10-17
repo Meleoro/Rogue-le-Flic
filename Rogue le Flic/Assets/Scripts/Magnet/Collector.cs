@@ -12,12 +12,13 @@ public class Collector : MonoBehaviour
          var exp = collision.GetComponent<EXP>();
          if (exp != null)
          {
-            exp.Collect();
-            ExpManager.pointCount += 1;
-            ExpBar.Instance.currentXp += 1;
+            //exp.Collect();
+            //ExpManager.pointCount += 1;
+            //ExpBar.Instance.currentXp += 1;
          }
       
-         ICollectible collectible = collision.GetComponent<ICollectible>();
+         //ICollectible collectible = collision.GetComponent<ICollectible>();
       }
    }
+   
 }
