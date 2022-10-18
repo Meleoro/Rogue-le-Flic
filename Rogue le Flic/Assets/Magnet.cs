@@ -6,16 +6,16 @@ public class Magnet : MonoBehaviour
 {
     void Update()
     { 
-        /*void OnTriggerStay2D(Collider2D collision)
+        void OnTriggerStay2D(Collider2D collision)
             {
-                if (!collision.CompareTag("Ennemy"))
+                if (collision.CompareTag("Coin"))
                 {
-                    if (collision.gameObject.TryGetComponent(out EXP exp))
+                    if (collision.gameObject.TryGetComponent(out Token coin))
                     {
-                        exp.SetTarget(transform.parent.position);
+                        coin.SetTarget(transform.parent.position);
                     }
                 }
-            }*/
+            }
     }
     
 }

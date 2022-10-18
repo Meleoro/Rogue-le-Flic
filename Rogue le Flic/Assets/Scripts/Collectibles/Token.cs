@@ -9,6 +9,10 @@ public class Token : MonoBehaviour
 {
     //public AudioClip sound;
     public int currentTokenCount;
+    bool hasTarget;
+    Vector3 targetPosition;
+    private float moveSpeed = 10f;
+    private Rigidbody2D rb;
     
     private void Start()
     {
@@ -32,5 +36,18 @@ public class Token : MonoBehaviour
         CounterToken.instance.AddCounterToken(1);
         Destroy(gameObject,0.00001f);
     }
+    void FixedUpdate()
+    {
+        if (hasTarget)
+        {
+            Vector2 targetDirection = targetPosition - transform.position;
+            rb.velocity = targetDirection.normalized * moveSpeed;
+        }
+    }
 
+    public void SetTarget(Vector3 position)
+    {
+        targetPosition = position;
+        hasTarget = true;
+    }
 }

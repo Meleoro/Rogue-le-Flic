@@ -9,7 +9,7 @@ public class EXP : MonoBehaviour
     Rigidbody2D rb;
 
     public float valeurXp;
-
+ 
     bool hasTarget;
     Vector3 targetPosition;
     private float moveSpeed = 10f;

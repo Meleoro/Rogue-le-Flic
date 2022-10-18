@@ -289,6 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8447078720495051528}
   - component: {fileID: 6330940490061661601}
+  - component: {fileID: 312834952}
   m_Layer: 8
   m_Name: Magnet
   m_TagString: Untagged
@@ -321,12 +322,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 3
+--- !u!114 &312834952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316933709733900192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4be1e4fc743de445bacb3fcb89c8d7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1503478015596987166
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +500,7 @@ MonoBehaviour:
   noControl: 0
   switchCooldown: 1
   canSwitch: 0
+  anim: {fileID: 0}
 --- !u!114 &1503478015596987165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,7 +584,7 @@ MonoBehaviour:
   - {x: 0.32733202, y: -0.82241535, z: 0}
   m_ShapePathHash: 1347242869
   m_Mesh: {fileID: 0}
-  m_InstanceId: -151982
+  m_InstanceId: -42686
 --- !u!1 &3405490159366010039
 GameObject:
   m_ObjectHideFlags: 0
