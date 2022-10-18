@@ -20,9 +20,9 @@ public class Token : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             StartCoroutine(ChangeNumber());
-            currentTokenCount = currentTokenCount + 1;
-            GetComponent<SpriteRenderer>().enabled = false;
-            GetComponent<BoxCollider2D>().enabled = false;
+            //currentTokenCount = currentTokenCount + 1;
+            //GetComponent<SpriteRenderer>().enabled = false;
+            //GetComponent<BoxCollider2D>().enabled = false;
             //AudioManager.instance.PlayClipAt(sound, transform.position);
         }
     }

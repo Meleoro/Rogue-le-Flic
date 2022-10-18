@@ -33,7 +33,7 @@ public class CounterToken : MonoBehaviour
 
     private void Update()
     {
-        //interactCountText.text = "Coins : " + currentTokenCount.ToString();
+        interactCountText.text = "Coins : " + currentTokenCount.ToString();
     }
 
     public void SaveToken()
