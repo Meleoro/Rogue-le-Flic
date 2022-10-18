@@ -26,7 +26,7 @@ public class Frog : MonoBehaviour
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
     private Rigidbody2D rb;
-    private bool canMove;
+    [HideInInspector] public bool canMove;
 
 
     private void Start()
@@ -81,15 +81,18 @@ public class Frog : MonoBehaviour
         
         yield return new WaitForSeconds(0.75f);
         
+        GetComponent<Ennemy>().isCharging = false;
+        
         GameObject currentTongue = Instantiate(tongue, transform.position, Quaternion.identity, transform);
 
         currentTongue.GetComponent<FrogTongue>().destination = destination;
-        
         currentTongue.GetComponent<FrogTongue>().tongueDuration = shotDuration;
-        
+
         yield return new WaitForSeconds(shotDuration);
 
         canMove = true;
+        
+        rb.AddForce(-direction * 3, ForceMode2D.Impulse);
         
         yield return new WaitForSeconds(shotDuration / 2);
 
@@ -123,13 +126,26 @@ public class Frog : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Bullet"))
         {
-            health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
-            Destroy(col.gameObject);
+            if (canMove)
+            {
+                health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
+                Destroy(col.gameObject);
 
-            rb.velocity = Vector2.zero;
+                rb.velocity = Vector2.zero;
 
-            // RECUL
-            rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet * col.gameObject.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+                // RECUL
+                rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet * col.gameObject.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+            }
+            else
+            {
+                health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
+                Destroy(col.gameObject);
+
+                rb.velocity = Vector2.zero;
+
+                // SHAKE
+                gameObject.transform.DOShakePosition(0.1f, 0.1f);
+            }
         }
         if (col.gameObject.CompareTag("Player"))
         {

@@ -14,6 +14,7 @@ public class FrogTongue : MonoBehaviour
     private float avancée;
 
     private Rigidbody2D rb;
+    private LineRenderer lr;
 
     private Frog frog;
 
@@ -21,6 +22,7 @@ public class FrogTongue : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        lr = GetComponent<LineRenderer>();
 
         //Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
         //destination = ManagerChara.Instance.transform.position + direction.normalized * 2;
@@ -28,16 +30,26 @@ public class FrogTongue : MonoBehaviour
         retour = transform.position;
 
         frog = GetComponentInParent<Frog>();
+        
+        lr.SetPosition(0, retour);
+        lr.SetPosition(1, retour);
     }
 
     private void Update()
     {
+        lr.SetPosition(1, transform.position);
+        
         avancée += Time.deltaTime / frog.shotDuration;
         
         transform.position = new Vector2(Mathf.Lerp(retour.x, destination.x, frog.tonguePatern.Evaluate(avancée)),
             Mathf.Lerp(retour.y, destination.y, frog.tonguePatern.Evaluate(avancée)));
 
         if (avancée >= 1)
+        {
+            Destroy(gameObject);
+        }
+
+        if (frog.canMove)
         {
             Destroy(gameObject);
         }

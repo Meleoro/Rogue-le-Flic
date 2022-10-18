@@ -13,6 +13,8 @@ public class Ennemy : MonoBehaviour
 
     public ennemies ennemyType;
 
+    public GameObject cible;
+
     private Beaver beaverScript;
     private Frog frogScript;
 

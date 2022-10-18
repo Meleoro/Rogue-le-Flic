@@ -72,11 +72,13 @@ public class KickChara : MonoBehaviour
             }
             
             // Auto-Aim
-            
+            kickedEnnemy.GetComponent<Ennemy>().cible.SetActive(true);
 
             if (timerSlowMo >= 1)
             {
                 slowMoStrongActive = false;
+                
+                kickedEnnemy.GetComponent<Ennemy>().cible.SetActive(false);
             }
         }
         
