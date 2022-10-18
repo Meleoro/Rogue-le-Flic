@@ -22,11 +22,7 @@ public class MapManager : MonoBehaviour
     {
         Instance = this;
     }
-
-    private void Start()
-    {
-        //Spawn();
-    }
+    
 
     void Update()
     {
@@ -180,7 +176,7 @@ public class MapManager : MonoBehaviour
                 k.SetActive(true);
         }
         
-        ReferenceCamera.Instance.camera.orthographicSize = activeRoom.GetComponent<CameraManager>().cameraSize;
+        ReferenceCamera.Instance._camera.orthographicSize = activeRoom.GetComponent<CameraManager>().cameraSize;
         
         MiniMapManager.Instance.ActualiseMap(mapActive);
     }

@@ -15,38 +15,34 @@ public class FrogTongue : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private Frog frog;
+
     
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
-
-        Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
-        destination = ManagerChara.Instance.transform.position + direction.normalized * 2;
-
-        transform.DOMove(destination, tongueDuration - 0.5f);
+        //Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
+        //destination = ManagerChara.Instance.transform.position + direction.normalized * 2;
 
         retour = transform.position;
+
+        frog = GetComponentInParent<Frog>();
     }
 
     private void Update()
     {
-        avancée += Time.deltaTime;
+        avancée += Time.deltaTime / frog.shotDuration;
+        
+        transform.position = new Vector2(Mathf.Lerp(retour.x, destination.x, frog.tonguePatern.Evaluate(avancée)),
+            Mathf.Lerp(retour.y, destination.y, frog.tonguePatern.Evaluate(avancée)));
 
-        if (avancée >= tongueDuration - 0.5f)
+        if (avancée >= 1)
         {
-            transform.DOMove(retour, 0.5f);
-        }
-
-        if (avancée >= tongueDuration)
-        {
-            DOTween.CompleteAll();
-            
             Destroy(gameObject);
         }
-        
-
     }
+    
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Player"))

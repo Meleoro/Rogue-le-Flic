@@ -40,6 +40,7 @@ public class Gun : MonoBehaviour
     private bool lookLeft;
     private bool isReloading;
     private bool stopStock;
+    [HideInInspector] public bool autoAim;
 
     public GameObject explanation;
 
@@ -185,8 +186,20 @@ public class Gun : MonoBehaviour
             {
                 float dispersion = Random.Range(-gunData.shotDispersion, gunData.shotDispersion);
 
-                float angle = OrientateGun();
-                
+                float angle;
+
+                if (autoAim)
+                {
+                    Vector2 ennemyPos = KickChara.Instance.kickedEnnemy.transform.position;
+                    Vector2 charaPos = ManagerChara.Instance.transform.position;
+        
+                    angle = Mathf.Atan2(ennemyPos.y - charaPos.y, ennemyPos.x - charaPos.x) * Mathf.Rad2Deg;
+                }
+                else
+                {
+                    angle = OrientateGun();
+                }
+
                 GameObject refBullet = Instantiate(bullet, transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
                 
@@ -224,8 +237,8 @@ public class Gun : MonoBehaviour
 
     public void Knockback()
     {
-        Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToViewportPoint(controls.Character.MousePosition.ReadValue<Vector2>());
-        Vector2 charaPos = ReferenceCamera.Instance.camera.WorldToViewportPoint(ManagerChara.Instance.transform.position);
+        Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToViewportPoint(controls.Character.MousePosition.ReadValue<Vector2>());
+        Vector2 charaPos = ReferenceCamera.Instance._camera.WorldToViewportPoint(ManagerChara.Instance.transform.position);
 
         Vector2 direction = charaPos - mousePos;
 
@@ -234,7 +247,7 @@ public class Gun : MonoBehaviour
     
     public float OrientateGun()
     {
-        Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToWorldPoint(controls.Character.MousePosition.ReadValue<Vector2>());
+        Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToWorldPoint(controls.Character.MousePosition.ReadValue<Vector2>());
         Vector2 charaPos = ManagerChara.Instance.transform.position;
         
         return Mathf.Atan2(mousePos.y - charaPos.y, mousePos.x - charaPos.x) * Mathf.Rad2Deg;
@@ -287,6 +300,15 @@ public class Gun : MonoBehaviour
 
         isReloading = false;
         currentAmmo = gunData.maxAmmo;
+    }
+
+    public IEnumerator AutoAim(float duree)
+    {
+        autoAim = true;
+        
+        yield return new WaitForSeconds(duree);
+        
+        autoAim = false;
     }
 
     IEnumerator DoubleShot()

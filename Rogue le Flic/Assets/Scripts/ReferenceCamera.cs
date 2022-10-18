@@ -7,7 +7,7 @@ public class ReferenceCamera : MonoBehaviour
 {
     public static ReferenceCamera Instance;
 
-    public Camera camera;
+    public Camera _camera;
 
     private void Awake()
     {
@@ -20,6 +20,6 @@ public class ReferenceCamera : MonoBehaviour
 
     private void Start()
     {
-        camera = GetComponent<Camera>();
+        _camera = GetComponent<Camera>();
     }
 }

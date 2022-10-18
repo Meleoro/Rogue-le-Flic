@@ -74,7 +74,7 @@ public class Ennemy : MonoBehaviour
                 break;
             
             case ennemies.Frog :
-                frogScript.StopAllCoroutines();
+                frogScript.StopCoroutine();
                 break;
         }
     }

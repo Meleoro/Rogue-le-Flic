@@ -87,7 +87,7 @@ public class Beaver : MonoBehaviour
         
         if (col.gameObject.CompareTag("Player"))
         {
-            HealthChara.instance.TakeDamage(15);
+            //HealthChara.instance.TakeDamage(15);
         }
     }
     
@@ -108,7 +108,7 @@ public class Beaver : MonoBehaviour
     {
         isJumping = true;
         canMove = false;
-        
+
         transform.DOShakePosition(0.75f, 0.3f);
 
         GetComponent<Ennemy>().isCharging = true;

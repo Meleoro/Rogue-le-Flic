@@ -18,7 +18,8 @@ public class Frog : MonoBehaviour
     [SerializeField] private int health;
     public GameObject tongue;
     [SerializeField] private float distanceShotTrigger;
-    [SerializeField] private float shotDuration;
+    public float shotDuration;
+    public AnimationCurve tonguePatern;
     private bool cooldownShot;
 
     [Header("Autres")]
@@ -51,8 +52,6 @@ public class Frog : MonoBehaviour
         
         if (distance <= distanceShotTrigger && !cooldownShot)
         {
-            Shoot();
-
             StartCoroutine(Cooldown());
         }
     }
@@ -66,19 +65,27 @@ public class Frog : MonoBehaviour
             rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
         }
     }
-
-
-    void Shoot()
-    {
-        GameObject currentTongue = Instantiate(tongue, transform.position, Quaternion.identity);
-
-        currentTongue.GetComponent<FrogTongue>().tongueDuration = shotDuration;
-    }
+    
 
     IEnumerator Cooldown()
     {
         canMove = false;
         cooldownShot = true;
+        
+        Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
+        Vector2 destination = ManagerChara.Instance.transform.position + direction.normalized * 3;
+        
+        transform.DOShakePosition(0.75f, 0.3f);
+
+        GetComponent<Ennemy>().isCharging = true;
+        
+        yield return new WaitForSeconds(0.75f);
+        
+        GameObject currentTongue = Instantiate(tongue, transform.position, Quaternion.identity, transform);
+
+        currentTongue.GetComponent<FrogTongue>().destination = destination;
+        
+        currentTongue.GetComponent<FrogTongue>().tongueDuration = shotDuration;
         
         yield return new WaitForSeconds(shotDuration);
 
@@ -86,6 +93,28 @@ public class Frog : MonoBehaviour
         
         yield return new WaitForSeconds(shotDuration / 2);
 
+        cooldownShot = false;
+    }
+    
+    
+    public void StopCoroutine()
+    {
+        if (!canMove)
+        {
+            StopAllCoroutines();
+            canMove = true;
+            transform.DOComplete();
+                
+            StartCoroutine(Wait(4));
+        }
+    }
+
+    IEnumerator Wait(float duree)
+    {
+        cooldownShot = true;
+        
+        yield return new WaitForSeconds(duree);
+        
         cooldownShot = false;
     }
 
