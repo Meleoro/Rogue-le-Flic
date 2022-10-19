@@ -34,6 +34,7 @@ public class KickChara : MonoBehaviour
 
     [Header("Auto-Aim")] 
     private bool autoAimActive;
+    [HideInInspector] public GameObject kickedEnnemy;
 
     [Header("References")] 
     public Volume kickVolume;
@@ -63,19 +64,21 @@ public class KickChara : MonoBehaviour
             // Mouvements camera
             if (timerSlowMo < zoomMoment)
             {
-                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(originalZoom, newZoom, timerSlowMo / zoomMoment);
+                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(originalZoom, newZoom, timerSlowMo / zoomMoment);
             }
             else if (timerSlowMo >= zoomMoment + dezoomMoment)
             {
-                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(newZoom, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
+                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(newZoom, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
             }
             
             // Auto-Aim
-            
+            kickedEnnemy.GetComponent<Ennemy>().cible.SetActive(true);
 
             if (timerSlowMo >= 1)
             {
                 slowMoStrongActive = false;
+                
+                kickedEnnemy.GetComponent<Ennemy>().cible.SetActive(false);
             }
         }
         
@@ -94,11 +97,11 @@ public class KickChara : MonoBehaviour
             // Mouvements camera
             if (timerSlowMo < zoomMoment)
             {
-                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(originalZoom, originalZoom - 0.7f, timerSlowMo / zoomMoment);
+                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(originalZoom, originalZoom - 0.7f, timerSlowMo / zoomMoment);
             }
             else if (timerSlowMo >= zoomMoment + dezoomMoment)
             {
-                ReferenceCamera.Instance.camera.orthographicSize = Mathf.Lerp(originalZoom - 0.7f, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
+                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(originalZoom - 0.7f, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
             }
 
             if (timerSlowMo >= 1)
@@ -112,7 +115,7 @@ public class KickChara : MonoBehaviour
     public IEnumerator Kick()
     {
         // ON RECUPERE LA POSITION DE LA SOURIS ET DU JOUEUR 
-        Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>());
+        Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>());
         Vector2 charaPos = ManagerChara.Instance.transform.position;
         
         // ON PLACE LA ZONE DE KICK ET ON L'AFFICHE
@@ -142,7 +145,7 @@ public class KickChara : MonoBehaviour
             Time.timeScale = 1 / slowMoStrenght;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
-            originalZoom = ReferenceCamera.Instance.camera.orthographicSize;
+            originalZoom = ReferenceCamera.Instance._camera.orthographicSize;
 
             timerSlowMo = 0;
             slowMoStrongActive = true;
@@ -156,10 +159,16 @@ public class KickChara : MonoBehaviour
             Time.timeScale = 1 / slowMoStrenght;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
-            originalZoom = ReferenceCamera.Instance.camera.orthographicSize;
+            originalZoom = ReferenceCamera.Instance._camera.orthographicSize;
 
             timerSlowMo = 0;
             slowMoActive = true;
         }
+    }
+
+    public void AutoAim()
+    {
+        if(ManagerChara.Instance.activeGun != null)
+            StartCoroutine(ManagerChara.Instance.activeGun.GetComponent<Gun>().AutoAim(kickDuration));
     }
 }

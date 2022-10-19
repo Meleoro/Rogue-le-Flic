@@ -11,6 +11,8 @@ public class KickZone : MonoBehaviour
     {
         if (col.CompareTag("Ennemy"))
         {
+            KickChara.Instance.kickedEnnemy = col.gameObject;
+            
             if (col.gameObject.GetComponent<Ennemy>().isCharging)
             {
                 col.gameObject.GetComponent<Ennemy>().StopCoroutines();
@@ -18,6 +20,8 @@ public class KickZone : MonoBehaviour
                 // EFFETS VISUELS
                 KickChara.Instance.SlowMoStrong();
                 KickChara.Instance.CameraShake();
+                
+                KickChara.Instance.AutoAim();
             }
             else
             {

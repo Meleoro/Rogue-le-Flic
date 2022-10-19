@@ -22,6 +22,10 @@ public class ManagerChara : MonoBehaviour
     private bool isKicking;
     private float timerKick;
 
+    [Header("Repositionnement")] 
+    public Vector2 posLeft;
+    public Vector2 posRight;
+
     [Header("Autres")] 
     public float switchCooldown;
     public bool canSwitch;

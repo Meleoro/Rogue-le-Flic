@@ -13,6 +13,8 @@ public class Ennemy : MonoBehaviour
 
     public ennemies ennemyType;
 
+    public GameObject cible;
+
     private Beaver beaverScript;
     private Frog frogScript;
 
@@ -74,7 +76,7 @@ public class Ennemy : MonoBehaviour
                 break;
             
             case ennemies.Frog :
-                frogScript.StopAllCoroutines();
+                frogScript.StopCoroutine();
                 break;
         }
     }

@@ -18,14 +18,15 @@ public class Frog : MonoBehaviour
     [SerializeField] private int health;
     public GameObject tongue;
     [SerializeField] private float distanceShotTrigger;
-    [SerializeField] private float shotDuration;
+    public float shotDuration;
+    public AnimationCurve tonguePatern;
     private bool cooldownShot;
 
     [Header("Autres")]
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
     private Rigidbody2D rb;
-    private bool canMove;
+    [HideInInspector] public bool canMove;
 
 
     private void Start()
@@ -51,8 +52,6 @@ public class Frog : MonoBehaviour
         
         if (distance <= distanceShotTrigger && !cooldownShot)
         {
-            Shoot();
-
             StartCoroutine(Cooldown());
         }
     }
@@ -66,26 +65,59 @@ public class Frog : MonoBehaviour
             rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
         }
     }
-
-
-    void Shoot()
-    {
-        GameObject currentTongue = Instantiate(tongue, transform.position, Quaternion.identity);
-
-        currentTongue.GetComponent<FrogTongue>().tongueDuration = shotDuration;
-    }
+    
 
     IEnumerator Cooldown()
     {
         canMove = false;
         cooldownShot = true;
         
+        Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
+        Vector2 destination = ManagerChara.Instance.transform.position + direction.normalized * 3;
+        
+        transform.DOShakePosition(0.75f, 0.3f);
+
+        GetComponent<Ennemy>().isCharging = true;
+        
+        yield return new WaitForSeconds(0.75f);
+        
+        GetComponent<Ennemy>().isCharging = false;
+        
+        GameObject currentTongue = Instantiate(tongue, transform.position, Quaternion.identity, transform);
+
+        currentTongue.GetComponent<FrogTongue>().destination = destination;
+        currentTongue.GetComponent<FrogTongue>().tongueDuration = shotDuration;
+
         yield return new WaitForSeconds(shotDuration);
 
         canMove = true;
         
+        rb.AddForce(-direction * 3, ForceMode2D.Impulse);
+        
         yield return new WaitForSeconds(shotDuration / 2);
 
+        cooldownShot = false;
+    }
+    
+    
+    public void StopCoroutine()
+    {
+        if (!canMove)
+        {
+            StopAllCoroutines();
+            canMove = true;
+            transform.DOComplete();
+                
+            StartCoroutine(Wait(4));
+        }
+    }
+
+    IEnumerator Wait(float duree)
+    {
+        cooldownShot = true;
+        
+        yield return new WaitForSeconds(duree);
+        
         cooldownShot = false;
     }
 
@@ -94,13 +126,26 @@ public class Frog : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Bullet"))
         {
-            health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
-            Destroy(col.gameObject);
+            if (canMove)
+            {
+                health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
+                Destroy(col.gameObject);
 
-            rb.velocity = Vector2.zero;
+                rb.velocity = Vector2.zero;
 
-            // RECUL
-            rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet * col.gameObject.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+                // RECUL
+                rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet * col.gameObject.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+            }
+            else
+            {
+                health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
+                Destroy(col.gameObject);
+
+                rb.velocity = Vector2.zero;
+
+                // SHAKE
+                gameObject.transform.DOShakePosition(0.1f, 0.1f);
+            }
         }
         if (col.gameObject.CompareTag("Player"))
         {

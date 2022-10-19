@@ -17,6 +17,9 @@ public class MovementsChara : MonoBehaviour
     public float dragDeceleration;
     public float dragMultiplier;
 
+    [Header("Références")] 
+    public GameObject sprite;
+
 
     private void Awake()
     {
@@ -62,12 +65,15 @@ public class MovementsChara : MonoBehaviour
         if(ManagerChara.Instance.controls.Character.Movements.ReadValue<Vector2>().x > 0.1f)
         {
             ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+
+            sprite.transform.localPosition = ManagerChara.Instance.posRight;
         }
 
         else if (ManagerChara.Instance.controls.Character.Movements.ReadValue<Vector2>().x < -0.1f)
         {
             ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 
+            sprite.transform.localPosition = ManagerChara.Instance.posLeft;  
         }
     }
 }

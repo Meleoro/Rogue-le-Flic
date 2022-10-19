@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class CameraMovements : MonoBehaviour
 {
-    private Camera camera;
+    private Camera _camera;
     private Controls controls;
 
     private float newX;
@@ -34,18 +34,19 @@ public class CameraMovements : MonoBehaviour
 
     private void Start()
     {
-        camera = ReferenceCamera.Instance.camera;
+        _camera = ReferenceCamera.Instance._camera;
     }
 
     void Update()
     {
         Vector3 charaPos = ManagerChara.Instance.transform.position;
         GameObject activeRoom = MapManager.Instance.activeRoom;
+        
         CameraManager limites = activeRoom.GetComponent<CameraManager>();
         
         
-        float height = camera.orthographicSize;
-        float width = height * camera.aspect;
+        float height = _camera.orthographicSize;
+        float width = height * _camera.aspect;
 
 
         if (limites.limitUp.transform.position.y > charaPos.y + height && 
@@ -86,7 +87,7 @@ public class CameraMovements : MonoBehaviour
         }
 
 
-        Vector2 mousePos = ReferenceCamera.Instance.camera.ScreenToViewportPoint(controls.Character.MousePosition.ReadValue<Vector2>());
+        Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToViewportPoint(controls.Character.MousePosition.ReadValue<Vector2>());
         
         Vector2 newPos = new Vector2( mousePos.x * multiplierMouse - multiplierMouse / 2,  mousePos.y * multiplierMouse- multiplierMouse / 2);
 
