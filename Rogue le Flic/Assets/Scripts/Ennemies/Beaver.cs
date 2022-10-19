@@ -85,9 +85,9 @@ public class Beaver : MonoBehaviour
         }
 
         
-        if (col.gameObject.CompareTag("Player"))
+        else if (col.gameObject.CompareTag("Player"))
         {
-            //HealthChara.instance.TakeDamage(15);
+            HealthManager.Instance.LoseHealth();
         }
     }
     

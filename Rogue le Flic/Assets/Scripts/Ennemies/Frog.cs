@@ -25,6 +25,7 @@ public class Frog : MonoBehaviour
     [Header("Autres")]
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
+    [SerializeField] private ParticleSystem hitEffect;
     private Rigidbody2D rb;
     [HideInInspector] public bool canMove;
 
@@ -126,30 +127,31 @@ public class Frog : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Bullet"))
         {
+            health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
+            Destroy(col.gameObject);
+
+            rb.velocity = Vector2.zero;
+            
             if (canMove)
             {
-                health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
-                Destroy(col.gameObject);
-
-                rb.velocity = Vector2.zero;
-
                 // RECUL
                 rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet * col.gameObject.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
             }
+            
+            // SI LA LANGUE EST ACTUELLEMENT LANCEE 
             else
             {
-                health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
-                Destroy(col.gameObject);
-
-                rb.velocity = Vector2.zero;
-
                 // SHAKE
                 gameObject.transform.DOShakePosition(0.1f, 0.1f);
             }
+            
+            hitEffect.Clear();
+            hitEffect.Play();
         }
-        if (col.gameObject.CompareTag("Player"))
+        
+        else if (col.gameObject.CompareTag("Player"))
         {
-            HealthChara.instance.TakeDamage(15);
+            HealthManager.Instance.LoseHealth();
         }
     }
 }
