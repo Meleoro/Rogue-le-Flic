@@ -87,7 +87,9 @@ public class Beaver : MonoBehaviour
         
         else if (col.gameObject.CompareTag("Player"))
         {
-            HealthManager.Instance.LoseHealth();
+            Vector2 direction = col.transform.position - transform.position;
+            
+            HealthManager.Instance.LoseHealth(direction);
         }
     }
     

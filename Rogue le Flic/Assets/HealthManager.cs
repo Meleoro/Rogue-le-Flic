@@ -14,7 +14,8 @@ public class HealthManager : MonoBehaviour
 
     [Header("Feedback Hit")] 
     [SerializeField] private Volume volume;
-    public float speedEffects;
+    [SerializeField] private float speedEffects;
+    [SerializeField] private float reculForce;
     [SerializeField] private float shakeAmplitude;
     [SerializeField] private float shakeDuration;
     private float timerEffects;
@@ -37,14 +38,15 @@ public class HealthManager : MonoBehaviour
             HitEffect();
     }
 
-    public void LoseHealth()
+    public void LoseHealth(Vector2 direction)
     {
         currentHealth -= 1;
-        
         hearts[currentHealth].SetActive(false);
 
         ReferenceCamera.Instance._camera.DOShakePosition(shakeDuration, shakeAmplitude);
-
+        
+        ManagerChara.Instance.rb.AddForce(direction.normalized * reculForce, ForceMode2D.Impulse);
+        
         timerEffects = 1;
     }
 
@@ -53,5 +55,12 @@ public class HealthManager : MonoBehaviour
         timerEffects -= Time.deltaTime * speedEffects;
 
         volume.weight = Mathf.Lerp(0, 1, timerEffects);
+
+        if (timerEffects > 0.7f)
+            Time.timeScale = 0.1f;
+
+        else
+            Time.timeScale = Mathf.Lerp(1, 0.6f, timerEffects);
+        
     }
 }
