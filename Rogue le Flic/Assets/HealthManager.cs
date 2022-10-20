@@ -11,6 +11,7 @@ public class HealthManager : MonoBehaviour
     
     [SerializeField] private List<GameObject> hearts = new List<GameObject>();
     private int currentHealth;
+    private bool isInvincible;
 
     [Header("Feedback Hit")] 
     [SerializeField] private Volume volume;
@@ -34,14 +35,19 @@ public class HealthManager : MonoBehaviour
 
     private void Update()
     {
-        if(timerEffects > 0)
+        if (timerEffects > 0)
             HitEffect();
+
+        else
+            isInvincible = false;
     }
 
     public void LoseHealth(Vector2 direction)
     {
         currentHealth -= 1;
         hearts[currentHealth].SetActive(false);
+
+        isInvincible = true;
 
         ReferenceCamera.Instance._camera.DOShakePosition(shakeDuration, shakeAmplitude);
         
@@ -53,14 +59,19 @@ public class HealthManager : MonoBehaviour
     public void HitEffect()
     {
         timerEffects -= Time.deltaTime * speedEffects;
-
-        volume.weight = Mathf.Lerp(0, 1, timerEffects);
-
-        if (timerEffects > 0.7f)
+        
+        if (timerEffects > 0.95f)
+        {
             Time.timeScale = 0.1f;
+            volume.weight = 1;
+        }
 
         else
-            Time.timeScale = Mathf.Lerp(1, 0.6f, timerEffects);
-        
+        {
+            Time.timeScale = Mathf.Lerp(1, 0.7f, timerEffects);
+            volume.weight = Mathf.Lerp(0, 1f, timerEffects);
+        }
+
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
 }
