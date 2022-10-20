@@ -17,19 +17,28 @@ public class KickChara : MonoBehaviour
 
     public float propulsionChara;
 
-    [Header("Effets")] 
+    [Header("Effets Kick Normal")] 
     public float cameraShakeDuration;
     public float cameraShakeAmplitude;
     [Range(0.1f, 5)] public float slowMoSpeed;
     [Range(1, 50)] public float slowMoStrenght;
+    [Range(0.1f, 4)] public float newZoom;
+    [Range(0.001f, 0.3f)] public float zoomMoment;
+    [Range(0.001f, 0.3f)] public float dezoomMoment;
     private bool slowMoActive;
     private bool slowMoStrongActive;
     private float timerSlowMo;
-
-    [Header("CameraZoom")] 
-    public float newZoom;
-    [Range(0.001f, 0.3f)] public float zoomMoment;
-    [Range(0.001f, 0.3f)] public float dezoomMoment;
+    
+    [Header("Effets Coup Critique")] 
+    public float cameraShakeDurationCritical;
+    public float cameraShakeAmplitudeCritical;
+    [Range(0.1f, 5)] public float slowMoSpeedCritical;
+    [Range(1, 50)] public float slowMoStrenghtCritical;
+    [Range(0.1f, 4)] public float newZoomCritical;
+    [Range(0.001f, 0.3f)] public float zoomMomentCritical;
+    [Range(0.001f, 0.3f)] public float dezoomMomentCritical;
+    
+    
     private float originalZoom;
 
     [Header("Auto-Aim")] 
@@ -52,23 +61,23 @@ public class KickChara : MonoBehaviour
         // INTERRUPTION D'UN ADVERSAIRE
         if (slowMoStrongActive)
         {
-            timerSlowMo += Time.fixedDeltaTime * slowMoSpeed;
+            timerSlowMo += Time.fixedDeltaTime * slowMoSpeedCritical;
 
             // Gestion du déroulement du temps
-            Time.timeScale = Mathf.Lerp(1 / slowMoStrenght, 1, timerSlowMo);
+            Time.timeScale = Mathf.Lerp(1 / slowMoStrenghtCritical, 1, timerSlowMo);
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             
             // Effets visuels
             kickVolume.weight = Mathf.Lerp(1, 0, timerSlowMo);
 
             // Mouvements camera
-            if (timerSlowMo < zoomMoment)
+            if (timerSlowMo < zoomMomentCritical)
             {
-                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(originalZoom, newZoom, timerSlowMo / zoomMoment);
+                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(originalZoom, originalZoom - newZoomCritical, timerSlowMo / zoomMomentCritical);
             }
-            else if (timerSlowMo >= zoomMoment + dezoomMoment)
+            else if (timerSlowMo >= zoomMomentCritical + dezoomMomentCritical)
             {
-                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(newZoom, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
+                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(originalZoom - newZoomCritical, originalZoom, timerSlowMo / (1 - dezoomMomentCritical + zoomMomentCritical));
             }
             
             // Auto-Aim
@@ -85,7 +94,7 @@ public class KickChara : MonoBehaviour
         // KICK NORMAL
         else if (slowMoActive)
         {
-            timerSlowMo += Time.fixedDeltaTime * slowMoSpeed * 4;
+            timerSlowMo += Time.fixedDeltaTime * slowMoSpeed;
 
             // Gestion du déroulement du temps
             Time.timeScale = Mathf.Lerp(1 / slowMoStrenght, 1, timerSlowMo);
@@ -97,11 +106,11 @@ public class KickChara : MonoBehaviour
             // Mouvements camera
             if (timerSlowMo < zoomMoment)
             {
-                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(originalZoom, originalZoom - 0.7f, timerSlowMo / zoomMoment);
+                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(originalZoom, originalZoom - newZoom, timerSlowMo / zoomMoment);
             }
             else if (timerSlowMo >= zoomMoment + dezoomMoment)
             {
-                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(originalZoom - 0.7f, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
+                ReferenceCamera.Instance._camera.orthographicSize = Mathf.Lerp(originalZoom - newZoom, originalZoom, timerSlowMo / (1 - dezoomMoment + zoomMoment));
             }
 
             if (timerSlowMo >= 1)
@@ -142,7 +151,7 @@ public class KickChara : MonoBehaviour
     {
         if (!slowMoStrongActive)
         {
-            Time.timeScale = 1 / slowMoStrenght;
+            Time.timeScale = 1 / slowMoStrenghtCritical;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
             originalZoom = ReferenceCamera.Instance._camera.orthographicSize;

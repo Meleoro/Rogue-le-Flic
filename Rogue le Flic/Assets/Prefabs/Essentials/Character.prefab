@@ -237,7 +237,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -463,6 +463,13 @@ MonoBehaviour:
   newZoom: 7
   zoomMoment: 0.007
   dezoomMoment: 0.262
+  cameraShakeDurationCritical: 0.18
+  cameraShakeAmplitudeCritical: 1
+  slowMoSpeedCritical: 1
+  slowMoStrenghtCritical: 25.4
+  newZoomCritical: 7
+  zoomMomentCritical: 0.007
+  dezoomMomentCritical: 0.262
   kickedEnnemy: {fileID: 0}
   kickVolume: {fileID: 1502092900}
 --- !u!114 &1990982738
@@ -491,7 +498,7 @@ MonoBehaviour:
   - {x: 0.32733202, y: -0.82241535, z: 0}
   m_ShapePathHash: 1347242869
   m_Mesh: {fileID: 0}
-  m_InstanceId: -267084
+  m_InstanceId: -56158
 --- !u!1001 &604948004
 PrefabInstance:
   m_ObjectHideFlags: 0
