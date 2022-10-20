@@ -44,23 +44,26 @@ public class HealthManager : MonoBehaviour
 
     public void LoseHealth(Vector2 direction)
     {
-        currentHealth -= 1;
-        hearts[currentHealth].SetActive(false);
+        if (!isInvincible)
+        {
+            currentHealth -= 1;
+            hearts[currentHealth].SetActive(false);
 
-        isInvincible = true;
+            isInvincible = true;
 
-        ReferenceCamera.Instance._camera.DOShakePosition(shakeDuration, shakeAmplitude);
+            ReferenceCamera.Instance._camera.DOShakePosition(shakeDuration, shakeAmplitude);
         
-        ManagerChara.Instance.rb.AddForce(direction.normalized * reculForce, ForceMode2D.Impulse);
+            ManagerChara.Instance.rb.AddForce(direction.normalized * reculForce, ForceMode2D.Impulse);
         
-        timerEffects = 1;
+            timerEffects = 1;
+        }
     }
 
     public void HitEffect()
     {
         timerEffects -= Time.deltaTime * speedEffects;
         
-        if (timerEffects > 0.95f)
+        if (timerEffects > 0.93f)
         {
             Time.timeScale = 0.1f;
             volume.weight = 1;

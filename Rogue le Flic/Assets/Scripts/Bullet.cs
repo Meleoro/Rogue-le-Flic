@@ -15,9 +15,9 @@ public class Bullet : MonoBehaviour
     public bool isBubble;
     public float decelerationBubble;
     public float timeExplosion;
-    public float reachExplosion;
-    
-    
+    [SerializeField] private GameObject bubble;
+    [SerializeField] private GameObject bubbleExplosion;
+
     [Header("Autres")]
     [HideInInspector] public Vector2 directionBullet;
     private Rigidbody2D rb;
@@ -38,10 +38,18 @@ public class Bullet : MonoBehaviour
 
         if (isBubble)
         {
-            bulletSpeed -= Time.deltaTime * decelerationBubble;
-            timerBubble -= Time.deltaTime;
-
             if (timerBubble <= 0)
+            {
+                bubble.SetActive(false);
+                bubbleExplosion.SetActive(true);
+            }
+            else
+            {
+                bulletSpeed -= Time.deltaTime * decelerationBubble;
+                timerBubble -= Time.deltaTime;
+            }
+
+            if (timerBubble <= -1)
             {
                 Destroy(gameObject);
             }

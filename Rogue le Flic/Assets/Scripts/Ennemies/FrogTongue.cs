@@ -18,14 +18,15 @@ public class FrogTongue : MonoBehaviour
 
     private Frog frog;
 
+    private EdgeCollider2D edgeCollider;
+    private List<Vector2> edgeColliderPoints = new List<Vector2>();
+
     
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
-
-        //Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
-        //destination = ManagerChara.Instance.transform.position + direction.normalized * 2;
+        edgeCollider = GetComponent<EdgeCollider2D>();
 
         retour = transform.position;
 
@@ -33,12 +34,18 @@ public class FrogTongue : MonoBehaviour
         
         lr.SetPosition(0, retour);
         lr.SetPosition(1, retour);
+
+        edgeColliderPoints.Add(transform.localPosition);
+        edgeColliderPoints.Add(transform.localPosition);
     }
 
     private void Update()
     {
         lr.SetPosition(1, transform.position);
-        
+
+        edgeColliderPoints[0] =  -transform.localPosition * 2;
+        edgeCollider.SetPoints(edgeColliderPoints);
+
         avancée += Time.deltaTime / frog.shotDuration;
         
         transform.position = new Vector2(Mathf.Lerp(retour.x, destination.x, frog.tonguePatern.Evaluate(avancée)),
@@ -54,12 +61,14 @@ public class FrogTongue : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    private void OnCollisionEnter2D(Collision2D col)
+
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            HealthChara.instance.TakeDamage(30);
+            Vector2 direction = col.transform.position - transform.position;
+            
+            HealthManager.Instance.LoseHealth(direction);
         }
     }
 }
