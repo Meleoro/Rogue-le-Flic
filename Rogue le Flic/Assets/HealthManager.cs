@@ -63,7 +63,7 @@ public class HealthManager : MonoBehaviour
     {
         timerEffects -= Time.deltaTime * speedEffects;
         
-        if (timerEffects > 0.93f)
+        if (timerEffects > 0.95f)
         {
             Time.timeScale = 0.1f;
             volume.weight = 1;
