@@ -105,8 +105,6 @@ public class DoorManager : MonoBehaviour
                     currentEnnemies.Add(k.ennemy);
 
                     ennemyCount += 1;
-                    
-                    Debug.Log(ennemyCount);
                 }
             }
 
