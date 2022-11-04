@@ -38,6 +38,8 @@ public class Bullet : MonoBehaviour
 
         if (isBubble)
         {
+            timerBubble -= Time.deltaTime;
+            
             if (timerBubble <= 0)
             {
                 bubble.SetActive(false);
@@ -46,10 +48,9 @@ public class Bullet : MonoBehaviour
             else
             {
                 bulletSpeed -= Time.deltaTime * decelerationBubble;
-                timerBubble -= Time.deltaTime;
             }
 
-            if (timerBubble <= -1)
+            if (timerBubble <= -0.5f)
             {
                 Destroy(gameObject);
             }

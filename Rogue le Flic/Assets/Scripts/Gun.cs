@@ -202,7 +202,8 @@ public class Gun : MonoBehaviour
 
                 GameObject refBullet = Instantiate(bullet, transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
-                
+
+                refBullet.GetComponent<Bullet>().bulletDamages = gunData.damages;
                 
                 // DOUBLE TIR ?
                 if (doubleBullet)

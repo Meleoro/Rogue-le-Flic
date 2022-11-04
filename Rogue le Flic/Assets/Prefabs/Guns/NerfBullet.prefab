@@ -212,13 +212,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9837cfd868eec294486a7c3bdb187707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 20
+  bulletSpeed: 30
   bulletKnockback: 0.5
   bulletDamages: 1
   isBubble: 0
   decelerationBubble: 0
   timeExplosion: 0
-  reachExplosion: 0
+  bubble: {fileID: 0}
+  bubbleExplosion: {fileID: 0}
   directionBullet: {x: 0, y: 0}
 --- !u!50 &4177285485063945855
 Rigidbody2D:

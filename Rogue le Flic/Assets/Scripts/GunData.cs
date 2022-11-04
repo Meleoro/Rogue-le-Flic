@@ -6,6 +6,7 @@ using UnityEngine;
 public class GunData : ScriptableObject
 {
     [Header("ShotProprieties")] 
+    public int damages;
     public int nbrBulletPerShot;
     public float cooldownShot;
     public float shotDispersion;
