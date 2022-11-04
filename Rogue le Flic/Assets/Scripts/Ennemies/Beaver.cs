@@ -25,6 +25,7 @@ public class Beaver : MonoBehaviour
     [Header("Autres")] 
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
+    [SerializeField] private ParticleSystem hitEffect;
     public GameObject coins;
     public Transform beaverPos;
     private Rigidbody2D rb;
@@ -78,7 +79,7 @@ public class Beaver : MonoBehaviour
             health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
             Destroy(col.gameObject);
 
-            rb.velocity = Vector2.zero;
+            //rb.velocity = Vector2.zero;
 
             // RECUL
             rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet * col.gameObject.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
@@ -91,6 +92,9 @@ public class Beaver : MonoBehaviour
             
             HealthManager.Instance.LoseHealth(direction);
         }
+        
+        hitEffect.Clear();
+        hitEffect.Play();
     }
     
 

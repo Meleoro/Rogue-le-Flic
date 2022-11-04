@@ -14,11 +14,13 @@ public class Ennemy : MonoBehaviour
     public ennemies ennemyType;
 
     public GameObject cible;
+    [SerializeField] private GameObject spawnIndicator;
 
     private Beaver beaverScript;
     private Frog frogScript;
 
     [HideInInspector] public bool isCharging;
+    private bool isSpawning;
 
 
     private void Start()
@@ -33,35 +35,61 @@ public class Ennemy : MonoBehaviour
                 frogScript = GetComponent<Frog>();
                 break;
         }
+
+        StartCoroutine(Spawn());
     }
 
 
     private void Update()
     {
-        switch (ennemyType)
+        if (!isSpawning)
         {
-            case ennemies.Beaver :
-                beaverScript.BeaverBehavior();
-                break;
+            switch (ennemyType)
+            {
+                case ennemies.Beaver :
+                    beaverScript.BeaverBehavior();
+                    break;
             
-            case ennemies.Frog :
-                frogScript.FrogBehavior();
-                break;
+                case ennemies.Frog :
+                    frogScript.FrogBehavior();
+                    break;
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        switch (ennemyType)
+        if (!isSpawning)
         {
-            case ennemies.Beaver :
-                beaverScript.BeaverFixedBehavior();
-                break;
-            
-            case ennemies.Frog :
-                frogScript.FrogFixedBehavior();
-                break;
+            switch (ennemyType)
+            {
+                case ennemies.Beaver :
+                    beaverScript.BeaverFixedBehavior();
+                    break;
+                
+                case ennemies.Frog :
+                    frogScript.FrogFixedBehavior();
+                    break;
+            }
         }
+    }
+
+
+    private IEnumerator Spawn()
+    {
+        spawnIndicator.SetActive(true);
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+
+        isSpawning = true;
+        
+        yield return new WaitForSeconds(2);
+        
+        spawnIndicator.SetActive(false);
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<BoxCollider2D>().enabled = true;
+        
+        isSpawning = false;
     }
 
 
