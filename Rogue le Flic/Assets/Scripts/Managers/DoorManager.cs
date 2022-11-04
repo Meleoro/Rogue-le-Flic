@@ -23,14 +23,32 @@ public class DoorManager : MonoBehaviour
     public GameObject up;
 
     [Header("Coordonnés Room")] 
-    public int roomPosX;
-    public int roomPosY;
+    [HideInInspector] public int roomPosX;
+    [HideInInspector] public int roomPosY;
 
     [Header("Autres")] 
     public int minEnnemies;
     public int maxEnnemies;
     public List<ennemySpawn> spawnEnnemies;
     public List<GameObject> currentEnnemies;
+    [HideInInspector] public int ennemyCount;
+
+
+    private void Update()
+    {
+        if (ennemyCount <= 0)
+        {
+            PortesActives();
+        }
+
+        else
+        {
+            doorBottom.SetActive(false);
+            doorRight.SetActive(false);
+            doorLeft.SetActive(false);
+            doorUp.SetActive(false);
+        }
+    }
 
 
     public void PortesActives()
@@ -85,6 +103,10 @@ public class DoorManager : MonoBehaviour
                 if (index < k.spawnChances && currentEnnemies.Count < maxEnnemies)
                 {
                     currentEnnemies.Add(k.ennemy);
+
+                    ennemyCount += 1;
+                    
+                    Debug.Log(ennemyCount);
                 }
             }
 

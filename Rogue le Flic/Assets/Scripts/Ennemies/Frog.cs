@@ -45,6 +45,8 @@ public class Frog : MonoBehaviour
     {
         if (health < 0)
         {
+            MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
+
             Destroy(gameObject);
         }
         

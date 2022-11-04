@@ -45,8 +45,10 @@ public class Beaver : MonoBehaviour
 
     public void BeaverBehavior()
     {
-        if (health < 0)
+        if (health <= 0)
         {
+            MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
+
             Instantiate(coins,beaverPos.position, Quaternion.identity);
             Destroy(gameObject);
             ScoreManager.instance.AddPoint();
@@ -83,6 +85,9 @@ public class Beaver : MonoBehaviour
 
             // RECUL
             rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet * col.gameObject.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+            
+            hitEffect.Clear();
+            hitEffect.Play();
         }
 
         
@@ -92,9 +97,6 @@ public class Beaver : MonoBehaviour
             
             HealthManager.Instance.LoseHealth(direction);
         }
-        
-        hitEffect.Clear();
-        hitEffect.Play();
     }
     
 
