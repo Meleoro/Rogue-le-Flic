@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine.Rendering;
 
 public class KickChara : MonoBehaviour
@@ -127,12 +129,28 @@ public class KickChara : MonoBehaviour
         Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>());
         Vector2 charaPos = ManagerChara.Instance.transform.position;
         
+        ManagerChara.Instance.noControl = true;
+
+        if (mousePos.x > charaPos.x)
+        {
+            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+            
+            MovementsChara.Instance.sprite.transform.localPosition = ManagerChara.Instance.posRight;
+        }
+        else
+        {
+            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            
+            MovementsChara.Instance.sprite.transform.localPosition = ManagerChara.Instance.posLeft;
+        }
+
+        yield return new WaitForSeconds(0.3f);
+        
         // ON PLACE LA ZONE DE KICK ET ON L'AFFICHE
         kick.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(mousePos.y - charaPos.y, mousePos.x - charaPos.x) * Mathf.Rad2Deg, Vector3.forward);
         kick.SetActive(true);
         
-        // ON PROPULSE LE PERSONNAGE ET ON RETIRE LE CONTROLE QUE LE JOUEUR A SUR LUI
-        ManagerChara.Instance.noControl = true;
+        // ON PROPULSE LE PERSONNAGE
         ManagerChara.Instance.rb.AddForce(new Vector2(mousePos.x - charaPos.x, mousePos.y - charaPos.y).normalized * propulsionChara, ForceMode2D.Impulse);
         
         yield return new WaitForSeconds(kickDuration);

@@ -80,6 +80,7 @@ public class ManagerChara : MonoBehaviour
             
             if (controls.Character.Kick.WasPerformedThisFrame() && !isKicking)
             { 
+                anim.SetTrigger("isKicking");
                 StartCoroutine(KickChara.Instance.Kick());
             }
 
