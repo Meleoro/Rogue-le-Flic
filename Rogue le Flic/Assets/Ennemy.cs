@@ -75,6 +75,21 @@ public class Ennemy : MonoBehaviour
     }
 
 
+    public void TakeDamages(int damages, GameObject bullet)
+    {
+        switch (ennemyType)
+        {
+            case ennemies.Beaver:
+                beaverScript.TakeDamages(damages, bullet);
+                break;
+
+            case ennemies.Frog:
+                frogScript.TakeDamages(damages, bullet);
+                break;
+        }
+    }
+
+
     private IEnumerator Spawn()
     {
         spawnIndicator.SetActive(true);

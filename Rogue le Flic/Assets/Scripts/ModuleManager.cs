@@ -49,23 +49,33 @@ public class ModuleManager : MonoBehaviour
 
     public void Search(int module)
     {
-        if(module == 1)
+        if (module == 1)
             Effet1();
-            
-        else if(module == 2)
+
+        else if (module == 2)
             Effet2();
+
+        else if (module == 3)
+            Effet3();
     }
     
 
     // GROSSISSEMENT DES BALLES
     public void Effet1()
     {
-        gun.bulletSize = gun.gunData.originalBulletSize * 3;
+        gun.ballesPercantes = true;
     }
     
     // DOUBLE TIRE
     public void Effet2()
     {
-        gun.doubleBullet = true;
+        gun.ballesRebondissantes = true;
+    }
+
+    public void Effet3()
+    {
+
     }
 }
+
+

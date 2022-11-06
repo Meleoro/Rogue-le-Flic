@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     public float bulletSpeed;
     public float bulletKnockback;
     public int bulletDamages;
+    private Vector2 direction;
 
     [Header("Bubble")] 
     public bool isBubble;
@@ -17,11 +18,16 @@ public class Bullet : MonoBehaviour
     public float timeExplosion;
     [SerializeField] private GameObject bubble;
     [SerializeField] private GameObject bubbleExplosion;
+    private float timerBubble;
+
+    [Header("Modules")]
+    [HideInInspector] public bool percante;
+    [HideInInspector] public bool rebondissante;
 
     [Header("Autres")]
+    [SerializeField] private BoxCollider2D bounceWalls;
     [HideInInspector] public Vector2 directionBullet;
     private Rigidbody2D rb;
-    private float timerBubble;
     
     
 
@@ -30,12 +36,15 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         timerBubble = timeExplosion;
+
+        direction = transform.right;
     }
 
     void Update()
     {
-        rb.velocity = transform.right * bulletSpeed;
+        rb.velocity = direction * bulletSpeed;
 
+        // BULLE
         if (isBubble)
         {
             timerBubble -= Time.deltaTime;
@@ -62,8 +71,34 @@ public class Bullet : MonoBehaviour
         directionBullet = rb.velocity;
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if (collision.CompareTag("Ennemy"))
+        {
+            collision.GetComponent<Ennemy>().TakeDamages(bulletDamages, gameObject);
+
+            if (!percante)
+                Destroy(gameObject);
+
+            bounceWalls.enabled = false;
+        }
+
+        else
+        {
+            if (!rebondissante)
+                Destroy(gameObject);
+
+            else
+                bounceWalls.enabled = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        direction = Vector3.Reflect(direction.normalized, collision.contacts[0].normal);
+
+        bounceWalls.enabled = false;
     }
 }
+

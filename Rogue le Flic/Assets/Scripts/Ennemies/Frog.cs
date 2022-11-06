@@ -127,35 +127,34 @@ public class Frog : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Bullet"))
-        {
-            health -= col.gameObject.GetComponent<Bullet>().bulletDamages;
-            Destroy(col.gameObject);
-
-            rb.velocity = Vector2.zero;
-            
-            if (canMove)
-            {
-                // RECUL
-                rb.AddForce(col.gameObject.GetComponent<Bullet>().directionBullet * col.gameObject.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
-            }
-            
-            // SI LA LANGUE EST ACTUELLEMENT LANCEE 
-            else
-            {
-                // SHAKE
-                gameObject.transform.DOShakePosition(0.1f, 0.1f);
-            }
-            
-            hitEffect.Clear();
-            hitEffect.Play();
-        }
-        
-        else if (col.gameObject.CompareTag("Player"))
+        if (col.gameObject.CompareTag("Player"))
         {
             Vector2 direction = col.transform.position - transform.position;
             
             HealthManager.Instance.LoseHealth(direction);
         }
+    }
+
+    public void TakeDamages(int damages, GameObject bullet)
+    {
+        health -= damages;
+
+        rb.velocity = Vector2.zero;
+
+        if (canMove)
+        {
+            // RECUL
+            rb.AddForce(bullet.GetComponent<Bullet>().directionBullet * bullet.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+        }
+
+        // SI LA LANGUE EST ACTUELLEMENT LANCEE 
+        else
+        {
+            // SHAKE
+            gameObject.transform.DOShakePosition(0.1f, 0.1f);
+        }
+
+        hitEffect.Clear();
+        hitEffect.Play();
     }
 }

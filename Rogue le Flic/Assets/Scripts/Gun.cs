@@ -25,8 +25,8 @@ public class Gun : MonoBehaviour
     public Vector2 posRight;
 
     [Header("Effets Modules")]
-    [HideInInspector] public float bulletSize;
-    [HideInInspector] public bool doubleBullet;
+    [HideInInspector] public bool ballesPercantes;
+    [HideInInspector] public bool ballesRebondissantes;
     
     [Header("Others")]
     private float timerShot;
@@ -64,7 +64,6 @@ public class Gun : MonoBehaviour
     {
         onGround = true;
 
-        bulletSize = gunData.originalBulletSize;
         lightShot.intensity = 0;
 
         currentAmmo = gunData.maxAmmo;
@@ -204,15 +203,17 @@ public class Gun : MonoBehaviour
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
 
                 refBullet.GetComponent<Bullet>().bulletDamages = gunData.damages;
-                
-                // DOUBLE TIR ?
-                if (doubleBullet)
+
+                // EFFETS MODULES
+                if (ballesPercantes)
                 {
-                    StartCoroutine(DoubleShot());
+                    refBullet.GetComponent<Bullet>().percante = true;
                 }
-                
-                // TAILLE DES TIRS ?
-                refBullet.transform.localScale = new Vector3(bulletSize, bulletSize, bulletSize);
+
+                if (ballesRebondissantes)
+                {
+                    refBullet.GetComponent<Bullet>().rebondissante = true;
+                }
                 
                 Destroy(refBullet, 3f);
             }
@@ -310,23 +311,5 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(duree);
         
         autoAim = false;
-    }
-
-    IEnumerator DoubleShot()
-    {
-        yield return new WaitForSeconds(0.05f);
-
-        float dispersion = Random.Range(-gunData.shotDispersion, gunData.shotDispersion);
-                
-        float angle = OrientateGun();
-                
-        GameObject refBullet = Instantiate(bullet, transform.position, 
-            Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
-        
-        // TAILLE DES TIRS ?
-        refBullet.transform.localScale = new Vector3(bulletSize, bulletSize, bulletSize);
-
-        Destroy(refBullet, 3f);
-        
     }
 }

@@ -25,7 +25,7 @@ public class GunData : ScriptableObject
     public float lightShotDuration;
     public float lightShotIntensity;
 
-    [Header("Modules")] 
-    public float originalBulletSize;
+    //[Header("Modules")] 
+    
 }
 

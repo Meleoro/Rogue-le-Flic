@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 4177285485063945855}
   - component: {fileID: 4177285485063945851}
   - component: {fileID: 1281992238748161930}
+  - component: {fileID: 4901216034534241692}
   m_Layer: 7
   m_Name: BubbleGunBullet
   m_TagString: Bullet
@@ -232,10 +233,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.069932595, y: 0.032017976}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -246,7 +247,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3920717, y: 0.3247189}
+  m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 0
 --- !u!114 &1281992238748161930
 MonoBehaviour:
@@ -268,7 +269,36 @@ MonoBehaviour:
   timeExplosion: 1.3
   bubble: {fileID: 7527566046279052003}
   bubbleExplosion: {fileID: 9156729226292837229}
+  percante: 0
+  rebondissante: 0
+  bounceWalls: {fileID: 4901216034534241692}
   directionBullet: {x: 0, y: 0}
+--- !u!61 &4901216034534241692
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177285485063945854}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.6, y: 1.6}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1}
+  m_EdgeRadius: 0
 --- !u!1001 &1454108833
 PrefabInstance:
   m_ObjectHideFlags: 0
