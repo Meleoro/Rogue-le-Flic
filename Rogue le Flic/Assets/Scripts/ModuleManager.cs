@@ -31,8 +31,13 @@ public class ModuleManager : MonoBehaviour
     {
         if(ManagerChara.Instance.activeGun != null)
             gun = ManagerChara.Instance.activeGun.GetComponent<Gun>();
-        
-        Debug.Log(Module1);
+
+        if (gun is not null)
+        {
+            gun.ballesPercantes = false;
+            gun.ballesRebondissantes = false;
+            gun.grossissementBalles = false;
+        }
         
         if (Module1 != 0)
         {
@@ -43,15 +48,6 @@ public class ModuleManager : MonoBehaviour
         {
             Search(Module2);
         }
-    }
-
-    private void LateUpdate()
-    {
-        /*if (gun is not null)
-        {
-            gun.bulletSize = gun.originalBulletSize;
-            gun.doubleBullet = false;
-        }*/
     }
 
 
