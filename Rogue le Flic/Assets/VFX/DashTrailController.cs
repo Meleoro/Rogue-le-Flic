@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,13 +28,14 @@ public class DashTrailController : MonoBehaviour
 
     void createDash()
     {
-        GameObject dashObj = Instantiate(DashTrailPrefab, transform.position, transform.rotation);
-        ghostObj.transform.localScale = player.transform.localScale;
-        destroy(dashObj, destroyTime);
+        //GameObject dashObj = Instantiate(DashTrailPrefab, transform.position, transform.rotation);
+        //ghostObj.transform.localScale = player.transform.localScale;
+        //destroy(dashObj, destroyTime);
 
-        spriteRenderer = dashObj.GetComponent<spriteRenderer>();
-        spriteRenderer.sprite = player.SpriteRenderer.sprite;
-        spriteRenderer.color = color;
-        if (material != null) spriteRenderer.material = material;
+        //spriteRenderer = dashObj.GetComponent<spriteRenderer>();
+       // spriteRenderer.sprite = player.SpriteRenderer.sprite;
+        //spriteRenderer.color = color;
+        //if (material != null) spriteRenderer.material = material;
     }
 }
+*/
