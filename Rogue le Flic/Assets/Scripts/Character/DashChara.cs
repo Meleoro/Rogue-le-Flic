@@ -12,6 +12,10 @@ public class DashChara : MonoBehaviour
     public float dashForceX;
     public float dashForceY;
 
+    public float dureeAjoutForce;
+    private float timer;
+    private Vector2 direction;
+
     public float noHitTime;
 
     [Header("Camera Shake")] 
@@ -24,13 +28,25 @@ public class DashChara : MonoBehaviour
         Instance = this;
     }
 
+    private void Update()
+    {
+        if (timer > 0)
+        {
+            ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * dashForceX, direction.y * dashForceY), ForceMode2D.Force);
+
+            timer -= Time.deltaTime;
+        }
+    }
+
 
     public void Dash()
     {
+        timer = dureeAjoutForce;
+        
         ReferenceCamera.Instance.transform.DOShakePosition(duration, amplitude);
         
-        Vector2 direction = ManagerChara.Instance.controls.Character.Movements.ReadValue<Vector2>();
+        direction = ManagerChara.Instance.controls.Character.Movements.ReadValue<Vector2>();
 
-        ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * dashForceX, direction.y * dashForceY), ForceMode2D.Impulse);
+        ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * dashForceX, direction.y * dashForceY), ForceMode2D.Force);
     }
 }
