@@ -123,8 +123,8 @@ GameObject:
   - component: {fileID: 4177285485063945849}
   - component: {fileID: 4177285485063945848}
   - component: {fileID: 4177285485063945855}
-  - component: {fileID: 4177285485063945851}
   - component: {fileID: 3443196921413445983}
+  - component: {fileID: 6697952776116709910}
   m_Layer: 7
   m_Name: NerfBullet
   m_TagString: Bullet
@@ -140,7 +140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4177285485063945854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.25, y: -1.64, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -224,6 +224,7 @@ MonoBehaviour:
   percante: 0
   rebondissante: 0
   bounceWalls: {fileID: 3443196921413445983}
+  objetAGrossir: {fileID: 6459866243884530899}
   directionBullet: {x: 0, y: 0}
 --- !u!50 &4177285485063945855
 Rigidbody2D:
@@ -246,32 +247,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &4177285485063945851
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4177285485063945854}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6, y: 1.6}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3}
-  m_EdgeRadius: 0
 --- !u!61 &3443196921413445983
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -298,6 +273,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
+--- !u!58 &6697952776116709910
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177285485063945854}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.15
 --- !u!1001 &6720368400100466811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323,7 +314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 352834841021561006, guid: 38d5663b166a3174ca42afc7c6d8489f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.11
       objectReference: {fileID: 0}
     - target: {fileID: 352834841021561006, guid: 38d5663b166a3174ca42afc7c6d8489f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -366,5 +357,10 @@ PrefabInstance:
 --- !u!4 &6459866242030704853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 352834841021561006, guid: 38d5663b166a3174ca42afc7c6d8489f, type: 3}
+  m_PrefabInstance: {fileID: 6720368400100466811}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6459866243884530899 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 352834841852091560, guid: 38d5663b166a3174ca42afc7c6d8489f, type: 3}
   m_PrefabInstance: {fileID: 6720368400100466811}
   m_PrefabAsset: {fileID: 0}
