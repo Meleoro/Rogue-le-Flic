@@ -7,9 +7,15 @@ using UnityEngine;
 public class ModuleManager : MonoBehaviour
 {
     public static ModuleManager Instance;
-    public int Module1;
-    public int Module2;
+    [HideInInspector] public int Module1;
+    [HideInInspector] public int Module2;
 
+    [Header("Rebonds")] 
+    [SerializeField] private int nbrRebondsMax;
+
+    [Header("Grossissement")] 
+    public float multiplicateurTaille;
+    
     private Gun gun;
 
     private void Awake()
@@ -25,6 +31,8 @@ public class ModuleManager : MonoBehaviour
     {
         if(ManagerChara.Instance.activeGun != null)
             gun = ManagerChara.Instance.activeGun.GetComponent<Gun>();
+        
+        Debug.Log(Module1);
         
         if (Module1 != 0)
         {
@@ -74,7 +82,7 @@ public class ModuleManager : MonoBehaviour
 
     public void Effet3()
     {
-
+        gun.grossissementBalles = true;
     }
 }
 

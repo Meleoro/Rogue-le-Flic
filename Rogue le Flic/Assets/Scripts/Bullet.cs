@@ -26,6 +26,7 @@ public class Bullet : MonoBehaviour
 
     [Header("Autres")]
     [SerializeField] private BoxCollider2D bounceWalls;
+    public GameObject objetAGrossir;
     [HideInInspector] public Vector2 directionBullet;
     private Rigidbody2D rb;
     
