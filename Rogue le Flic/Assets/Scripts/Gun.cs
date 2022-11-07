@@ -27,6 +27,7 @@ public class Gun : MonoBehaviour
     [Header("Effets Modules")]
     [HideInInspector] public bool ballesPercantes;
     [HideInInspector] public bool ballesRebondissantes;
+    [HideInInspector] public bool grossissementBalles;
     
     [Header("Others")]
     private float timerShot;
@@ -213,6 +214,13 @@ public class Gun : MonoBehaviour
                 if (ballesRebondissantes)
                 {
                     refBullet.GetComponent<Bullet>().rebondissante = true;
+                }
+
+                if (grossissementBalles)
+                {
+                    refBullet.GetComponent<CircleCollider2D>().radius = (float) 0.15 * ModuleManager.Instance.multiplicateurTaille;
+                    refBullet.GetComponent<Bullet>().objetAGrossir.transform.localScale = new Vector3(1 * ModuleManager.Instance.multiplicateurTaille, 
+                        1 * ModuleManager.Instance.multiplicateurTaille, 1);
                 }
                 
                 Destroy(refBullet, 3f);
