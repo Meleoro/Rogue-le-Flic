@@ -16,6 +16,7 @@ public class KickChara : MonoBehaviour
     
     public float kickDuration;
     public float kickStrenght;
+    [SerializeField] private float kickDelay;
 
     public float propulsionChara;
 
@@ -144,7 +145,7 @@ public class KickChara : MonoBehaviour
             MovementsChara.Instance.sprite.transform.localPosition = ManagerChara.Instance.posLeft;
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(kickDelay);
         
         // ON PLACE LA ZONE DE KICK ET ON L'AFFICHE
         kick.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(mousePos.y - charaPos.y, mousePos.x - charaPos.x) * Mathf.Rad2Deg, Vector3.forward);
