@@ -76,6 +76,8 @@ public class ManagerChara : MonoBehaviour
 
                 timerDash = DashChara.Instance.noHitTime;
                 isDashing = true;
+                
+                anim.SetTrigger("isDashing");
             }
             
             if (controls.Character.Kick.WasPerformedThisFrame() && !isKicking)
