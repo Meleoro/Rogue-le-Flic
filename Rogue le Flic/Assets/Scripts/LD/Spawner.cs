@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
@@ -37,6 +40,9 @@ public class Spawner : MonoBehaviour
             timer = delaySpawn;
             SpawnEntity();
         }
+        
+        if(health <= 0)
+            Destroy(gameObject);
     }
 
     
@@ -48,5 +54,16 @@ public class Spawner : MonoBehaviour
         
         Instantiate(ennemies[ennemySpawning],  new Vector3(transform.position.x + 1 * Mathf.Sign(modificateurPos.x), 
             transform.position.y + 1.2f * Mathf.Sign(modificateurPos.y), 0), Quaternion.identity);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Bullet"))
+        {
+            health -= 1;
+
+            transform.DOShakePosition(0.04f, 0.1f);
+        }
     }
 }
