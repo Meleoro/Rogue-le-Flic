@@ -92,6 +92,5 @@ public class CameraMovements : MonoBehaviour
         Vector2 newPos = new Vector2( mousePos.x * multiplierMouse - multiplierMouse / 2,  mousePos.y * multiplierMouse- multiplierMouse / 2);
 
         transform.position = new Vector3(newX + newPos.x, newY + newPos.y, transform.position.z);
-        
     }
 }

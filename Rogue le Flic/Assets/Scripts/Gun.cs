@@ -200,7 +200,7 @@ public class Gun : MonoBehaviour
                     angle = OrientateGun();
                 }
 
-                GameObject refBullet = Instantiate(bullet, transform.position, 
+                GameObject refBullet = Instantiate(bullet, ManagerChara.Instance.transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
 
                 refBullet.GetComponent<Bullet>().bulletDamages = gunData.damages;
