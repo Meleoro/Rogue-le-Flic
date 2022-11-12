@@ -8,7 +8,8 @@ public class Ennemy : MonoBehaviour
     public enum ennemies
     {
         Beaver,
-        Frog
+        Frog,
+        Turtle
     }
 
     public ennemies ennemyType;
@@ -18,6 +19,7 @@ public class Ennemy : MonoBehaviour
 
     private Beaver beaverScript;
     private Frog frogScript;
+    private Turtle turtleScript;
 
     [HideInInspector] public bool isCharging;
     private bool isSpawning;
@@ -33,6 +35,10 @@ public class Ennemy : MonoBehaviour
             
             case ennemies.Frog :
                 frogScript = GetComponent<Frog>();
+                break;
+
+            case ennemies.Turtle:
+                turtleScript = GetComponent<Turtle>();
                 break;
         }
 
@@ -53,6 +59,10 @@ public class Ennemy : MonoBehaviour
                 case ennemies.Frog :
                     frogScript.FrogBehavior();
                     break;
+
+                case ennemies.Turtle :
+                    turtleScript.TurtleBehavior();
+                    break;
             }
         }
     }
@@ -70,6 +80,10 @@ public class Ennemy : MonoBehaviour
                 case ennemies.Frog :
                     frogScript.FrogFixedBehavior();
                     break;
+
+                case ennemies.Turtle:
+                    turtleScript.TurtleFixedBehavior();
+                    break;
             }
         }
     }
@@ -85,6 +99,10 @@ public class Ennemy : MonoBehaviour
 
             case ennemies.Frog:
                 frogScript.TakeDamages(damages, bullet);
+                break;
+
+            case ennemies.Turtle:
+                turtleScript.TakeDamages(damages, bullet);
                 break;
         }
     }
@@ -120,6 +138,10 @@ public class Ennemy : MonoBehaviour
             
             case ennemies.Frog :
                 frogScript.StopCoroutine();
+                break;
+
+            case ennemies.Turtle:
+                turtleScript.StopCoroutine();
                 break;
         }
     }
