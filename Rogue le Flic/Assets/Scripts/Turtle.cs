@@ -19,6 +19,7 @@ public class Turtle : MonoBehaviour
     [SerializeField] private float distanceSlideTrigger;
     [SerializeField] private float speedSlide;
     [SerializeField] private int nbrRebonds;
+    [SerializeField] private float cooldown;
     private bool isSliding;
 
     [Header("Autres")]
@@ -29,6 +30,7 @@ public class Turtle : MonoBehaviour
     public Transform beaverPos;
     private Rigidbody2D rb;
     private bool canMove;
+    private float timerCooldown;
 
     private Vector2 slideDirection;
     private int currentNbrRebonds;
@@ -42,6 +44,8 @@ public class Turtle : MonoBehaviour
         canMove = true;
 
         AIDestination.target = ManagerChara.Instance.transform;
+        
+        timerCooldown = cooldown;
     }
 
 
@@ -58,9 +62,17 @@ public class Turtle : MonoBehaviour
         float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) +
                                     Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
 
-        if (distance < distanceSlideTrigger && !isSliding && canMove)
+        if (!isSliding && canMove)
         {
-            StartCoroutine(Slide(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
+            if (timerCooldown <= 0 && distance < distanceSlideTrigger)
+            {
+                StartCoroutine(Slide(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
+            }
+            
+            else
+            {
+                timerCooldown -= Time.deltaTime;
+            }
         }
     }
 
@@ -88,6 +100,11 @@ public class Turtle : MonoBehaviour
 
             HealthManager.Instance.LoseHealth(direction);
         }
+        
+        else if (col.gameObject.CompareTag("Ennemy") && isSliding)
+        {
+            //col.gameObject.GetComponent<Ennemy>().TakeDamages(1, gameObject);
+        }
 
         else if (!col.gameObject.CompareTag("Ennemy") && isSliding)
         {
@@ -95,10 +112,13 @@ public class Turtle : MonoBehaviour
 
             slideDirection = Vector3.Reflect(slideDirection.normalized, col.contacts[0].normal);
 
+            // ON STOP SON COMPORTEMENT DE SLIDE
             if(currentNbrRebonds >= nbrRebonds)
             {
                 isSliding = false;
                 canMove = true;
+
+                timerCooldown = cooldown;
 
                 currentNbrRebonds = 0;
             }

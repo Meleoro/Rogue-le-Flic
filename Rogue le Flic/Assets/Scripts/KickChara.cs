@@ -159,6 +159,7 @@ public class KickChara : MonoBehaviour
         // ON ENLEVE LA ZONE DE KICK ET REDONNE LE CONTROLE AU JOUEUR
         kick.SetActive(false);
         ManagerChara.Instance.noControl = false;
+        ManagerChara.Instance.activeGun.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     public void CameraShake()
