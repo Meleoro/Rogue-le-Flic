@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine.TextCore.Text;
 
 public class Beaver : MonoBehaviour
@@ -30,6 +31,7 @@ public class Beaver : MonoBehaviour
     public Transform beaverPos;
     private Rigidbody2D rb;
     private bool canMove;
+    private Vector2 direction;
     
 
     private void Start()
@@ -61,6 +63,17 @@ public class Beaver : MonoBehaviour
         {
             StartCoroutine(Jump(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
         }
+
+        // ROTATION CASTOR
+        if (direction.x > 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        
+        else if (direction.x < -0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
     }
     
 
@@ -68,7 +81,7 @@ public class Beaver : MonoBehaviour
     {
         if (canMove)
         {
-            Vector2 direction = AIPath.targetDirection;
+            direction = AIPath.targetDirection;
             
             rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
         }
@@ -78,9 +91,9 @@ public class Beaver : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            Vector2 direction = col.transform.position - transform.position;
+            Vector2 directionProj = col.transform.position - transform.position;
             
-            HealthManager.Instance.LoseHealth(direction);
+            HealthManager.Instance.LoseHealth(directionProj);
         }
     }
 
@@ -109,7 +122,7 @@ public class Beaver : MonoBehaviour
         }
     }
 
-    IEnumerator Jump(Vector2 direction)
+    IEnumerator Jump(Vector2 directionJump)
     {
         isJumping = true;
         canMove = false;
@@ -120,7 +133,7 @@ public class Beaver : MonoBehaviour
         
         yield return new WaitForSeconds(0.75f);
 
-        rb.AddForce(direction.normalized * strenghtJump, ForceMode2D.Impulse);
+        rb.AddForce(directionJump.normalized * strenghtJump, ForceMode2D.Impulse);
         
         GetComponent<Ennemy>().isCharging = false;
         
