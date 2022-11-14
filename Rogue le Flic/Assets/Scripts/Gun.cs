@@ -28,6 +28,7 @@ public class Gun : MonoBehaviour
     [HideInInspector] public bool ballesPercantes;
     [HideInInspector] public bool ballesRebondissantes;
     [HideInInspector] public bool grossissementBalles;
+    [HideInInspector] public bool critiques;
     
     [Header("Others")]
     private float timerShot;
@@ -221,6 +222,16 @@ public class Gun : MonoBehaviour
                     refBullet.GetComponent<CircleCollider2D>().radius = (float) 0.15 * ModuleManager.Instance.multiplicateurTaille;
                     refBullet.GetComponent<Bullet>().objetAGrossir.transform.localScale = new Vector3(1 * ModuleManager.Instance.multiplicateurTaille, 
                         1 * ModuleManager.Instance.multiplicateurTaille, 1);
+                }
+
+                if (critiques)
+                {
+                    int isCritique = Random.Range(0, 100);
+
+                    if (isCritique <= ModuleManager.Instance.probaCritique)
+                    {
+                        refBullet.GetComponent<Bullet>().isCritique = true;
+                    }
                 }
                 
                 Destroy(refBullet, 3f);

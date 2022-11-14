@@ -15,6 +15,12 @@ public class ModuleManager : MonoBehaviour
 
     [Header("Grossissement")] 
     public float multiplicateurTaille;
+
+    [Header("Critique")] 
+    [Range(0, 100)] public float probaCritique;
+    public float mulitplicateurTaille;
+    public float multiplicateurVitesse;
+    public float multiplicateurDegats;
     
     private Gun gun;
 
@@ -37,6 +43,7 @@ public class ModuleManager : MonoBehaviour
             gun.ballesPercantes = false;
             gun.ballesRebondissantes = false;
             gun.grossissementBalles = false;
+            gun.critiques = false;
         }
         
         if (Module1 != 0)
@@ -61,6 +68,9 @@ public class ModuleManager : MonoBehaviour
 
         else if (module == 3)
             Effet3();
+        
+        else if (module == 4)
+            Effet4();
     }
     
 
@@ -80,6 +90,9 @@ public class ModuleManager : MonoBehaviour
     {
         gun.grossissementBalles = true;
     }
+
+    public void Effet4()
+    {
+        gun.critiques = true;
+    }
 }
-
-

@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     public float bulletKnockback;
     public int bulletDamages;
     private Vector2 direction;
+    [HideInInspector] public bool isCritique;
 
     [Header("Bubble")] 
     public bool isBubble;
@@ -29,8 +30,8 @@ public class Bullet : MonoBehaviour
     public GameObject objetAGrossir;
     [HideInInspector] public Vector2 directionBullet;
     private Rigidbody2D rb;
-    
-    
+
+
 
     private void Start()
     {
@@ -64,6 +65,16 @@ public class Bullet : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+
+        // SI LE TIRE EST CRITIQUE
+        if (isCritique)
+        {
+            bulletDamages = (int) (bulletDamages * ModuleManager.Instance.multiplicateurDegats);
+            bulletSpeed *= ModuleManager.Instance.multiplicateurVitesse;
+            objetAGrossir.transform.localScale = objetAGrossir.transform.localScale * ModuleManager.Instance.multiplicateurTaille;
+            
+            isCritique = false;
         }
     }
 
