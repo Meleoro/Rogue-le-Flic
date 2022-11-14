@@ -26,9 +26,9 @@ public class Fragment : MonoBehaviour
         originalPos = transform.position;
 
         modificateurRotation = Random.Range(0, 1.5f);
-        modificateurHauteur = Random.Range(-0.15f, 0.15f);
+        modificateurHauteur = Random.Range(-0.2f, 0.2f);
         modificateurX = Random.Range(0.8f, 3f);
-        modificateurVitesse = Random.Range(1, 1.3f);
+        modificateurVitesse = Random.Range(0.7f, 1.3f);
     }
 
     private void Update()

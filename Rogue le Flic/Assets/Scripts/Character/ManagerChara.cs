@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ManagerChara : MonoBehaviour
 {
@@ -138,5 +139,14 @@ public class ManagerChara : MonoBehaviour
         yield return new WaitForSeconds(switchCooldown);
 
         canSwitch = true;
+    }
+
+    public IEnumerator Death()
+    {
+        anim.SetTrigger("isDying");
+
+        yield return new WaitForSeconds(0.8f);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

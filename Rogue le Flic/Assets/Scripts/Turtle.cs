@@ -146,6 +146,9 @@ public class Turtle : MonoBehaviour
             canMove = true;
             transform.DOComplete();
 
+            isSliding = false;
+            timerCooldown = cooldown;
+
             StartCoroutine(Wait());
         }
     }

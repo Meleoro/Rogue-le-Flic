@@ -56,6 +56,13 @@ public class HealthManager : MonoBehaviour
             ManagerChara.Instance.rb.AddForce(direction.normalized * reculForce, ForceMode2D.Impulse);
         
             timerEffects = 1;
+
+            if (currentHealth <= 0)
+            {
+                ManagerChara.Instance.noControl = true;
+                
+                StartCoroutine(ManagerChara.Instance.Death());
+            }
         }
     }
 
