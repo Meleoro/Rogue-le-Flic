@@ -8,7 +8,15 @@ public class Module : MonoBehaviour
     private bool canBeGrab;
 
     public int numberEffect;
-    
+
+    public GameObject UI;
+
+
+    private void Start()
+    {
+        UI.SetActive(false);
+    }
+
 
     private void Update()
     {
@@ -34,6 +42,7 @@ public class Module : MonoBehaviour
         if (col.tag == "Player")
         {
             canBeGrab = true;
+            UI.SetActive(true);
         }
     }
     
@@ -42,6 +51,7 @@ public class Module : MonoBehaviour
         if (col.tag == "Player")
         {
             canBeGrab = false;
+            UI.SetActive(false);
         }
     }
 }
