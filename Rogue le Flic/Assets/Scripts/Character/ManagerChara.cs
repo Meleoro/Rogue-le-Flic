@@ -145,7 +145,7 @@ public class ManagerChara : MonoBehaviour
     {
         anim.SetTrigger("isDying");
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(2f);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
