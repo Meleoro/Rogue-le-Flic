@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Shop : MonoBehaviour
 {
@@ -16,6 +18,12 @@ public class Shop : MonoBehaviour
     private Vector2 originalPosShopkeeper;
     [SerializeField] private float closingDuration;
 
+    [Header("Marchandise")] 
+    [SerializeField] private List<GameObject> items;
+    [SerializeField] private Image item1;
+    [SerializeField] private Image item2;
+    [SerializeField] private Image item3;
+
     [Header("Others")] 
     private bool isOpen;
     private bool canUseShop;
@@ -24,6 +32,8 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         originalPosShopkeeper = shopkeeperUI.localPosition;
+        
+        ChoiceItems();
     }
 
     
@@ -48,12 +58,37 @@ public class Shop : MonoBehaviour
         isOpen = true;
     }
 
+    
     void CloseShop()
     {
         shopkeeperUI.DOLocalMove(originalPosShopkeeper, closingDuration);
         ManagerChara.Instance.noControl = false;
 
         isOpen = false;
+    }
+
+    
+    void ChoiceItems()
+    {
+        for (int k = 0; k < 3; k++)
+        {
+            int choice = Random.Range(0, items.Count);
+
+            if (k == 0)
+            {
+                item1.sprite = items[choice].GetComponent<SpriteRenderer>().sprite;
+            }
+            
+            else if (k == 1)
+            {
+                item2.sprite = items[choice].GetComponent<SpriteRenderer>().sprite;
+            }
+
+            else
+            {
+                item3.sprite = items[choice].GetComponent<SpriteRenderer>().sprite;
+            }
+        }
     }
     
 
