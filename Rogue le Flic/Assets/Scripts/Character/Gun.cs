@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using DG.Tweening;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine.Rendering.Universal;
 
 
@@ -33,6 +34,7 @@ public class Gun : MonoBehaviour
     [Header("Others")]
     private float timerShot;
     private float timerLight;
+    private float timerReload;
     private int currentAmmo;
 
     [HideInInspector] public bool isStocked;
@@ -142,6 +144,23 @@ public class Gun : MonoBehaviour
             else
                 lightShot.intensity = 0;
         }
+
+        if (isReloading)
+        {
+            ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = true;
+            
+            timerReload -= Time.deltaTime;
+
+            ManagerChara.Instance.reload.fillAmount = 1 - timerReload / gunData.reloadTime;
+
+            if (timerReload <= 0)
+            {
+                isReloading = false;
+                currentAmmo = gunData.maxAmmo;
+
+                ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = false;
+            }
+        }
     }
 
 
@@ -242,7 +261,7 @@ public class Gun : MonoBehaviour
             if (currentAmmo <= 0)
             {
                 isReloading = true;
-                StartCoroutine(ReloadCooldown());
+                timerReload = gunData.reloadTime;
             }
             
             onCooldown = true;
@@ -282,10 +301,10 @@ public class Gun : MonoBehaviour
 
         StopAllCoroutines();
 
-        if (currentAmmo < gunData.maxAmmo)
+        /*if (currentAmmo < gunData.maxAmmo)
         {
             StartCoroutine(ReloadCooldown());
-        }
+        }*/
     }
 
     
@@ -313,14 +332,6 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(gunData.cooldownShot);
 
         onCooldown = false;
-    }
-    
-    IEnumerator ReloadCooldown()
-    {
-        yield return new WaitForSeconds(gunData.reloadTime);
-
-        isReloading = false;
-        currentAmmo = gunData.maxAmmo;
     }
 
     public IEnumerator AutoAim(float duree)
