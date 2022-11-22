@@ -20,6 +20,7 @@ public class Shop : MonoBehaviour
 
     [Header("Marchandise")] 
     [SerializeField] private List<GameObject> items;
+    [SerializeField] private List<GameObject> weapons;
     [SerializeField] private Image item1;
     [SerializeField] private Image item2;
     [SerializeField] private Image item3;
@@ -72,20 +73,24 @@ public class Shop : MonoBehaviour
     {
         for (int k = 0; k < 3; k++)
         {
-            int choice = Random.Range(0, items.Count);
-
             if (k == 0)
             {
-                item1.sprite = items[choice].GetComponent<SpriteRenderer>().sprite;
+                int choice = Random.Range(0, weapons.Count);
+                
+                item1.sprite = weapons[choice].GetComponent<SpriteRenderer>().sprite;
             }
             
             else if (k == 1)
             {
+                int choice = Random.Range(0, items.Count);
+                
                 item2.sprite = items[choice].GetComponent<SpriteRenderer>().sprite;
             }
 
             else
             {
+                int choice = Random.Range(0, items.Count);
+                
                 item3.sprite = items[choice].GetComponent<SpriteRenderer>().sprite;
             }
         }
