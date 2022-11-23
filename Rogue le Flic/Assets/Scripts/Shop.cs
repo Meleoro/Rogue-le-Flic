@@ -60,9 +60,9 @@ public class Shop : MonoBehaviour
         {
             timerEnter -= Time.deltaTime;
             
-            ancrage1.rotation = Quaternion.Euler(0, 0, rotationItems.Evaluate(2.5f - timerEnter) * 100);
-            ancrage2.rotation = Quaternion.Euler(0, 0, rotationItems.Evaluate(2.5f - timerEnter) * 100);
-            ancrage3.rotation = Quaternion.Euler(0, 0, rotationItems.Evaluate(2.5f - timerEnter) * 100);
+            ancrage1.rotation = Quaternion.Euler(0, 0, rotationItems.Evaluate(4f - timerEnter) * 100);
+            ancrage2.rotation = Quaternion.Euler(0, 0, rotationItems.Evaluate(4f - timerEnter) * 100);
+            ancrage3.rotation = Quaternion.Euler(0, 0, rotationItems.Evaluate(4f - timerEnter) * 100);
         }
     }
 
@@ -74,7 +74,7 @@ public class Shop : MonoBehaviour
 
         isOpen = true;
 
-        timerEnter = 2.5f;
+        timerEnter = 4f;
     }
 
     
