@@ -9,30 +9,51 @@ public class Module : MonoBehaviour
 
     public int numberEffect;
 
-    public GameObject UI;
+    [SerializeField] GameObject UIExplications;
+    [SerializeField] GameObject UIChoix;
 
+    private bool UIActive;
+    
 
     private void Start()
     {
-        UI.SetActive(false);
+        UIExplications.SetActive(false);
+        UIChoix.SetActive(false);
     }
 
 
     private void Update()
     {
-        if (MovementsChara.Instance.controls.Character.Module1.WasPerformedThisFrame() && canBeGrab)
-        {
-            ModuleManager.Instance.Module1 = numberEffect;
-            
-            Destroy(gameObject);
-        }
+        if (MovementsChara.Instance.controls.Character.Enter.WasPerformedThisFrame() && canBeGrab)
+            OpenChoice();
 
-        else if (MovementsChara.Instance.controls.Character.Module2.WasPerformedThisFrame() && canBeGrab)
-        {
+        else if(UIActive)
+            UIChoix.SetActive(true);
+    }
+    
+    public void OpenChoice()
+    {
+        UIActive = true;
+        
+        UIExplications.SetActive(false);
+        UIChoix.SetActive(true);
+
+        ManagerChara.Instance.noControl = true;
+    }
+    
+    public void ChoiceSlot(int slot)
+    {
+        if (slot == 1)
+            ModuleManager.Instance.Module1 = numberEffect;
+
+        else
             ModuleManager.Instance.Module2 = numberEffect;
-            
-            Destroy(gameObject);
-        }
+        
+        
+        UIChoix.SetActive(false);
+        Destroy(gameObject);
+        
+        ManagerChara.Instance.noControl = false;
     }
 
 
@@ -42,7 +63,7 @@ public class Module : MonoBehaviour
         if (col.tag == "Player")
         {
             canBeGrab = true;
-            UI.SetActive(true);
+            UIExplications.SetActive(true);
         }
     }
     
@@ -51,7 +72,7 @@ public class Module : MonoBehaviour
         if (col.tag == "Player")
         {
             canBeGrab = false;
-            UI.SetActive(false);
+            UIExplications.SetActive(false);
         }
     }
 }
