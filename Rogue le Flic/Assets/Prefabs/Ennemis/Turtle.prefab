@@ -14815,9 +14815,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ennemyType: 2
+  isCharging: 0
   cible: {fileID: 8151852789033315837}
   spawnIndicator: {fileID: 4739753317862848332}
-  isCharging: 0
+  sprite: {fileID: 0}
 --- !u!114 &4376012204993926796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14836,8 +14837,9 @@ MonoBehaviour:
   dragMultiplier: 3
   health: 25
   distanceSlideTrigger: 10
-  speedSlide: 90
+  speedSlide: 130
   nbrRebonds: 3
+  cooldown: 0
   AIPath: {fileID: 4376012204993926812}
   AIDestination: {fileID: 4376012204993926803}
   hitEffect: {fileID: 1456856938700952811}

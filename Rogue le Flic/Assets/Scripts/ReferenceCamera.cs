@@ -21,5 +21,7 @@ public class ReferenceCamera : MonoBehaviour
     private void Start()
     {
         _camera = GetComponent<Camera>();
+
+        CameraMovements.Instance._camera = _camera;
     }
 }

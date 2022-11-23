@@ -13,17 +13,18 @@ public class Ennemy : MonoBehaviour
     }
 
     public ennemies ennemyType;
-
-    public GameObject cible;
-    [SerializeField] private GameObject spawnIndicator;
-
+    
     private Beaver beaverScript;
     private Frog frogScript;
     private Turtle turtleScript;
 
     [HideInInspector] public bool isCharging;
     private bool isSpawning;
-
+    
+    [Header("References")]
+    public GameObject cible;
+    [SerializeField] private GameObject spawnIndicator;
+    [SerializeField] private GameObject sprite;
 
     private void Start()
     {
@@ -110,19 +111,58 @@ public class Ennemy : MonoBehaviour
 
     private IEnumerator Spawn()
     {
-        spawnIndicator.SetActive(true);
-        GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<BoxCollider2D>().enabled = false;
+        switch (ennemyType)
+        {
+            case ennemies.Beaver:
+                spawnIndicator.SetActive(true);
+                sprite.SetActive(false);
+                GetComponent<BoxCollider2D>().enabled = false;
 
-        isSpawning = true;
+                isSpawning = true;
         
-        yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(2);
         
-        spawnIndicator.SetActive(false);
-        GetComponent<SpriteRenderer>().enabled = true;
-        GetComponent<BoxCollider2D>().enabled = true;
+                spawnIndicator.SetActive(false);
+                sprite.SetActive(true);
+                GetComponent<BoxCollider2D>().enabled = true;
         
-        isSpawning = false;
+                isSpawning = false;
+                break;
+            
+
+            case ennemies.Frog:
+                spawnIndicator.SetActive(true);
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
+
+                isSpawning = true;
+        
+                yield return new WaitForSeconds(2);
+        
+                spawnIndicator.SetActive(false);
+                GetComponent<SpriteRenderer>().enabled = true;
+                GetComponent<BoxCollider2D>().enabled = true;
+        
+                isSpawning = false;
+                break;
+            
+
+            case ennemies.Turtle:
+                spawnIndicator.SetActive(true);
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
+
+                isSpawning = true;
+        
+                yield return new WaitForSeconds(2);
+        
+                spawnIndicator.SetActive(false);
+                GetComponent<SpriteRenderer>().enabled = true;
+                GetComponent<BoxCollider2D>().enabled = true;
+        
+                isSpawning = false;
+                break;
+        }
     }
 
 

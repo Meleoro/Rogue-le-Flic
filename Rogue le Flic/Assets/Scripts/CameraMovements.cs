@@ -7,7 +7,9 @@ using DG.Tweening;
 
 public class CameraMovements : MonoBehaviour
 {
-    private Camera _camera;
+    public static CameraMovements Instance;
+    
+    [HideInInspector] public Camera _camera;
     private Controls controls;
 
     private float newX;
@@ -19,6 +21,12 @@ public class CameraMovements : MonoBehaviour
     private void Awake()
     {
         controls = new Controls();
+
+        if (Instance == null)
+            Instance = this;
+        
+        else
+            Destroy(gameObject);
     }
 
     private void OnEnable()
@@ -29,12 +37,6 @@ public class CameraMovements : MonoBehaviour
     private void OnDisable()
     {
         controls.Disable();
-    }
-
-
-    private void Start()
-    {
-        _camera = ReferenceCamera.Instance._camera;
     }
 
     void Update()

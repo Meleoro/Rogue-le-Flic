@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ManagerChara : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class ManagerChara : MonoBehaviour
     public float switchCooldown;
     public bool canSwitch;
     public Animator anim;
+    public Image reload;
     
     
 
@@ -63,6 +65,8 @@ public class ManagerChara : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         canSwitch = true;
+        
+        reload.GetComponentInParent<Canvas>().enabled = false;
     }
 
     private void Update()

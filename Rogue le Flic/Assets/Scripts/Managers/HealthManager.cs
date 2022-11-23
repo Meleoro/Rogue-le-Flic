@@ -44,7 +44,7 @@ public class HealthManager : MonoBehaviour
 
     public void LoseHealth(Vector2 direction)
     {
-        if (!isInvincible)
+        if (!isInvincible && currentHealth > 0)
         {
             currentHealth -= 1;
             hearts[currentHealth].SetActive(false);

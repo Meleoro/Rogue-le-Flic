@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using DG.Tweening;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine.Rendering.Universal;
 
 
@@ -29,15 +30,20 @@ public class Gun : MonoBehaviour
     [HideInInspector] public bool ballesRebondissantes;
     [HideInInspector] public bool grossissementBalles;
     [HideInInspector] public bool critiques;
+
+    [Header("Shop")] 
+    public string itemName;
+    public string itemDescription;
     
     [Header("Others")]
     private float timerShot;
     private float timerLight;
+    private float timerReload;
     private int currentAmmo;
 
     [HideInInspector] public bool isStocked;
-    private bool onGround;
-    private bool canBePicked;
+    private bool isHeld;
+    [HideInInspector] public bool canBePicked;
     private bool onCooldown;
     private bool lookLeft;
     private bool isReloading;
@@ -64,8 +70,6 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
-        onGround = true;
-
         lightShot.intensity = 0;
 
         currentAmmo = gunData.maxAmmo;
@@ -77,7 +81,7 @@ public class Gun : MonoBehaviour
         if (!isStocked)
         {
             // ON POSITIONNE LE GUN SI LE JOUEUR LE PORTE
-            if (!onGround)
+            if (isHeld)
             {
                 // ON RETIRE LE TEXTE
                 explanation.SetActive(false);
@@ -126,7 +130,7 @@ public class Gun : MonoBehaviour
             // ON RAMASSE L'ARME
             if (controls.Character.Enter.WasPerformedThisFrame())
             {
-                if (canBePicked && (ManagerChara.Instance.stockWeapon == null || ManagerChara.Instance.activeGun == null))
+                if (canBePicked && (ManagerChara.Instance.stockWeapon == null || ManagerChara.Instance.activeGun == null) && !isHeld)
                 {
                     PickWeapon();
                 }
@@ -142,6 +146,23 @@ public class Gun : MonoBehaviour
             else
                 lightShot.intensity = 0;
         }
+
+        if (isReloading)
+        {
+            ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = true;
+            
+            timerReload -= Time.deltaTime;
+
+            ManagerChara.Instance.reload.fillAmount = 1 - timerReload / gunData.reloadTime;
+
+            if (timerReload <= 0)
+            {
+                isReloading = false;
+                currentAmmo = gunData.maxAmmo;
+
+                ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = false;
+            }
+        }
     }
 
 
@@ -149,7 +170,7 @@ public class Gun : MonoBehaviour
     {
         if (canBePicked)
         {
-            onGround = false;
+            isHeld = true;
             canBePicked = false;
 
             //explanation.SetActive(false);
@@ -170,7 +191,7 @@ public class Gun : MonoBehaviour
 
             else if(ManagerChara.Instance.stockWeapon != null)
             {
-                ManagerChara.Instance.activeGun.GetComponent<Gun>().onGround = true;
+                ManagerChara.Instance.activeGun.GetComponent<Gun>().isHeld = false;
                 ManagerChara.Instance.activeGun.GetComponent<Gun>().canBePicked = true;
                 
                 ManagerChara.Instance.activeGun = gameObject;
@@ -180,7 +201,7 @@ public class Gun : MonoBehaviour
     
     public void Shoot()
     {
-        if (!onGround && !onCooldown && !isReloading)
+        if (isHeld && !onCooldown && !isReloading)
         {
             // BOUCLE QUI GENERE TOUTES LES BALLES
             for (int k = 0; k < gunData.nbrBulletPerShot; k++)
@@ -242,7 +263,7 @@ public class Gun : MonoBehaviour
             if (currentAmmo <= 0)
             {
                 isReloading = true;
-                StartCoroutine(ReloadCooldown());
+                timerReload = gunData.reloadTime;
             }
             
             onCooldown = true;
@@ -282,10 +303,10 @@ public class Gun : MonoBehaviour
 
         StopAllCoroutines();
 
-        if (currentAmmo < gunData.maxAmmo)
+        /*if (currentAmmo < gunData.maxAmmo)
         {
             StartCoroutine(ReloadCooldown());
-        }
+        }*/
     }
 
     
@@ -313,14 +334,6 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(gunData.cooldownShot);
 
         onCooldown = false;
-    }
-    
-    IEnumerator ReloadCooldown()
-    {
-        yield return new WaitForSeconds(gunData.reloadTime);
-
-        isReloading = false;
-        currentAmmo = gunData.maxAmmo;
     }
 
     public IEnumerator AutoAim(float duree)
