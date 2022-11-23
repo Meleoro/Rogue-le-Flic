@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Spawner : MonoBehaviour
+public class SpawnerTest : MonoBehaviour
 {
     [SerializeField] private float delaySpawn;
     [SerializeField] private float health;
@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
     private List<GameObject> ennemies = new List<GameObject>();
 
 
-    //public GameObject gameobject;
+    public GameObject gameobject;
     
     
     
@@ -34,6 +34,8 @@ public class Spawner : MonoBehaviour
         if(spawnFrogs)
             ennemies.Add(frog);
         
+        Destroy(gameobject, 5);
+
     }
 
     void Update()
