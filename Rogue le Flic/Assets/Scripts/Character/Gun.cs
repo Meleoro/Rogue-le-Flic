@@ -30,6 +30,10 @@ public class Gun : MonoBehaviour
     [HideInInspector] public bool ballesRebondissantes;
     [HideInInspector] public bool grossissementBalles;
     [HideInInspector] public bool critiques;
+
+    [Header("Shop")] 
+    public string itemName;
+    public string itemDescription;
     
     [Header("Others")]
     private float timerShot;
@@ -166,8 +170,6 @@ public class Gun : MonoBehaviour
     {
         if (canBePicked)
         {
-            Debug.Log(12);
-            
             isHeld = true;
             canBePicked = false;
 

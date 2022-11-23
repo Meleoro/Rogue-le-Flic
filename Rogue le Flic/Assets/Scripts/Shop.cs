@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using TMPro;
 
 public class Shop : MonoBehaviour
 {
@@ -27,6 +27,10 @@ public class Shop : MonoBehaviour
     [SerializeField] private List<GameObject> weapons;
     private List<GameObject> currentItems = new List<GameObject>();
 
+    [Header("Details")] 
+    [SerializeField] private TextMeshProUGUI itemName;
+    [SerializeField] private TextMeshProUGUI itemDescription;
+
     [Header("Références")]
     [SerializeField] private Image item1;
     [SerializeField] private Image item2;
@@ -34,6 +38,9 @@ public class Shop : MonoBehaviour
     [SerializeField] private RectTransform ancrage1;
     [SerializeField] private RectTransform ancrage2;
     [SerializeField] private RectTransform ancrage3;
+    [SerializeField] private Button button1;
+    [SerializeField] private Button button2;
+    [SerializeField] private Button button3;
     [SerializeField] private Image fond;
 
     [Header("Others")] 
@@ -154,8 +161,24 @@ public class Shop : MonoBehaviour
                 item3.enabled = false;
         }
     }
-    
 
+
+    public void ButtonSelected(int buttonNumber)
+    {
+        if (buttonNumber == 1)
+        {
+            itemName.text = currentItems[buttonNumber - 1].GetComponent<Gun>().itemName;
+            itemDescription.text = currentItems[buttonNumber - 1].GetComponent<Gun>().itemDescription;
+        }
+
+        else
+        {
+            itemName.text = currentItems[buttonNumber - 1].GetComponent<Module>().itemName;
+            itemDescription.text = currentItems[buttonNumber - 1].GetComponent<Module>().itemDescription;
+        }
+    }
+    
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
