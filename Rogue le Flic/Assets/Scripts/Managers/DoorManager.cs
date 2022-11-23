@@ -103,14 +103,14 @@ public class DoorManager : MonoBehaviour
                 if (index < k.spawnChances && currentEnnemies.Count < maxEnnemies)
                 {
                     currentEnnemies.Add(k.ennemy);
-
-                    ennemyCount += 1;
                 }
             }
 
             if (currentEnnemies.Count >= minEnnemies)
                 stopWhile = true;
         }
+
+        ennemyCount = currentEnnemies.Count;
     }
 }
 
