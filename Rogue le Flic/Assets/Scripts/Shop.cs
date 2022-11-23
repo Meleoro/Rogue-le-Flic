@@ -10,13 +10,16 @@ using Random = UnityEngine.Random;
 public class Shop : MonoBehaviour
 {
     [SerializeField] private RectTransform shopkeeperUI;
+    [SerializeField] private RectTransform detailsUI;
 
     [Header("Ouverture / Fermeture Shop")] 
     [SerializeField] private Vector2 posShopkeeper;
+    [SerializeField] private Vector2 posDetails;
     [SerializeField] private float openingDuration;
     [SerializeField] private AnimationCurve rotationItems;
     private float timerEnter;
     private Vector2 originalPosShopkeeper;
+    private Vector2 originalPosDetails;
     [SerializeField] private float closingDuration;
 
     [Header("Marchandise")] 
@@ -41,6 +44,7 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         originalPosShopkeeper = shopkeeperUI.localPosition;
+        originalPosDetails = detailsUI.localPosition;
         
         ChoiceItems();
     }
@@ -71,6 +75,7 @@ public class Shop : MonoBehaviour
     void OpenShop()
     {
         shopkeeperUI.DOLocalMove(posShopkeeper, openingDuration);
+        detailsUI.DOLocalMove(posDetails, openingDuration);
         fond.DOFade(0.8f, 0.5f);
         
         ManagerChara.Instance.noControl = true;
@@ -84,6 +89,7 @@ public class Shop : MonoBehaviour
     void CloseShop()
     {
         shopkeeperUI.DOLocalMove(originalPosShopkeeper, closingDuration);
+        detailsUI.DOLocalMove(originalPosDetails, closingDuration);
         fond.DOFade(0f, 0.5f);
         
         ManagerChara.Instance.noControl = false;
