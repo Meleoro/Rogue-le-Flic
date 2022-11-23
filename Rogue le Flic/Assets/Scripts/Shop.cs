@@ -31,6 +31,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private RectTransform ancrage1;
     [SerializeField] private RectTransform ancrage2;
     [SerializeField] private RectTransform ancrage3;
+    [SerializeField] private Image fond;
 
     [Header("Others")] 
     private bool isOpen;
@@ -70,6 +71,8 @@ public class Shop : MonoBehaviour
     void OpenShop()
     {
         shopkeeperUI.DOLocalMove(posShopkeeper, openingDuration);
+        fond.DOFade(0.8f, 0.5f);
+        
         ManagerChara.Instance.noControl = true;
 
         isOpen = true;
@@ -81,6 +84,8 @@ public class Shop : MonoBehaviour
     void CloseShop()
     {
         shopkeeperUI.DOLocalMove(originalPosShopkeeper, closingDuration);
+        fond.DOFade(0f, 0.5f);
+        
         ManagerChara.Instance.noControl = false;
 
         isOpen = false;
