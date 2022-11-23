@@ -14,6 +14,8 @@ public class Shop : MonoBehaviour
     [Header("Ouverture / Fermeture Shop")] 
     [SerializeField] private Vector2 posShopkeeper;
     [SerializeField] private float openingDuration;
+    [SerializeField] private AnimationCurve rotationItems;
+    private float timerEnter;
     private Vector2 originalPosShopkeeper;
     [SerializeField] private float closingDuration;
 
@@ -26,9 +28,9 @@ public class Shop : MonoBehaviour
     [SerializeField] private Image item1;
     [SerializeField] private Image item2;
     [SerializeField] private Image item3;
-    [SerializeField] private Button buttonItem1;
-    [SerializeField] private Button buttonItem2;
-    [SerializeField] private Button buttonItem3;
+    [SerializeField] private RectTransform ancrage1;
+    [SerializeField] private RectTransform ancrage2;
+    [SerializeField] private RectTransform ancrage3;
 
     [Header("Others")] 
     private bool isOpen;
@@ -53,6 +55,15 @@ public class Shop : MonoBehaviour
             else
                 CloseShop();
         }
+
+        if (timerEnter > 0)
+        {
+            timerEnter -= Time.deltaTime;
+            
+            ancrage1.rotation = Quaternion.Euler(0, 0, rotationItems.Evaluate(2.5f - timerEnter) * 100);
+            ancrage2.rotation = Quaternion.Euler(0, 0, rotationItems.Evaluate(2.5f - timerEnter) * 100);
+            ancrage3.rotation = Quaternion.Euler(0, 0, rotationItems.Evaluate(2.5f - timerEnter) * 100);
+        }
     }
 
 
@@ -62,6 +73,8 @@ public class Shop : MonoBehaviour
         ManagerChara.Instance.noControl = true;
 
         isOpen = true;
+
+        timerEnter = 2.5f;
     }
 
     
