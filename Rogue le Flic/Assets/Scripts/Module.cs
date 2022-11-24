@@ -12,6 +12,10 @@ public class Module : MonoBehaviour
     [SerializeField] GameObject UIExplications;
     [SerializeField] GameObject UIChoix;
 
+    [Header("Shop")] 
+    public string itemName;
+    public string itemDescription;
+
     private bool UIActive;
     
 
