@@ -13,6 +13,10 @@ public class GunData : ScriptableObject
     public float charaKnockback;
     public AnimationCurve gunKnockback;
 
+    [Header("TirChargeable")] 
+    public bool tirChargeable;
+    public float dureeChargement;
+
     [Header("Ammo")] 
     public int maxAmmo;
     public float reloadTime;

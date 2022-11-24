@@ -25,6 +25,9 @@ public class Gun : MonoBehaviour
     public Vector2 posLeft;
     public Vector2 posRight;
 
+    [Header("ChargementTir")] 
+    private float timerCharge;
+
     [Header("Effets Modules")]
     [HideInInspector] public bool ballesPercantes;
     [HideInInspector] public bool ballesRebondissantes;
@@ -124,7 +127,27 @@ public class Gun : MonoBehaviour
             // TIR
             if (controls.Character.Tir.IsPressed())
             {
-                Shoot();
+                if (gunData.tirChargeable)
+                {
+                    if (timerCharge < gunData.dureeChargement)
+                    {
+                        timerCharge += Time.deltaTime;
+                    }
+                }
+
+                else
+                {
+                    Shoot();
+                }
+            }
+            else if (controls.Character.Tir.WasReleasedThisFrame())
+            {
+                if (timerCharge >= gunData.dureeChargement)
+                {
+                    Shoot();
+                }
+                
+                timerCharge = 0;
             }
 
             // ON RAMASSE L'ARME
