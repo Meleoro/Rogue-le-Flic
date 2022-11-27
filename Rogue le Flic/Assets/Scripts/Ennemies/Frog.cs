@@ -48,6 +48,7 @@ public class Frog : MonoBehaviour
             MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
 
             Destroy(gameObject);
+            ScoreManager.instance.AddPoint();
         }
         
         float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
