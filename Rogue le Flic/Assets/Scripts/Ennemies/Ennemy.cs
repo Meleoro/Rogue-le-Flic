@@ -23,6 +23,7 @@ public class Ennemy : MonoBehaviour
     
     [Header("References")]
     public GameObject cible;
+    public Animator anim;
     [SerializeField] private GameObject spawnIndicator;
     [SerializeField] private GameObject sprite;
 
