@@ -57,7 +57,6 @@ public class Beaver : MonoBehaviour
 
             Instantiate(coins,beaverPos.position, Quaternion.identity);
             Destroy(gameObject);
-            ScoreManager.instance.AddPoint();
         }
         
         float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 

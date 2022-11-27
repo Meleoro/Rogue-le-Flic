@@ -19,6 +19,8 @@ public class GenerationPro : MonoBehaviour
     public GameObject spawn;
     public List<GameObject> basicRooms;
     public List<GameObject> bigRooms;
+    public List<GameObject> specialRooms;
+    public List<Coord> roomsCreated;
     public GameObject boss;
     
     [Header("Autres")]
@@ -106,6 +108,12 @@ public class GenerationPro : MonoBehaviour
                             newSaveY = saveY;
 
                             voisinsNbr += 1;
+
+
+                            roomsCreated.Add(new Coord());
+
+                            roomsCreated[roomsCreated.Count - 1].x = saveX;
+                            roomsCreated[roomsCreated.Count - 1].y = saveY;
                         }
                     }
                     
@@ -122,6 +130,12 @@ public class GenerationPro : MonoBehaviour
                             newSaveY = saveY - 1;
                             
                             voisinsNbr += 1;
+
+
+                            roomsCreated.Add(new Coord());
+
+                            roomsCreated[roomsCreated.Count - 1].x = saveX;
+                            roomsCreated[roomsCreated.Count - 1].y = saveY;
                         }
                     }
                     
@@ -138,6 +152,12 @@ public class GenerationPro : MonoBehaviour
                             newSaveY = saveY;
                             
                             voisinsNbr += 1;
+
+
+                            roomsCreated.Add(new Coord());    
+
+                            roomsCreated[roomsCreated.Count - 1].x = saveX;
+                            roomsCreated[roomsCreated.Count - 1].y = saveY;
                         }
                     }
 
@@ -154,6 +174,12 @@ public class GenerationPro : MonoBehaviour
                             newSaveY = saveY + 1;
                             
                             voisinsNbr += 1;
+
+
+                            roomsCreated.Add(new Coord());
+
+                            roomsCreated[roomsCreated.Count - 1].x = saveX;
+                            roomsCreated[roomsCreated.Count - 1].y = saveY;
                         }
                     }
                 }
@@ -169,6 +195,8 @@ public class GenerationPro : MonoBehaviour
                 saveY = newSaveY;
             }
         }
+
+        SpecialRooms();
         
         // SALLE DE BOSS
         while (!bossRoom)
@@ -228,6 +256,45 @@ public class GenerationPro : MonoBehaviour
             }
         }
     }
+
+
+
+    void SpecialRooms()
+    {
+        for(int k = 0; k < specialRooms.Count; k++)
+        {
+            for(int i = 1; i < roomsCreated.Count; i++)
+            {
+                // DROITE
+                if (map.list[roomsCreated[i].x + 1].list[roomsCreated[i].y] == null)
+                {
+                    map.list[roomsCreated[i].x + 1].list[roomsCreated[i].y] = specialRooms[k];
+                    i += roomsCreated.Count;
+                }
+
+                // BAS
+                else if (map.list[roomsCreated[i].x].list[roomsCreated[i].y - 1] == null)
+                {
+                    map.list[roomsCreated[i].x].list[roomsCreated[i].y - 1] = specialRooms[k];
+                    i += roomsCreated.Count;
+                }
+
+                // GAUCHE
+                else if (map.list[roomsCreated[i].x - 1].list[roomsCreated[i].y] == null)
+                {
+                    map.list[roomsCreated[i].x - 1].list[roomsCreated[i].y] = specialRooms[k];
+                    i += roomsCreated.Count;
+                }
+
+                // HAUT
+                else if (map.list[roomsCreated[i].x].list[roomsCreated[i].y + 1] == null)
+                {
+                    map.list[roomsCreated[i].x].list[roomsCreated[i].y + 1] = specialRooms[k];
+                    i += roomsCreated.Count;
+                }
+            }
+        }
+    }
     
 
     
@@ -242,4 +309,11 @@ public class GenerationPro : MonoBehaviour
             }
         }
     }
+}
+
+[Serializable]
+public class Coord
+{
+    public int x;
+    public int y;
 }
