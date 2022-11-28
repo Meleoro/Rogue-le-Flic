@@ -20,7 +20,7 @@ public class Turtle : MonoBehaviour
     [SerializeField] private float speedSlide;
     [SerializeField] private int nbrRebonds;
     [SerializeField] private float cooldown;
-    private bool isSliding;
+    [HideInInspector] public bool isSliding;
 
     [Header("Autres")]
     public AIPath AIPath;
@@ -34,6 +34,7 @@ public class Turtle : MonoBehaviour
 
     private Vector2 slideDirection;
     private int currentNbrRebonds;
+    private bool isKicked;
 
 
     private void Start()
@@ -87,10 +88,16 @@ public class Turtle : MonoBehaviour
 
         else if (isSliding)
         {
-            rb.AddForce(slideDirection * speedSlide, ForceMode2D.Force);
+            if(!isKicked)
+                rb.AddForce(slideDirection * speedSlide, ForceMode2D.Force);
+            
+            else
+                rb.AddForce(slideDirection * speedSlide * 1.5f, ForceMode2D.Force);
         }
     }
 
+    
+    
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Player"))
@@ -102,7 +109,16 @@ public class Turtle : MonoBehaviour
         
         else if (col.gameObject.CompareTag("Ennemy") && isSliding)
         {
-            //col.gameObject.GetComponent<Ennemy>().TakeDamages(1, gameObject);
+            if(!isSliding)
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(1, gameObject);
+            
+            else
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(5, gameObject);
+        }
+        
+        else if (col.gameObject.CompareTag("Box") && isSliding)
+        {
+            col.gameObject.GetComponent<Box>().Explose();
         }
 
         else if (!col.gameObject.CompareTag("Ennemy") && isSliding)
@@ -110,11 +126,15 @@ public class Turtle : MonoBehaviour
             currentNbrRebonds += 1;
 
             slideDirection = Vector3.Reflect(slideDirection.normalized, col.contacts[0].normal);
+            
+            if(isKicked)
+                TakeDamages(3, col.gameObject);
 
             // ON STOP SON COMPORTEMENT DE SLIDE
             if(currentNbrRebonds >= nbrRebonds)
             {
                 isSliding = false;
+                isKicked = false;
                 canMove = true;
 
                 timerCooldown = cooldown;
@@ -125,15 +145,27 @@ public class Turtle : MonoBehaviour
     }
 
 
-    public void TakeDamages(int damages, GameObject bullet)
+    public void TakeDamages(int damages, GameObject collider)
     {
         health -= damages;
 
         // RECUL
-        rb.AddForce(bullet.GetComponent<Bullet>().directionBullet * bullet.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+        if(collider.CompareTag("Bullet")) 
+            rb.AddForce(collider.GetComponent<Bullet>().directionBullet * collider.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+        
+        else
+            rb.AddForce(collider.transform.position - transform.position, ForceMode2D.Impulse);
 
         hitEffect.Clear();
         hitEffect.Play();
+    }
+
+    public void Kicked(Vector2 direction)
+    {
+        slideDirection = direction;
+        isKicked = true;
+
+        currentNbrRebonds = nbrRebonds;
     }
 
 
@@ -146,9 +178,8 @@ public class Turtle : MonoBehaviour
             transform.DOComplete();
 
             isSliding = false;
+            isKicked = false;
             timerCooldown = cooldown;
-
-            StartCoroutine(Wait());
         }
     }
 
@@ -170,12 +201,5 @@ public class Turtle : MonoBehaviour
         GetComponent<Ennemy>().isCharging = false;
 
         isSliding = true;
-    }
-
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(3);
-
-        isSliding = false;
     }
 }

@@ -115,11 +115,15 @@ public class Beaver : MonoBehaviour
         health -= damages;
 
         // RECUL
-        rb.AddForce(bullet.GetComponent<Bullet>().directionBullet * bullet.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+        if(gameObject.CompareTag("Bullet"))
+            rb.AddForce(bullet.GetComponent<Bullet>().directionBullet * bullet.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+        
+        else
+            rb.AddForce(-bullet.transform.position + transform.position * 6, ForceMode2D.Impulse);
 
         hitEffect.Clear();
         hitEffect.Play();
-    }
+    } 
 
 
     public void StopCoroutine()

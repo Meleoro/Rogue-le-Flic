@@ -23,6 +23,23 @@ public class KickZone : MonoBehaviour
                 
                 KickChara.Instance.AutoAim();
             }
+            
+            else if (col.gameObject.GetComponent<Ennemy>().ennemyType == Ennemy.ennemies.Turtle)
+            {
+                if (col.gameObject.GetComponent<Turtle>().isSliding)
+                {
+                    col.gameObject.GetComponent<Turtle>().Kicked(-ManagerChara.Instance.transform.position + col.transform.position);
+                }
+
+                else
+                {
+                    col.gameObject.GetComponent<Ennemy>().StopCoroutines();
+                }
+                
+                KickChara.Instance.SlowMo();
+                KickChara.Instance.CameraShake();
+            }
+            
             else
             {
                 col.gameObject.GetComponent<Ennemy>().StopCoroutines();
