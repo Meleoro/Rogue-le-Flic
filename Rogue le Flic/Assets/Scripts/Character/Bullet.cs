@@ -98,9 +98,16 @@ public class Bullet : MonoBehaviour
         
         else if (collision.CompareTag("Box"))
         {
-            collision.GetComponent<Box>().Explose();
-            
-            Destroy(gameObject);
+            if (!rebondissante)
+            {
+                Destroy(gameObject);
+                collision.GetComponent<Box>().Explose();
+            }
+
+            else
+            {
+                bounceWalls.enabled = true;
+            }
         }
 
         else
@@ -115,6 +122,11 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Box"))
+        {
+            collision.gameObject.GetComponent<Box>().Explose();
+        }
+        
         direction = Vector3.Reflect(direction.normalized, collision.contacts[0].normal);
 
         bounceWalls.enabled = false;
