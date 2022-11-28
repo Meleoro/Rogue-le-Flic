@@ -117,9 +117,15 @@ public class Beaver : MonoBehaviour
         // RECUL
         if(gameObject.CompareTag("Bullet"))
             rb.AddForce(bullet.GetComponent<Bullet>().directionBullet * bullet.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
-        
+
         else
-            rb.AddForce(-bullet.transform.position + transform.position * 6, ForceMode2D.Impulse);
+        {
+            Vector2 directionForce = new Vector2(transform.position.y - bullet.transform.position.y, transform.position.x - bullet.transform.position.x);
+            
+            StopCoroutine();
+            
+            rb.AddForce(directionForce.normalized * 40, ForceMode2D.Impulse);
+        }
 
         hitEffect.Clear();
         hitEffect.Play();
