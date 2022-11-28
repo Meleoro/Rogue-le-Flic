@@ -36,6 +36,11 @@ public class KickZone : MonoBehaviour
             
             col.GetComponent<Rigidbody2D>().AddForce(direction.normalized * KickChara.Instance.kickStrenght, ForceMode2D.Impulse);
         }
+        
+        else if (col.CompareTag("Box"))
+        {
+            col.GetComponent<Box>().Explose();
+        }
     }
     
     
