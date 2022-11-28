@@ -32,6 +32,8 @@ public class Beaver : MonoBehaviour
     private Rigidbody2D rb;
     private bool canMove;
     private Vector2 direction;
+
+    private Ennemy ennemy;
     
 
     private void Start()
@@ -42,6 +44,8 @@ public class Beaver : MonoBehaviour
         canMove = true;
         
         AIDestination.target = ManagerChara.Instance.transform;
+
+        ennemy = GetComponent<Ennemy>();
     }
     
 
@@ -53,7 +57,6 @@ public class Beaver : MonoBehaviour
 
             Instantiate(coins,beaverPos.position, Quaternion.identity);
             Destroy(gameObject);
-            ScoreManager.instance.AddPoint();
         }
         
         float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
@@ -61,6 +64,8 @@ public class Beaver : MonoBehaviour
         
         if (distance < distanceJumpTrigger && !isJumping)
         {
+            ennemy.anim.SetTrigger("isAttacking");
+
             StartCoroutine(Jump(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
         }
 
@@ -84,6 +89,13 @@ public class Beaver : MonoBehaviour
             direction = AIPath.targetDirection;
             
             rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
+
+            ennemy.anim.SetBool("isWalking", true);
+        }
+
+        else
+        {
+            ennemy.anim.SetBool("isWalking", false);
         }
     }
 
