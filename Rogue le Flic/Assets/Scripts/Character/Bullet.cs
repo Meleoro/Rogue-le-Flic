@@ -95,6 +95,13 @@ public class Bullet : MonoBehaviour
 
             bounceWalls.enabled = false;
         }
+        
+        else if (collision.CompareTag("Box"))
+        {
+            collision.GetComponent<Box>().Explose();
+            
+            Destroy(gameObject);
+        }
 
         else
         {
