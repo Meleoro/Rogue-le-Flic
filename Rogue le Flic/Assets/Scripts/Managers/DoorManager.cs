@@ -31,7 +31,7 @@ public class DoorManager : MonoBehaviour
     public int maxEnnemies;
     public List<ennemySpawn> spawnEnnemies;
     public List<GameObject> currentEnnemies;
-    [HideInInspector] public int ennemyCount;
+    public int ennemyCount;
 
 
     private void Update()
@@ -102,7 +102,10 @@ public class DoorManager : MonoBehaviour
 
                 if (index < k.spawnChances && currentEnnemies.Count < maxEnnemies)
                 {
+                    
                     currentEnnemies.Add(k.ennemy);
+                    
+                    k.spawnChances = 0;
                 }
             }
 
