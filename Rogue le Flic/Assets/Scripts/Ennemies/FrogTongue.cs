@@ -43,7 +43,7 @@ public class FrogTongue : MonoBehaviour
     {
         lr.SetPosition(1, transform.position);
 
-        edgeColliderPoints[0] =  -transform.localPosition * 2;
+        edgeColliderPoints[1] =  (-transform.position + frog.gameObject.transform.position) * 2;
         edgeCollider.SetPoints(edgeColliderPoints);
 
         avancée += Time.deltaTime / frog.shotDuration;
