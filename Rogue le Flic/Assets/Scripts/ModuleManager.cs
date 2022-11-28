@@ -11,7 +11,7 @@ public class ModuleManager : MonoBehaviour
     [HideInInspector] public int Module2;
 
     [Header("Rebonds")] 
-    [SerializeField] private int nbrRebondsMax;
+    //[SerializeField] private int nbrRebondsMax;
 
     [Header("Grossissement")] 
     public float multiplicateurTaille;
