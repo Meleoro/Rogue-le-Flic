@@ -21,6 +21,12 @@ public class Frog : MonoBehaviour
     public float shotDuration;
     public AnimationCurve tonguePatern;
     private bool cooldownShot;
+    
+    [SerializeField] private Vector2 posLeft;
+    [SerializeField] private Vector2 posRight;
+    private Vector2 direction;
+    private bool lookLeft;
+    private Ennemy ennemy;
 
     [Header("Autres")]
     public AIPath AIPath;
@@ -38,6 +44,8 @@ public class Frog : MonoBehaviour
         canMove = true;
         
         AIDestination.target = ManagerChara.Instance.transform;
+
+        ennemy = GetComponent<Ennemy>();
     }
     
 
@@ -55,7 +63,31 @@ public class Frog : MonoBehaviour
         
         if (distance <= distanceShotTrigger && !cooldownShot)
         {
+            ennemy.anim.SetTrigger("isAttacking");
+            
             StartCoroutine(Cooldown());
+        }
+        
+        // ROTATION CASTOR
+        if (direction.x > 0.1f)
+        {
+            lookLeft = false;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        
+        else if (direction.x < -0.1f)
+        {
+            lookLeft = true;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        if (lookLeft)
+        {
+            ennemy.sprite.transform.localPosition = posLeft;
+        }
+        else
+        {
+            ennemy.sprite.transform.localPosition = posRight;
         }
     }
 
@@ -63,9 +95,16 @@ public class Frog : MonoBehaviour
     {
         if (canMove)
         {
-            Vector2 direction = AIPath.targetDirection;
+            direction = AIPath.targetDirection;
 
             rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
+            
+            ennemy.anim.SetBool("isWalking", true);
+        }
+
+        else
+        {
+            ennemy.anim.SetBool("isWalking", false);
         }
     }
     
