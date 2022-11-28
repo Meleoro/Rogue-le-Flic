@@ -25,7 +25,7 @@ public class Ennemy : MonoBehaviour
     public GameObject cible;
     public Animator anim;
     [SerializeField] private GameObject spawnIndicator;
-    [SerializeField] private GameObject sprite;
+    public GameObject sprite;
 
     private void Start()
     {
@@ -133,7 +133,7 @@ public class Ennemy : MonoBehaviour
 
             case ennemies.Frog:
                 spawnIndicator.SetActive(true);
-                GetComponent<SpriteRenderer>().enabled = false;
+                sprite.SetActive(false);
                 GetComponent<BoxCollider2D>().enabled = false;
 
                 isSpawning = true;
@@ -141,7 +141,7 @@ public class Ennemy : MonoBehaviour
                 yield return new WaitForSeconds(2);
         
                 spawnIndicator.SetActive(false);
-                GetComponent<SpriteRenderer>().enabled = true;
+                sprite.SetActive(true);
                 GetComponent<BoxCollider2D>().enabled = true;
         
                 isSpawning = false;
