@@ -26,7 +26,7 @@ public class KickChara : MonoBehaviour
     [Header("Effets Kick Normal")] 
     public float cameraShakeDuration;
     public float cameraShakeAmplitude;
-    [Range(0.1f, 5)] public float slowMoSpeed;
+    [Range(0.1f, 10)] public float slowMoSpeed;
     [Range(1, 50)] public float slowMoStrenght;
     [Range(0.1f, 4)] public float newZoom;
     [Range(0.001f, 0.3f)] public float zoomMoment;
