@@ -266,6 +266,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234ab4dfcf3177d4a9a32c5f595c346c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1314531379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1314531380}
+  - component: {fileID: 1314531381}
+  m_Layer: 0
+  m_Name: Motion blur
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1314531380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314531379}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1503478015596987164}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1314531381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314531379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: dd6d984ca34ef544e8e679f9f8042ed1, type: 2}
 --- !u!1 &1351326057
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,6 +690,7 @@ Transform:
   - {fileID: 8447078720495051528}
   - {fileID: 1502092899}
   - {fileID: 5870714460992034749}
+  - {fileID: 1314531380}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -794,11 +844,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367835680b6c22c4ab1a98cf9568fa8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashForceX: 570
-  dashForceY: 570
+  dashForceX: 650
+  dashForceY: 650
   dureeAjoutForce: 0.09
   noHitTime: 0.4
   dashEffects: {fileID: 8730555803135111572}
+  dashBlur: {fileID: 1314531381}
   duration: 0.08
   amplitude: 0.01
 --- !u!114 &8500281233397896041
@@ -821,10 +872,10 @@ MonoBehaviour:
   propulsionChara: 25
   cameraShakeDuration: 0.09
   cameraShakeAmplitude: 0.5
-  slowMoSpeed: 5
-  slowMoStrenght: 10.8
-  newZoom: 0.41
-  zoomMoment: 0.005
+  slowMoSpeed: 4
+  slowMoStrenght: 16.8
+  newZoom: 0.51
+  zoomMoment: 0.009
   dezoomMoment: 0.262
   kickVolume: {fileID: 1502092900}
   foot: {fileID: 0}

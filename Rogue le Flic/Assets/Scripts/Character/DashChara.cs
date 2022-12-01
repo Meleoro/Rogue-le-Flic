@@ -21,6 +21,7 @@ public class DashChara : MonoBehaviour
 
     [Header("Effets")] 
     [SerializeField] private Volume dashEffects;
+    [SerializeField] private Volume dashBlur;
     private float timerEffects;
 
     [Header("Camera Shake")] 
@@ -43,6 +44,11 @@ public class DashChara : MonoBehaviour
         if (timerEffects > 0)
         {
             timerEffects -= Time.deltaTime;
+            dashBlur.weight = 1;
+        }
+        else
+        {
+            dashBlur.weight = 0;
         }
     }
 
