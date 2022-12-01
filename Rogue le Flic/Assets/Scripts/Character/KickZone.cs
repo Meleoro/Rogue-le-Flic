@@ -13,6 +13,7 @@ public class KickZone : MonoBehaviour
         {
             KickChara.Instance.kickedEnnemy = col.gameObject;
             
+            /*
             if (col.gameObject.GetComponent<Ennemy>().isCharging)
             {
                 col.gameObject.GetComponent<Ennemy>().StopCoroutines();
@@ -22,9 +23,9 @@ public class KickZone : MonoBehaviour
                 KickChara.Instance.CameraShake();
                 
                 KickChara.Instance.AutoAim();
-            }
+            }*/
             
-            else if (col.gameObject.GetComponent<Ennemy>().ennemyType == Ennemy.ennemies.Turtle)
+            if (col.gameObject.GetComponent<Ennemy>().ennemyType == Ennemy.ennemies.Turtle)
             {
                 if (col.gameObject.GetComponent<Turtle>().isSliding)
                 {

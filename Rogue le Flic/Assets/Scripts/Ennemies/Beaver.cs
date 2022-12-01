@@ -115,7 +115,7 @@ public class Beaver : MonoBehaviour
         health -= damages;
 
         // RECUL
-        if(gameObject.CompareTag("Bullet"))
+        if(bullet.CompareTag("Bullet"))
             rb.AddForce(bullet.GetComponent<Bullet>().directionBullet * bullet.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
 
         else

@@ -17,6 +17,9 @@ public class KickChara : MonoBehaviour
     public float kickDuration;
     public float kickStrenght;
     [SerializeField] private float kickDelay;
+    
+    private float originalZoom;
+    [HideInInspector] public GameObject kickedEnnemy;
 
     public float propulsionChara;
 
@@ -32,6 +35,7 @@ public class KickChara : MonoBehaviour
     private bool slowMoStrongActive;
     private float timerSlowMo;
     
+    /*
     [Header("Effets Coup Critique")] 
     public float cameraShakeDurationCritical;
     public float cameraShakeAmplitudeCritical;
@@ -39,17 +43,14 @@ public class KickChara : MonoBehaviour
     [Range(1, 50)] public float slowMoStrenghtCritical;
     [Range(0.1f, 4)] public float newZoomCritical;
     [Range(0.001f, 0.3f)] public float zoomMomentCritical;
-    [Range(0.001f, 0.3f)] public float dezoomMomentCritical;
-    
-    
-    private float originalZoom;
+    [Range(0.001f, 0.3f)] public float dezoomMomentCritical;*/
 
-    [Header("Auto-Aim")] 
-    private bool autoAimActive;
-    [HideInInspector] public GameObject kickedEnnemy;
+    /*[Header("Auto-Aim")] 
+    private bool autoAimActive;*/
 
     [Header("References")] 
     public Volume kickVolume;
+    [SerializeField] private Animation foot;
 
 
     public void Awake()
@@ -62,7 +63,7 @@ public class KickChara : MonoBehaviour
     private void Update()
     {
         // INTERRUPTION D'UN ADVERSAIRE
-        if (slowMoStrongActive)
+        /*if (slowMoStrongActive)
         {
             timerSlowMo += Time.fixedDeltaTime * slowMoSpeedCritical;
 
@@ -92,10 +93,9 @@ public class KickChara : MonoBehaviour
                 
                 kickedEnnemy.GetComponent<Ennemy>().cible.SetActive(false);
             }
-        }
-        
-        // KICK NORMAL
-        else if (slowMoActive)
+        }*/
+
+        if (slowMoActive)
         {
             timerSlowMo += Time.fixedDeltaTime * slowMoSpeed;
 
@@ -130,6 +130,10 @@ public class KickChara : MonoBehaviour
         Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>());
         Vector2 charaPos = ManagerChara.Instance.transform.position;
         
+        kick.SetActive(true);
+        kick.GetComponent<CircleCollider2D>().enabled = false;
+        foot.DORestart();
+        
         ManagerChara.Instance.noControl = true;
 
         if (mousePos.x > charaPos.x)
@@ -149,8 +153,8 @@ public class KickChara : MonoBehaviour
         
         // ON PLACE LA ZONE DE KICK ET ON L'AFFICHE
         kick.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(mousePos.y - charaPos.y, mousePos.x - charaPos.x) * Mathf.Rad2Deg, Vector3.forward);
-        kick.SetActive(true);
-        
+        kick.GetComponent<CircleCollider2D>().enabled = true;
+
         // ON PROPULSE LE PERSONNAGE
         ManagerChara.Instance.rb.AddForce(new Vector2(mousePos.x - charaPos.x, mousePos.y - charaPos.y).normalized * propulsionChara, ForceMode2D.Impulse);
         
@@ -167,7 +171,7 @@ public class KickChara : MonoBehaviour
         ReferenceCamera.Instance.transform.DOShakePosition(cameraShakeDuration, cameraShakeAmplitude);
     }
 
-    public void SlowMoStrong()
+    /*public void SlowMoStrong()
     {
         if (!slowMoStrongActive)
         {
@@ -179,7 +183,7 @@ public class KickChara : MonoBehaviour
             timerSlowMo = 0;
             slowMoStrongActive = true;
         }
-    }
+    }*/
 
     public void SlowMo()
     {
@@ -195,9 +199,9 @@ public class KickChara : MonoBehaviour
         }
     }
 
-    public void AutoAim()
+    /*public void AutoAim()
     {
         if(ManagerChara.Instance.activeGun != null)
             StartCoroutine(ManagerChara.Instance.activeGun.GetComponent<Gun>().AutoAim(kickDuration));
-    }
+    }*/
 }
