@@ -37,15 +37,25 @@ public class DashChara : MonoBehaviour
     {
         if (timerForce > 0)
         {
-            ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * dashForceX, direction.y * dashForceY), ForceMode2D.Force);
-
             timerForce -= Time.deltaTime;
         }
 
         if (timerEffects > 0)
         {
             timerEffects -= Time.deltaTime;
-            
+        }
+    }
+
+
+    private void FixedUpdate()
+    {
+        if (timerForce > 0)
+        {
+            ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * dashForceX, direction.y * dashForceY), ForceMode2D.Force);
+        }
+
+        if (timerEffects > 0)
+        {
             dashEffects.weight = timerEffects / noHitTime;
         }
     }
