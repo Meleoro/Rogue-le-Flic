@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class DashChara : MonoBehaviour
@@ -13,10 +14,14 @@ public class DashChara : MonoBehaviour
     public float dashForceY;
 
     public float dureeAjoutForce;
-    private float timer;
+    private float timerForce;
     private Vector2 direction;
 
     public float noHitTime;
+
+    [Header("Effets")] 
+    [SerializeField] private Volume dashEffects;
+    private float timerEffects;
 
     [Header("Camera Shake")] 
     public float duration;
@@ -30,18 +35,26 @@ public class DashChara : MonoBehaviour
 
     private void Update()
     {
-        if (timer > 0)
+        if (timerForce > 0)
         {
             ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * dashForceX, direction.y * dashForceY), ForceMode2D.Force);
 
-            timer -= Time.deltaTime;
+            timerForce -= Time.deltaTime;
+        }
+
+        if (timerEffects > 0)
+        {
+            timerEffects -= Time.deltaTime;
+            
+            dashEffects.weight = timerEffects / noHitTime;
         }
     }
 
 
     public void Dash()
     {
-        timer = dureeAjoutForce;
+        timerForce = dureeAjoutForce;
+        timerEffects = noHitTime;
         
         ReferenceCamera.Instance.transform.DOShakePosition(duration, amplitude);
         
