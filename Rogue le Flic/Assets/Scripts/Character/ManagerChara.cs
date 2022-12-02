@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,7 +18,7 @@ public class ManagerChara : MonoBehaviour
     public bool noControl;
 
     [Header("Dash")] 
-    private bool isDashing;
+    [HideInInspector] public bool isDashing;
     private float timerDash;
     
     [Header("Kick")] 
@@ -33,6 +34,7 @@ public class ManagerChara : MonoBehaviour
     public bool canSwitch;
     public Animator anim;
     public Image reload;
+    [HideInInspector] public bool isFalling;
     
     
 
@@ -152,5 +154,22 @@ public class ManagerChara : MonoBehaviour
         yield return new WaitForSeconds(0.9f);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public IEnumerator Fall(float fallDuration, Vector2 newPos)
+    {
+        transform.DOScale(Vector3.zero, fallDuration);
+        noControl = true;
+        isFalling = true;
+        
+        yield return new WaitForSeconds(fallDuration);
+
+        transform.DOScale(Vector3.one, fallDuration / 5);
+        noControl = false;
+        isFalling = false;
+
+        transform.position = newPos;
+        
+        HealthManager.Instance.LoseHealth(Vector2.zero);
     }
 }
