@@ -35,6 +35,9 @@ public class Turtle : MonoBehaviour
     private Vector2 slideDirection;
     private int currentNbrRebonds;
     private bool isKicked;
+    private Ennemy ennemy;
+
+    private bool stopDeath;
 
 
     private void Start()
@@ -47,16 +50,27 @@ public class Turtle : MonoBehaviour
         AIDestination.target = ManagerChara.Instance.transform;
         
         timerCooldown = cooldown;
+
+        ennemy = GetComponent<Ennemy>();
     }
 
 
     public void TurtleBehavior()
     {
-        if (health <= 0)
+        if (health <= 0 && !stopDeath)
         {
+            stopDeath = true;
+            
             MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
 
-            Destroy(gameObject);
+            if (MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount <= 0)
+            {
+                StartCoroutine(ennemy.FinalDeath());
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) +

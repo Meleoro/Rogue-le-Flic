@@ -35,6 +35,8 @@ public class Frog : MonoBehaviour
     private Rigidbody2D rb;
     [HideInInspector] public bool canMove;
 
+    private bool stopDeath;
+
 
     private void Start()
     {
@@ -51,11 +53,20 @@ public class Frog : MonoBehaviour
 
     public void FrogBehavior()
     {
-        if (health < 0)
+        if (health <= 0 && !stopDeath)
         {
+            stopDeath = true;
+            
             MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
 
-            Destroy(gameObject);
+            if (MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount <= 0)
+            {
+                StartCoroutine(ennemy.FinalDeath());
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
         
         float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 

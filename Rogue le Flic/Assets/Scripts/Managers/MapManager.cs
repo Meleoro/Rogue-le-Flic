@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 public class MapManager : MonoBehaviour
 {
     public static MapManager Instance;
+
+    public Volume winVolume;
     
     private bool spawnRoom;
 

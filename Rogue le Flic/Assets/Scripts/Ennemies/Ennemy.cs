@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Ennemy : MonoBehaviour
@@ -107,6 +108,20 @@ public class Ennemy : MonoBehaviour
                 turtleScript.TakeDamages(damages, bullet);
                 break;
         }
+    }
+
+
+    public IEnumerator FinalDeath()
+    {
+        transform.DOShakePosition(1, 1);
+        MapManager.Instance.activeRoom.GetComponent<DoorManager>().isFinished = true;
+        
+        yield return new WaitForSeconds(1);
+
+        MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives(); 
+        MapManager.Instance.activeRoom.GetComponent<DoorManager>().EndRoom(transform.position); 
+        
+        Destroy(gameObject);
     }
 
 

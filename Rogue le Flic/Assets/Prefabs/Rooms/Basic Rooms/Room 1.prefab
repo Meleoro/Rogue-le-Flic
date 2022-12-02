@@ -1035,22 +1035,29 @@ MonoBehaviour:
   minEnnemies: 3
   maxEnnemies: 4
   spawnEnnemies:
-  - ennemy: {fileID: 1629064102851673669}
+  - element: {fileID: 1629064102851673669}
     spawnChances: 20
-  - ennemy: {fileID: 2554613105093359850}
+  - element: {fileID: 2554613105093359850}
     spawnChances: 20
-  - ennemy: {fileID: 6409684747257925156}
+  - element: {fileID: 6409684747257925156}
     spawnChances: 20
-  - ennemy: {fileID: 2008888743619123831}
+  - element: {fileID: 2008888743619123831}
     spawnChances: 20
-  - ennemy: {fileID: 359329343753456647}
+  - element: {fileID: 359329343753456647}
     spawnChances: 100
-  - ennemy: {fileID: 4827840596142756016}
+  - element: {fileID: 4827840596142756016}
     spawnChances: 50
-  - ennemy: {fileID: 1554939365033870289}
+  - element: {fileID: 1554939365033870289}
     spawnChances: 50
   currentEnnemies: []
   ennemyCount: 0
+  spawnLoots:
+  - element: {fileID: 4404858517026568697, guid: 0a12cc2e4dba0c74b8aacbaf03ce09c1, type: 3}
+    spawnChances: 10
+  - element: {fileID: 571252457800942925, guid: d9f2f2e91abcef347a9b6f813f76f37e, type: 3}
+    spawnChances: 20
+  - element: {fileID: 7161395903424992997, guid: c2013118a0a59bf47a33c29552f75ec0, type: 3}
+    spawnChances: 20
 --- !u!114 &6622452753882870427
 MonoBehaviour:
   m_ObjectHideFlags: 0

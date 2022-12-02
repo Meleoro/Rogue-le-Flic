@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1051280695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1051280696}
+  - component: {fileID: 1051280697}
+  m_Layer: 0
+  m_Name: VolumeWin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1051280696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051280695}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8180513429589223063}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1051280697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051280695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: ff55a9a003a56244fa6bb6b72566ab83, type: 2}
 --- !u!1 &8180513429589223057
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,7 +80,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1051280696}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -167,6 +217,9 @@ MonoBehaviour:
   - {fileID: 6460342174784775937, guid: fcb2daf54a7b8244c895677ab59d22e9, type: 3}
   bigRooms:
   - {fileID: 6460342174784775937, guid: 6e597860d60bfbd46b2e19d2ef59a74f, type: 3}
+  specialRooms:
+  - {fileID: 6460342174784775937, guid: 032668a850e55534c92d193047ad9cb8, type: 3}
+  roomsCreated: []
   boss: {fileID: 1456235560539892883, guid: 140442aea99aab14ba094f7f5dc2f580, type: 3}
   spawnLocation: {x: 0, y: 0}
 --- !u!114 &8180513429589223060
@@ -181,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d49b0a18524ff498f726985fbe3543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winVolume: {fileID: 1051280697}
   playerX: 0
   playerY: 0
   activeRoom: {fileID: 0}
@@ -310,7 +364,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Module1: 0
   Module2: 0
-  nbrRebondsMax: 0
   multiplicateurTaille: 2
   probaCritique: 16
   mulitplicateurTaille: 2

@@ -34,6 +34,7 @@ public class Beaver : MonoBehaviour
     private Vector2 direction;
 
     private Ennemy ennemy;
+    private bool stopDeath;
     
 
     private void Start()
@@ -51,12 +52,21 @@ public class Beaver : MonoBehaviour
 
     public void BeaverBehavior()
     {
-        if (health <= 0)
+        if (health <= 0 && !stopDeath)
         {
+            stopDeath = true;
+            
             MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
 
-            Instantiate(coins,beaverPos.position, Quaternion.identity);
-            Destroy(gameObject);
+            if (MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount <= 0)
+            {
+                StartCoroutine(ennemy.FinalDeath());
+            }
+            else
+            {
+                Instantiate(coins,beaverPos.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
         }
         
         float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 

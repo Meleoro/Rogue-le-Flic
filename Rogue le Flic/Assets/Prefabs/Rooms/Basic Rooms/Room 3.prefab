@@ -775,24 +775,32 @@ MonoBehaviour:
   minEnnemies: 3
   maxEnnemies: 5
   spawnEnnemies:
-  - ennemy: {fileID: 1629064102851673669}
+  - element: {fileID: 1629064102851673669}
     spawnChances: 100
-  - ennemy: {fileID: 2554613105093359850}
+  - element: {fileID: 2554613105093359850}
     spawnChances: 40
-  - ennemy: {fileID: 6409684747257925156}
+  - element: {fileID: 6409684747257925156}
     spawnChances: 40
-  - ennemy: {fileID: 1368820280142302572}
+  - element: {fileID: 1368820280142302572}
     spawnChances: 10
-  - ennemy: {fileID: 814836565323684819}
+  - element: {fileID: 814836565323684819}
     spawnChances: 40
-  - ennemy: {fileID: 2538102395039996622}
+  - element: {fileID: 2538102395039996622}
     spawnChances: 40
-  - ennemy: {fileID: 6616931719321185775}
+  - element: {fileID: 6616931719321185775}
     spawnChances: 60
-  - ennemy: {fileID: 7541696320828018582}
+  - element: {fileID: 7541696320828018582}
     spawnChances: 30
   currentEnnemies: []
   ennemyCount: 0
+  spawnLoots:
+  - element: {fileID: 4404858517026568697, guid: 0079c9710dd48c240bffecf26d3f7535, type: 3}
+    spawnChances: 10
+  - element: {fileID: 571252457800942925, guid: d9f2f2e91abcef347a9b6f813f76f37e, type: 3}
+    spawnChances: 20
+  - element: {fileID: 8633518367942238775, guid: dbc5c06fa8f151448ab65adb285f973d, type: 3}
+    spawnChances: 20
+  isFinished: 0
 --- !u!114 &6622452753882870427
 MonoBehaviour:
   m_ObjectHideFlags: 0

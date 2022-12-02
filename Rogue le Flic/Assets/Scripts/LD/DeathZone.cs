@@ -19,7 +19,7 @@ public class DeathZone : MonoBehaviour
         
         else if (col.CompareTag("Ennemy"))
         {
-            Destroy(col);
+            col.GetComponent<Ennemy>().TakeDamages(1000, gameObject);
         }
     }
 }
