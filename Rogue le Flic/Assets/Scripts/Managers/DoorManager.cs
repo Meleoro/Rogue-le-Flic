@@ -48,7 +48,14 @@ public class DoorManager : MonoBehaviour
             doorLeft.SetActive(false);
             doorUp.SetActive(false);
         }
+
+        else
+        {
+            PortesActives();
+        }
     }
+    
+    
 
 
     private void Update()
