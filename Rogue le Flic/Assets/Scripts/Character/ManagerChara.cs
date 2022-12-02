@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -95,15 +97,23 @@ public class ManagerChara : MonoBehaviour
                 StartCoroutine(KickChara.Instance.Kick());
             }
 
-            else if (isDashing)
+            if (isDashing)
             {
                 timerDash -= Time.deltaTime;
+
+                /*gameObject.layer = DashChara.Instance.invincibleLayer;
+                Debug.Log(gameObject.layer);*/
 
                 if (timerDash <= 0)
                 {
                     isDashing = false;
                 }
             }
+
+            /*else
+            {
+                gameObject.layer = DashChara.Instance.normalLayer;
+            }*/
             
             // SWITCH WEAPONS
             if (controls.Character.SwitchWeapon.ReadValue<float>() != 0 && canSwitch)

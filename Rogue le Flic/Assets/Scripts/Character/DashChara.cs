@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,9 @@ public class DashChara : MonoBehaviour
     private Vector2 direction;
 
     public float noHitTime;
+
+    public LayerMask normalLayer;
+    public LayerMask invincibleLayer;
 
     [Header("Effets")] 
     [SerializeField] private Volume dashEffects;
