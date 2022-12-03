@@ -44,18 +44,18 @@ public class Coin : MonoBehaviour
 
     private void Update()
     {
+        RotationPiece();
+        
         if (!isMagneted)
         {
             if (!isEjecting)
             {
                 CoinFloat();
-                RotationPiece();
             }
 
             else
             {
                 Ejection();
-                RotationPiece();
             }
         }
 
@@ -103,6 +103,10 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        
+        if (col.CompareTag("Player"))
+        {
+            CoinManager.Instance.AddCoin(1);
+            Destroy(gameObject);
+        }
     }
 }
