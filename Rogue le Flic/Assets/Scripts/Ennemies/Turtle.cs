@@ -27,7 +27,6 @@ public class Turtle : MonoBehaviour
     public AIDestinationSetter AIDestination;
     [SerializeField] private ParticleSystem hitEffect;
     public GameObject coins;
-    public Transform beaverPos;
     private Rigidbody2D rb;
     private bool canMove;
     private float timerCooldown;
@@ -69,6 +68,7 @@ public class Turtle : MonoBehaviour
             }
             else
             {
+                Instantiate(coins,transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

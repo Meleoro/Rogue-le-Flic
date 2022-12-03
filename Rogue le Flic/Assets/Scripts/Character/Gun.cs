@@ -296,7 +296,8 @@ public class Gun : MonoBehaviour
             StartCoroutine(ShotCooldown());
             Knockback();
 
-            ReferenceCamera.Instance.transform.DOShakePosition(gunData.shakeDuration, gunData.shakeAmplitude);
+            if(CameraMovements.Instance.canShake)
+                ReferenceCamera.Instance.transform.DOShakePosition(gunData.shakeDuration, gunData.shakeAmplitude);
         }
     }
 

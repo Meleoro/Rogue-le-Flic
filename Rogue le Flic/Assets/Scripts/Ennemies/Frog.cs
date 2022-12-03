@@ -32,6 +32,7 @@ public class Frog : MonoBehaviour
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
     [SerializeField] private ParticleSystem hitEffect;
+    [SerializeField] private GameObject coins;
     private Rigidbody2D rb;
     [HideInInspector] public bool canMove;
 
@@ -65,6 +66,7 @@ public class Frog : MonoBehaviour
             }
             else
             {
+                Instantiate(coins,transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

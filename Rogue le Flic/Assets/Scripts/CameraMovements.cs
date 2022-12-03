@@ -16,6 +16,16 @@ public class CameraMovements : MonoBehaviour
     private float newY;
 
     public float multiplierMouse;
+    [HideInInspector] public bool canShake;
+
+    [Header("End Room Behavior")]
+    [HideInInspector] public bool endRoom;
+    [HideInInspector] public float timeZoom;
+    [HideInInspector] public Vector2 ennemyPos;
+    private float originalSize;
+    private Vector2 originalPos;
+    [HideInInspector] public float timerZoom;
+    private float timerDezoom;
     
 
     private void Awake()
@@ -41,6 +51,20 @@ public class CameraMovements : MonoBehaviour
 
     void Update()
     {
+        if (!endRoom)
+        {
+            transform.position = NormalBehavior();
+            
+            originalSize = _camera.orthographicSize;
+            originalPos = _camera.transform.position;
+        }
+
+        else 
+            EndRoomBehavior();
+    }
+
+    Vector2 NormalBehavior()
+    {
         Vector3 charaPos = ManagerChara.Instance.transform.position;
         GameObject activeRoom = MapManager.Instance.activeRoom;
         
@@ -49,8 +73,8 @@ public class CameraMovements : MonoBehaviour
         
         float height = _camera.orthographicSize;
         float width = height * _camera.aspect;
-
-
+        
+        
         if (limites.limitUp.transform.position.y > charaPos.y + height && 
             limites.limitBottom.transform.position.y < charaPos.y - height)
         {
@@ -93,6 +117,50 @@ public class CameraMovements : MonoBehaviour
         
         Vector2 newPos = new Vector2( mousePos.x * multiplierMouse - multiplierMouse / 2,  mousePos.y * multiplierMouse- multiplierMouse / 2);
 
-        transform.position = new Vector3(newX + newPos.x, newY + newPos.y, transform.position.z);
+        return new Vector3(newX + newPos.x, newY + newPos.y, transform.position.z);
+    }
+
+    void EndRoomBehavior()
+    {
+        //ZOOM
+        if (timerDezoom <= 0)
+        {
+            timerZoom -= Time.deltaTime;
+        
+            _camera.orthographicSize = Mathf.Lerp(originalSize, originalSize / 1.2f, (1 - timerZoom / timeZoom) * 1.5f);
+
+            transform.position = new Vector3(Mathf.Lerp(originalPos.x, ennemyPos.x,  1 - timerZoom / timeZoom), 
+                Mathf.Lerp(originalPos.y, ennemyPos.y, 1 - timerZoom / timeZoom), transform.position.z);
+            
+            //SLOW MO
+            Time.timeScale = Mathf.Lerp(1f, 0.4f, 1 - timerZoom / timeZoom);
+            Time.fixedDeltaTime = 0.02f * Time.deltaTime;
+
+            if (timerZoom <= -0.3f)
+            {
+                timerDezoom = 0.15f;
+            }
+        }
+        
+        // DEZOOM
+        else
+        {
+            timerDezoom -= Time.deltaTime;
+            
+            _camera.orthographicSize = Mathf.Lerp(originalSize, originalSize / 1.2f, timerDezoom / 0.15f);
+
+            Vector2 wantedPos = NormalBehavior();
+            
+            transform.position = new Vector3(Mathf.Lerp(wantedPos.x, ennemyPos.x, timerDezoom / 0.15f), 
+                Mathf.Lerp(wantedPos.y, ennemyPos.y, timerDezoom / 0.15f), transform.position.z);
+            
+            Time.timeScale = Mathf.Lerp(1f, 0.4f, timerDezoom / 0.15f);
+            Time.fixedDeltaTime = 0.02f * Time.deltaTime;
+
+            if (timerDezoom <= 0)
+            {
+                endRoom = false;
+            }
+        }
     }
 }

@@ -28,7 +28,6 @@ public class Beaver : MonoBehaviour
     public AIDestinationSetter AIDestination;
     [SerializeField] private ParticleSystem hitEffect;
     public GameObject coins;
-    public Transform beaverPos;
     private Rigidbody2D rb;
     private bool canMove;
     private Vector2 direction;
@@ -64,7 +63,7 @@ public class Beaver : MonoBehaviour
             }
             else
             {
-                Instantiate(coins,beaverPos.position, Quaternion.identity);
+                Instantiate(coins,transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

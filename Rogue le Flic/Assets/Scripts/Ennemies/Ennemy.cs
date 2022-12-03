@@ -116,6 +116,13 @@ public class Ennemy : MonoBehaviour
         transform.DOShakePosition(1, 1);
         MapManager.Instance.activeRoom.GetComponent<DoorManager>().isFinished = true;
         
+        // CAMERA
+        CameraMovements.Instance.endRoom = true;
+
+        CameraMovements.Instance.timerZoom = 1f;
+        CameraMovements.Instance.timeZoom = 1f;
+        CameraMovements.Instance.ennemyPos = transform.position;
+        
         yield return new WaitForSeconds(1);
 
         MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives(); 
