@@ -110,6 +110,20 @@ public class Bullet : MonoBehaviour
             }
         }
 
+        else if (collision.CompareTag("ExplosiveBox"))
+        {
+            if (!rebondissante)
+            {
+                Destroy(gameObject);
+                collision.GetComponent<ExplosiveBox>().Explose();
+            }
+
+            else
+            {
+                bounceWalls.enabled = true;
+            }
+        }
+
         else
         {
             if (!rebondissante)

@@ -10,6 +10,8 @@ using Vector3 = UnityEngine.Vector3;
 
 public class DoorManager : MonoBehaviour
 {
+    public bool disableEndEffect;
+
     [Header("Doors")]
     public GameObject doorRight;
     public GameObject doorBottom;
@@ -137,26 +139,29 @@ public class DoorManager : MonoBehaviour
     
     public void EndRoom(Vector2 posSpawn)
     {
-        bool stopWhile = false;
-
-        while (!stopWhile)
+        if (!disableEndEffect)
         {
-            foreach (spawnChance k in spawnLoots)
+            bool stopWhile = false;
+
+            while (!stopWhile)
             {
-                int index = Random.Range(0, 100);
-
-                if (index < k.spawnChances && !stopWhile)
+                foreach (spawnChance k in spawnLoots)
                 {
-                    stopWhile = true;
+                    int index = Random.Range(0, 100);
 
-                    Instantiate(k.element, posSpawn, Quaternion.identity);
+                    if (index < k.spawnChances && !stopWhile)
+                    {
+                        stopWhile = true;
+
+                        Instantiate(k.element, posSpawn, Quaternion.identity);
+                    }
                 }
             }
-        }
 
-        timerFinish = 1;
-        
-        PortesActives();
+            timerFinish = 1;
+
+            PortesActives();
+        }
     }
 }
 

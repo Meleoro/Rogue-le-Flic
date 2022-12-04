@@ -114,22 +114,30 @@ public class Ennemy : MonoBehaviour
 
     public IEnumerator FinalDeath()
     {
-        transform.DOShakePosition(1, 1);
-        MapManager.Instance.activeRoom.GetComponent<DoorManager>().isFinished = true;
-        
-        // CAMERA
-        CameraMovements.Instance.endRoom = true;
+        if (!MapManager.Instance.activeRoom.GetComponent<DoorManager>().disableEndEffect)
+        {
+            transform.DOShakePosition(1, 1);
+            MapManager.Instance.activeRoom.GetComponent<DoorManager>().isFinished = true;
 
-        CameraMovements.Instance.timerZoom = 1f;
-        CameraMovements.Instance.timeZoom = 1f;
-        CameraMovements.Instance.ennemyPos = transform.position;
-        
-        yield return new WaitForSeconds(1);
+            // CAMERA
+            CameraMovements.Instance.endRoom = true;
 
-        MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives(); 
-        MapManager.Instance.activeRoom.GetComponent<DoorManager>().EndRoom(transform.position); 
-        
-        Destroy(gameObject);
+            CameraMovements.Instance.timerZoom = 1f;
+            CameraMovements.Instance.timeZoom = 1f;
+            CameraMovements.Instance.ennemyPos = transform.position;
+
+            yield return new WaitForSeconds(1);
+
+            MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
+            MapManager.Instance.activeRoom.GetComponent<DoorManager>().EndRoom(transform.position);
+
+            Destroy(gameObject);
+        }
+
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
 

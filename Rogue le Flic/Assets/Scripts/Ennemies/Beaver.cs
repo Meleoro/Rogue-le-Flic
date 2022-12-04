@@ -129,7 +129,7 @@ public class Beaver : MonoBehaviour
 
         else
         {
-            Vector2 directionForce = new Vector2(transform.position.y - bullet.transform.position.y, transform.position.x - bullet.transform.position.x);
+            Vector2 directionForce = new Vector2(transform.position.x - bullet.transform.position.x, transform.position.y - bullet.transform.position.y);
             
             StopCoroutine();
             

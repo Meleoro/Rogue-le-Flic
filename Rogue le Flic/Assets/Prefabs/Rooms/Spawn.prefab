@@ -1464,6 +1464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d8c207ba7334340b69fa52f6d304ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableEndEffect: 1
   doorRight: {fileID: 1332099543002181231}
   doorBottom: {fileID: 1332099543964820704}
   doorLeft: {fileID: 1332099544233509215}
@@ -1479,6 +1480,8 @@ MonoBehaviour:
   spawnEnnemies: []
   currentEnnemies: []
   ennemyCount: 0
+  spawnLoots: []
+  isFinished: 0
 --- !u!114 &-1795592372447449372
 MonoBehaviour:
   m_ObjectHideFlags: 0
