@@ -37,6 +37,7 @@ public class Turtle : MonoBehaviour
     private Ennemy ennemy;
 
     private bool stopDeath;
+    private Vector2 direction;
 
 
     private void Start()
@@ -88,6 +89,18 @@ public class Turtle : MonoBehaviour
                 timerCooldown -= Time.deltaTime;
             }
         }
+
+
+        // ROTATION TURTLE
+        if (direction.x > 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        else if (direction.x < -0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
     }
 
 
@@ -95,7 +108,7 @@ public class Turtle : MonoBehaviour
     {
         if (canMove)
         {
-            Vector2 direction = AIPath.targetDirection;
+            direction = AIPath.targetDirection;
 
             rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
         }
@@ -154,6 +167,8 @@ public class Turtle : MonoBehaviour
                 timerCooldown = cooldown;
 
                 currentNbrRebonds = 0;
+
+                ennemy.anim.SetBool("isWalking", true);
             }
         }
     }
@@ -200,6 +215,9 @@ public class Turtle : MonoBehaviour
     IEnumerator Slide(Vector2 direction)
     {
         canMove = false;
+
+        ennemy.anim.SetTrigger("StartAttack");
+        ennemy.anim.SetBool("isWalking", false);
 
         transform.DOShakePosition(0.75f, 0.3f);
 

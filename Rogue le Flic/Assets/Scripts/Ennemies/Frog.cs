@@ -81,7 +81,7 @@ public class Frog : MonoBehaviour
             StartCoroutine(Cooldown());
         }
         
-        // ROTATION CASTOR
+        // ROTATION FROG
         if (direction.x > 0.1f)
         {
             lookLeft = false;

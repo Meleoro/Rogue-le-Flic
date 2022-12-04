@@ -28,6 +28,7 @@ public class Ennemy : MonoBehaviour
     [SerializeField] private GameObject spawnIndicator;
     public GameObject sprite;
 
+
     private void Start()
     {
         switch (ennemyType)
@@ -134,10 +135,7 @@ public class Ennemy : MonoBehaviour
 
     private IEnumerator Spawn()
     {
-        switch (ennemyType)
-        {
-            case ennemies.Beaver:
-                spawnIndicator.SetActive(true);
+            spawnIndicator.SetActive(true);
                 sprite.SetActive(false);
                 GetComponent<BoxCollider2D>().enabled = false;
 
@@ -150,42 +148,6 @@ public class Ennemy : MonoBehaviour
                 GetComponent<BoxCollider2D>().enabled = true;
         
                 isSpawning = false;
-                break;
-            
-
-            case ennemies.Frog:
-                spawnIndicator.SetActive(true);
-                sprite.SetActive(false);
-                GetComponent<BoxCollider2D>().enabled = false;
-
-                isSpawning = true;
-        
-                yield return new WaitForSeconds(2);
-        
-                spawnIndicator.SetActive(false);
-                sprite.SetActive(true);
-                GetComponent<BoxCollider2D>().enabled = true;
-        
-                isSpawning = false;
-                break;
-            
-
-            case ennemies.Turtle:
-                spawnIndicator.SetActive(true);
-                GetComponent<SpriteRenderer>().enabled = false;
-                GetComponent<BoxCollider2D>().enabled = false;
-
-                isSpawning = true;
-        
-                yield return new WaitForSeconds(2);
-        
-                spawnIndicator.SetActive(false);
-                GetComponent<SpriteRenderer>().enabled = true;
-                GetComponent<BoxCollider2D>().enabled = true;
-        
-                isSpawning = false;
-                break;
-        }
     }
 
 
