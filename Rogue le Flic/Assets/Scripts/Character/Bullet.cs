@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -122,6 +123,11 @@ public class Bullet : MonoBehaviour
             {
                 bounceWalls.enabled = true;
             }
+        }
+        
+        else if (collision.CompareTag("Trou"))
+        {
+            bounceWalls.enabled = false;
         }
 
         else
