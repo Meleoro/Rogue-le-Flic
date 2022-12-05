@@ -43,17 +43,20 @@ public class DoorManager : MonoBehaviour
 
     private void Start()
     {
-        if (ennemyCount != 0)
+        if (!GenerationPro.Instance.testLDMode)
         {
-            doorBottom.SetActive(false);
-            doorRight.SetActive(false);
-            doorLeft.SetActive(false);
-            doorUp.SetActive(false);
-        }
+            if (ennemyCount != 0)
+            {
+                doorBottom.SetActive(false);
+                doorRight.SetActive(false);
+                doorLeft.SetActive(false);
+                doorUp.SetActive(false);
+            }
 
-        else
-        {
-            PortesActives();
+            else
+            {
+                PortesActives();
+            }
         }
     }
     

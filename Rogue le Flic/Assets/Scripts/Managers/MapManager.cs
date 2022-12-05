@@ -29,7 +29,7 @@ public class MapManager : MonoBehaviour
 
     void Update()
     {
-        if (!spawnRoom)
+        if (!spawnRoom && !GenerationPro.Instance.testLDMode)
         {
             Spawn();
 
