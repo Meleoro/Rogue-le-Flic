@@ -120,7 +120,6 @@ public class Beaver : MonoBehaviour
         
         else if (isKicked && col.CompareTag("Ennemy"))
         {
-            Debug.Log(12);
             col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
         }
         
