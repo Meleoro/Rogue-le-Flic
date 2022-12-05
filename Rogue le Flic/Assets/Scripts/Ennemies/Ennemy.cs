@@ -114,29 +114,32 @@ public class Ennemy : MonoBehaviour
 
     public IEnumerator FinalDeath()
     {
-        if (!MapManager.Instance.activeRoom.GetComponent<DoorManager>().disableEndEffect)
+        if (!GenerationPro.Instance.testLDMode)
         {
-            transform.DOShakePosition(1, 1);
-            MapManager.Instance.activeRoom.GetComponent<DoorManager>().isFinished = true;
+            if (!MapManager.Instance.activeRoom.GetComponent<DoorManager>().disableEndEffect)
+            {
+                transform.DOShakePosition(1, 1);
+                MapManager.Instance.activeRoom.GetComponent<DoorManager>().isFinished = true;
 
-            // CAMERA
-            CameraMovements.Instance.endRoom = true;
+                // CAMERA
+                CameraMovements.Instance.endRoom = true;
 
-            CameraMovements.Instance.timerZoom = 1f;
-            CameraMovements.Instance.timeZoom = 1f;
-            CameraMovements.Instance.ennemyPos = transform.position;
+                CameraMovements.Instance.timerZoom = 1f;
+                CameraMovements.Instance.timeZoom = 1f;
+                CameraMovements.Instance.ennemyPos = transform.position;
 
-            yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(1);
 
-            MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
-            MapManager.Instance.activeRoom.GetComponent<DoorManager>().EndRoom(transform.position);
+                MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
+                MapManager.Instance.activeRoom.GetComponent<DoorManager>().EndRoom(transform.position);
 
-            Destroy(gameObject);
-        }
+                Destroy(gameObject);
+            }
 
-        else
-        {
-            Destroy(gameObject);
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

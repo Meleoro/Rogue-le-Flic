@@ -9,6 +9,8 @@ using Random = UnityEngine.Random;
 
 public class GenerationPro : MonoBehaviour
 {
+    public bool testLDMode;
+
     public static GenerationPro Instance;
     
     public int roomNumber;
@@ -50,9 +52,12 @@ public class GenerationPro : MonoBehaviour
 
     void Start()
     {
-        GenerateMap();
+        if (testLDMode)
+        {
+            GenerateMap();
 
-        boucleNbr = 0;
+            boucleNbr = 0;
+        }
     }
     
     public void GenerateMap()
