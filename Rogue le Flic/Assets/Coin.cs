@@ -63,6 +63,8 @@ public class Coin : MonoBehaviour
         {
             isEjecting = false;
             DOTween.Kill(gameObject);
+
+            sprite.transform.localPosition = Vector2.zero;
         }
     }
 
@@ -71,7 +73,7 @@ public class Coin : MonoBehaviour
     {
         timerEjection += Time.deltaTime * ejectionSpeed;
 
-        transform.position =  originalPos + new Vector2(posX.Evaluate(timerEjection) * speedX, posY.Evaluate(timerEjection) * speedY);
+        transform.localPosition =  originalPos + new Vector2(posX.Evaluate(timerEjection) * speedX, posY.Evaluate(timerEjection) * speedY);
 
         if (timerEjection >= ejectionDuration)
         {
@@ -89,13 +91,13 @@ public class Coin : MonoBehaviour
     {
         if (!goDown && goUp)
         {
-            transform.DOMoveY(sprite.transform.position.y + 0.2f, floatDuration).OnComplete(() => goDown = true).SetEase(Ease.InOutQuad);
+            sprite.transform.DOLocalMoveY(sprite.transform.localPosition.y + 0.3f, floatDuration).OnComplete(() => goDown = true).SetEase(Ease.InOutQuad);
             goUp = false;
         }
 
         else if(goDown && !goUp)
         {
-            transform.DOMoveY(sprite.transform.position.y - 0.2f, floatDuration).OnComplete(() => goUp = true).SetEase(Ease.InOutQuad);
+            sprite.transform.DOLocalMoveY(sprite.transform.localPosition.y - 0.3f, floatDuration).OnComplete(() => goUp = true).SetEase(Ease.InOutQuad);
             goDown = false;
         }
     }

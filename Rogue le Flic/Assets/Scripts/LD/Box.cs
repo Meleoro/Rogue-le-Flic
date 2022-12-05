@@ -9,9 +9,25 @@ public class Box : MonoBehaviour
     [SerializeField] private GameObject fragment;
     [SerializeField] private int nbrFragments;
 
+    private bool isKicked;
+    private Vector2 directionKick;
+    private Rigidbody2D rb;
+
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Explose();
+        if(!isKicked)
+            Explose();
+
+        else if(col.gameObject.CompareTag("Ennemy"))
+        {
+            col.gameObject.GetComponent<Ennemy>().TakeDamages(3, gameObject);
+            Explose();
+        }
+
+        else
+        {
+            Explose();
+        }
     }
 
     public void Explose()
@@ -27,5 +43,26 @@ public class Box : MonoBehaviour
         }
         
         Destroy(gameObject);
+    }
+
+    public void Kicked(Vector2 direction)
+    {
+        isKicked = true;
+        directionKick = direction;
+        
+        rb.AddForce(directionKick * 25, ForceMode2D.Impulse);
+    }
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    { /*
+        if (isKicked)
+        {
+            rb.AddForce(directionKick * 10, ForceMode2D.Impulse);
+        }*/
     }
 }
