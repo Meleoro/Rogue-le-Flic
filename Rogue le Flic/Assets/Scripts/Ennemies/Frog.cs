@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -175,11 +176,11 @@ public class Frog : MonoBehaviour
         
         cooldownShot = false;
     }
+    
 
-
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Player"))
+        if (col.CompareTag("Player"))
         {
             Vector2 direction = col.transform.position - transform.position;
             

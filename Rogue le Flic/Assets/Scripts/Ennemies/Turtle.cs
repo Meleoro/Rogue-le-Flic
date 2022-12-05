@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -127,28 +128,7 @@ public class Turtle : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Player"))
-        {
-            Vector2 direction = col.transform.position - transform.position;
-
-            HealthManager.Instance.LoseHealth(direction);
-        }
-        
-        else if (col.gameObject.CompareTag("Ennemy") && isSliding)
-        {
-            if(!isSliding)
-                col.gameObject.GetComponent<Ennemy>().TakeDamages(1, gameObject);
-            
-            else
-                col.gameObject.GetComponent<Ennemy>().TakeDamages(5, gameObject);
-        }
-        
-        else if (col.gameObject.CompareTag("Box") && isSliding)
-        {
-            col.gameObject.GetComponent<Box>().Explose();
-        }
-
-        else if (!col.gameObject.CompareTag("Ennemy") && isSliding)
+        if (!col.gameObject.CompareTag("Ennemy") && isSliding)
         {
             currentNbrRebonds += 1;
 
@@ -170,6 +150,30 @@ public class Turtle : MonoBehaviour
 
                 ennemy.anim.SetBool("isWalking", true);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Player"))
+        {
+            Vector2 direction = col.transform.position - transform.position;
+
+            HealthManager.Instance.LoseHealth(direction);
+        }
+        
+        else if (col.gameObject.CompareTag("Ennemy") && isSliding)
+        {
+            if(!isSliding)
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(1, gameObject);
+            
+            else
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(5, gameObject);
+        }
+        
+        else if (col.gameObject.CompareTag("Box") && isSliding)
+        {
+            col.gameObject.GetComponent<Box>().Explose();
         }
     }
 
