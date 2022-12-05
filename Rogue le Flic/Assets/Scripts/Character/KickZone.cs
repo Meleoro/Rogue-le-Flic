@@ -44,11 +44,13 @@ public class KickZone : MonoBehaviour
             else
             {
                 col.gameObject.GetComponent<Ennemy>().StopCoroutines();
-                
+
                 // EFFETS VISUELS
                 KickChara.Instance.SlowMo();
                 KickChara.Instance.CameraShake();
             }
+            
+            col.gameObject.GetComponent<Ennemy>().isKicked();
             
             Vector2 direction = col.transform.position - transform.position;
             

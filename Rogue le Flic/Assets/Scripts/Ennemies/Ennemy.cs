@@ -21,7 +21,10 @@ public class Ennemy : MonoBehaviour
 
     [HideInInspector] public bool isCharging;
     private bool isSpawning;
-    
+
+    [Header("Kicked")] 
+    private float timerKick;
+
     [Header("References")]
     public GameObject cible;
     public Animator anim;
@@ -69,6 +72,29 @@ public class Ennemy : MonoBehaviour
                     break;
             }
         }
+
+        if (timerKick > 0)
+        {
+            timerKick -= Time.deltaTime;
+
+            if (timerKick <= 0)
+            {
+                switch (ennemyType)
+                {
+                    case ennemies.Beaver:
+                        beaverScript.isKicked = false;
+                        break;
+
+                    case ennemies.Frog:
+                        frogScript.isKicked = false;
+                        break;
+
+                    case ennemies.Turtle:
+                        turtleScript.isKicked = false;
+                        break;
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -109,6 +135,26 @@ public class Ennemy : MonoBehaviour
                 turtleScript.TakeDamages(damages, bullet);
                 break;
         }
+    }
+
+    public void isKicked()
+    {
+        switch (ennemyType)
+        {
+            case ennemies.Beaver:
+                beaverScript.isKicked = true;
+                break;
+
+            case ennemies.Frog:
+                frogScript.isKicked = true;
+                break;
+
+            case ennemies.Turtle:
+                turtleScript.isKicked = true;
+                break;
+        }
+        
+        timerKick = 0.3f;
     }
 
 

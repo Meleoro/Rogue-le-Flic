@@ -31,9 +31,10 @@ public class Beaver : MonoBehaviour
     private Rigidbody2D rb;
     private bool canMove;
     private Vector2 direction;
-
     private Ennemy ennemy;
+    
     private bool stopDeath;
+    [HideInInspector] public bool isKicked;
     
 
     private void Start()
@@ -116,6 +117,17 @@ public class Beaver : MonoBehaviour
             
             HealthManager.Instance.LoseHealth(directionProj);
         }
+        
+        else if (isKicked && col.CompareTag("Ennemy"))
+        {
+            Debug.Log(12);
+            col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
+        }
+        
+        else if (isKicked)
+        {
+            TakeDamages(2, gameObject);
+        }
     }
 
 
@@ -133,7 +145,7 @@ public class Beaver : MonoBehaviour
             
             StopCoroutine();
             
-            rb.AddForce(directionForce.normalized * 40, ForceMode2D.Impulse);
+            rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
         }
 
         hitEffect.Clear();
@@ -178,6 +190,7 @@ public class Beaver : MonoBehaviour
 
         isJumping = false;
     }
+    
 
     IEnumerator Wait()
     {
