@@ -59,7 +59,7 @@ public class KickZone : MonoBehaviour
         
         else if (col.CompareTag("Box"))
         {
-            col.GetComponent<Box>().Explose();
+            col.GetComponent<Box>().Kicked(-KickChara.Instance.kickDirection);
         }
     }
     

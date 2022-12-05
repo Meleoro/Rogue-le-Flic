@@ -22,6 +22,7 @@ public class KickChara : MonoBehaviour
     [HideInInspector] public GameObject kickedEnnemy;
 
     public float propulsionChara;
+    [HideInInspector] public Vector2 kickDirection;
 
     [Header("Effets Kick Normal")] 
     public float cameraShakeDuration;
@@ -129,6 +130,8 @@ public class KickChara : MonoBehaviour
         // ON RECUPERE LA POSITION DE LA SOURIS ET DU JOUEUR 
         Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>());
         Vector2 charaPos = ManagerChara.Instance.transform.position;
+
+        kickDirection = new Vector2(-mousePos.x + charaPos.x, -mousePos.y + charaPos.y).normalized;
         
         kick.SetActive(true);
         kick.GetComponent<CircleCollider2D>().enabled = false;
