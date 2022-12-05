@@ -108,9 +108,19 @@ public class Beaver : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    /*private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Player"))
+        {
+            Vector2 directionProj = col.transform.position - transform.position;
+            
+            HealthManager.Instance.LoseHealth(directionProj);
+        }
+    }*/
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
         {
             Vector2 directionProj = col.transform.position - transform.position;
             

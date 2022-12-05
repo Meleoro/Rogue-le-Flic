@@ -52,7 +52,7 @@ public class GenerationPro : MonoBehaviour
 
     void Start()
     {
-        if (testLDMode)
+        if (!testLDMode)
         {
             GenerateMap();
 
