@@ -34,7 +34,7 @@ public class Turtle : MonoBehaviour
 
     private Vector2 slideDirection;
     private int currentNbrRebonds;
-    private bool isKicked;
+    [HideInInspector] public bool isKicked;
     private Ennemy ennemy;
 
     private bool stopDeath;
@@ -164,7 +164,7 @@ public class Turtle : MonoBehaviour
         
         else if (col.gameObject.CompareTag("Ennemy") && isSliding)
         {
-            if(!isSliding)
+            if(!isKicked)
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(1, gameObject);
             
             else
@@ -174,6 +174,11 @@ public class Turtle : MonoBehaviour
         else if (col.gameObject.CompareTag("Box") && isSliding)
         {
             col.gameObject.GetComponent<Box>().Explose();
+        }
+        
+        else if (isKicked && col.CompareTag("Ennemy"))
+        {
+            col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
         }
     }
 
@@ -185,9 +190,15 @@ public class Turtle : MonoBehaviour
         // RECUL
         if(collider.CompareTag("Bullet")) 
             rb.AddForce(collider.GetComponent<Bullet>().directionBullet * collider.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
-        
+
         else
-            rb.AddForce(collider.transform.position - transform.position, ForceMode2D.Impulse);
+        {
+            Vector2 directionForce = new Vector2(transform.position.x - collider.transform.position.x, transform.position.y - collider.transform.position.y);
+            
+            StopCoroutine();
+            
+            rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
+        }
 
         hitEffect.Clear();
         hitEffect.Play();

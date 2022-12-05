@@ -31,9 +31,10 @@ public class Beaver : MonoBehaviour
     private Rigidbody2D rb;
     private bool canMove;
     private Vector2 direction;
-
     private Ennemy ennemy;
+    
     private bool stopDeath;
+    [HideInInspector] public bool isKicked;
     
 
     private void Start()
@@ -108,16 +109,6 @@ public class Beaver : MonoBehaviour
         }
     }
 
-    /*private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Player"))
-        {
-            Vector2 directionProj = col.transform.position - transform.position;
-            
-            HealthManager.Instance.LoseHealth(directionProj);
-        }
-    }*/
-
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
@@ -125,6 +116,16 @@ public class Beaver : MonoBehaviour
             Vector2 directionProj = col.transform.position - transform.position;
             
             HealthManager.Instance.LoseHealth(directionProj);
+        }
+        
+        else if (isKicked && col.CompareTag("Ennemy"))
+        {
+            col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
+        }
+        
+        else if (isKicked)
+        {
+            TakeDamages(2, gameObject);
         }
     }
 
@@ -143,7 +144,7 @@ public class Beaver : MonoBehaviour
             
             StopCoroutine();
             
-            rb.AddForce(directionForce.normalized * 40, ForceMode2D.Impulse);
+            rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
         }
 
         hitEffect.Clear();
@@ -167,8 +168,10 @@ public class Beaver : MonoBehaviour
     {
         isJumping = true;
         canMove = false;
+        
+        rb.AddForce(-directionJump.normalized * (strenghtJump / 5), ForceMode2D.Impulse);
 
-        transform.DOShakePosition(0.75f, 0.3f);
+        //transform.DOShakePosition(0.75f, 0.3f);
 
         GetComponent<Ennemy>().isCharging = true;
         
@@ -186,6 +189,7 @@ public class Beaver : MonoBehaviour
 
         isJumping = false;
     }
+    
 
     IEnumerator Wait()
     {

@@ -37,6 +37,7 @@ public class Frog : MonoBehaviour
     private Rigidbody2D rb;
     [HideInInspector] public bool canMove;
 
+    [HideInInspector] public bool isKicked;
     private bool stopDeath;
 
 
@@ -186,6 +187,11 @@ public class Frog : MonoBehaviour
             
             HealthManager.Instance.LoseHealth(direction);
         }
+        
+        else if (isKicked && col.CompareTag("Ennemy"))
+        {
+            col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
+        }
     }
 
     public void TakeDamages(int damages, GameObject bullet)
@@ -194,18 +200,26 @@ public class Frog : MonoBehaviour
 
         rb.velocity = Vector2.zero;
 
-        if (canMove)
+        if (canMove && bullet.CompareTag("Bullet"))
         {
             // RECUL
             rb.AddForce(bullet.GetComponent<Bullet>().directionBullet * bullet.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
         }
-
-        // SI LA LANGUE EST ACTUELLEMENT LANCEE 
-        else
+        
+        else if (!canMove && bullet.CompareTag("Bullet"))
         {
-            // SHAKE
             gameObject.transform.DOShakePosition(0.1f, 0.1f);
         }
+        
+        else 
+        {
+            Vector2 directionForce = new Vector2(transform.position.x - bullet.transform.position.x, transform.position.y - bullet.transform.position.y);
+            
+            StopCoroutine();
+            
+            rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
+        }
+
 
         hitEffect.Clear();
         hitEffect.Play();
