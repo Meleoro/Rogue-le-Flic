@@ -108,16 +108,6 @@ public class Beaver : MonoBehaviour
         }
     }
 
-    /*private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Player"))
-        {
-            Vector2 directionProj = col.transform.position - transform.position;
-            
-            HealthManager.Instance.LoseHealth(directionProj);
-        }
-    }*/
-
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
@@ -167,8 +157,10 @@ public class Beaver : MonoBehaviour
     {
         isJumping = true;
         canMove = false;
+        
+        rb.AddForce(-directionJump.normalized * (strenghtJump / 5), ForceMode2D.Impulse);
 
-        transform.DOShakePosition(0.75f, 0.3f);
+        //transform.DOShakePosition(0.75f, 0.3f);
 
         GetComponent<Ennemy>().isCharging = true;
         
