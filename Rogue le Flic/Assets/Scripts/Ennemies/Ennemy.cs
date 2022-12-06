@@ -196,7 +196,11 @@ public class Ennemy : MonoBehaviour
             }
         }
         
-        yield return new WaitForSeconds(0);
+        anim.SetTrigger("death");
+        
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+
+        yield return new WaitForSeconds(0.5f);
         
         Destroy(gameObject);
     }
