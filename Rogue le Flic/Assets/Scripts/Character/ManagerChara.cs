@@ -17,7 +17,8 @@ public class ManagerChara : MonoBehaviour
     [HideInInspector] public GameObject stockWeapon;
 
     public Controls controls;
-    public bool noControl;
+    [HideInInspector] public bool noControl;
+    public bool munitionsActives;
 
     [Header("Dash")] 
     [HideInInspector] public bool isDashing;
