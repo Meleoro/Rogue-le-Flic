@@ -70,8 +70,7 @@ public class Turtle : MonoBehaviour
             }
             else
             {
-                Instantiate(coins,transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                StartCoroutine(ennemy.Death());
             }
         }
 

@@ -9,7 +9,7 @@ public class Ammo : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            ManagerChara.Instance.activeGun.GetComponent<Gun>().AddAmmo(ManagerChara.Instance.activeGun.GetComponent<Gun>().gunData.maxAmmo);
+            ManagerChara.Instance.activeGun.GetComponent<Gun>().AddAmmo(ManagerChara.Instance.activeGun.GetComponent<Gun>().gunData.chargeurSize);
             
             Destroy(gameObject);
         }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Ennemy : MonoBehaviour
 {
@@ -28,9 +29,11 @@ public class Ennemy : MonoBehaviour
     [Header("Loot")] 
     [SerializeField] private int minCoins;
     [SerializeField] private int maxCoins;
-    [SerializeField] private bool ammunition;
+    [SerializeField] private bool ammunitionActive;
     [Range(0, 100)] [SerializeField] private int probaAmmunition;
-
+    [SerializeField] private GameObject coin;
+    [SerializeField] private GameObject ammunition;
+ 
     [Header("References")]
     public GameObject cible;
     public Animator anim;
@@ -161,6 +164,41 @@ public class Ennemy : MonoBehaviour
         }
         
         timerKick = 0.3f;
+    }
+
+    public IEnumerator Death()
+    {
+        if (ammunitionActive)
+        {
+            int ammo = Random.Range(0, 100);
+
+            if (ammo < probaAmmunition)
+            {
+                Instantiate(ammunition, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                int coinNumber = Random.Range(minCoins, maxCoins + 1);
+
+                for (int k = 0; k < coinNumber; k++)
+                {
+                    Instantiate(coin,transform.position, Quaternion.identity);
+                }
+            }
+        }
+        else
+        {
+            int coinNumber = Random.Range(minCoins, maxCoins + 1);
+
+            for (int k = 0; k < coinNumber; k++)
+            {
+                Instantiate(coin,transform.position, Quaternion.identity);
+            }
+        }
+        
+        yield return new WaitForSeconds(0);
+        
+        Destroy(gameObject);
     }
 
 
