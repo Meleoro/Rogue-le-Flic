@@ -43,7 +43,7 @@ public class Gun : MonoBehaviour
     private float timerLight;
     private float timerReload;
     private int currentChargeurAmmo;
-    private int currentAmmo;
+    [HideInInspector] public int currentAmmo;
 
     [HideInInspector] public bool isStocked;
     private bool isHeld;
@@ -381,5 +381,20 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(duree);
         
         autoAim = false;
+    }
+
+    public void AddAmmo(int ammoAdded)
+    {
+        currentAmmo += ammoAdded;
+
+        if (currentAmmo > gunData.maxAmmo)
+        {
+            currentAmmo = gunData.maxAmmo;
+        }
+        
+        if (ManagerChara.Instance.munitionsActives)
+        {
+            HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
+        }
     }
 }

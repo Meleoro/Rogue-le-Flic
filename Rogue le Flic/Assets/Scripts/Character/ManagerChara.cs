@@ -146,6 +146,11 @@ public class ManagerChara : MonoBehaviour
             stockWeapon.GetComponent<Gun>().Stocking();
 
             StartCoroutine(CooldownSwitch());
+            
+            if (munitionsActives)
+            {
+                HUDManager.Instance.UpdateAmmo(activeGun.GetComponent<Gun>().currentAmmo, activeGun.GetComponent<Gun>().gunData.maxAmmo);
+            }
         }
     }
 

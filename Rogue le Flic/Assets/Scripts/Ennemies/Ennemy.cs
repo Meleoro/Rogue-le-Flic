@@ -25,6 +25,12 @@ public class Ennemy : MonoBehaviour
     [Header("Kicked")] 
     private float timerKick;
 
+    [Header("Loot")] 
+    [SerializeField] private int minCoins;
+    [SerializeField] private int maxCoins;
+    [SerializeField] private bool ammunition;
+    [Range(0, 100)] [SerializeField] private int probaAmmunition;
+
     [Header("References")]
     public GameObject cible;
     public Animator anim;
