@@ -37,7 +37,9 @@ public class Coin : MonoBehaviour
         originalPos = transform.position;
         isEjecting = true;
 
-        speedX = Random.Range(2f, 4f);
+ 
+
+        speedX = Random.Range(-4f, 4f);
         speedY = Random.Range(2f, 3f);
     }
 
