@@ -17,7 +17,8 @@ public class ManagerChara : MonoBehaviour
     [HideInInspector] public GameObject stockWeapon;
 
     public Controls controls;
-    public bool noControl;
+    [HideInInspector] public bool noControl;
+    public bool munitionsActives;
 
     [Header("Dash")] 
     [HideInInspector] public bool isDashing;
@@ -145,6 +146,11 @@ public class ManagerChara : MonoBehaviour
             stockWeapon.GetComponent<Gun>().Stocking();
 
             StartCoroutine(CooldownSwitch());
+            
+            if (munitionsActives)
+            {
+                HUDManager.Instance.UpdateAmmo(activeGun.GetComponent<Gun>().currentAmmo, activeGun.GetComponent<Gun>().gunData.maxAmmo);
+            }
         }
     }
 

@@ -68,8 +68,7 @@ public class Frog : MonoBehaviour
             }
             else
             {
-                Instantiate(coins,transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                StartCoroutine(ennemy.Death());
             }
         }
         

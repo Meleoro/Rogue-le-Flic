@@ -17,8 +17,11 @@ public class GunData : ScriptableObject
     public bool tirChargeable;
     public float dureeChargement;
 
-    [Header("Ammo")] 
+    [Header("Munitions")] 
     public int maxAmmo;
+    
+    [Header("Reload")] 
+    public int chargeurSize;
     public float reloadTime;
 
     [Header("CameraShake")] 

@@ -299,6 +299,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemyType: 0
   isCharging: 0
+  minCoins: 2
+  maxCoins: 3
+  ammunitionActive: 1
+  probaAmmunition: 30
+  coin: {fileID: 7454127418636556160, guid: 5a049748f43b0b54ab007c5d5874a306, type: 3}
+  ammunition: {fileID: 4197107675258616838, guid: 740aa92ee9ac5bb479382d2639de1ca9, type: 3}
   cible: {fileID: 8744557149710044141}
   anim: {fileID: 1165195475023699897}
   spawnIndicator: {fileID: 5313444958537765212}
@@ -326,6 +332,7 @@ MonoBehaviour:
   AIDestination: {fileID: 3801439837385764995}
   hitEffect: {fileID: 2039023581012112123}
   coins: {fileID: 7454127418636556160, guid: 5a049748f43b0b54ab007c5d5874a306, type: 3}
+  isKicked: 0
 --- !u!1 &5313444958537765212
 GameObject:
   m_ObjectHideFlags: 0

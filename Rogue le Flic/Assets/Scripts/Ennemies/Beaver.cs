@@ -64,8 +64,7 @@ public class Beaver : MonoBehaviour
             }
             else
             {
-                Instantiate(coins,transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                StartCoroutine(ennemy.Death());
             }
         }
         

@@ -42,7 +42,8 @@ public class Gun : MonoBehaviour
     private float timerShot;
     private float timerLight;
     private float timerReload;
-    private int currentAmmo;
+    private int currentChargeurAmmo;
+    [HideInInspector] public int currentAmmo;
 
     [HideInInspector] public bool isStocked;
     private bool isHeld;
@@ -75,6 +76,7 @@ public class Gun : MonoBehaviour
     {
         lightShot.intensity = 0;
 
+        currentChargeurAmmo = gunData.chargeurSize;
         currentAmmo = gunData.maxAmmo;
     }
 
@@ -125,7 +127,7 @@ public class Gun : MonoBehaviour
             }
         
             // TIR
-            if (controls.Character.Tir.IsPressed())
+            if (controls.Character.Tir.IsPressed() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0))
             {
                 if (gunData.tirChargeable)
                 {
@@ -140,7 +142,8 @@ public class Gun : MonoBehaviour
                     Shoot();
                 }
             }
-            else if (controls.Character.Tir.WasReleasedThisFrame())
+            
+            else if (controls.Character.Tir.WasReleasedThisFrame() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0))
             {
                 if (timerCharge >= gunData.dureeChargement)
                 {
@@ -181,7 +184,7 @@ public class Gun : MonoBehaviour
             if (timerReload <= 0)
             {
                 isReloading = false;
-                currentAmmo = gunData.maxAmmo;
+                currentChargeurAmmo = gunData.chargeurSize;
 
                 ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = false;
             }
@@ -218,6 +221,11 @@ public class Gun : MonoBehaviour
                 ManagerChara.Instance.activeGun.GetComponent<Gun>().canBePicked = true;
                 
                 ManagerChara.Instance.activeGun = gameObject;
+            }
+            
+            if (ManagerChara.Instance.munitionsActives)
+            {
+                HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
             }
         }
     }
@@ -281,9 +289,10 @@ public class Gun : MonoBehaviour
                 Destroy(refBullet, 3f);
             }
 
+            currentChargeurAmmo -= 1;
             currentAmmo -= 1;
 
-            if (currentAmmo <= 0)
+            if (currentChargeurAmmo <= 0)
             {
                 isReloading = true;
                 timerReload = gunData.reloadTime;
@@ -298,6 +307,11 @@ public class Gun : MonoBehaviour
 
             if(CameraMovements.Instance.canShake)
                 ReferenceCamera.Instance.transform.DOShakePosition(gunData.shakeDuration, gunData.shakeAmplitude);
+
+            if (ManagerChara.Instance.munitionsActives)
+            {
+                HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
+            }
         }
     }
 
@@ -367,5 +381,20 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(duree);
         
         autoAim = false;
+    }
+
+    public void AddAmmo(int ammoAdded)
+    {
+        currentAmmo += ammoAdded;
+
+        if (currentAmmo > gunData.maxAmmo)
+        {
+            currentAmmo = gunData.maxAmmo;
+        }
+        
+        if (ManagerChara.Instance.munitionsActives)
+        {
+            HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
+        }
     }
 }
