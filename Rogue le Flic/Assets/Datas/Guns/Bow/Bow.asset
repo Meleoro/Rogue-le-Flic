@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa7cdbc37fa82142a17e80f68b86a39, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-  damages: 15
+  damages: 20
   nbrBulletPerShot: 1
   cooldownShot: 0
   shotDispersion: 1
@@ -70,8 +70,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   tirChargeable: 1
   dureeChargement: 1
-  maxAmmo: 1
-  reloadTime: 0
+  maxAmmo: 5
+  chargeurSize: 1
+  reloadTime: 1
   shakeDuration: 0.35
   shakeAmplitude: 0.4
   lightShotDuration: 0.1
