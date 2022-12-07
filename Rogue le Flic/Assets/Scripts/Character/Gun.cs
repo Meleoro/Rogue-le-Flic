@@ -154,7 +154,7 @@ public class Gun : MonoBehaviour
                 }
             }
             
-            else if (controls.Character.Tir.WasReleasedThisFrame() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0))
+            else if (controls.Character.Tir.WasReleasedThisFrame() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && gunData.tirChargeable)
             {
                 GetComponent<SpriteRenderer>().sprite = gunData.charge0;
                 
