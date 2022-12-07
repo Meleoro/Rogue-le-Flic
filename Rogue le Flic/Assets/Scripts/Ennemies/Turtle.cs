@@ -132,9 +132,12 @@ public class Turtle : MonoBehaviour
             currentNbrRebonds += 1;
 
             slideDirection = Vector3.Reflect(slideDirection.normalized, col.contacts[0].normal);
-            
-            if(isKicked)
+
+            if (isKicked)
+            {
                 TakeDamages(3, col.gameObject);
+                ennemy.anim.SetTrigger("reset");
+            }
 
             // ON STOP SON COMPORTEMENT DE SLIDE
             if(currentNbrRebonds >= nbrRebonds)
