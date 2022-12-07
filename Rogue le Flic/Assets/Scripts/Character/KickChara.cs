@@ -24,7 +24,9 @@ public class KickChara : MonoBehaviour
     public float propulsionChara;
     [HideInInspector] public Vector2 kickDirection;
 
-    [Header("Effets Kick Normal")] 
+    public bool mouseDirection;
+
+    [Header("Effets Kick")] 
     public float cameraShakeDuration;
     public float cameraShakeAmplitude;
     [Range(0.1f, 10)] public float slowMoSpeed;
@@ -131,8 +133,15 @@ public class KickChara : MonoBehaviour
         Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>());
         Vector2 charaPos = ManagerChara.Instance.transform.position;
 
-        kickDirection = new Vector2(-mousePos.x + charaPos.x, -mousePos.y + charaPos.y).normalized;
-        
+        if (mouseDirection)
+        {
+            kickDirection = new Vector2(-mousePos.x + charaPos.x, -mousePos.y + charaPos.y).normalized;
+        }
+        else
+        {
+            kickDirection = -MovementsChara.Instance.direction.normalized;
+        }
+
         kick.SetActive(true);
         kick.GetComponent<CircleCollider2D>().enabled = false;
         foot.DORestart();
@@ -155,11 +164,11 @@ public class KickChara : MonoBehaviour
         yield return new WaitForSeconds(kickDelay);
         
         // ON PLACE LA ZONE DE KICK ET ON L'AFFICHE
-        kick.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(mousePos.y - charaPos.y, mousePos.x - charaPos.x) * Mathf.Rad2Deg, Vector3.forward);
+        kick.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(-kickDirection.y, -kickDirection.x) * Mathf.Rad2Deg, Vector3.forward);
         kick.GetComponent<CircleCollider2D>().enabled = true;
 
         // ON PROPULSE LE PERSONNAGE
-        ManagerChara.Instance.rb.AddForce(new Vector2(mousePos.x - charaPos.x, mousePos.y - charaPos.y).normalized * propulsionChara, ForceMode2D.Impulse);
+        ManagerChara.Instance.rb.AddForce(new Vector2(-kickDirection.x, -kickDirection.y).normalized * propulsionChara, ForceMode2D.Impulse);
         
         yield return new WaitForSeconds(kickDuration);
         
