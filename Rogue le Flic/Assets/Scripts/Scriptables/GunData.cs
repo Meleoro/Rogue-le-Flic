@@ -25,6 +25,7 @@ public class GunData : ScriptableObject
 
     [Header("Munitions")] 
     public int maxAmmo;
+    public int ammoPerSupply;
     
     [Header("Reload")] 
     public int chargeurSize;
