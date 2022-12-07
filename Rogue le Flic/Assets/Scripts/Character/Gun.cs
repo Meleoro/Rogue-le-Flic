@@ -125,6 +125,11 @@ public class Gun : MonoBehaviour
                     transform.position = ManagerChara.Instance.transform.position + (Vector3) posRight;
                 }
             }
+
+            else
+            {
+                transform.rotation = Quaternion.Euler(Vector3.zero);
+            }
         
             // TIR
             if (controls.Character.Tir.IsPressed() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && isHeld)
@@ -170,7 +175,7 @@ public class Gun : MonoBehaviour
             // ON RAMASSE L'ARME
             if (controls.Character.Enter.WasPerformedThisFrame())
             {
-                if (canBePicked && (ManagerChara.Instance.stockWeapon == null || ManagerChara.Instance.activeGun == null) && !isHeld)
+                if (canBePicked && !isHeld)
                 {
                     PickWeapon();
                 }
@@ -229,10 +234,10 @@ public class Gun : MonoBehaviour
                 Stocking();
             }
 
-            else if(ManagerChara.Instance.stockWeapon != null)
+            else if (ManagerChara.Instance.stockWeapon != null)
             {
                 ManagerChara.Instance.activeGun.GetComponent<Gun>().isHeld = false;
-                ManagerChara.Instance.activeGun.GetComponent<Gun>().canBePicked = true;
+                ManagerChara.Instance.activeGun.GetComponent<Gun>().canBePicked = false;
                 
                 ManagerChara.Instance.activeGun = gameObject;
             }

@@ -10,6 +10,8 @@ public class MovementsChara : MonoBehaviour
     public static MovementsChara Instance;
     public Controls controls;
 
+    [HideInInspector] public Vector2 direction;
+
     [Header("Movement Speeds")] 
     public float speedX;
     public float speedY;
@@ -47,7 +49,7 @@ public class MovementsChara : MonoBehaviour
 
     public void MoveCharacter()
     {
-        Vector2 direction = controls.Character.Movements.ReadValue<Vector2>();
+        direction = controls.Character.Movements.ReadValue<Vector2>();
 
         ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * speedX, direction.y* speedY) * 10, ForceMode2D.Force);
 
