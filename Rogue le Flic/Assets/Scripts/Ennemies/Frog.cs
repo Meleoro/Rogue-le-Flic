@@ -163,6 +163,8 @@ public class Frog : MonoBehaviour
             StopAllCoroutines();
             canMove = true;
             transform.DOComplete();
+            
+            ennemy.anim.SetTrigger("reset");
                 
             StartCoroutine(Wait(4));
         }
