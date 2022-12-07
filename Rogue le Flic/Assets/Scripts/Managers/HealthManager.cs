@@ -12,6 +12,8 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private List<GameObject> hearts = new List<GameObject>();
     private int currentHealth;
     private bool isInvincible;
+    [SerializeField] private float invincibleTime;
+    private float timerInvincible;
 
     [Header("Feedback Hit")] 
     [SerializeField] private Volume volume;
@@ -32,15 +34,21 @@ public class HealthManager : MonoBehaviour
     {
         currentHealth = hearts.Count;
     }
+    
 
     private void Update()
     {
         if (timerEffects > 0)
             HitEffect();
 
+        if (timerInvincible > 0)
+            timerInvincible -= Time.deltaTime;
+
         else
             isInvincible = false;
+
     }
+    
 
     public void LoseHealth(Vector2 direction)
     {
@@ -63,6 +71,9 @@ public class HealthManager : MonoBehaviour
                 
                 StartCoroutine(ManagerChara.Instance.Death());
             }
+
+            
+            timerInvincible = invincibleTime;
         }
     }
 

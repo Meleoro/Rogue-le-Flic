@@ -611,7 +611,6 @@ GameObject:
   - component: {fileID: 8447078720495051528}
   - component: {fileID: 6330940490061661601}
   - component: {fileID: 1025613738}
-  - component: {fileID: 8971521459013234712}
   m_Layer: 8
   m_Name: Magnet
   m_TagString: Untagged
@@ -663,19 +662,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magnetStrenght: 50
---- !u!114 &8971521459013234712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 316933709733900192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4be1e4fc743de445bacb3fcb89c8d7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magnetStrenght: 10
 --- !u!1 &1503478015596987166
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +823,7 @@ MonoBehaviour:
   activeGun: {fileID: 0}
   stockWeapon: {fileID: 0}
   noControl: 0
+  munitionsActives: 1
   isDashing: 0
   posLeft: {x: 0.6, y: 0}
   posRight: {x: -0.6, y: 0}
@@ -942,7 +929,7 @@ MonoBehaviour:
   - {x: 0.32733202, y: -0.82241535, z: 0}
   m_ShapePathHash: 1347242869
   m_Mesh: {fileID: 0}
-  m_InstanceId: -2248
+  m_InstanceId: -3322
 --- !u!1 &8319384481229060628
 GameObject:
   m_ObjectHideFlags: 0

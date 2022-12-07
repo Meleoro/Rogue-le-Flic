@@ -15,18 +15,21 @@ public class Box : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(!isKicked)
-            Explose();
-
-        else if(col.gameObject.CompareTag("Ennemy"))
+        if (!col.gameObject.CompareTag("Player"))
         {
-            col.gameObject.GetComponent<Ennemy>().TakeDamages(3, gameObject);
-            Explose();
-        }
+            if(!isKicked)
+                Explose();
 
-        else
-        {
-            Explose();
+            else if(col.gameObject.CompareTag("Ennemy"))
+            {
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(3, gameObject);
+                Explose();
+            }
+
+            else
+            {
+                Explose();
+            }
         }
     }
 
@@ -59,10 +62,10 @@ public class Box : MonoBehaviour
     }
 
     private void Update()
-    { /*
-        if (isKicked)
+    { 
+        if (!isKicked)
         {
-            rb.AddForce(directionKick * 10, ForceMode2D.Impulse);
-        }*/
+            rb.velocity = Vector2.zero;
+        }
     }
 }
