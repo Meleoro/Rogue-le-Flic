@@ -16,6 +16,12 @@ public class GunData : ScriptableObject
     [Header("TirChargeable")] 
     public bool tirChargeable;
     public float dureeChargement;
+    public Sprite charge1;
+    public Sprite charge2;
+    public Sprite charge3;
+    public Sprite charge4;
+    public Sprite charge0;
+    
 
     [Header("Munitions")] 
     public int maxAmmo;

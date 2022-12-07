@@ -127,7 +127,7 @@ public class Gun : MonoBehaviour
             }
         
             // TIR
-            if (controls.Character.Tir.IsPressed() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0))
+            if (controls.Character.Tir.IsPressed() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && isHeld)
             {
                 if (gunData.tirChargeable)
                 {
@@ -135,8 +135,19 @@ public class Gun : MonoBehaviour
                     {
                         timerCharge += Time.deltaTime;
                     }
-                }
 
+                    if (timerCharge < gunData.dureeChargement / 3)
+                        GetComponent<SpriteRenderer>().sprite = gunData.charge1;
+                    
+                    else if (timerCharge < (gunData.dureeChargement / 3) * 2)
+                        GetComponent<SpriteRenderer>().sprite = gunData.charge2;
+                    
+                    else if (timerCharge < (gunData.dureeChargement / 3) * 3)
+                        GetComponent<SpriteRenderer>().sprite = gunData.charge3;
+                    
+                    else
+                        GetComponent<SpriteRenderer>().sprite = gunData.charge4;
+                }
                 else
                 {
                     Shoot();
@@ -145,6 +156,8 @@ public class Gun : MonoBehaviour
             
             else if (controls.Character.Tir.WasReleasedThisFrame() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0))
             {
+                GetComponent<SpriteRenderer>().sprite = gunData.charge0;
+                
                 if (timerCharge >= gunData.dureeChargement)
                 {
                     Shoot();
@@ -152,6 +165,7 @@ public class Gun : MonoBehaviour
                 
                 timerCharge = 0;
             }
+            
 
             // ON RAMASSE L'ARME
             if (controls.Character.Enter.WasPerformedThisFrame())
@@ -232,7 +246,7 @@ public class Gun : MonoBehaviour
     
     public void Shoot()
     {
-        if (isHeld && !onCooldown && !isReloading)
+        if (!onCooldown && !isReloading && isHeld)
         {
             // BOUCLE QUI GENERE TOUTES LES BALLES
             for (int k = 0; k < gunData.nbrBulletPerShot; k++)
