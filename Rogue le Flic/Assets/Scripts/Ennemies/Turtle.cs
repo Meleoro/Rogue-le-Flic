@@ -182,6 +182,11 @@ public class Turtle : MonoBehaviour
         {
             col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
         }
+        
+        else if (isKicked)
+        {
+            TakeDamages(2, gameObject);
+        }
     }
 
 

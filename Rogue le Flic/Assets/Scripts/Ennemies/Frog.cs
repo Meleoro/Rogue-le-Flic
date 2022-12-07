@@ -193,6 +193,11 @@ public class Frog : MonoBehaviour
         {
             col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
         }
+        
+        else if (isKicked)
+        {
+            TakeDamages(2, gameObject);
+        }
     }
 
     public void TakeDamages(int damages, GameObject bullet)
