@@ -13,6 +13,10 @@ public class Box : MonoBehaviour
     private Vector2 directionKick;
     private Rigidbody2D rb;
 
+
+    public int damageFromBox;
+    
+
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.gameObject.CompareTag("Player"))
@@ -22,7 +26,7 @@ public class Box : MonoBehaviour
 
             else if(col.gameObject.CompareTag("Ennemy"))
             {
-                col.gameObject.GetComponent<Ennemy>().TakeDamages(3, gameObject);
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(damageFromBox, gameObject);
                 Explose();
             }
 
