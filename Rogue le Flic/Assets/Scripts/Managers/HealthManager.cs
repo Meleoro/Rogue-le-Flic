@@ -14,6 +14,7 @@ public class HealthManager : MonoBehaviour
     private bool isInvincible;
     [SerializeField] private float invincibleTime;
     private float timerInvincible;
+    public bool immortel;
 
     [Header("Feedback Hit")] 
     [SerializeField] private Volume volume;
@@ -52,7 +53,7 @@ public class HealthManager : MonoBehaviour
 
     public void LoseHealth(Vector2 direction)
     {
-        if (!isInvincible && currentHealth > 0 && !ManagerChara.Instance.isDashing)
+        if (!isInvincible && currentHealth > 0 && !ManagerChara.Instance.isDashing && !immortel)
         {
             currentHealth -= 1;
             hearts[currentHealth].SetActive(false);
