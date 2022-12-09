@@ -60,11 +60,15 @@ public class Frog : MonoBehaviour
         {
             stopDeath = true;
             
-            MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
-
-            if (MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount <= 0 && !GenerationPro.Instance.testLDMode)
+            if (!GenerationPro.Instance.testLDMode) 
             {
-                StartCoroutine(ennemy.FinalDeath());
+                MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
+            }
+
+            if (!GenerationPro.Instance.testLDMode)
+            {
+                if(MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount <= 0)
+                    StartCoroutine(ennemy.FinalDeath());
             }
             else
             {
