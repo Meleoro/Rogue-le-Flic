@@ -11,6 +11,7 @@ public class MovementsChara : MonoBehaviour
     public Controls controls;
 
     [HideInInspector] public Vector2 direction;
+    [HideInInspector] public bool lookLeft;
 
     [Header("Movement Speeds")] 
     public float speedX;
@@ -65,18 +66,38 @@ public class MovementsChara : MonoBehaviour
 
     public void RotateCharacter()
     {
-        if(ManagerChara.Instance.controls.Character.Movements.ReadValue<Vector2>().x > 0.1f)
+        if (!ManagerChara.Instance.activeGun)
         {
-            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+            if(ManagerChara.Instance.controls.Character.Movements.ReadValue<Vector2>().x > 0.1f)
+            {
+                ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
 
-            sprite.transform.localPosition = ManagerChara.Instance.posRight;
+                sprite.transform.localPosition = ManagerChara.Instance.posRight;
+            }
+
+            else if (ManagerChara.Instance.controls.Character.Movements.ReadValue<Vector2>().x < -0.1f)
+            {
+                ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+                sprite.transform.localPosition = ManagerChara.Instance.posLeft;  
+            }
         }
 
-        else if (ManagerChara.Instance.controls.Character.Movements.ReadValue<Vector2>().x < -0.1f)
+        else
         {
-            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            if (lookLeft)
+            {
+                ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            sprite.transform.localPosition = ManagerChara.Instance.posLeft;  
+                sprite.transform.localPosition = ManagerChara.Instance.posLeft;  
+            }
+
+            else
+            {
+                ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+
+                sprite.transform.localPosition = ManagerChara.Instance.posRight;
+            }
         }
     }
 }
