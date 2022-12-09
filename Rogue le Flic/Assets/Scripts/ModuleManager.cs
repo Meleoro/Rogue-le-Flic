@@ -10,6 +10,16 @@ public class ModuleManager : MonoBehaviour
     [HideInInspector] public int Module1;
     [HideInInspector] public int Module2;
 
+    [Header("Infos1")] 
+    public string moduleName1;
+    public string description1;
+    public Sprite image1;
+    
+    [Header("Infos2")]
+    public string moduleName2;
+    public string description2;
+    public Sprite image2;
+    
     [Header("Rebonds")] 
     //[SerializeField] private int nbrRebondsMax;
 

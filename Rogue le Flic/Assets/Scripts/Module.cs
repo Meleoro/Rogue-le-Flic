@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Module : MonoBehaviour
 {
@@ -11,6 +13,14 @@ public class Module : MonoBehaviour
 
     [SerializeField] GameObject UIExplications;
     [SerializeField] GameObject UIChoix;
+
+    [Header("Choix")] 
+    [SerializeField] private TextMeshProUGUI moduleName1;
+    [SerializeField] private TextMeshProUGUI description1;
+    [SerializeField] private Image image1;
+    [SerializeField] private TextMeshProUGUI moduleName2;
+    [SerializeField] private TextMeshProUGUI description2;
+    [SerializeField] private Image image2;
 
     [Header("Shop")] 
     public string itemName;
@@ -42,16 +52,36 @@ public class Module : MonoBehaviour
         UIExplications.SetActive(false);
         UIChoix.SetActive(true);
 
+        moduleName1.text = ModuleManager.Instance.moduleName1;
+        description1.text = ModuleManager.Instance.description1;
+        image1.sprite = ModuleManager.Instance.image1;
+        
+        moduleName2.text = ModuleManager.Instance.moduleName2;
+        description2.text = ModuleManager.Instance.description2;
+        image2.sprite = ModuleManager.Instance.image2;
+
         ManagerChara.Instance.noControl = true;
     }
     
     public void ChoiceSlot(int slot)
     {
         if (slot == 1)
+        {
             ModuleManager.Instance.Module1 = numberEffect;
 
+            ModuleManager.Instance.moduleName1 = itemName;
+            ModuleManager.Instance.description1 = itemDescription;
+            ModuleManager.Instance.image1 = GetComponent<SpriteRenderer>().sprite;
+        }
+
         else
+        {
             ModuleManager.Instance.Module2 = numberEffect;
+            
+            ModuleManager.Instance.moduleName2 = itemName;
+            ModuleManager.Instance.description2 = itemDescription;
+            ModuleManager.Instance.image2 = GetComponent<SpriteRenderer>().sprite;
+        }
         
         
         UIChoix.SetActive(false);
