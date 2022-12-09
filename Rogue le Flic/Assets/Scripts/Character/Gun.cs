@@ -104,10 +104,14 @@ public class Gun : MonoBehaviour
                     if (angle > 90 || angle < -90)
                     {
                         transform.rotation = Quaternion.AngleAxis(angle - addValue * 20, Vector3.forward);
+                        
+                        MovementsChara.Instance.lookLeft = true;
                     }
                     else
                     {
                         transform.rotation = Quaternion.AngleAxis(angle + addValue * 20, Vector3.forward);
+                        
+                        MovementsChara.Instance.lookLeft = false;
                     }
                 }
                 else
@@ -119,10 +123,14 @@ public class Gun : MonoBehaviour
                 {
                     transform.position = ManagerChara.Instance.transform.position + (Vector3) posLeft;
                     transform.Rotate(180, 0, 0);
+
+                    MovementsChara.Instance.lookLeft = true;
                 }
                 else
                 {
                     transform.position = ManagerChara.Instance.transform.position + (Vector3) posRight;
+                    
+                    MovementsChara.Instance.lookLeft = false;
                 }
             }
 
