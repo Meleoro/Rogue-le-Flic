@@ -28,7 +28,7 @@ public class MainMenuButtons : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Rendu1");
+        SceneManager.LoadScene("Playtest");
     }
 
     public void OpenSettings()
