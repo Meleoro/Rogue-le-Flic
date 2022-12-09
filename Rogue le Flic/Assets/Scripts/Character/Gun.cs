@@ -42,7 +42,7 @@ public class Gun : MonoBehaviour
     private float timerShot;
     private float timerLight;
     private float timerReload;
-    private int currentChargeurAmmo;
+    [HideInInspector] public int currentChargeurAmmo;
     [HideInInspector] public int currentAmmo;
 
     [HideInInspector] public bool isStocked;
@@ -214,6 +214,11 @@ public class Gun : MonoBehaviour
                 currentChargeurAmmo = gunData.chargeurSize;
 
                 ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = false;
+                
+                if(!ManagerChara.Instance.munitionsActives)
+                {
+                    HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize);
+                }
             }
         }
     }
@@ -253,6 +258,10 @@ public class Gun : MonoBehaviour
             if (ManagerChara.Instance.munitionsActives)
             {
                 HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
+            }
+            else
+            {
+                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize);
             }
         }
     }
@@ -334,6 +343,10 @@ public class Gun : MonoBehaviour
             if (ManagerChara.Instance.munitionsActives)
             {
                 HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
+            }
+            else
+            {
+                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize);
             }
         }
     }
