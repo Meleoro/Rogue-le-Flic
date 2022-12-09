@@ -37,6 +37,8 @@ public class CameraMovements : MonoBehaviour
         
         else
             Destroy(gameObject);
+
+        canShake = true;
     }
 
     private void OnEnable()

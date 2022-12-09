@@ -260,23 +260,19 @@ public class Gun : MonoBehaviour
 
                 float angle;
 
-                if (autoAim)
-                {
-                    Vector2 ennemyPos = KickChara.Instance.kickedEnnemy.transform.position;
-                    Vector2 charaPos = ManagerChara.Instance.transform.position;
-        
-                    angle = Mathf.Atan2(ennemyPos.y - charaPos.y, ennemyPos.x - charaPos.x) * Mathf.Rad2Deg;
-                }
-                else
-                {
-                    angle = OrientateGun();
-                }
-
+                angle = OrientateGun();
+                
                 GameObject refBullet = Instantiate(bullet, ManagerChara.Instance.transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
 
+                if (refBullet.GetComponent<Bullet>().isBubble)
+                {
+                    refBullet.GetComponent<Bullet>().originalVelocity = ManagerChara.Instance.rb.velocity;
+                }
+
                 refBullet.GetComponent<Bullet>().bulletDamages = gunData.damages;
 
+                
                 // EFFETS MODULES
                 if (ballesPercantes)
                 {

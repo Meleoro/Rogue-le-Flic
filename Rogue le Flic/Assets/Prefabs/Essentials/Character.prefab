@@ -844,6 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459bbf3a225e89d4b853db46388e4b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: {x: 0, y: 0}
   speedX: 14
   speedY: 12
   dragDeceleration: 5
@@ -894,6 +895,7 @@ MonoBehaviour:
   kickedEnnemy: {fileID: 0}
   propulsionChara: 25
   kickDirection: {x: 0, y: 0}
+  mouseDirection: 0
   cameraShakeDuration: 0.09
   cameraShakeAmplitude: 0.5
   slowMoSpeed: 4
@@ -929,7 +931,7 @@ MonoBehaviour:
   - {x: 0.32733202, y: -0.82241535, z: 0}
   m_ShapePathHash: 1347242869
   m_Mesh: {fileID: 0}
-  m_InstanceId: -3322
+  m_InstanceId: -13836
 --- !u!1 &8319384481229060628
 GameObject:
   m_ObjectHideFlags: 0
