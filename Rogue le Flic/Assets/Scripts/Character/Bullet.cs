@@ -21,6 +21,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject bubble;
     [SerializeField] private GameObject bubbleExplosion;
     private float timerBubble;
+    [HideInInspector] public Vector2 originalVelocity;
 
     [Header("Modules")]
     [HideInInspector] public bool percante;
@@ -45,11 +46,11 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        rb.velocity = direction * bulletSpeed;
-
         // BULLE
         if (isBubble)
         {
+            rb.velocity = originalVelocity / 13.5f * bulletSpeed + direction * bulletSpeed;
+            
             timerBubble -= Time.deltaTime;
             
             if (timerBubble <= 0)
@@ -66,6 +67,11 @@ public class Bullet : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+
+        else
+        {
+            rb.velocity = direction * bulletSpeed;
         }
 
         // SI LE TIRE EST CRITIQUE

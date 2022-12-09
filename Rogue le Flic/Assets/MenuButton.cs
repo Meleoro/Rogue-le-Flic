@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonStart : MonoBehaviour
+public class MenuButton : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     
@@ -12,13 +12,11 @@ public class ButtonStart : MonoBehaviour
 
     public void OnPointerEnter()
     {
-        Debug.Log(12);
         animator.SetBool("In", true);
     }
     
     public void OnPointerExit()
     {
         animator.SetBool("In", false);
-        Debug.Log(122222);
     }
 }
