@@ -69,6 +69,9 @@ public class Frog : MonoBehaviour
             {
                 if(MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount <= 0)
                     StartCoroutine(ennemy.FinalDeath());
+                
+                else
+                    StartCoroutine(ennemy.Death());
             }
             else
             {
