@@ -51,6 +51,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    
+    //Invoquer cette fonction dans MainMenuButtons
     public void ClosePause()
     {
         pausePanel.SetActive(false);
@@ -70,8 +72,7 @@ public class PauseMenu : MonoBehaviour
         settPanel.SetActive(false);
         settOpen = false;
     }
-
-    //La fonction ReturnToMain() ne marche pas parce que la scene n'est pas dans les Build Settings
+    
     public void ReturnToMain()
     {
         SceneManager.LoadScene("MAIN MENU");
