@@ -7,8 +7,8 @@ using UnityEngine;
 public class ModuleManager : MonoBehaviour
 {
     public static ModuleManager Instance;
-    [HideInInspector] public int Module1;
-    [HideInInspector] public int Module2;
+    public int Module1;
+    public int Module2;
 
     [Header("Infos1")] 
     public string moduleName1;
