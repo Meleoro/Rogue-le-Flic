@@ -20,7 +20,7 @@ public class GenerationPro : MonoBehaviour
     [Header("Rooms")]
     public GameObject spawn;
     public List<GameObject> basicRooms;
-    public List<GameObject> bigRooms;
+    //public List<GameObject> bigRooms;
     public List<GameObject> specialRooms;
     public List<Coord> roomsCreated;
     public GameObject boss;
