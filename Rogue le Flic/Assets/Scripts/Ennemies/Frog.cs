@@ -36,6 +36,7 @@ public class Frog : MonoBehaviour
     [SerializeField] private GameObject coins;
     private Rigidbody2D rb;
     [HideInInspector] public bool canMove;
+    [HideInInspector] public bool stopTongue;
 
     [HideInInspector] public bool isKicked;
     private bool stopDeath;
@@ -60,6 +61,12 @@ public class Frog : MonoBehaviour
         {
             stopDeath = true;
             
+            //GetComponent<BoxCollider2D>().enabled = false;
+            
+            StopCoroutine();
+            canMove = false;
+            stopTongue = true;
+            
             if (!GenerationPro.Instance.testLDMode) 
             {
                 MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
@@ -78,37 +85,39 @@ public class Frog : MonoBehaviour
                 StartCoroutine(ennemy.Death());
             }
         }
-        
-        float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
-                                    Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
-        
-        if (distance <= distanceShotTrigger && !cooldownShot)
-        {
-            ennemy.anim.SetTrigger("isAttacking");
-            
-            StartCoroutine(Cooldown());
-        }
-        
-        // ROTATION FROG
-        if (direction.x > 0.1f)
-        {
-            lookLeft = false;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        
-        else if (direction.x < -0.1f)
-        {
-            lookLeft = true;
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-
-        if (lookLeft)
-        {
-            ennemy.sprite.transform.localPosition = posLeft;
-        }
         else
         {
-            ennemy.sprite.transform.localPosition = posRight;
+            float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
+                                        Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
+        
+            if (distance <= distanceShotTrigger && !cooldownShot)
+            {
+                ennemy.anim.SetTrigger("isAttacking");
+            
+                StartCoroutine(Cooldown());
+            }
+        
+            // ROTATION FROG
+            if (direction.x > 0.1f)
+            {
+                lookLeft = false;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+        
+            else if (direction.x < -0.1f)
+            {
+                lookLeft = true;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+
+            if (lookLeft)
+            {
+                ennemy.sprite.transform.localPosition = posLeft;
+            }
+            else
+            {
+                ennemy.sprite.transform.localPosition = posRight;
+            }
         }
     }
 
@@ -171,7 +180,8 @@ public class Frog : MonoBehaviour
             canMove = true;
             transform.DOComplete();
             
-            ennemy.anim.SetTrigger("reset");
+            if(!stopDeath)
+                ennemy.anim.SetTrigger("reset");
                 
             StartCoroutine(Wait(4));
         }

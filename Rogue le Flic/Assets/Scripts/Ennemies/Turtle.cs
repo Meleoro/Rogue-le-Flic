@@ -62,6 +62,11 @@ public class Turtle : MonoBehaviour
         {
             stopDeath = true;
             
+            GetComponent<BoxCollider2D>().enabled = false;
+
+            StopCoroutine();
+            canMove = false;
+            
             if (!GenerationPro.Instance.testLDMode) 
             {
                 MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
@@ -81,32 +86,35 @@ public class Turtle : MonoBehaviour
             }
         }
 
-        float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) +
-                                    Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
-
-        if (!isSliding && canMove)
+        else
         {
-            if (timerCooldown <= 0 && distance < distanceSlideTrigger)
+            float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) +
+                                        Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
+
+            if (!isSliding && canMove)
             {
-                StartCoroutine(Slide(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
-            }
+                if (timerCooldown <= 0 && distance < distanceSlideTrigger)
+                {
+                    StartCoroutine(Slide(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
+                }
             
-            else
-            {
-                timerCooldown -= Time.deltaTime;
+                else
+                {
+                    timerCooldown -= Time.deltaTime;
+                }
             }
-        }
 
 
-        // ROTATION TURTLE
-        if (direction.x > 0.1f)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
+            // ROTATION TURTLE
+            if (direction.x > 0.1f)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
 
-        else if (direction.x < -0.1f)
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            else if (direction.x < -0.1f)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
         }
     }
 
@@ -238,6 +246,9 @@ public class Turtle : MonoBehaviour
             isSliding = false;
             isKicked = false;
             timerCooldown = cooldown;
+            
+            if(!stopDeath)
+                ennemy.anim.SetTrigger("reset");
         }
     }
 

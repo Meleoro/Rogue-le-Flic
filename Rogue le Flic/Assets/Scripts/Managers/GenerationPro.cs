@@ -20,7 +20,7 @@ public class GenerationPro : MonoBehaviour
     [Header("Rooms")]
     public GameObject spawn;
     public List<GameObject> basicRooms;
-    public List<GameObject> bigRooms;
+    //public List<GameObject> bigRooms;
     public List<GameObject> specialRooms;
     public List<Coord> roomsCreated;
     public GameObject boss;
@@ -117,8 +117,8 @@ public class GenerationPro : MonoBehaviour
 
                             roomsCreated.Add(new Coord());
 
-                            roomsCreated[roomsCreated.Count - 1].x = saveX;
-                            roomsCreated[roomsCreated.Count - 1].y = saveY;
+                            roomsCreated[roomsCreated.Count - 1].x = newSaveX;
+                            roomsCreated[roomsCreated.Count - 1].y = newSaveY;
                         }
                     }
                     
@@ -139,8 +139,8 @@ public class GenerationPro : MonoBehaviour
 
                             roomsCreated.Add(new Coord());
 
-                            roomsCreated[roomsCreated.Count - 1].x = saveX;
-                            roomsCreated[roomsCreated.Count - 1].y = saveY;
+                            roomsCreated[roomsCreated.Count - 1].x = newSaveX;
+                            roomsCreated[roomsCreated.Count - 1].y = newSaveY;
                         }
                     }
                     
@@ -161,8 +161,8 @@ public class GenerationPro : MonoBehaviour
 
                             roomsCreated.Add(new Coord());    
 
-                            roomsCreated[roomsCreated.Count - 1].x = saveX;
-                            roomsCreated[roomsCreated.Count - 1].y = saveY;
+                            roomsCreated[roomsCreated.Count - 1].x = newSaveX;
+                            roomsCreated[roomsCreated.Count - 1].y = newSaveY;
                         }
                     }
 
@@ -183,18 +183,18 @@ public class GenerationPro : MonoBehaviour
 
                             roomsCreated.Add(new Coord());
 
-                            roomsCreated[roomsCreated.Count - 1].x = saveX;
-                            roomsCreated[roomsCreated.Count - 1].y = saveY;
+                            roomsCreated[roomsCreated.Count - 1].x = newSaveX;
+                            roomsCreated[roomsCreated.Count - 1].y = newSaveY;
                         }
                     }
                 }
 
-                if (voisinsNbr >= 2 && boucleNbr >= 3 && nbrBigRoom < 1)
+                /*if (voisinsNbr >= 2 && boucleNbr >= 3 && nbrBigRoom < 1)
                 {
                     nbrBigRoom += 1;
 
                     map.list[saveX].list[saveY] = bigRooms[0];
-                }
+                }*/
                 
                 saveX = newSaveX;
                 saveY = newSaveY;
@@ -268,31 +268,31 @@ public class GenerationPro : MonoBehaviour
     {
         for(int k = 0; k < specialRooms.Count; k++)
         {
-            for(int i = 1; i < roomsCreated.Count; i++)
+            for(int i = 2; i < roomsCreated.Count; i++)
             {
                 // DROITE
-                if (map.list[roomsCreated[i].x + 1].list[roomsCreated[i].y] == null)
+                if (map.list[roomsCreated[i].x + 1].list[roomsCreated[i].y] == null && i < roomsCreated.Count)
                 {
                     map.list[roomsCreated[i].x + 1].list[roomsCreated[i].y] = specialRooms[k];
                     i += roomsCreated.Count;
                 }
 
                 // BAS
-                else if (map.list[roomsCreated[i].x].list[roomsCreated[i].y - 1] == null)
+                else if (map.list[roomsCreated[i].x].list[roomsCreated[i].y - 1] == null && i < roomsCreated.Count)
                 {
                     map.list[roomsCreated[i].x].list[roomsCreated[i].y - 1] = specialRooms[k];
                     i += roomsCreated.Count;
                 }
 
                 // GAUCHE
-                else if (map.list[roomsCreated[i].x - 1].list[roomsCreated[i].y] == null)
+                else if (map.list[roomsCreated[i].x - 1].list[roomsCreated[i].y] == null && i < roomsCreated.Count)
                 {
                     map.list[roomsCreated[i].x - 1].list[roomsCreated[i].y] = specialRooms[k];
                     i += roomsCreated.Count;
                 }
 
                 // HAUT
-                else if (map.list[roomsCreated[i].x].list[roomsCreated[i].y + 1] == null)
+                else if (map.list[roomsCreated[i].x].list[roomsCreated[i].y + 1] == null && i < roomsCreated.Count)
                 {
                     map.list[roomsCreated[i].x].list[roomsCreated[i].y + 1] = specialRooms[k];
                     i += roomsCreated.Count;

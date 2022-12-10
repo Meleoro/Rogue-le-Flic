@@ -55,6 +55,11 @@ public class Beaver : MonoBehaviour
         if (health <= 0 && !stopDeath)
         {
             stopDeath = true;
+
+            GetComponent<BoxCollider2D>().enabled = false;
+            
+            StopCoroutine();
+            canMove = false;
             
             if (!GenerationPro.Instance.testLDMode) 
             {
@@ -75,26 +80,29 @@ public class Beaver : MonoBehaviour
                 StartCoroutine(ennemy.Death());
             }
         }
-        
-        float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
-                                    Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
-        
-        if (distance < distanceJumpTrigger && !isJumping)
+        else
         {
-            ennemy.anim.SetTrigger("isAttacking");
+            
+            float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
+                                        Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
+        
+            if (distance < distanceJumpTrigger && !isJumping)
+            {
+                ennemy.anim.SetTrigger("isAttacking");
 
-            StartCoroutine(Jump(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
-        }
+                StartCoroutine(Jump(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
+            }
 
-        // ROTATION CASTOR
-        if (direction.x > 0.1f)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
+            // ROTATION CASTOR
+            if (direction.x > 0.1f)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         
-        else if (direction.x < -0.1f)
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            else if (direction.x < -0.1f)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
         }
     }
     
@@ -116,6 +124,7 @@ public class Beaver : MonoBehaviour
         }
     }
 
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))

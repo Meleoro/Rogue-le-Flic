@@ -132,6 +132,8 @@ public class Gun : MonoBehaviour
                     
                     MovementsChara.Instance.lookLeft = false;
                 }
+                
+                
             }
 
             else
@@ -140,34 +142,37 @@ public class Gun : MonoBehaviour
             }
         
             // TIR
-            if (controls.Character.Tir.IsPressed() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && isHeld)
+            if (controls.Character.Tir.IsPressed() && isHeld)
             {
-                if (gunData.tirChargeable)
+                if ((!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && !isReloading)
                 {
-                    if (timerCharge < gunData.dureeChargement)
+                    if (gunData.tirChargeable)
                     {
-                        timerCharge += Time.deltaTime;
-                    }
+                        if (timerCharge < gunData.dureeChargement)
+                        {
+                            timerCharge += Time.deltaTime;
+                        }
 
-                    if (timerCharge < gunData.dureeChargement / 3)
-                        GetComponent<SpriteRenderer>().sprite = gunData.charge1;
+                        if (timerCharge < gunData.dureeChargement / 3)
+                            GetComponent<SpriteRenderer>().sprite = gunData.charge1;
                     
-                    else if (timerCharge < (gunData.dureeChargement / 3) * 2)
-                        GetComponent<SpriteRenderer>().sprite = gunData.charge2;
+                        else if (timerCharge < (gunData.dureeChargement / 3) * 2)
+                            GetComponent<SpriteRenderer>().sprite = gunData.charge2;
                     
-                    else if (timerCharge < (gunData.dureeChargement / 3) * 3)
-                        GetComponent<SpriteRenderer>().sprite = gunData.charge3;
+                        else if (timerCharge < (gunData.dureeChargement / 3) * 3)
+                            GetComponent<SpriteRenderer>().sprite = gunData.charge3;
                     
+                        else
+                            GetComponent<SpriteRenderer>().sprite = gunData.charge4;
+                    }
                     else
-                        GetComponent<SpriteRenderer>().sprite = gunData.charge4;
-                }
-                else
-                {
-                    Shoot();
+                    {
+                        Shoot();
+                    }
                 }
             }
             
-            else if (controls.Character.Tir.WasReleasedThisFrame() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && gunData.tirChargeable)
+            else if (controls.Character.Tir.WasReleasedThisFrame() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && gunData.tirChargeable && isHeld)
             {
                 GetComponent<SpriteRenderer>().sprite = gunData.charge0;
                 
@@ -198,9 +203,15 @@ public class Gun : MonoBehaviour
             }
             else
                 lightShot.intensity = 0;
+
+            if (controls.Character.Reload.WasPerformedThisFrame() && !isReloading)
+            {
+                isReloading = true;
+                timerReload = gunData.reloadTime;
+            }
         }
 
-        if (isReloading)
+        if (isReloading && isHeld)
         {
             ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = true;
             
@@ -215,9 +226,9 @@ public class Gun : MonoBehaviour
 
                 ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = false;
                 
-                if(!ManagerChara.Instance.munitionsActives)
+                if(!ManagerChara.Instance.munitionsActives && !isStocked)
                 {
-                    HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize);
+                    HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
                 }
             }
         }
@@ -254,14 +265,17 @@ public class Gun : MonoBehaviour
                 
                 ManagerChara.Instance.activeGun = gameObject;
             }
+                        
             
-            if (ManagerChara.Instance.munitionsActives)
+            HUDManager.Instance.TakeWeapon();
+            
+            if (ManagerChara.Instance.munitionsActives && !isStocked)
             {
-                HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
+                HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo, GetComponent<SpriteRenderer>().sprite);
             }
-            else
+            else if(!isStocked)
             {
-                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize);
+                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
             }
         }
     }
@@ -342,11 +356,11 @@ public class Gun : MonoBehaviour
 
             if (ManagerChara.Instance.munitionsActives)
             {
-                HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
+                HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo, GetComponent<SpriteRenderer>().sprite);
             }
             else
             {
-                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize);
+                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
             }
         }
     }
@@ -430,7 +444,7 @@ public class Gun : MonoBehaviour
         
         if (ManagerChara.Instance.munitionsActives)
         {
-            HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
+            HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo, GetComponent<SpriteRenderer>().sprite);
         }
     }
 }

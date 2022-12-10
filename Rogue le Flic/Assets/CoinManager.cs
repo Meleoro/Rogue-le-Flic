@@ -9,6 +9,7 @@ public class CoinManager : MonoBehaviour
     public static CoinManager Instance;
 
     [SerializeField] private TextMeshProUGUI coinTXT;
+    public GameObject coin;
 
     private int currentCoins;
 

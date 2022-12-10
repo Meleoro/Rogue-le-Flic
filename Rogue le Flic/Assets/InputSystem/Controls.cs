@@ -107,6 +107,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""8d0c7aea-00a9-44df-b874-e560a7bc3bbe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +261,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""SwitchWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""926dfb7a-c0af-4237-8491-7e032c299fef"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -291,6 +311,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Character_Dash = m_Character.FindAction("Dash", throwIfNotFound: true);
         m_Character_Kick = m_Character.FindAction("Kick", throwIfNotFound: true);
         m_Character_SwitchWeapon = m_Character.FindAction("SwitchWeapon", throwIfNotFound: true);
+        m_Character_Reload = m_Character.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -359,6 +380,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Dash;
     private readonly InputAction m_Character_Kick;
     private readonly InputAction m_Character_SwitchWeapon;
+    private readonly InputAction m_Character_Reload;
     public struct CharacterActions
     {
         private @Controls m_Wrapper;
@@ -372,6 +394,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_Character_Dash;
         public InputAction @Kick => m_Wrapper.m_Character_Kick;
         public InputAction @SwitchWeapon => m_Wrapper.m_Character_SwitchWeapon;
+        public InputAction @Reload => m_Wrapper.m_Character_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -408,6 +431,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @SwitchWeapon.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchWeapon;
                 @SwitchWeapon.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchWeapon;
                 @SwitchWeapon.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSwitchWeapon;
+                @Reload.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -439,6 +465,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @SwitchWeapon.started += instance.OnSwitchWeapon;
                 @SwitchWeapon.performed += instance.OnSwitchWeapon;
                 @SwitchWeapon.canceled += instance.OnSwitchWeapon;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -463,5 +492,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnKick(InputAction.CallbackContext context);
         void OnSwitchWeapon(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }
