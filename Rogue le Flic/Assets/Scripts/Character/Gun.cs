@@ -215,9 +215,9 @@ public class Gun : MonoBehaviour
 
                 ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = false;
                 
-                if(!ManagerChara.Instance.munitionsActives)
+                if(!ManagerChara.Instance.munitionsActives && !isStocked)
                 {
-                    HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize);
+                    HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
                 }
             }
         }
@@ -254,14 +254,17 @@ public class Gun : MonoBehaviour
                 
                 ManagerChara.Instance.activeGun = gameObject;
             }
+                        
             
-            if (ManagerChara.Instance.munitionsActives)
+            HUDManager.Instance.TakeWeapon();
+            
+            if (ManagerChara.Instance.munitionsActives && !isStocked)
             {
-                HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
+                HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo, GetComponent<SpriteRenderer>().sprite);
             }
-            else
+            else if(!isStocked)
             {
-                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize);
+                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
             }
         }
     }
@@ -342,11 +345,11 @@ public class Gun : MonoBehaviour
 
             if (ManagerChara.Instance.munitionsActives)
             {
-                HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
+                HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo, GetComponent<SpriteRenderer>().sprite);
             }
             else
             {
-                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize);
+                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
             }
         }
     }
@@ -430,7 +433,7 @@ public class Gun : MonoBehaviour
         
         if (ManagerChara.Instance.munitionsActives)
         {
-            HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo);
+            HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo, GetComponent<SpriteRenderer>().sprite);
         }
     }
 }

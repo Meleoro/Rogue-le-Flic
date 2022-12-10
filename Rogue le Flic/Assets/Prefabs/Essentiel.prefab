@@ -157,6 +157,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8159523867254284515}
     m_Modifications:
+    - target: {fileID: 1126305445, guid: f9fc4e03806eba44d89ff6a1b9f8e32e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 102.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126305445, guid: f9fc4e03806eba44d89ff6a1b9f8e32e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126305445, guid: f9fc4e03806eba44d89ff6a1b9f8e32e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126305445, guid: f9fc4e03806eba44d89ff6a1b9f8e32e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126305445, guid: f9fc4e03806eba44d89ff6a1b9f8e32e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126305445, guid: f9fc4e03806eba44d89ff6a1b9f8e32e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -53.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126305445, guid: f9fc4e03806eba44d89ff6a1b9f8e32e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7532571123500182858, guid: f9fc4e03806eba44d89ff6a1b9f8e32e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -258,6 +286,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1691462934689658327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1901845460, guid: f9fc4e03806eba44d89ff6a1b9f8e32e, type: 3}
+  m_PrefabInstance: {fileID: 1691462934434246147}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1691462934736586423 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1913104564, guid: f9fc4e03806eba44d89ff6a1b9f8e32e, type: 3}
@@ -267,6 +300,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1691462935522795685 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1126305446, guid: f9fc4e03806eba44d89ff6a1b9f8e32e, type: 3}
+  m_PrefabInstance: {fileID: 1691462934434246147}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &9218966382616937289 stripped
@@ -375,7 +419,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -103566
+  m_InstanceId: -128760
 --- !u!1001 &5145797376698196850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -391,6 +435,22 @@ PrefabInstance:
       propertyPath: ammo
       value: 
       objectReference: {fileID: 1691462933839299638}
+    - target: {fileID: 198134015, guid: 46d5d09d5accdff4b953a0fe723df8ca, type: 3}
+      propertyPath: ammoUI
+      value: 
+      objectReference: {fileID: 1691462934689658327}
+    - target: {fileID: 198134015, guid: 46d5d09d5accdff4b953a0fe723df8ca, type: 3}
+      propertyPath: bowPos.x
+      value: -67.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198134015, guid: 46d5d09d5accdff4b953a0fe723df8ca, type: 3}
+      propertyPath: bowPos.y
+      value: 3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 198134015, guid: 46d5d09d5accdff4b953a0fe723df8ca, type: 3}
+      propertyPath: gunImage
+      value: 
+      objectReference: {fileID: 1691462935522795685}
     - target: {fileID: 8180513429589223057, guid: 46d5d09d5accdff4b953a0fe723df8ca, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -463,7 +523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1990982738, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
       propertyPath: m_InstanceId
-      value: -103586
+      value: -128780
       objectReference: {fileID: 0}
     - target: {fileID: 1503478015596987164, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
       propertyPath: m_RootOrder
