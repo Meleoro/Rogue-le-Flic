@@ -114,6 +114,7 @@ public class Shop : MonoBehaviour
                 int choice = Random.Range(0, weapons.Count);
                 
                 item1.sprite = weapons[choice].GetComponent<SpriteRenderer>().sprite;
+                item1.SetNativeSize();
                 currentItems.Add(weapons[choice]);
             }
             
@@ -122,6 +123,7 @@ public class Shop : MonoBehaviour
                 int choice = Random.Range(0, items.Count);
                 
                 item2.sprite = items[choice].GetComponent<SpriteRenderer>().sprite;
+                item2.SetNativeSize();
                 currentItems.Add(items[choice]);
             }
 
@@ -130,6 +132,7 @@ public class Shop : MonoBehaviour
                 int choice = Random.Range(0, items.Count);
                 
                 item3.sprite = items[choice].GetComponent<SpriteRenderer>().sprite;
+                item3.SetNativeSize();
                 currentItems.Add(items[choice]);
             }
         }
