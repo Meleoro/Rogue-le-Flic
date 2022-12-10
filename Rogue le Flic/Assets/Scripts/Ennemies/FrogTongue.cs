@@ -56,7 +56,7 @@ public class FrogTongue : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (frog.canMove)
+        if (frog.stopTongue || frog.canMove)
         {
             Destroy(gameObject);
         }
