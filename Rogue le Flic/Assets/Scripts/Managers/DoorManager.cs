@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Unity.Mathematics;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
@@ -144,20 +145,24 @@ public class DoorManager : MonoBehaviour
     {
         if (!disableEndEffect)
         {
-            bool stopWhile = false;
-
-            while (!stopWhile)
+            bool createdItem = false;
+            
+            foreach (spawnChance k in spawnLoots)
             {
-                foreach (spawnChance k in spawnLoots)
+                int index = Random.Range(0, 100);
+
+                if (index < k.spawnChances)
                 {
-                    int index = Random.Range(0, 100);
-
-                    if (index < k.spawnChances && !stopWhile)
-                    {
-                        stopWhile = true;
-
-                        Instantiate(k.element, posSpawn, Quaternion.identity);
-                    }
+                    Instantiate(k.element, posSpawn, Quaternion.identity);
+                    createdItem = true;
+                }
+            }
+            
+            if (!createdItem)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    Instantiate(CoinManager.Instance.coin, posSpawn, quaternion.identity);
                 }
             }
 
