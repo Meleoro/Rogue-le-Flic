@@ -270,9 +270,6 @@ public class GenerationPro : MonoBehaviour
         {
             for(int i = 2; i < roomsCreated.Count; i++)
             {
-                Debug.Log(roomsCreated[i].x);
-                Debug.Log(roomsCreated[i].y);
-                
                 // DROITE
                 if (map.list[roomsCreated[i].x + 1].list[roomsCreated[i].y] == null && i < roomsCreated.Count)
                 {
