@@ -23,7 +23,9 @@ public class ScoreManager : MonoBehaviour
     public int enemyKill;
     public float timer;
     public int scoreAdd = 100;
-
+    public bool timerTrue;
+    public int valeurMax;
+    
     public int timerMax = 5;
     
     
@@ -42,6 +44,7 @@ public class ScoreManager : MonoBehaviour
         //timerText.alpha = 0;
         enemyKill = 1;
         timer = timerMax;
+        timerTrue = true;
     }
 
 
@@ -62,7 +65,7 @@ public class ScoreManager : MonoBehaviour
         }
 
 
-        if (timer < 0)
+        if (timer < 0 && timerTrue == false)
         {
             NoTimeLeft();
         }
@@ -75,6 +78,7 @@ public class ScoreManager : MonoBehaviour
         //timerText.alpha = 255;
         scoreCount = scoreCount + scoreAdd*enemyKill;
         timer = timerMax;
+        timerTrue = false;
         enemyKill = enemyKill + 1;
         enemyKillTxt.alpha = 255;
         enemyKillTxt.DOFade(0, timerMax);
@@ -84,12 +88,24 @@ public class ScoreManager : MonoBehaviour
 
     public void NoTimeLeft()
     {
-        scoreActuel = scoreActuel + scoreCount;
+        //valeurMax = scoreCount;
+        
+        for (int i = 0; i < scoreCount; i++)
+        {
+            StartCoroutine(Tututu());
+        }
+        timerTrue = true;
         scoreCount = 0;
+        enemyKill = 1;
         //scoreCountText.alpha = 0;
         //enemyKillTxt.alpha = 0;
-        enemyKill = 1;
         //timerText.alpha = 0;
     }
 
+
+    IEnumerator Tututu()
+    {
+        scoreActuel = scoreActuel + 1;
+        yield return new WaitForSeconds(0.1f);
+    }
 }
