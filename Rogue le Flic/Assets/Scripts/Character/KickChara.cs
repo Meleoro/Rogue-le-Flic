@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine.Rendering;
 
 public class KickChara : MonoBehaviour
