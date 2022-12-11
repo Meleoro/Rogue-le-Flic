@@ -230,6 +230,8 @@ public class Ennemy : MonoBehaviour
         {
             if (!MapManager.Instance.activeRoom.GetComponent<DoorManager>().disableEndEffect)
             {
+                ScoreManager.instance.EnemyKilled();
+                
                 isDying = true;
 
                 transform.DOShakePosition(1, 1);
@@ -246,7 +248,7 @@ public class Ennemy : MonoBehaviour
 
                 MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
                 MapManager.Instance.activeRoom.GetComponent<DoorManager>().EndRoom(transform.position);
-                ScoreManager.instance.EnemyKilled();
+                
 
                 Destroy(gameObject);
             }

@@ -88,7 +88,7 @@ public class ScoreManager : MonoBehaviour
         scoreCount = 0;
         //scoreCountText.alpha = 0;
         //enemyKillTxt.alpha = 0;
-        enemyKill = 0;
+        enemyKill = 1;
         //timerText.alpha = 0;
     }
 
