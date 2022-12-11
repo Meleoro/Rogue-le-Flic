@@ -214,6 +214,8 @@ public class Ennemy : MonoBehaviour
         
         anim.SetTrigger("death");
         
+        ScoreManager.instance.EnemyKilled();
+        
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
         yield return new WaitForSeconds(0.5f);
@@ -244,6 +246,7 @@ public class Ennemy : MonoBehaviour
 
                 MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
                 MapManager.Instance.activeRoom.GetComponent<DoorManager>().EndRoom(transform.position);
+                ScoreManager.instance.EnemyKilled();
 
                 Destroy(gameObject);
             }
