@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public class ScoreManager : MonoBehaviour
     
     public TMP_Text scoreActuelText;
     public TMP_Text scoreCountText;
-    public TMP_Text timerText;
+    //public TMP_Text timerText;
     public TMP_Text enemyKillTxt;
 
 
@@ -38,7 +39,7 @@ public class ScoreManager : MonoBehaviour
         scoreActuel = 0;
         scoreCountText.alpha = 0;
         enemyKillTxt.alpha = 0;
-        timerText.alpha = 0;
+        //timerText.alpha = 0;
         enemyKill = 1;
         timer = timerMax;
     }
@@ -46,12 +47,14 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
-        scoreCountText.text = scoreCount.ToString();
+        scoreCountText.text = "+" + scoreCount.ToString();
         scoreActuelText.text = scoreActuel.ToString();
-        enemyKillTxt.text = enemyKill.ToString();
+        enemyKillTxt.text = "x" + enemyKill.ToString();
         
 
-        timer = timer - 0.005f;
+        timer = timer - Time.deltaTime;
+
+
         
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -69,12 +72,13 @@ public class ScoreManager : MonoBehaviour
     public void EnemyKilled()
     {
         scoreCountText.alpha = 255;
-        timerText.alpha = 255;
+        //timerText.alpha = 255;
         scoreCount = scoreCount + scoreAdd*enemyKill;
-        timer = 5;
+        timer = timerMax;
         enemyKill = enemyKill + 1;
         enemyKillTxt.alpha = 255;
-
+        enemyKillTxt.DOFade(0, timerMax);
+        scoreCountText.DOFade(0, timerMax);
     }
 
 
@@ -82,8 +86,10 @@ public class ScoreManager : MonoBehaviour
     {
         scoreActuel = scoreActuel + scoreCount;
         scoreCount = 0;
-        scoreCountText.alpha = 0;
-        timerText.alpha = 0;
+        //scoreCountText.alpha = 0;
+        //enemyKillTxt.alpha = 0;
+        enemyKill = 0;
+        //timerText.alpha = 0;
     }
 
 }
