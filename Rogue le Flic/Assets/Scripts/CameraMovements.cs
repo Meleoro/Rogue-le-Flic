@@ -18,6 +18,8 @@ public class CameraMovements : MonoBehaviour
     public float multiplierMouse;
     [HideInInspector] public bool canShake;
 
+    [HideInInspector] public bool canMove;
+
     [Header("End Room Behavior")]
     [HideInInspector] public bool endRoom;
     [HideInInspector] public float timeZoom;
@@ -39,6 +41,7 @@ public class CameraMovements : MonoBehaviour
             Destroy(gameObject);
 
         canShake = true;
+        canMove = true;
     }
 
     private void OnEnable()
@@ -53,7 +56,7 @@ public class CameraMovements : MonoBehaviour
 
     void Update()
     {
-        if (!endRoom)
+        if (!endRoom && canMove)
         {
             transform.position = NormalBehavior();
             
@@ -61,7 +64,7 @@ public class CameraMovements : MonoBehaviour
             originalPos = _camera.transform.position;
         }
 
-        else 
+        else if (canMove)
             EndRoomBehavior();
     }
 

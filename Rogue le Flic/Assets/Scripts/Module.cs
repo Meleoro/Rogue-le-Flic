@@ -61,10 +61,14 @@ public class Module : MonoBehaviour
         image2.sprite = ModuleManager.Instance.image2;
 
         ManagerChara.Instance.noControl = true;
+
+        CameraMovements.Instance.canMove = false;
     }
     
     public void ChoiceSlot(int slot)
     {
+        CameraMovements.Instance.canMove = true;
+
         if (slot == 1)
         {
             ModuleManager.Instance.Module1 = numberEffect;

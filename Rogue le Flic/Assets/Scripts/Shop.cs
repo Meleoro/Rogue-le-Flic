@@ -89,6 +89,7 @@ public class Shop : MonoBehaviour
         ManagerChara.Instance.noControl = true;
 
         isOpen = true;
+        CameraMovements.Instance.canMove = false;
 
         timerEnter = 4f;
     }
@@ -101,6 +102,7 @@ public class Shop : MonoBehaviour
         fond.DOFade(0f, 0.5f);
         
         ManagerChara.Instance.noControl = false;
+        CameraMovements.Instance.canMove = true;
 
         isOpen = false;
     }
