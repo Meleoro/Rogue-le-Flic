@@ -62,6 +62,16 @@ public class KickChara : MonoBehaviour
         kick.SetActive(false);
     }
 
+
+    private void FixedUpdate()
+    {
+        if (slowMoActive)
+        {
+            timerSlowMo += Time.fixedDeltaTime * slowMoSpeed;
+        }
+    }
+
+
     private void Update()
     {
         // INTERRUPTION D'UN ADVERSAIRE
@@ -99,8 +109,6 @@ public class KickChara : MonoBehaviour
 
         if (slowMoActive)
         {
-            timerSlowMo += Time.fixedDeltaTime * slowMoSpeed;
-
             // Gestion du déroulement du temps
             Time.timeScale = Mathf.Lerp(1 / slowMoStrenght, 1, timerSlowMo);
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
