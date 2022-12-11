@@ -216,8 +216,6 @@ public class Ennemy : MonoBehaviour
         
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
-        Debug.Log(12);
-
         yield return new WaitForSeconds(0.5f);
 
         Destroy(gameObject);

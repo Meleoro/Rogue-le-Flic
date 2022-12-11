@@ -11,7 +11,7 @@ public class CoinManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinTXT;
     public GameObject coin;
 
-    private int currentCoins;
+    [HideInInspector] public int currentCoins;
 
     private void Awake()
     {
