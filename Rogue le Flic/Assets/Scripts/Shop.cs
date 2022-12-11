@@ -30,6 +30,7 @@ public class Shop : MonoBehaviour
     [Header("Details")] 
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemDescription;
+    [SerializeField] private TextMeshProUGUI itemPrice;
 
     [Header("Références")]
     [SerializeField] private Image item1;
@@ -141,20 +142,26 @@ public class Shop : MonoBehaviour
 
     public void PurshaseItem(int itemID)
     {
-        if (itemID == 1)
+        Debug.Log(CoinManager.Instance.currentCoins);
+
+        if (itemID == 1 && CoinManager.Instance.currentCoins >= 20)
         {
             GameObject newGun = Instantiate(currentItems[0]);
-            
+
+            CoinManager.Instance.currentCoins -= 20;
+
             newGun.GetComponent<Gun>().canBePicked = true;
             newGun.GetComponent<Gun>().PickWeapon();
             
             item1.enabled = false;
         }
 
-        else
+        else if(itemID >= 2 && CoinManager.Instance.currentCoins >= 10)
         {
             GameObject newModule = Instantiate(currentItems[itemID - 1]);
-            
+
+            CoinManager.Instance.currentCoins -= 10;
+
             newModule.GetComponent<Module>().OpenChoice();
 
             if (itemID == 2)
@@ -172,12 +179,14 @@ public class Shop : MonoBehaviour
         {
             itemName.text = currentItems[buttonNumber - 1].GetComponent<Gun>().itemName;
             itemDescription.text = currentItems[buttonNumber - 1].GetComponent<Gun>().itemDescription;
+            itemPrice.text = "20$";
         }
 
         else
         {
             itemName.text = currentItems[buttonNumber - 1].GetComponent<Module>().itemName;
             itemDescription.text = currentItems[buttonNumber - 1].GetComponent<Module>().itemDescription;
+            itemPrice.text = "10$";
         }
     }
     
