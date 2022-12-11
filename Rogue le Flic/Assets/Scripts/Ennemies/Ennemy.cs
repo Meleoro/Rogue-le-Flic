@@ -21,6 +21,7 @@ public class Ennemy : MonoBehaviour
     private Turtle turtleScript;
 
     [HideInInspector] public bool isCharging;
+    [HideInInspector] public bool isDying;
     private bool isSpawning;
 
     [Header("Kicked")] 
@@ -130,19 +131,22 @@ public class Ennemy : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject bullet)
     {
-        switch (ennemyType)
+        if (!isDying)
         {
-            case ennemies.Beaver:
-                beaverScript.TakeDamages(damages, bullet);
-                break;
+            switch (ennemyType)
+            {
+                case ennemies.Beaver:
+                    beaverScript.TakeDamages(damages, bullet);
+                    break;
 
-            case ennemies.Frog:
-                frogScript.TakeDamages(damages, bullet);
-                break;
+                case ennemies.Frog:
+                    frogScript.TakeDamages(damages, bullet);
+                    break;
 
-            case ennemies.Turtle:
-                turtleScript.TakeDamages(damages, bullet);
-                break;
+                case ennemies.Turtle:
+                    turtleScript.TakeDamages(damages, bullet);
+                    break;
+            }
         }
     }
 
@@ -151,19 +155,29 @@ public class Ennemy : MonoBehaviour
         switch (ennemyType)
         {
             case ennemies.Beaver:
-                beaverScript.isKicked = true;
+                if(!beaverScript.isKicked)
+                {
+                    beaverScript.isKicked = true;
+                    timerKick = 0.3f;
+                }
                 break;
 
             case ennemies.Frog:
-                frogScript.isKicked = true;
+                if (!frogScript.isKicked)
+                {
+                    frogScript.isKicked = true;
+                    timerKick = 0.3f;
+                }
                 break;
 
             case ennemies.Turtle:
-                turtleScript.isKicked = true;
+                if (!turtleScript.isKicked)
+                {
+                    turtleScript.isKicked = true;
+                    timerKick = 0.3f;
+                }
                 break;
         }
-        
-        timerKick = 0.3f;
     }
 
     public IEnumerator Death()
@@ -195,13 +209,17 @@ public class Ennemy : MonoBehaviour
                 Instantiate(coin,transform.position, Quaternion.identity);
             }
         }
+
+        isDying = true;
         
         anim.SetTrigger("death");
         
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
+        Debug.Log(12);
+
         yield return new WaitForSeconds(0.5f);
-        
+
         Destroy(gameObject);
     }
 
@@ -212,6 +230,8 @@ public class Ennemy : MonoBehaviour
         {
             if (!MapManager.Instance.activeRoom.GetComponent<DoorManager>().disableEndEffect)
             {
+                isDying = true;
+
                 transform.DOShakePosition(1, 1);
                 MapManager.Instance.activeRoom.GetComponent<DoorManager>().isFinished = true;
 
@@ -241,38 +261,41 @@ public class Ennemy : MonoBehaviour
     private IEnumerator Spawn()
     {
             spawnIndicator.SetActive(true);
-                sprite.SetActive(false);
-                GetComponent<BoxCollider2D>().enabled = false;
+            sprite.SetActive(false);
+            GetComponent<BoxCollider2D>().enabled = false;
 
-                isSpawning = true;
+            isSpawning = true;
         
-                yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(2);
         
-                spawnIndicator.SetActive(false);
-                sprite.SetActive(true);
-                GetComponent<BoxCollider2D>().enabled = true;
-        
-                isSpawning = false;
+            spawnIndicator.SetActive(false);
+            sprite.SetActive(true);
+            GetComponent<BoxCollider2D>().enabled = true;
+       
+            isSpawning = false;
     }
 
 
     public void StopCoroutines()
     {
         isCharging = false;
-        
-        switch (ennemyType)
-        {
-            case ennemies.Beaver :
-                beaverScript.StopCoroutine();
-                break;
-            
-            case ennemies.Frog :
-                frogScript.StopCoroutine();
-                break;
 
-            case ennemies.Turtle:
-                turtleScript.StopCoroutine();
-                break;
+        if (!isDying)
+        {
+            switch (ennemyType)
+            {
+                case ennemies.Beaver:
+                    beaverScript.StopCoroutine();
+                    break;
+
+                case ennemies.Frog:
+                    frogScript.StopCoroutine();
+                    break;
+
+                case ennemies.Turtle:
+                    turtleScript.StopCoroutine();
+                    break;
+            }
         }
     }
 }

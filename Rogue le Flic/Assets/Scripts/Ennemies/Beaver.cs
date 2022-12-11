@@ -55,6 +55,7 @@ public class Beaver : MonoBehaviour
         if (health <= 0 && !stopDeath)
         {
             stopDeath = true;
+            isKicked = false;
 
             GetComponent<BoxCollider2D>().enabled = false;
             
@@ -170,7 +171,7 @@ public class Beaver : MonoBehaviour
 
     public void StopCoroutine()
     {
-        if (!canMove)
+        if (!canMove && !ennemy.isDying)
         {
             StopAllCoroutines();
             canMove = true;

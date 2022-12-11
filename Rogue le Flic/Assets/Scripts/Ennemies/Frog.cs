@@ -59,6 +59,7 @@ public class Frog : MonoBehaviour
     {
         if (health <= 0 && !stopDeath)
         {
+            isKicked = false;
             stopDeath = true;
             
             //GetComponent<BoxCollider2D>().enabled = false;
