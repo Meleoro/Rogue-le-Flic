@@ -92,8 +92,6 @@ public class Shop : MonoBehaviour
         CameraMovements.Instance.canMove = false;
 
         timerEnter = 4f;
-
-        ManagerChara.Instance.activeGun.GetComponent<Gun>().isHeld = false;
     }
 
     
@@ -107,8 +105,6 @@ public class Shop : MonoBehaviour
         CameraMovements.Instance.canMove = true;
 
         isOpen = false;
-
-        ManagerChara.Instance.activeGun.GetComponent<Gun>().isHeld = true;
     }
 
     
