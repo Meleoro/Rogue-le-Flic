@@ -46,7 +46,7 @@ public class Gun : MonoBehaviour
     [HideInInspector] public int currentAmmo;
 
     [HideInInspector] public bool isStocked;
-    private bool isHeld;
+    [HideInInspector] public bool isHeld;
     [HideInInspector] public bool canBePicked;
     private bool onCooldown;
     private bool lookLeft;
@@ -142,7 +142,7 @@ public class Gun : MonoBehaviour
             }
         
             // TIR
-            if (controls.Character.Tir.IsPressed() && isHeld)
+            if (controls.Character.Tir.IsPressed() && isHeld && !ManagerChara.Instance.noControl)
             {
                 if ((!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && !isReloading)
                 {
@@ -172,7 +172,7 @@ public class Gun : MonoBehaviour
                 }
             }
             
-            else if (controls.Character.Tir.WasReleasedThisFrame() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && gunData.tirChargeable && isHeld)
+            else if (controls.Character.Tir.WasReleasedThisFrame() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && gunData.tirChargeable && isHeld && !ManagerChara.Instance.noControl)
             {
                 GetComponent<SpriteRenderer>().sprite = gunData.charge0;
                 

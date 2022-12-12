@@ -92,6 +92,8 @@ public class Shop : MonoBehaviour
         CameraMovements.Instance.canMove = false;
 
         timerEnter = 4f;
+
+        ManagerChara.Instance.activeGun.GetComponent<Gun>().isHeld = false;
     }
 
     
@@ -105,6 +107,8 @@ public class Shop : MonoBehaviour
         CameraMovements.Instance.canMove = true;
 
         isOpen = false;
+
+        ManagerChara.Instance.activeGun.GetComponent<Gun>().isHeld = true;
     }
 
     
@@ -128,6 +132,8 @@ public class Shop : MonoBehaviour
                 item2.sprite = items[choice].GetComponent<SpriteRenderer>().sprite;
                 item2.SetNativeSize();
                 currentItems.Add(items[choice]);
+
+                items.RemoveAt(choice);
             }
 
             else
