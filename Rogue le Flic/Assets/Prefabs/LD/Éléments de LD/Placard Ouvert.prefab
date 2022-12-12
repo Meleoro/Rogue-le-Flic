@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2322635583939598540}
   - component: {fileID: 782137079100192539}
   - component: {fileID: 8137296268255849918}
+  - component: {fileID: 2420455258831840830}
   m_Layer: 6
   m_Name: Placard Ouvert
   m_TagString: Wall
@@ -111,3 +112,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.2208443, y: 9.93614}
   m_EdgeRadius: 0
+--- !u!114 &2420455258831840830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6824641293116740596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -3.1899986, y: -5.0599995, z: 0}
+  - {x: -3.1899986, y: 5.0599995, z: 0}
+  - {x: 3.1900005, y: 5.0599995, z: 0}
+  - {x: 3.1900005, y: -5.0599995, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -906972
