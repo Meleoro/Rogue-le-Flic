@@ -147,11 +147,11 @@ public class DoorManager : MonoBehaviour
         if (!disableEndEffect)
         {
             bool createdItem = false;
+            stopItem = false;
 
             foreach (spawnChance k in spawnLoots)
             {
                 int index = Random.Range(0, 100);
-                stopItem = false;
 
                 if (index < k.spawnChances && !stopItem)
                 {
