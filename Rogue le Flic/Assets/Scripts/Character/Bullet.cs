@@ -50,7 +50,7 @@ public class Bullet : MonoBehaviour
         if (isBubble)
         {
             rb.velocity = originalVelocity / 13.5f * bulletSpeed + direction * bulletSpeed;
-            
+
             timerBubble -= Time.deltaTime;
             
             if (timerBubble <= 0)
