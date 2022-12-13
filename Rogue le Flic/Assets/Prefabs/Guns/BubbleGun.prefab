@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 4404858517026568700}
   - component: {fileID: 4404858517026568699}
   - component: {fileID: 4404858517026568698}
+  - component: {fileID: -2590593546410175315}
   m_Layer: 0
   m_Name: BubbleGun
   m_TagString: Untagged
@@ -347,8 +348,10 @@ MonoBehaviour:
   critiques: 0
   itemName: Lance-bulles
   itemDescription: Tir une multitude projectiles a courte portee
+  currentChargeurAmmo: 0
   currentAmmo: 0
   isStocked: 0
+  isHeld: 0
   canBePicked: 0
   autoAim: 0
   explanation: {fileID: 791092493}
@@ -378,6 +381,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 2.5}
   m_EdgeRadius: 0
+--- !u!114 &-2590593546410175315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4404858517026568697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121a428d3c238a1499652fd61d6ca45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4404858517643633301
 GameObject:
   m_ObjectHideFlags: 0
