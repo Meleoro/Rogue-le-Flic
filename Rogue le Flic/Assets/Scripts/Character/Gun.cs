@@ -52,7 +52,7 @@ public class Gun : MonoBehaviour
     private bool lookLeft;
     private bool isReloading;
     private bool stopStock;
-    [HideInInspector] public bool autoAim;
+    private float bowState;
 
     public GameObject explanation;
 
@@ -154,16 +154,28 @@ public class Gun : MonoBehaviour
                         }
 
                         if (timerCharge < gunData.dureeChargement / 3)
+                        {
+                            bowState = 1;
                             GetComponent<SpriteRenderer>().sprite = gunData.charge1;
-                    
+                        }
+
                         else if (timerCharge < (gunData.dureeChargement / 3) * 2)
+                        {
+                            bowState = 2;
                             GetComponent<SpriteRenderer>().sprite = gunData.charge2;
-                    
+                        }
+
                         else if (timerCharge < (gunData.dureeChargement / 3) * 3)
+                        {
+                            bowState = 3;
                             GetComponent<SpriteRenderer>().sprite = gunData.charge3;
+                        }
                     
                         else
+                        {
+                            bowState = 4;
                             GetComponent<SpriteRenderer>().sprite = gunData.charge4;
+                        }
                     }
                     else
                     {
@@ -172,14 +184,12 @@ public class Gun : MonoBehaviour
                 }
             }
             
-            else if (controls.Character.Tir.WasReleasedThisFrame() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && gunData.tirChargeable && isHeld && !ManagerChara.Instance.noControl)
+            else if (controls.Character.Tir.WasReleasedThisFrame() && (!ManagerChara.Instance.munitionsActives || currentAmmo > 0) && 
+                     gunData.tirChargeable && isHeld && !ManagerChara.Instance.noControl)
             {
                 GetComponent<SpriteRenderer>().sprite = gunData.charge0;
                 
-                if (timerCharge >= gunData.dureeChargement)
-                {
-                    Shoot();
-                }
+                Shoot();
                 
                 timerCharge = 0;
             }
@@ -296,11 +306,19 @@ public class Gun : MonoBehaviour
                 GameObject refBullet = Instantiate(bullet, ManagerChara.Instance.transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
 
+                
                 if (refBullet.GetComponent<Bullet>().isBubble)
                 {
                     refBullet.GetComponent<Bullet>().originalVelocity = ManagerChara.Instance.rb.velocity;
                 }
+                else if (refBullet.GetComponent<Bullet>().isArrow)
+                {
+                    refBullet.GetComponent<Bullet>().timerArrow = bowState / 3;
 
+                    refBullet.GetComponent<Bullet>().bulletSpeed = bowState * 10;
+                }
+
+                
                 refBullet.GetComponent<Bullet>().bulletDamages = gunData.damages;
 
                 
@@ -332,7 +350,8 @@ public class Gun : MonoBehaviour
                     }
                 }
                 
-                Destroy(refBullet, 3f);
+                if(!refBullet.GetComponent<Bullet>().isArrow)
+                    Destroy(refBullet, 3f);
             }
 
             currentChargeurAmmo -= 1;
@@ -423,15 +442,7 @@ public class Gun : MonoBehaviour
 
         onCooldown = false;
     }
-
-    public IEnumerator AutoAim(float duree)
-    {
-        autoAim = true;
-        
-        yield return new WaitForSeconds(duree);
-        
-        autoAim = false;
-    }
+    
 
     public void AddAmmo(int ammoAdded)
     {

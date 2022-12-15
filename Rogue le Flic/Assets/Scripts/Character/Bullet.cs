@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
 
 public class Bullet : MonoBehaviour
 {
@@ -22,6 +23,17 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject bubbleExplosion;
     private float timerBubble;
     [HideInInspector] public Vector2 originalVelocity;
+
+    [Header("Arrow")] 
+    public bool isArrow;
+    [SerializeField] private float arrowDeceleration;
+    public float arrowDuration1;
+    public float arrowDuration2;
+    public float arrowDuration3;
+    public float arrowDuration4;
+    [HideInInspector] public float timerArrow;
+    private bool stopMoving;
+    private bool doOnce;
 
     [Header("Modules")]
     [HideInInspector] public bool percante;
@@ -68,6 +80,42 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        
+        // ARROW
+        else if (isArrow)
+        {
+            if (!stopMoving)
+            {
+                rb.velocity = direction * bulletSpeed;
+
+                timerArrow -= Time.deltaTime;
+
+                if (timerArrow <= 0)
+                {
+                    stopMoving = true;
+                    rb.velocity = Vector2.zero;
+                    GetComponent<CircleCollider2D>().enabled = false;
+                    GetComponent<BoxCollider2D>().enabled = false;
+                }
+                
+                else if (timerArrow <= 0.3f)
+                {
+                    if (!doOnce)
+                    {
+                        transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.3f);
+                        doOnce = true;
+                    }
+
+                    if(bulletSpeed > 0)
+                        bulletSpeed -= Time.deltaTime * arrowDeceleration * 2;
+                }
+                
+                else
+                {
+                    bulletSpeed -= Time.deltaTime * arrowDeceleration;
+                }
+            }
+        }
 
         else
         {
@@ -79,7 +127,7 @@ public class Bullet : MonoBehaviour
         {
             bulletDamages = (int) (bulletDamages * ModuleManager.Instance.multiplicateurDegats);
             bulletSpeed *= ModuleManager.Instance.multiplicateurVitesse;
-            objetAGrossir.transform.localScale = objetAGrossir.transform.localScale * ModuleManager.Instance.multiplicateurTaille;
+            objetAGrossir.transform.localScale *= ModuleManager.Instance.multiplicateurTaille;
             
             isCritique = false;
         }
