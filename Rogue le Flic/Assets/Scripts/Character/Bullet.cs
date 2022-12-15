@@ -187,7 +187,16 @@ public class Bullet : MonoBehaviour
         else
         {
             if (!rebondissante)
-                Destroy(gameObject);
+            {
+                if (isArrow)
+                {
+                    bounceWalls.enabled = true;
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
+            }
 
             else
                 bounceWalls.enabled = true;
@@ -196,6 +205,13 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (isArrow)
+        {
+            transform.rotation = Quaternion.FromToRotation (-transform.right, collision.contacts[0].normal) * transform.rotation;
+            stopMoving = true;
+            rb.velocity = Vector2.zero;
+        }
+        
         if (collision.gameObject.CompareTag("Box"))
         {
             collision.gameObject.GetComponent<Box>().Explose();
