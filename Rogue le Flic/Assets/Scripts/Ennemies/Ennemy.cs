@@ -224,6 +224,33 @@ public class Ennemy : MonoBehaviour
     }
 
 
+    public IEnumerator Fall()
+    {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+
+        sprite.transform.DOScale(new Vector3(0, 0, 0), 0.5f);
+
+
+        yield return new WaitForSeconds(0.5f);
+
+
+        int coinNumber = Random.Range(minCoins, maxCoins + 1);
+
+        for (int k = 0; k < coinNumber; k++)
+        {
+            Instantiate(coin, transform.position, Quaternion.identity);
+        }
+
+        isDying = true;
+
+        anim.SetTrigger("death");
+
+        ScoreManager.instance.EnemyKilled();
+
+        Destroy(gameObject);
+    }
+
+
     public IEnumerator FinalDeath()
     {
         if (!GenerationPro.Instance.testLDMode)
