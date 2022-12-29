@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.UI;
 
 public class BeaverBoss : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class BeaverBoss : MonoBehaviour
 
     [Header("Castor")]
     [SerializeField] private int health;
+    private int currentHealth;
     [SerializeField] private float cooldownMin;
     [SerializeField] private float cooldownMax;
     private float timer;
@@ -41,6 +43,7 @@ public class BeaverBoss : MonoBehaviour
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
     [SerializeField] private BossRoom bossRoom;
+    [SerializeField] private Image healthBar;
     private Rigidbody2D rb;
     private Boss boss;
 
@@ -116,6 +119,27 @@ public class BeaverBoss : MonoBehaviour
     }
 
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            Vector2 directionProj = col.transform.position - transform.position;
+
+            HealthManager.Instance.LoseHealth(directionProj);
+        }
+
+        /*else if (isKicked && col.CompareTag("Ennemy"))
+        {
+            col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
+        }
+
+        else if (isKicked)
+        {
+            TakeDamages(2, gameObject);
+        }*/
+    }
+
+
 
     IEnumerator Charge(Vector2 directionJump)
     {
@@ -176,5 +200,14 @@ public class BeaverBoss : MonoBehaviour
         isAttacking = false;
         isGigaCharging = false;
         timer = Random.Range(cooldownMin, cooldownMax);
+    }
+
+
+
+    public void TakeDamages(int degats, GameObject bullet)
+    {
+        currentHealth -= degats;
+
+        healthBar.fillAmount = currentHealth / health;
     }
 }

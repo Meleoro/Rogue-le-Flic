@@ -60,4 +60,23 @@ public class Boss : MonoBehaviour
                 break;
         }
     }
+
+
+    public void TakeDamages(int damages, GameObject bullet)
+    {
+            switch (bossType)
+            {
+                case boss.Beaver:
+                    beaverScript.TakeDamages(damages, bullet);
+                    break;
+
+                case boss.Frog:
+                    frogScript.TakeDamages(damages, bullet);
+                    break;
+
+                case boss.Turtle:
+                    turtleScript.TakeDamages(damages, bullet);
+                    break;
+            }
+    }
 }
