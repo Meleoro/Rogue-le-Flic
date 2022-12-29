@@ -88,6 +88,8 @@ public class BeaverBoss : MonoBehaviour
         // ATTAQUE
         if (isAttacking && currentAttack != 0)
         {
+            boss.anim.SetTrigger("isAttacking");
+
             // CHARGE
             if (currentAttack == 1)
             {
@@ -129,6 +131,13 @@ public class BeaverBoss : MonoBehaviour
             direction = AIPath.targetDirection;
 
             rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
+
+            boss.anim.SetBool("isWalking", true);
+        }
+
+        else
+        {
+            boss.anim.SetBool("isWalking", true);
         }
     }
 

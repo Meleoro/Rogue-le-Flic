@@ -10,7 +10,6 @@ public class CollisionWallBoss : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            Debug.Log(12);
             beaverBoss.CollideWall();
         }
     }
