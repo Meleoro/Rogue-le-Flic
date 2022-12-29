@@ -150,7 +150,17 @@ public class Bullet : MonoBehaviour
 
             bounceWalls.enabled = false;
         }
-        
+
+        else if (collision.CompareTag("Boss"))
+        {
+            collision.GetComponent<Boss>().TakeDamages(bulletDamages, gameObject);
+
+            if (!percante)
+                Destroy(gameObject);
+
+            bounceWalls.enabled = false;
+        }
+
         else if (collision.CompareTag("Box"))
         {
             if (!rebondissante)

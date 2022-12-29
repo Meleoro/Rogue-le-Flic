@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class BeaverBoss : MonoBehaviour
 {
@@ -62,6 +63,7 @@ public class BeaverBoss : MonoBehaviour
 
         timer = Random.Range(cooldownMin, cooldownMax);
         currentAttack = 0;
+        currentHealth = health;
     }
 
 
@@ -161,6 +163,10 @@ public class BeaverBoss : MonoBehaviour
 
     IEnumerator Spawn()
     {
+        transform.DOShakePosition(1, 1);
+
+        yield return new WaitForSeconds(1);
+
         int nbrEnnemies = Random.Range(minCastorSpawn, maxCastorSpawn);
 
         List<int> indexSelected = new List<int>();
@@ -177,8 +183,6 @@ public class BeaverBoss : MonoBehaviour
             Instantiate(castor, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
             indexSelected.Add(newIndex);
         }
-
-        yield return new WaitForSeconds(1);
 
         isAttacking = false;
         timer = Random.Range(cooldownMin, cooldownMax);
@@ -208,6 +212,11 @@ public class BeaverBoss : MonoBehaviour
     {
         currentHealth -= degats;
 
-        healthBar.fillAmount = currentHealth / health;
+        healthBar.fillAmount = (float) currentHealth / health;
+
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
