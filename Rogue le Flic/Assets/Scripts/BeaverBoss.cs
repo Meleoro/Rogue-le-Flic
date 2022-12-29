@@ -38,6 +38,9 @@ public class BeaverBoss : MonoBehaviour
 
     [Header("GigaCharge")]
     [SerializeField] private float strenghtGigaJump;
+    [SerializeField] private int minBoxSpawn;
+    [SerializeField] private int maxBoxSpawn;
+    [SerializeField] private GameObject box;
     private bool isGigaCharging;
 
     [Header("References")]
@@ -69,6 +72,7 @@ public class BeaverBoss : MonoBehaviour
 
     public void BeaverBehavior()
     {
+        // COOLDOWN ENTRE LES ATTAQUES
         if (!isAttacking)
         {
             timer -= Time.deltaTime;
@@ -81,6 +85,7 @@ public class BeaverBoss : MonoBehaviour
             }
         }
 
+        // ATTAQUE
         if (isAttacking && currentAttack != 0)
         {
             // CHARGE
@@ -103,7 +108,19 @@ public class BeaverBoss : MonoBehaviour
 
             currentAttack = 0;
         }
+
+        // ROTATION
+        if (direction.x > 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        else if (direction.x < -0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
     }
+    
 
     public void FixedBeaverBehavior()
     {
@@ -113,12 +130,8 @@ public class BeaverBoss : MonoBehaviour
 
             rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
         }
-
-        else if (isGigaCharging)
-        {
-
-        }
     }
+
 
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -128,6 +141,11 @@ public class BeaverBoss : MonoBehaviour
             Vector2 directionProj = col.transform.position - transform.position;
 
             HealthManager.Instance.LoseHealth(directionProj);
+        }
+
+        else if(isGigaCharging && CompareTag("Wall"))
+        {
+            CollideWall();
         }
 
         /*else if (isKicked && col.CompareTag("Ennemy"))
@@ -167,7 +185,7 @@ public class BeaverBoss : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        int nbrEnnemies = Random.Range(minCastorSpawn, maxCastorSpawn);
+        int nbrEnnemies = Random.Range(minCastorSpawn, maxCastorSpawn + 1);
 
         List<int> indexSelected = new List<int>();
 
@@ -217,6 +235,29 @@ public class BeaverBoss : MonoBehaviour
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void CollideWall()
+    {
+        if (isGigaCharging)
+        {
+            int nbrItems = Random.Range(minBoxSpawn, maxBoxSpawn + 1);
+
+            List<int> indexSelected = new List<int>();
+
+            for (int i = 0; i < nbrItems; i++)
+            {
+                int newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
+
+                while (indexSelected.Contains(newIndex))
+                {
+                    newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
+                }
+
+                Instantiate(box, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+                indexSelected.Add(newIndex);
+            }
         }
     }
 }
