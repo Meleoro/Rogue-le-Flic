@@ -50,4 +50,14 @@ public class Boss : MonoBehaviour
                 break;
         }
     }
+
+    private void FixedUpdate()
+    {
+        switch (bossType)
+        {
+            case boss.Beaver:
+                beaverScript.FixedBeaverBehavior();
+                break;
+        }
+    }
 }

@@ -21,6 +21,7 @@ public class BeaverBoss : MonoBehaviour
     private bool isAttacking;
     private bool canMove;
     private int currentAttack;
+    private Vector2 direction;
 
     [Header("Charge")]
     [SerializeField] private float distanceJumpTrigger;
@@ -39,6 +40,7 @@ public class BeaverBoss : MonoBehaviour
     [Header("References")]
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
+    [SerializeField] private BossRoom bossRoom;
     private Rigidbody2D rb;
     private Boss boss;
 
@@ -98,17 +100,30 @@ public class BeaverBoss : MonoBehaviour
         }
     }
 
+    public void FixedBeaverBehavior()
+    {
+        if (!isAttacking)
+        {
+            direction = AIPath.targetDirection;
+
+            rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
+        }
+
+        else if (isGigaCharging)
+        {
+
+        }
+    }
+
 
 
     IEnumerator Charge(Vector2 directionJump)
     {
-        Debug.Log(1);
-
         isCharging = true;
 
         rb.AddForce(-directionJump.normalized * (strenghtJump / 5), ForceMode2D.Impulse);
 
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.6f);
 
         rb.AddForce(directionJump.normalized * strenghtJump, ForceMode2D.Impulse);
 
@@ -122,7 +137,22 @@ public class BeaverBoss : MonoBehaviour
 
     IEnumerator Spawn()
     {
-        Debug.Log(2);
+        int nbrEnnemies = Random.Range(minCastorSpawn, maxCastorSpawn);
+
+        List<int> indexSelected = new List<int>();
+
+        for (int i = 0; i < nbrEnnemies; i++)
+        {
+            int newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
+
+            while (indexSelected.Contains(newIndex))
+            {
+                newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
+            }
+
+            Instantiate(castor, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+            indexSelected.Add(newIndex);
+        }
 
         yield return new WaitForSeconds(1);
 
@@ -133,15 +163,13 @@ public class BeaverBoss : MonoBehaviour
 
     IEnumerator GigaCharge(Vector2 directionJump)
     {
-        Debug.Log(3);
-
         isGigaCharging = true;
 
-        rb.AddForce(-directionJump.normalized * (strenghtJump / 5), ForceMode2D.Impulse);
+        rb.AddForce(-directionJump.normalized * (strenghtGigaJump / 5), ForceMode2D.Impulse);
 
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(1f);
 
-        rb.AddForce(directionJump.normalized * strenghtJump, ForceMode2D.Impulse);
+        rb.AddForce(directionJump.normalized * strenghtGigaJump, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.25f);
 
