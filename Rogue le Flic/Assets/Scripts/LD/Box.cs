@@ -3,19 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using DG.Tweening;
+
 
 public class Box : MonoBehaviour
 {
     [SerializeField] private GameObject fragment;
     [SerializeField] private int nbrFragments;
 
+    [SerializeField] private GameObject shadow;
+
     private bool isKicked;
     private Vector2 directionKick;
     private Rigidbody2D rb;
 
-
     public int damageFromBox;
-    
+
+
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+
+    private void Update()
+    {
+        if (!isKicked)
+        {
+            rb.velocity = Vector2.zero;
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -60,16 +79,18 @@ public class Box : MonoBehaviour
         rb.AddForce(directionKick * 25, ForceMode2D.Impulse);
     }
 
-    private void Start()
+    public IEnumerator Fall()
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
+        shadow.SetActive(true);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
 
-    private void Update()
-    { 
-        if (!isKicked)
-        {
-            rb.velocity = Vector2.zero;
-        }
+        shadow.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0);
+
+        shadow.transform.DOScale(new Vector3(1.8f, 1.8f, 1.8f), 2);
+
+        yield return new WaitForSeconds(2f);
+
+        shadow.SetActive(false);
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 }

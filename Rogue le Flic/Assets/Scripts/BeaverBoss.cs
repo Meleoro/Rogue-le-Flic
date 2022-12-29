@@ -264,7 +264,9 @@ public class BeaverBoss : MonoBehaviour
                     newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
                 }
 
-                Instantiate(box, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+                GameObject newBox = Instantiate(box, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+
+                StartCoroutine(newBox.GetComponent<Box>().Fall());
                 indexSelected.Add(newIndex);
             }
         }
