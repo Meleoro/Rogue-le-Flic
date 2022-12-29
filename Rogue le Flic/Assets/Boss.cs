@@ -13,7 +13,7 @@ public class Boss : MonoBehaviour
 
     public boss bossType;
 
-    private Beaver beaverScript;
+    private BeaverBoss beaverScript;
     private Frog frogScript;
     private Turtle turtleScript;
 
@@ -27,7 +27,7 @@ public class Boss : MonoBehaviour
         switch (bossType)
         {
             case boss.Beaver:
-                beaverScript = GetComponent<Beaver>();
+                beaverScript = GetComponent<BeaverBoss>();
                 break;
 
             case boss.Frog:

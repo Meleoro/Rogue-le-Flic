@@ -74,7 +74,7 @@ public class BeaverBoss : MonoBehaviour
             }
         }
 
-        if (isAttacking)
+        if (isAttacking && currentAttack != 0)
         {
             // CHARGE
             if (currentAttack == 1)
@@ -93,6 +93,8 @@ public class BeaverBoss : MonoBehaviour
             {
                 StartCoroutine(GigaCharge(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
             }
+
+            currentAttack = 0;
         }
     }
 
@@ -100,6 +102,8 @@ public class BeaverBoss : MonoBehaviour
 
     IEnumerator Charge(Vector2 directionJump)
     {
+        Debug.Log(1);
+
         isCharging = true;
 
         rb.AddForce(-directionJump.normalized * (strenghtJump / 5), ForceMode2D.Impulse);
@@ -118,12 +122,19 @@ public class BeaverBoss : MonoBehaviour
 
     IEnumerator Spawn()
     {
+        Debug.Log(2);
+
         yield return new WaitForSeconds(1);
+
+        isAttacking = false;
+        timer = Random.Range(cooldownMin, cooldownMax);
     }
 
 
     IEnumerator GigaCharge(Vector2 directionJump)
     {
+        Debug.Log(3);
+
         isGigaCharging = true;
 
         rb.AddForce(-directionJump.normalized * (strenghtJump / 5), ForceMode2D.Impulse);
