@@ -18,7 +18,7 @@ public class Frog : MonoBehaviour
     [Header("Frog")]
     [SerializeField] private int health;
     public GameObject tongue;
-    [SerializeField] private float distanceShotTrigger;
+    public float distanceShotTrigger;
     public float shotDuration;
     public AnimationCurve tonguePatern;
     private bool cooldownShot;
@@ -40,6 +40,8 @@ public class Frog : MonoBehaviour
 
     [HideInInspector] public bool isKicked;
     private bool stopDeath;
+
+    [HideInInspector] public bool canShoot;
 
 
     private void Start()
@@ -93,9 +95,12 @@ public class Frog : MonoBehaviour
         
             if (distance <= distanceShotTrigger && !cooldownShot)
             {
-                ennemy.anim.SetTrigger("isAttacking");
-            
-                StartCoroutine(Cooldown());
+                if (canShoot)
+                {
+                    ennemy.anim.SetTrigger("isAttacking");
+
+                    StartCoroutine(Cooldown());
+                }
             }
         
             // ROTATION FROG
