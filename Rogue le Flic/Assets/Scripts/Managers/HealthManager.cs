@@ -82,7 +82,7 @@ public class HealthManager : MonoBehaviour
     {
         timerEffects -= Time.deltaTime * speedEffects;
         
-        if (timerEffects > 0.95f)
+        if (timerEffects > 0.93f)
         {
             Time.timeScale = 0.1f;
             volume.weight = 1;
@@ -90,7 +90,7 @@ public class HealthManager : MonoBehaviour
 
         else
         {
-            Time.timeScale = Mathf.Lerp(1, 0.7f, timerEffects);
+            Time.timeScale = Mathf.Lerp(1, 0.6f, timerEffects);
             volume.weight = Mathf.Lerp(0, 1f, timerEffects);
         }
 
