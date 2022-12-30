@@ -299,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemyType: 0
   isCharging: 0
+  isDying: 0
   minCoins: 2
   maxCoins: 3
   ammunitionActive: 0
@@ -655,6 +656,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7985632225957842364, guid: 4156696091c404b43866aab9ddaa28d1, type: 3}
   m_PrefabInstance: {fileID: 9149398197147210244}
   m_PrefabAsset: {fileID: 0}
+--- !u!210 &4721331237809255490
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165195475023699896}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!114 &8724737365332090175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165195475023699896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b383b9657341aa045aad3a82b949c0dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &1165195475023699897 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7985632225957842365, guid: 4156696091c404b43866aab9ddaa28d1, type: 3}

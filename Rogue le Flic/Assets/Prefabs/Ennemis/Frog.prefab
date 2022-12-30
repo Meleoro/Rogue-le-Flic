@@ -325,6 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemyType: 1
   isCharging: 0
+  isDying: 0
   minCoins: 2
   maxCoins: 3
   ammunitionActive: 0
@@ -422,6 +423,7 @@ MonoBehaviour:
   hitEffect: {fileID: 887236585816238470}
   coins: {fileID: 7454127418636556160, guid: 5a049748f43b0b54ab007c5d5874a306, type: 3}
   canMove: 0
+  stopTongue: 0
   isKicked: 0
 --- !u!1 &6912177523317481441
 GameObject:
@@ -644,6 +646,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 818073983358800230, guid: c64bf1a2baaea054aaa63d3b46b08c88, type: 3}
   m_PrefabInstance: {fileID: 4625953393576626800}
   m_PrefabAsset: {fileID: 0}
+--- !u!210 &3437463471538991779
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5433823771522947862}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!114 &3249378192071015948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5433823771522947862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b383b9657341aa045aad3a82b949c0dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5433823771522947863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 818073983358800231, guid: c64bf1a2baaea054aaa63d3b46b08c88, type: 3}

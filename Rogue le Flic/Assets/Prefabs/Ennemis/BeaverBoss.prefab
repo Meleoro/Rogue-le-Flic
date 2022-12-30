@@ -435,9 +435,13 @@ MonoBehaviour:
   maxCastorSpawn: 3
   castor: {fileID: 3801439837385764994, guid: 905aac0dc1c1191449696f45a2ea266e, type: 3}
   strenghtGigaJump: 160
+  minBoxSpawn: 0
+  maxBoxSpawn: 0
+  box: {fileID: 0}
   AIPath: {fileID: 5297101395759883294}
   AIDestination: {fileID: 5297101395759883281}
   bossRoom: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!1 &6855633920649893502
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +678,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7985632225957842354, guid: 4156696091c404b43866aab9ddaa28d1, type: 3}
   m_PrefabInstance: {fileID: 268889881098634902}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7884083170439973674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7985632225957842364, guid: 4156696091c404b43866aab9ddaa28d1, type: 3}
+  m_PrefabInstance: {fileID: 268889881098634902}
+  m_PrefabAsset: {fileID: 0}
+--- !u!210 &5640998582081328430
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7884083170439973674}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!114 &6434441858469515189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7884083170439973674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b383b9657341aa045aad3a82b949c0dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2731770823850428394
 PrefabInstance:
   m_ObjectHideFlags: 0
