@@ -16,6 +16,7 @@ public class Box : MonoBehaviour
     private bool isKicked;
     private Vector2 directionKick;
     private Rigidbody2D rb;
+    private BoxCollider2D boxCollider2D;
 
     public int damageFromBox;
 
@@ -24,6 +25,7 @@ public class Box : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
 
@@ -32,6 +34,16 @@ public class Box : MonoBehaviour
         if (!isKicked)
         {
             rb.velocity = Vector2.zero;
+
+            if (ManagerChara.Instance.isDashing)
+            {
+                boxCollider2D.enabled = false;
+            }
+
+            else
+            {
+                boxCollider2D.enabled = true;
+            }
         }
     }
 
@@ -49,7 +61,7 @@ public class Box : MonoBehaviour
                 Explose();
             }
 
-            else
+            else if(!col.gameObject.CompareTag("Box"))
             {
                 Explose();
             }
