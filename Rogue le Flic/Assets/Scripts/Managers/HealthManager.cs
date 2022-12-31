@@ -56,7 +56,17 @@ public class HealthManager : MonoBehaviour
         if (!isInvincible && currentHealth > 0 && !ManagerChara.Instance.isDashing && !immortel)
         {
             currentHealth -= 1;
-            hearts[currentHealth].SetActive(false);
+
+            if(currentHealth % 2 == 1)
+            {
+                hearts[currentHealth].SetActive(false);
+                hearts[currentHealth - 1].SetActive(true);
+            }
+
+            else
+            {
+                hearts[currentHealth].SetActive(false);
+            }
 
             isInvincible = true;
 

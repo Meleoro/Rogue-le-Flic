@@ -8,7 +8,8 @@ public class EdgeColliderFrog : MonoBehaviour
     [SerializeField] private LayerMask obstacleLayer;
 
 
-    private RaycastHit raycastHit;
+    private RaycastHit2D hit;
+    private bool touchedSomething;
 
 
     private void Update()
@@ -17,13 +18,15 @@ public class EdgeColliderFrog : MonoBehaviour
 
         Debug.DrawRay(transform.position, ManagerChara.Instance.transform.position - transform.position, Color.red, 0.2f);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, ManagerChara.Instance.transform.position - transform.position, frog.distanceShotTrigger, obstacleLayer);
+        hit = Physics2D.Raycast(transform.position, ManagerChara.Instance.transform.position - transform.position, frog.distanceShotTrigger, obstacleLayer);
+        touchedSomething = Physics2D.Raycast(transform.position, ManagerChara.Instance.transform.position - transform.position, frog.distanceShotTrigger, obstacleLayer);
 
-        Debug.Log(hit.collider.tag);
-        if (hit.collider.CompareTag("Wall"))
+        if (touchedSomething)
         {
-            Debug.Log(12);
-            frog.canShoot = false;
+            if (hit.collider.CompareTag("Wall"))
+            {
+                frog.canShoot = false;
+            }
         }
     }
 }
