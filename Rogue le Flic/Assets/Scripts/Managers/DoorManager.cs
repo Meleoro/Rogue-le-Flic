@@ -42,6 +42,10 @@ public class DoorManager : MonoBehaviour
     private float timerFinish;
     private bool stopItem;
 
+    [Header("BossRoom")]
+    [SerializeField] private bool bossRoom;
+    private bool hasExitDoor;
+
 
     private void Start()
     {
@@ -84,6 +88,14 @@ public class DoorManager : MonoBehaviour
         }
         else
         {
+            if(!hasExitDoor && bossRoom)
+            {
+                hasExitDoor = true;
+
+                doorRight.SetActive(true);
+                doorRight.GetComponent<Door>().isFinalDoor = true;
+            }
+
             doorRight.SetActive(false);
         }
         
@@ -93,6 +105,14 @@ public class DoorManager : MonoBehaviour
         }
         else
         {
+            if (!hasExitDoor && bossRoom)
+            {
+                hasExitDoor = true;
+
+                doorBottom.SetActive(true);
+                doorBottom.GetComponent<Door>().isFinalDoor = true;
+            }
+
             doorBottom.SetActive(false);
         }
         
@@ -102,6 +122,14 @@ public class DoorManager : MonoBehaviour
         }
         else
         {
+            if (!hasExitDoor && bossRoom)
+            {
+                hasExitDoor = true;
+
+                doorUp.SetActive(true);
+                doorUp.GetComponent<Door>().isFinalDoor = true;
+            }
+
             doorUp.SetActive(false);
         }
         
@@ -111,6 +139,14 @@ public class DoorManager : MonoBehaviour
         }
         else
         {
+            if (!hasExitDoor && bossRoom)
+            {
+                hasExitDoor = true;
+
+                doorLeft.SetActive(true);
+                doorLeft.GetComponent<Door>().isFinalDoor = true;
+            }
+
             doorLeft.SetActive(false);
         }
     }
