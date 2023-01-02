@@ -978,7 +978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d8c207ba7334340b69fa52f6d304ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableEndEffect: 0
+  disableEndEffect: 1
   doorRight: {fileID: 3199553089178815588}
   doorBottom: {fileID: 2935905242330401495}
   doorLeft: {fileID: 1739961972841930317}
@@ -4800,7 +4800,7 @@ PrefabInstance:
       objectReference: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
     - target: {fileID: 5297101395759883289, guid: 3b5148e872b6d1a45a9cfeeaf305b2c1, type: 3}
       propertyPath: health
-      value: 150
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 5297101395759883289, guid: 3b5148e872b6d1a45a9cfeeaf305b2c1, type: 3}
       propertyPath: bossRoom
@@ -4819,8 +4819,12 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5297101395759883289, guid: 3b5148e872b6d1a45a9cfeeaf305b2c1, type: 3}
+      propertyPath: strenghtJump
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5297101395759883289, guid: 3b5148e872b6d1a45a9cfeeaf305b2c1, type: 3}
       propertyPath: strenghtGigaJump
-      value: 200
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 5297101395759883290, guid: 3b5148e872b6d1a45a9cfeeaf305b2c1, type: 3}
       propertyPath: m_Size.x
@@ -4938,6 +4942,10 @@ PrefabInstance:
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
       value: ProjectileCarton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7521661537025544880, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
+      propertyPath: damageFromBox
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544882, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_RootOrder

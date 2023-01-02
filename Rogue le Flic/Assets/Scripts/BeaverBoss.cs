@@ -203,7 +203,7 @@ public class BeaverBoss : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
 
         isAttacking = false;
-        isGigaCharging = true;
+        isCharging = false;
         timer = Random.Range(cooldownMin, cooldownMax);
     }
 
@@ -244,7 +244,7 @@ public class BeaverBoss : MonoBehaviour
 
         rb.AddForce(-directionJump.normalized * (strenghtGigaJump / 5), ForceMode2D.Impulse);
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1f);
 
         rb.AddForce(directionJump.normalized * strenghtGigaJump, ForceMode2D.Impulse);
 
@@ -271,7 +271,7 @@ public class BeaverBoss : MonoBehaviour
 
     public void CollideWall()
     {
-        if (isGigaCharging)
+        if (isGigaCharging || isCharging)
         {
             int nbrItems = Random.Range(minBoxSpawn, maxBoxSpawn + 1);
 
@@ -293,7 +293,7 @@ public class BeaverBoss : MonoBehaviour
             }
 
             stunTimer = stunDuration;
-            ReferenceCamera.Instance._camera.DOShakePosition(1, 2);
+            ReferenceCamera.Instance._camera.DOShakePosition(1, 1.5f);
         }
     }
 }

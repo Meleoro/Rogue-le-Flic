@@ -295,8 +295,11 @@ public class Ennemy : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
 
             isSpawning = true;
-        
-            yield return new WaitForSeconds(2);
+
+        spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0);
+        spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 2);
+
+        yield return new WaitForSeconds(2);
         
             spawnIndicator.SetActive(false);
             sprite.SetActive(true);

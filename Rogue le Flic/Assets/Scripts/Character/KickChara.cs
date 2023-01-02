@@ -36,6 +36,7 @@ public class KickChara : MonoBehaviour
     private bool slowMoActive;
     private bool slowMoStrongActive;
     private float timerSlowMo;
+    private float currentMultiplier;
     
     /*
     [Header("Effets Coup Critique")] 
@@ -67,7 +68,7 @@ public class KickChara : MonoBehaviour
     {
         if (slowMoActive)
         {
-            timerSlowMo += Time.fixedDeltaTime * slowMoSpeed;
+            timerSlowMo += Time.fixedDeltaTime * slowMoSpeed * currentMultiplier;
         }
     }
 
@@ -114,7 +115,7 @@ public class KickChara : MonoBehaviour
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             
             // Effets visuels
-            kickVolume.weight = Mathf.Lerp(0.70f, 0, timerSlowMo);
+            kickVolume.weight = Mathf.Lerp(0.70f / currentMultiplier, 0, timerSlowMo);
 
             // Mouvements camera
             if (timerSlowMo < zoomMoment)
@@ -204,7 +205,7 @@ public class KickChara : MonoBehaviour
         }
     }*/
 
-    public void SlowMo()
+    public void SlowMo(float multiplier)
     {
         if (!slowMoActive)
         {
@@ -215,6 +216,8 @@ public class KickChara : MonoBehaviour
 
             timerSlowMo = 0;
             slowMoActive = true;
+
+            currentMultiplier = multiplier;
         }
     }
 

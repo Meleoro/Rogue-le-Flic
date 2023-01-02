@@ -41,7 +41,7 @@ public class KickZone : MonoBehaviour
                         col.gameObject.GetComponent<Ennemy>().isKicked();
                     }
 
-                    KickChara.Instance.SlowMo();
+                    KickChara.Instance.SlowMo(1.5f);
                     KickChara.Instance.CameraShake();
                 }
 
@@ -50,7 +50,7 @@ public class KickZone : MonoBehaviour
                     col.gameObject.GetComponent<Ennemy>().StopCoroutines();
 
                     // EFFETS VISUELS
-                    KickChara.Instance.SlowMo();
+                    KickChara.Instance.SlowMo(0.9f);
                     KickChara.Instance.CameraShake();
 
                     col.gameObject.GetComponent<Ennemy>().isKicked();
@@ -66,7 +66,7 @@ public class KickZone : MonoBehaviour
         {
             col.GetComponent<Box>().Kicked(-KickChara.Instance.kickDirection);
 
-            KickChara.Instance.SlowMo();
+            KickChara.Instance.SlowMo(2);
             KickChara.Instance.CameraShake();
         }
     }

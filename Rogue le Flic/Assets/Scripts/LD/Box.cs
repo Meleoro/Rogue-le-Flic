@@ -61,6 +61,12 @@ public class Box : MonoBehaviour
                 Explose();
             }
 
+            else if (col.gameObject.CompareTag("Boss"))
+            {
+                col.gameObject.GetComponent<Boss>().TakeDamages(damageFromBox, gameObject);
+                Explose();
+            }
+
             else if(!col.gameObject.CompareTag("Box"))
             {
                 Explose();
