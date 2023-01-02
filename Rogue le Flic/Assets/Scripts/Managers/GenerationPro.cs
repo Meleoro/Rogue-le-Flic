@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 public class GenerationPro : MonoBehaviour
 {
     public bool testLDMode;
+    public bool bossFloor;
 
     public static GenerationPro Instance;
     
@@ -123,7 +124,7 @@ public class GenerationPro : MonoBehaviour
                     }
                     
                     // Bas
-                    else if (direction == 1)
+                    else if (direction == 1 && !bossFloor)
                     {
                         if (map.list[saveX].list[saveY - 1] == null)
                         {
@@ -202,63 +203,117 @@ public class GenerationPro : MonoBehaviour
         }
 
         SpecialRooms();
-        
+
         // SALLE DE BOSS
+        if (bossFloor)
+        {
+            if (map.list[saveX].list[saveY + 1] == null)
+            {
+                map.list[saveX].list[saveY + 1] = boss;
+
+                bossRoom = true;
+            }
+        }
+
         while (!bossRoom)
         {
-            // Détermination de la direction de la salle à ajouter
-            int direction = Random.Range(0, 4);
-                    
-            while (direction == saveDirection)
+            if (!bossRoom)
             {
-                direction = Random.Range(0, 4);
-            }
+                // Détermination de la direction de la salle à ajouter
+                int direction = Random.Range(0, 4);
 
-            saveDirection = direction;
-
-            // Droite
-            if (direction == 0)
-            {
-                if (map.list[saveX + 1].list[saveY] == null)
+                while (direction == saveDirection)
                 {
-                    map.list[saveX + 1].list[saveY] = boss;
-                    
-                    bossRoom = true;
+                    direction = Random.Range(0, 4);
+                }
+
+                saveDirection = direction;
+
+                // Droite
+                if (direction == 0)
+                {
+                    if (map.list[saveX + 1].list[saveY] == null)
+                    {
+                        if (!bossFloor)
+                        {
+                            map.list[saveX + 1].list[saveY] = boss;
+
+                            bossRoom = true;
+                        }
+
+                        else
+                        {
+                            newSaveX = saveX + 1;
+                            newSaveY = saveY;
+                        }
+                    }
+                }
+
+                // Bas
+                else if (direction == 1 && !bossFloor)
+                {
+                    if (map.list[saveX].list[saveY - 1] == null)
+                    {
+                        if (!bossFloor)
+                        {
+                            map.list[saveX].list[saveY - 1] = boss;
+
+                            bossRoom = true;
+                        }
+
+                        else
+                        {
+                            newSaveX = saveX;
+                            newSaveY = saveY - 1;
+                        }
+                    }
+                }
+
+                // Gauche
+                else if (direction == 2)
+                {
+                    if (map.list[saveX - 1].list[saveY] == null)
+                    {
+                        if (!bossFloor)
+                        {
+                            map.list[saveX - 1].list[saveY] = boss;
+
+                            bossRoom = true;
+                        }
+
+                        else
+                        {
+                            newSaveX = saveX - 1;
+                            newSaveY = saveY;
+                        }
+                    }
+                }
+
+                // Haut
+                else
+                {
+                    if (map.list[saveX].list[saveY + 1] == null)
+                    {
+                        if (!bossFloor)
+                        {
+                            map.list[saveX - 1].list[saveY] = boss;
+
+                            bossRoom = true;
+                        }
+
+                        else
+                        {
+                            newSaveX = saveX;
+                            newSaveY = saveY + 1;
+                        }
+                    }
                 }
             }
-                    
-            // Bas
-            else if (direction == 1)
-            {
-                if (map.list[saveX].list[saveY - 1] == null)
-                {
-                    map.list[saveX].list[saveY - 1] = boss;
-                    
-                    bossRoom = true;
-                }
-            }
-                    
-            // Gauche
-            else if (direction == 2)
-            {
-                if (map.list[saveX - 1].list[saveY] == null)
-                {
-                    map.list[saveX - 1].list[saveY] = boss;
+        }
 
-                    bossRoom = true;
-                }
-            }
+        if (bossFloor && !bossRoom)
+        {
 
-            // Haut
-            else
-            {
-                if (map.list[saveX].list[saveY + 1] == null)
-                {
-                    map.list[saveX].list[saveY + 1] = boss;
-                    
-                    bossRoom = true;
-                }
-            }
         }
     }
 
