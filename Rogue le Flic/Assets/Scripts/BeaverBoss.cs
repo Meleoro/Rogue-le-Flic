@@ -35,13 +35,16 @@ public class BeaverBoss : MonoBehaviour
     [SerializeField] private int minCastorSpawn;
     [SerializeField] private int maxCastorSpawn;
     [SerializeField] private GameObject castor;
+    private int cooldownSpawn;
 
     [Header("GigaCharge")]
     [SerializeField] private float strenghtGigaJump;
     [SerializeField] private int minBoxSpawn;
     [SerializeField] private int maxBoxSpawn;
+    [SerializeField] private float stunDuration;
     [SerializeField] private GameObject box;
     private bool isGigaCharging;
+    private float stunTimer;
 
     [Header("References")]
     public AIPath AIPath;
@@ -72,61 +75,78 @@ public class BeaverBoss : MonoBehaviour
 
     public void BeaverBehavior()
     {
-        // COOLDOWN ENTRE LES ATTAQUES
-        if (!isAttacking)
+        if(stunTimer <= 0)
         {
-            timer -= Time.deltaTime;
-            
-            if (timer <= 0)
+            // COOLDOWN ENTRE LES ATTAQUES
+            if (!isAttacking)
             {
-                isAttacking = true;
+                timer -= Time.deltaTime;
 
-                currentAttack = Random.Range(1, 4);
+                if (timer <= 0)
+                {
+                    isAttacking = true;
+
+                    if (cooldownSpawn > 0)
+                    {
+                        currentAttack = Random.Range(1, 3);
+                    }
+                    else
+                    {
+                        currentAttack = Random.Range(1, 4);
+                    }
+                }
+            }
+
+            // ATTAQUE
+            if (isAttacking && currentAttack != 0)
+            {
+                boss.anim.SetTrigger("isAttacking");
+
+                cooldownSpawn -= 1;
+
+                // CHARGE
+                if (currentAttack == 1)
+                {
+                    StartCoroutine(Charge(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
+                }
+
+                // SPAWN
+                else if (currentAttack == 3)
+                {
+                    StartCoroutine(Spawn());
+                }
+
+                // GIGA CHARGE
+                else
+                {
+                    StartCoroutine(GigaCharge(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
+                }
+
+                currentAttack = 0;
+            }
+
+            // ROTATION
+            if (direction.x > 0.1f)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+
+            else if (direction.x < -0.1f)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
 
-        // ATTAQUE
-        if (isAttacking && currentAttack != 0)
+        else
         {
-            boss.anim.SetTrigger("isAttacking");
-
-            // CHARGE
-            if (currentAttack == 1)
-            {
-                StartCoroutine(Charge(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
-            }
-
-            // SPAWN
-            else if (currentAttack == 2)
-            {
-                StartCoroutine(Spawn());
-            }
-
-            // GIGA CHARGE
-            else 
-            {
-                StartCoroutine(GigaCharge(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
-            }
-
-            currentAttack = 0;
-        }
-
-        // ROTATION
-        if (direction.x > 0.1f)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-
-        else if (direction.x < -0.1f)
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            stunTimer -= Time.deltaTime;
         }
     }
     
 
     public void FixedBeaverBehavior()
     {
-        if (!isAttacking)
+        if (!isAttacking && stunTimer <= 0)
         {
             direction = AIPath.targetDirection;
 
@@ -137,7 +157,7 @@ public class BeaverBoss : MonoBehaviour
 
         else
         {
-            boss.anim.SetBool("isWalking", true);
+            boss.anim.SetBool("isWalking", false);
         }
     }
 
@@ -213,6 +233,8 @@ public class BeaverBoss : MonoBehaviour
 
         isAttacking = false;
         timer = Random.Range(cooldownMin, cooldownMax);
+
+        cooldownSpawn = 2;
     }
 
 
@@ -222,11 +244,11 @@ public class BeaverBoss : MonoBehaviour
 
         rb.AddForce(-directionJump.normalized * (strenghtGigaJump / 5), ForceMode2D.Impulse);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.3f);
 
         rb.AddForce(directionJump.normalized * strenghtGigaJump, ForceMode2D.Impulse);
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.32f);
 
         isAttacking = false;
         isGigaCharging = false;
@@ -269,6 +291,9 @@ public class BeaverBoss : MonoBehaviour
                 StartCoroutine(newBox.GetComponent<Box>().Fall());
                 indexSelected.Add(newIndex);
             }
+
+            stunTimer = stunDuration;
+            ReferenceCamera.Instance._camera.DOShakePosition(1, 2);
         }
     }
 }
