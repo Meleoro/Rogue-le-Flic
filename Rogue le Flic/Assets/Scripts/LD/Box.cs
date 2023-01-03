@@ -115,7 +115,7 @@ public class Box : MonoBehaviour
         boxCollider2D.enabled = false;
         
         transform.DOMoveY(originalY + 10, 0);
-        shadow.transform.DOLocalMoveY(-10, 0);
+        //shadow.transform.DOLocalMoveY(-10, 0);
 
         isFalling = true;
         
