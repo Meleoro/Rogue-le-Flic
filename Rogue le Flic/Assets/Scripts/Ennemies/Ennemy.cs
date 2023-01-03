@@ -40,6 +40,7 @@ public class Ennemy : MonoBehaviour
     public Animator anim;
     [SerializeField] private GameObject spawnIndicator;
     public GameObject sprite;
+    [SerializeField] private BoxCollider2D _collider2D;
 
 
     private void Start()
@@ -293,23 +294,26 @@ public class Ennemy : MonoBehaviour
         spawnIndicator.SetActive(true);
         sprite.SetActive(false);
         GetComponent<BoxCollider2D>().enabled = false;
+        _collider2D.enabled = false;
 
         isSpawning = true;
 
         spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0);
         spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 2);
+        
+        sprite.transform.DOMoveY(transform.position.y + 15, 0);
 
         yield return new WaitForSeconds(2);
         
         spawnIndicator.SetActive(false);
         sprite.SetActive(true);
-
-        transform.DOMoveY(transform.position.y + 10, 0);
-        transform.DOMoveY(transform.position.y, 0.2f).SetEase(Ease.InCirc);;
+        
+        sprite.transform.DOMoveY(transform.position.y, 0.2f).SetEase(Ease.InCirc);;
         
         yield return new WaitForSeconds(0.2f);
         
         GetComponent<BoxCollider2D>().enabled = true;
+        _collider2D.enabled = true;
         
         isSpawning = false;
     }
