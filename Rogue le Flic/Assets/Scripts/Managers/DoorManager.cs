@@ -95,8 +95,10 @@ public class DoorManager : MonoBehaviour
                 doorRight.SetActive(true);
                 doorRight.GetComponent<Door>().isFinalDoor = true;
             }
-
-            doorRight.SetActive(false);
+            else
+            {
+                doorRight.SetActive(false);
+            }
         }
         
         if (GenerationPro.Instance.map.list[roomPosX].list[roomPosY - 1] != null)
@@ -112,8 +114,10 @@ public class DoorManager : MonoBehaviour
                 doorBottom.SetActive(true);
                 doorBottom.GetComponent<Door>().isFinalDoor = true;
             }
-
-            doorBottom.SetActive(false);
+            else
+            {
+                doorBottom.SetActive(false);
+            }
         }
         
         if (GenerationPro.Instance.map.list[roomPosX].list[roomPosY + 1] != null)
@@ -129,8 +133,10 @@ public class DoorManager : MonoBehaviour
                 doorUp.SetActive(true);
                 doorUp.GetComponent<Door>().isFinalDoor = true;
             }
-
-            doorUp.SetActive(false);
+            else
+            {
+                doorUp.SetActive(false);
+            }
         }
         
         if (GenerationPro.Instance.map.list[roomPosX - 1].list[roomPosY] != null)
@@ -146,8 +152,10 @@ public class DoorManager : MonoBehaviour
                 doorLeft.SetActive(true);
                 doorLeft.GetComponent<Door>().isFinalDoor = true;
             }
-
-            doorLeft.SetActive(false);
+            else
+            {
+                doorLeft.SetActive(false);
+            }
         }
     }
 
