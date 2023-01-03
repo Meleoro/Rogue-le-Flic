@@ -255,7 +255,7 @@ public class Ennemy : MonoBehaviour
     {
         if (!GenerationPro.Instance.testLDMode)
         {
-            if (!MapManager.Instance.activeRoom.GetComponent<DoorManager>().disableEndEffect)
+            if (!MapManager.Instance.activeRoom.GetComponent<DoorManager>().disableEndEffect && !MapManager.Instance.activeRoom.GetComponent<DoorManager>().bossRoom)
             {
                 ScoreManager.instance.EnemyKilled();
                 

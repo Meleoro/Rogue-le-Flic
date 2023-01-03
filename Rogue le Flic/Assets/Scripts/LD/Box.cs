@@ -110,15 +110,16 @@ public class Box : MonoBehaviour
         originalY = transform.position.y;
         boxCollider2D = GetComponent<BoxCollider2D>();
         
-        shadow.SetActive(true);
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        //shadow.SetActive(true);
+        //gameObject.GetComponent<SpriteRenderer>().enabled = false;
         boxCollider2D.enabled = false;
         
         transform.DOMoveY(originalY + 10, 0);
         shadow.transform.DOLocalMoveY(-10, 0);
 
         isFalling = true;
-
+        
+        /*
         shadow.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0);
 
         shadow.transform.DOScale(new Vector3(1.8f, 1.8f, 1.8f), 2);
@@ -130,10 +131,10 @@ public class Box : MonoBehaviour
         anim.enabled = true;
         anim.Play("Fall");
         
-        shadow.SetActive(false);
+        shadow.SetActive(false);*/
         
-        transform.DOMoveY(originalY, 0.3f).SetEase(Ease.Linear);
-        shadow.transform.DOLocalMoveY(0, 0.3f).SetEase(Ease.Linear);
+        transform.DOMoveY(originalY, 0.3f).SetEase(Ease.InCirc);
+        //shadow.transform.DOLocalMoveY(0, 0.3f).SetEase(Ease.InCirc);
         
         yield return new WaitForSeconds(0.3f);
         
