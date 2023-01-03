@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 5822967266813350168}
   - component: {fileID: 5200508662259682044}
   - component: {fileID: -4102416770093458525}
+  - component: {fileID: 1296444255}
   m_Layer: 6
   m_Name: ProjectileCarton
   m_TagString: Box
@@ -274,7 +275,7 @@ MonoBehaviour:
   fragment: {fileID: 7441002095920963516, guid: a95b5304a68911449acffd4538b892b3, type: 3}
   nbrFragments: 10
   shadow: {fileID: 2019294578}
-  damageFromBox: 20
+  damageFromBox: 25
 --- !u!61 &7521661537025544881
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -348,7 +349,7 @@ MonoBehaviour:
   - {x: 0.52264786, y: -0.71319425, z: 0}
   m_ShapePathHash: 37468917
   m_Mesh: {fileID: 0}
-  m_InstanceId: 116676
+  m_InstanceId: -179562
 --- !u!114 &-4102416770093458525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,3 +362,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121a428d3c238a1499652fd61d6ca45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1296444255
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7521661537025544878}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 933ba6d96609d9943998e50c9a85aefb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
