@@ -32,8 +32,6 @@ public class Box : MonoBehaviour
         
         anim = GetComponent<Animator>();
         anim.enabled = false;
-
-        StartCoroutine(Fall());
     }
 
 
