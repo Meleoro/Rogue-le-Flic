@@ -43,7 +43,7 @@ public class DoorManager : MonoBehaviour
     private bool stopItem;
 
     [Header("BossRoom")]
-    [SerializeField] private bool bossRoom;
+    public bool bossRoom;
     private bool hasExitDoor;
 
 
@@ -51,7 +51,7 @@ public class DoorManager : MonoBehaviour
     {
         if (!GenerationPro.Instance.testLDMode)
         {
-            if (ennemyCount != 0)
+            if (ennemyCount != 0 || bossRoom)
             {
                 doorBottom.SetActive(false);
                 doorRight.SetActive(false);

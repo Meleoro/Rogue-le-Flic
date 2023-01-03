@@ -79,4 +79,11 @@ public class Boss : MonoBehaviour
                     break;
             }
     }
+
+    public void Death()
+    {
+        MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
+        
+        Destroy(gameObject);
+    }
 }
