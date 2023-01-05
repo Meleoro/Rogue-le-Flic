@@ -37,6 +37,7 @@ public class KickChara : MonoBehaviour
     private bool slowMoStrongActive;
     private float timerSlowMo;
     private float currentMultiplier;
+    private bool hasKicked;
     
     /*
     [Header("Effets Coup Critique")] 
@@ -141,6 +142,8 @@ public class KickChara : MonoBehaviour
         Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>());
         Vector2 charaPos = ManagerChara.Instance.transform.position;
 
+        hasKicked = false;
+
         if (mouseDirection)
         {
             kickDirection = new Vector2(-mousePos.x + charaPos.x, -mousePos.y + charaPos.y).normalized;
@@ -207,8 +210,10 @@ public class KickChara : MonoBehaviour
 
     public void SlowMo(float multiplier)
     {
-        if (!slowMoActive)
+        if (!slowMoActive && !hasKicked)
         {
+            hasKicked = true;
+
             Time.timeScale = 1 / slowMoStrenght;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
 

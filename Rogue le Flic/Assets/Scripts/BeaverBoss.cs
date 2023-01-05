@@ -192,11 +192,11 @@ public class BeaverBoss : MonoBehaviour
 
     IEnumerator Charge(Vector2 directionJump)
     {
-        isCharging = true;
-
         rb.AddForce(-directionJump.normalized * (strenghtJump / 5), ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.6f);
+
+        isCharging = true;
 
         rb.AddForce(directionJump.normalized * strenghtJump, ForceMode2D.Impulse);
 
@@ -240,11 +240,11 @@ public class BeaverBoss : MonoBehaviour
 
     IEnumerator GigaCharge(Vector2 directionJump)
     {
-        isGigaCharging = true;
-
         rb.AddForce(-directionJump.normalized * (strenghtGigaJump / 5), ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(1f);
+
+        isGigaCharging = true;
 
         rb.AddForce(directionJump.normalized * strenghtGigaJump, ForceMode2D.Impulse);
 
@@ -293,7 +293,7 @@ public class BeaverBoss : MonoBehaviour
             }
 
             stunTimer = stunDuration;
-            ReferenceCamera.Instance._camera.DOShakePosition(1, 1.5f);
+            ReferenceCamera.Instance._camera.DOShakePosition(1, 1f);
         }
     }
 }
