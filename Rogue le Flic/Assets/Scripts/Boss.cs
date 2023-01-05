@@ -21,6 +21,7 @@ public class Boss : MonoBehaviour
     public Animator anim;
     public GameObject sprite;
     public GameObject spawnIndicator;
+    public BoxCollider2D _collider2D;
 
 
     private void Start()

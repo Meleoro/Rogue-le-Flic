@@ -27,6 +27,7 @@ public class FrogBoss : MonoBehaviour
     private bool canMove;
     private int currentAttack;
     private Vector2 direction;
+    private bool lookLeft;
 
     [Header("Saut")]
     [SerializeField] private float distanceJumpTrigger;
@@ -103,15 +104,17 @@ public class FrogBoss : MonoBehaviour
             // ATTAQUE
             if (isAttacking && currentAttack != 0)
             {
+                isAttacking = true;
+                
                 float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
                                             Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
 
                 if (distance < distanceJumpTrigger)
                 {
-                    
+                    StartCoroutine(Jump(Vector2.zero));
                 }
                 
-                else
+                /*else
                 {
                     boss.anim.SetTrigger("isAttacking");
 
@@ -136,17 +139,22 @@ public class FrogBoss : MonoBehaviour
                     }
 
                     currentAttack = 0;
-                }
+                }*/
+
+
+                currentAttack = 0;
             }
 
             // ROTATION
             if (direction.x > 0.1f)
             {
+                lookLeft = false;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
-
+        
             else if (direction.x < -0.1f)
             {
+                lookLeft = true;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
@@ -154,6 +162,18 @@ public class FrogBoss : MonoBehaviour
         else
         {
             stunTimer -= Time.deltaTime;
+        }
+
+        if (!isAttacking)
+        {
+            if (lookLeft)
+            {
+                boss.sprite.transform.localPosition = posLeft;
+            }
+            else
+            {
+                boss.sprite.transform.localPosition = posRight;
+            }
         }
     }
     
@@ -197,11 +217,45 @@ public class FrogBoss : MonoBehaviour
         }*/
     }
 
-    IEnumerator Jump()
+    
+    IEnumerator Jump(Vector2 destination)
     {
-        boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0);
+        boss.spawnIndicator.SetActive(true);
+        GetComponent<BoxCollider2D>().enabled = false;
+        boss._collider2D.enabled = false;
+        
+        boss.sprite.transform.DOMoveY(transform.position.y + 15, 0.2f).SetEase(Ease.InCirc);
+        
+        boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0);
+        boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 2);
+
+        transform.DOMove(destination, 4);
+        
+        yield return new WaitForSeconds(0.2f);
+
+        boss.sprite.SetActive(false);
+        
+        yield return new WaitForSeconds(1.8f);
+        
         boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 2);
+
+        yield return new WaitForSeconds(1.8f);
+        
+        boss.sprite.SetActive(true);
+        
+        boss.sprite.transform.DOMoveY(transform.position.y, 0.2f).SetEase(Ease.InCirc);;
+        
+        yield return new WaitForSeconds(0.2f);
+        
+        boss.spawnIndicator.SetActive(false);
+        
+        GetComponent<BoxCollider2D>().enabled = true;
+        boss._collider2D.enabled = true;
+        
+        isAttacking = false;
+        timer = Random.Range(cooldownMin, cooldownMax);
     }
+    
     
     IEnumerator Spawn()
     {
