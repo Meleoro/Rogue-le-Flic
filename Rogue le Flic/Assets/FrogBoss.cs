@@ -32,6 +32,7 @@ public class FrogBoss : MonoBehaviour
     [Header("Saut")]
     [SerializeField] private float distanceJumpTrigger;
     [SerializeField] private List<Transform> spotsJump;
+    private Vector2 jumpDestination;
     
     [Header("Attaque sautée")]
     [SerializeField] private float duree;
@@ -111,7 +112,7 @@ public class FrogBoss : MonoBehaviour
 
                 if (distance < distanceJumpTrigger)
                 {
-                    StartCoroutine(Jump(Vector2.zero));
+                    Jump();
                 }
                 
                 /*else
@@ -217,8 +218,28 @@ public class FrogBoss : MonoBehaviour
         }*/
     }
 
+
+    private void Jump()
+    {
+        float maxDistance = 0;
+
+        for (int k = 0; k < spotsJump.Count; k++)
+        {
+            float newDistance = Vector2.Distance(ManagerChara.Instance.transform.position, spotsJump[k].position);
+
+            if(newDistance > maxDistance)
+            {
+                jumpDestination = spotsJump[k].position;
+                maxDistance = newDistance;
+            }
+        }
+
+
+        StartCoroutine(JumpChoroutine(jumpDestination));
+    }
+
     
-    IEnumerator Jump(Vector2 destination)
+    IEnumerator JumpChoroutine(Vector2 destination)
     {
         boss.spawnIndicator.SetActive(true);
         GetComponent<BoxCollider2D>().enabled = false;
