@@ -97,7 +97,7 @@ public class FrogBoss : MonoBehaviour
                     }
                     else
                     {
-                        currentAttack = Random.Range(1, 6);
+                        currentAttack = Random.Range(1, 2);
                     }
                 }
             }
@@ -112,19 +112,17 @@ public class FrogBoss : MonoBehaviour
 
                 if (distance < distanceJumpTrigger)
                 {
-                    Jump();
+                    Jump(false);
                 }
                 
-                /*else
+                else
                 {
-                    boss.anim.SetTrigger("isAttacking");
-
                     cooldownSpawn -= 1;
 
                     // ATTAQUE SAUTEE
                     if (currentAttack == 1)
                     {
-                    
+                        Jump(true);
                     }
 
                     // SPAWN
@@ -136,11 +134,9 @@ public class FrogBoss : MonoBehaviour
                     // TIR
                     else
                     {
-                    
+                        boss.anim.SetTrigger("isAttacking");
                     }
-
-                    currentAttack = 0;
-                }*/
+                }
 
 
                 currentAttack = 0;
@@ -165,7 +161,7 @@ public class FrogBoss : MonoBehaviour
             stunTimer -= Time.deltaTime;
         }
 
-        if (!isAttacking)
+        /*if (!isAttacking)
         {
             if (lookLeft)
             {
@@ -175,7 +171,7 @@ public class FrogBoss : MonoBehaviour
             {
                 boss.sprite.transform.localPosition = posRight;
             }
-        }
+        }*/
     }
     
 
@@ -219,7 +215,7 @@ public class FrogBoss : MonoBehaviour
     }
 
 
-    private void Jump()
+    private void Jump(bool attaque)
     {
         float maxDistance = 0;
 
@@ -234,8 +230,11 @@ public class FrogBoss : MonoBehaviour
             }
         }
 
+        if (!attaque)
+            StartCoroutine(JumpChoroutine(jumpDestination));
 
-        StartCoroutine(JumpChoroutine(jumpDestination));
+        else
+            StartCoroutine(JumpAttaqueChoroutine(ManagerChara.Instance.transform.position, jumpDestination));
     }
 
     
@@ -245,30 +244,29 @@ public class FrogBoss : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         boss._collider2D.enabled = false;
         
-        boss.sprite.transform.DOMoveY(transform.position.y + 15, 0.2f).SetEase(Ease.InCirc);
+        boss.sprite.transform.DOMoveY(transform.position.y + 20, 0.2f).SetEase(Ease.InCirc);
         
         boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0);
-        boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 2);
+        boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1);
 
-        transform.DOMove(destination, 4);
+        transform.DOMove(destination, 2);
         
         yield return new WaitForSeconds(0.2f);
 
         boss.sprite.SetActive(false);
         
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(0.8f);
         
-        boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 2);
+        boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 1f);
 
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(1f);
         
         boss.sprite.SetActive(true);
         
-        boss.sprite.transform.DOMoveY(transform.position.y, 0.2f).SetEase(Ease.InCirc);;
-        
-        yield return new WaitForSeconds(0.2f);
-        
+        boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.2f).SetEase(Ease.InCirc);;
         boss.spawnIndicator.SetActive(false);
+
+        yield return new WaitForSeconds(0.2f);
         
         GetComponent<BoxCollider2D>().enabled = true;
         boss._collider2D.enabled = true;
@@ -276,8 +274,79 @@ public class FrogBoss : MonoBehaviour
         isAttacking = false;
         timer = Random.Range(cooldownMin, cooldownMax);
     }
-    
-    
+
+
+    IEnumerator JumpAttaqueChoroutine(Vector2 destination1, Vector2 destination2)
+    {
+        for(int i = 0; i < 2; i++)
+        {
+            boss.spawnIndicator.SetActive(true);
+            GetComponent<BoxCollider2D>().enabled = false;
+            boss._collider2D.enabled = false;
+
+            if(i == 0)
+            {
+                boss.sprite.transform.DOMoveY(transform.position.y + 20, 0.1f).SetEase(Ease.InCirc);
+
+                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0);
+                boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
+
+                transform.DOMove(destination1, 1);
+
+                yield return new WaitForSeconds(0.1f);
+
+                boss.sprite.SetActive(false);
+
+                yield return new WaitForSeconds(0.4f);
+
+                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0.5f);
+
+                yield return new WaitForSeconds(0.5f);
+
+                boss.sprite.SetActive(true);
+
+                boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.1f).SetEase(Ease.InCirc);
+                boss.spawnIndicator.SetActive(false);
+
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            else
+            {
+                boss.sprite.transform.DOMoveY(transform.position.y + 20, 0.2f).SetEase(Ease.InCirc);
+
+                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0);
+                boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1);
+
+                transform.DOMove(destination2, 2);
+
+                yield return new WaitForSeconds(0.2f);
+
+                boss.sprite.SetActive(false);
+
+                yield return new WaitForSeconds(0.8f);
+
+                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 1);
+
+                yield return new WaitForSeconds(1f);
+
+                boss.sprite.SetActive(true);
+
+                boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.2f).SetEase(Ease.InCirc);
+                boss.spawnIndicator.SetActive(false);
+
+                yield return new WaitForSeconds(0.2f);
+            }
+
+            GetComponent<BoxCollider2D>().enabled = true;
+            boss._collider2D.enabled = true;
+        }
+
+        isAttacking = false;
+        timer = Random.Range(cooldownMin, cooldownMax);
+    }
+
+
     IEnumerator Spawn()
     {
         transform.DOShakePosition(1, 1);
