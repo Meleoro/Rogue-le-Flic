@@ -6,6 +6,7 @@ using UnityEngine;
 public class DeathZone : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D _boxCollider2D;
+    [SerializeField] private EdgeCollider2D _edgeCollider2D;
     
     private void OnTriggerStay2D(Collider2D col)
     {
@@ -49,12 +50,12 @@ public class DeathZone : MonoBehaviour
     {
         if (ManagerChara.Instance.isDashing)
         {
-            _boxCollider2D.enabled = false;
+            _edgeCollider2D.enabled = false;
         }
 
         else
         {
-            _boxCollider2D.enabled = true;
+            _edgeCollider2D.enabled = true;
         }
     }
 }
