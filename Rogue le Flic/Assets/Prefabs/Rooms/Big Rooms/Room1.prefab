@@ -514,6 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 0
+  isFinalDoor: 0
 --- !u!1 &4488757878798622571
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 2
+  isFinalDoor: 0
 --- !u!1 &6460342174784775937
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d8c207ba7334340b69fa52f6d304ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableEndEffect: 0
   doorRight: {fileID: 3887401770892265664}
   doorBottom: {fileID: 9164836101142078635}
   doorLeft: {fileID: 6133274163969390036}
@@ -860,6 +863,7 @@ MonoBehaviour:
   - element: {fileID: 8633518367942238775, guid: a8bf0ca18e7bd324e977c7c802a0f44d, type: 3}
     spawnChances: 10
   isFinished: 0
+  bossRoom: 0
 --- !u!114 &6622452753882870427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1348,6 +1352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 3
+  isFinalDoor: 0
 --- !u!1 &9026518947988747160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,6 +1589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 1
+  isFinalDoor: 0
 --- !u!1001 &155928127361198390
 PrefabInstance:
   m_ObjectHideFlags: 0

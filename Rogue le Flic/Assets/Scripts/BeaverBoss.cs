@@ -265,7 +265,7 @@ public class BeaverBoss : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            boss.Death();
         }
     }
 

@@ -14,12 +14,14 @@ public class Boss : MonoBehaviour
     public boss bossType;
 
     private BeaverBoss beaverScript;
-    private Frog frogScript;
+    private FrogBoss frogScript;
     private Turtle turtleScript;
 
     [Header("References")]
     public Animator anim;
     public GameObject sprite;
+    public GameObject spawnIndicator;
+    public BoxCollider2D _collider2D;
 
 
     private void Start()
@@ -31,7 +33,7 @@ public class Boss : MonoBehaviour
                 break;
 
             case boss.Frog:
-                frogScript = GetComponent<Frog>();
+                frogScript = GetComponent<FrogBoss>();
                 break;
 
             case boss.Turtle:
@@ -48,6 +50,10 @@ public class Boss : MonoBehaviour
             case boss.Beaver:
                 beaverScript.BeaverBehavior();
                 break;
+            
+            case boss.Frog:
+                frogScript.FrogBehavior();
+                break;
         }
     }
 
@@ -57,6 +63,10 @@ public class Boss : MonoBehaviour
         {
             case boss.Beaver:
                 beaverScript.FixedBeaverBehavior();
+                break;
+            
+            case boss.Frog:
+                frogScript.FixedFrogBehavior();
                 break;
         }
     }
@@ -78,5 +88,12 @@ public class Boss : MonoBehaviour
                     turtleScript.TakeDamages(damages, bullet);
                     break;
             }
+    }
+
+    public void Death()
+    {
+        MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
+        
+        Destroy(gameObject);
     }
 }

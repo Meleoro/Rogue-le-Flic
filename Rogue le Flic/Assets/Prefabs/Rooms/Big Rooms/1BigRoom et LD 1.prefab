@@ -2004,8 +2004,8 @@ Transform:
   m_GameObject: {fileID: 1531634404990884459}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -49.91558, y: -18.145622, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3703071712906349633}
   - {fileID: 5492075874656843258}
@@ -2069,6 +2069,7 @@ MonoBehaviour:
   - element: {fileID: 8633518367942238775, guid: a8bf0ca18e7bd324e977c7c802a0f44d, type: 3}
     spawnChances: 10
   isFinished: 0
+  bossRoom: 0
 --- !u!114 &1657718476414128113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2410,6 +2411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 2
+  isFinalDoor: 0
 --- !u!1 &2087308644557461592
 GameObject:
   m_ObjectHideFlags: 0
@@ -2752,6 +2754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fragment: {fileID: 7441002095920963516, guid: a95b5304a68911449acffd4538b892b3, type: 3}
   nbrFragments: 10
+  shadow: {fileID: 0}
   damageFromBox: 10
 --- !u!61 &2631374092253907164
 BoxCollider2D:
@@ -2902,6 +2905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fragment: {fileID: 7441002095920963516, guid: a95b5304a68911449acffd4538b892b3, type: 3}
   nbrFragments: 10
+  shadow: {fileID: 0}
   damageFromBox: 10
 --- !u!61 &2631374092723862960
 BoxCollider2D:
@@ -3052,6 +3056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fragment: {fileID: 7441002095920963516, guid: a95b5304a68911449acffd4538b892b3, type: 3}
   nbrFragments: 10
+  shadow: {fileID: 0}
   damageFromBox: 10
 --- !u!61 &2631374093846189371
 BoxCollider2D:
@@ -5811,6 +5816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 1
+  isFinalDoor: 0
 --- !u!1 &4260198673824706360
 GameObject:
   m_ObjectHideFlags: 0
@@ -5936,6 +5942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 3
+  isFinalDoor: 0
 --- !u!1 &4300611493526054549
 GameObject:
   m_ObjectHideFlags: 0
@@ -83540,6 +83547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemyType: 0
   isCharging: 0
+  isDying: 0
   minCoins: 2
   maxCoins: 3
   ammunitionActive: 0
@@ -83815,6 +83823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemyType: 0
   isCharging: 0
+  isDying: 0
   minCoins: 2
   maxCoins: 3
   ammunitionActive: 0
@@ -85958,6 +85967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemyType: 2
   isCharging: 0
+  isDying: 0
   minCoins: 3
   maxCoins: 4
   ammunitionActive: 0
@@ -86236,6 +86246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemyType: 2
   isCharging: 0
+  isDying: 0
   minCoins: 3
   maxCoins: 4
   ammunitionActive: 0
@@ -86884,6 +86895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ennemyType: 1
   isCharging: 0
+  isDying: 0
   minCoins: 2
   maxCoins: 3
   ammunitionActive: 0
@@ -86981,7 +86993,9 @@ MonoBehaviour:
   hitEffect: {fileID: 4663146890002602640}
   coins: {fileID: 7454127418636556160, guid: 5a049748f43b0b54ab007c5d5874a306, type: 3}
   canMove: 0
+  stopTongue: 0
   isKicked: 0
+  canShoot: 0
 --- !u!1 &8724625637911360938
 GameObject:
   m_ObjectHideFlags: 0
@@ -87107,3 +87121,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 0
+  isFinalDoor: 0
