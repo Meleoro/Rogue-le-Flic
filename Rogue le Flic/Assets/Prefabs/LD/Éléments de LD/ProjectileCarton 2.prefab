@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 7521661537025544881}
   - component: {fileID: 5822967266813350168}
   - component: {fileID: -7311526158373006533}
+  - component: {fileID: 9090807791008285470}
   m_Layer: 6
   m_Name: ProjectileCarton 2
   m_TagString: Box
@@ -187,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fragment: {fileID: 7441002095920963516, guid: a95b5304a68911449acffd4538b892b3, type: 3}
   nbrFragments: 10
+  shadow: {fileID: 0}
   damageFromBox: 30
 --- !u!61 &7521661537025544881
 BoxCollider2D:
@@ -247,3 +249,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121a428d3c238a1499652fd61d6ca45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9090807791008285470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7521661537025544878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.50827885, y: -0.705439, z: 0}
+  - {x: -0.49882126, y: -0.08903289, z: 0}
+  - {x: 0.47517586, y: -0.07011688, z: 0}
+  - {x: 0.47990513, y: -0.710168, z: 0}
+  m_ShapePathHash: -825962667
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -963688
