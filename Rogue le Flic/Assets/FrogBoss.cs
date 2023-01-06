@@ -49,7 +49,9 @@ public class FrogBoss : MonoBehaviour
     private int cooldownSpawn;
 
     [Header("Tir")]
-    [SerializeField] private AnimationCurve TonguePatern;
+    public AnimationCurve tonguePatern;
+    [SerializeField] private GameObject tongue;
+    public float shotDuration;
 
     [Header("References")]
     public AIPath AIPath;
@@ -97,7 +99,7 @@ public class FrogBoss : MonoBehaviour
                     }
                     else
                     {
-                        currentAttack = Random.Range(1, 2);
+                        currentAttack = Random.Range(1, 6);
                     }
                 }
             }
@@ -135,6 +137,7 @@ public class FrogBoss : MonoBehaviour
                     else
                     {
                         boss.anim.SetTrigger("isAttacking");
+                        StartCoroutine(Shoot());
                     }
                 }
 
@@ -261,7 +264,7 @@ public class FrogBoss : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         
-        boss.sprite.SetActive(true);
+        boss.sprite.SetActive(true); 
         
         boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.2f).SetEase(Ease.InCirc);;
         boss.spawnIndicator.SetActive(false);
@@ -341,6 +344,33 @@ public class FrogBoss : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = true;
             boss._collider2D.enabled = true;
         }
+
+        isAttacking = false;
+        timer = Random.Range(cooldownMin, cooldownMax);
+    }
+
+
+    IEnumerator Shoot()
+    {
+        canMove = false;
+
+        Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
+        Vector2 destination = ManagerChara.Instance.transform.position + direction.normalized * 3;
+        
+        transform.DOShakePosition(0.75f, 0.3f);
+
+        yield return new WaitForSeconds(0.75f);
+
+        GameObject currentTongue = Instantiate(tongue, transform.position, Quaternion.identity, transform);
+
+        currentTongue.GetComponent<BossFrogTongue>().destination = destination;
+        currentTongue.GetComponent<BossFrogTongue>().tongueDuration = shotDuration;
+
+        yield return new WaitForSeconds(shotDuration);
+
+        canMove = true;
+
+        rb.AddForce(-direction.normalized, ForceMode2D.Impulse);
 
         isAttacking = false;
         timer = Random.Range(cooldownMin, cooldownMax);
