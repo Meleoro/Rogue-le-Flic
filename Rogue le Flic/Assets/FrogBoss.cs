@@ -22,25 +22,26 @@ public class FrogBoss : MonoBehaviour
     [SerializeField] private float cooldownMax;
     [SerializeField] private Vector2 posLeft;
     [SerializeField] private Vector2 posRight;
+    [SerializeField] private float stunDuration;
     private float timer;
     private bool isAttacking;
     private bool canMove;
     private int currentAttack;
     private Vector2 direction;
     private bool lookLeft;
+    private float stunTimer;
 
     [Header("Saut")]
     [SerializeField] private float distanceJumpTrigger;
     [SerializeField] private List<Transform> spotsJump;
     private Vector2 jumpDestination;
+    private int cooldownJump;
     
     [Header("Attaque sautée")]
     [SerializeField] private float duree;
     [SerializeField] private int minBoxSpawn;
     [SerializeField] private int maxBoxSpawn;
-    [SerializeField] private float stunDuration;
     [SerializeField] private GameObject box;
-    private float stunTimer;
 
     [Header("Spawn")]
     [SerializeField] private int minFrogSpawn;
@@ -112,7 +113,7 @@ public class FrogBoss : MonoBehaviour
                 float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
                                             Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
 
-                if (distance < distanceJumpTrigger)
+                if (distance < distanceJumpTrigger && cooldownJump <= 0)
                 {
                     Jump(false);
                 }
@@ -120,6 +121,7 @@ public class FrogBoss : MonoBehaviour
                 else
                 {
                     cooldownSpawn -= 1;
+                    cooldownJump -= 1;
 
                     // ATTAQUE SAUTEE
                     if (currentAttack == 1)
@@ -128,7 +130,7 @@ public class FrogBoss : MonoBehaviour
                     }
 
                     // SPAWN
-                    else if (currentAttack == 5)
+                    else if (currentAttack == 5 && cooldownSpawn <= 0)
                     {
                         StartCoroutine(Spawn());
                     }
@@ -136,7 +138,6 @@ public class FrogBoss : MonoBehaviour
                     // TIR
                     else
                     {
-                        boss.anim.SetTrigger("isAttacking");
                         StartCoroutine(Shoot());
                     }
                 }
@@ -221,6 +222,7 @@ public class FrogBoss : MonoBehaviour
     private void Jump(bool attaque)
     {
         float maxDistance = 0;
+        cooldownJump = 2;
 
         for (int k = 0; k < spotsJump.Count; k++)
         {
@@ -352,25 +354,41 @@ public class FrogBoss : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        canMove = false;
+        for(int k = 0; k < 3; k++)
+        {
+            boss.anim.SetTrigger("isAttacking");
 
-        Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
-        Vector2 destination = ManagerChara.Instance.transform.position + direction.normalized * 3;
-        
-        transform.DOShakePosition(0.75f, 0.3f);
+            canMove = false;
 
-        yield return new WaitForSeconds(0.75f);
+            Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
+            Vector2 destination = ManagerChara.Instance.transform.position + direction.normalized * 3;
 
-        GameObject currentTongue = Instantiate(tongue, transform.position, Quaternion.identity, transform);
+            transform.DOShakePosition(0.6f, 0.3f);
 
-        currentTongue.GetComponent<BossFrogTongue>().destination = destination;
-        currentTongue.GetComponent<BossFrogTongue>().tongueDuration = shotDuration;
+            yield return new WaitForSeconds(0.6f);
 
-        yield return new WaitForSeconds(shotDuration);
+            GameObject currentTongue = Instantiate(tongue, transform.position, Quaternion.identity, transform);
 
-        canMove = true;
+            currentTongue.GetComponent<BossFrogTongue>().destination = destination;
+            currentTongue.GetComponent<BossFrogTongue>().tongueDuration = shotDuration;
+
+            yield return new WaitForSeconds(shotDuration);
+
+            canMove = true;
+        }
 
         rb.AddForce(-direction.normalized, ForceMode2D.Impulse);
+
+        isAttacking = false;
+        timer = Random.Range(cooldownMin, cooldownMax);
+    }
+
+
+    public void Stun()
+    {
+        stunTimer = stunDuration;
+
+        StopAllCoroutines();
 
         isAttacking = false;
         timer = Random.Range(cooldownMin, cooldownMax);

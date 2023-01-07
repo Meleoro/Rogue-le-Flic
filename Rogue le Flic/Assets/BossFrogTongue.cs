@@ -22,6 +22,9 @@ public class BossFrogTongue : MonoBehaviour
     private EdgeCollider2D edgeCollider;
     private List<Vector2> edgeColliderPoints = new List<Vector2>();
 
+    private GameObject box;
+    private bool boxStuck;
+
 
     private void Start()
     {
@@ -56,6 +59,11 @@ public class BossFrogTongue : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (boxStuck)
+        {
+            box.transform.position = transform.position;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -65,6 +73,14 @@ public class BossFrogTongue : MonoBehaviour
             Vector2 direction = col.transform.position - transform.position;
 
             HealthManager.Instance.LoseHealth(direction);
+        }
+
+        if (col.gameObject.CompareTag("Box") && !boxStuck)
+        { 
+            box = col.gameObject;
+            boxStuck = true;
+
+            box.GetComponent<Box>().isInvincible = true;
         }
     }
 }

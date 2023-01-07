@@ -24,6 +24,8 @@ public class Box : MonoBehaviour
     private float originalY;
     private bool isFalling;
 
+    [HideInInspector] public bool isInvincible;
+
 
     private void Start()
     {
@@ -59,10 +61,10 @@ public class Box : MonoBehaviour
     {
         if (!col.gameObject.CompareTag("Player"))
         {
-            if(!isKicked)
+            if(!isKicked && !isInvincible)
                 Explose();
 
-            else if(col.gameObject.CompareTag("Ennemy"))
+            else if(col.gameObject.CompareTag("Ennemy") && !isInvincible)
             {
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(damageFromBox, gameObject);
                 Explose();
@@ -70,11 +72,20 @@ public class Box : MonoBehaviour
 
             else if (col.gameObject.CompareTag("Boss"))
             {
-                col.gameObject.GetComponent<Boss>().TakeDamages(damageFromBox, gameObject);
-                Explose();
+                if (isInvincible)
+                {
+                    col.gameObject.GetComponent<Boss>().TakeDamages(damageFromBox, gameObject);
+                    col.gameObject.GetComponent<FrogBoss>().Stun();
+                    Explose();
+                }
+                else
+                {
+                    col.gameObject.GetComponent<Boss>().TakeDamages(damageFromBox, gameObject);
+                    Explose();
+                }
             }
 
-            else if(!col.gameObject.CompareTag("Box"))
+            else if(!col.gameObject.CompareTag("Box") && !isInvincible)
             {
                 Explose();
             }
