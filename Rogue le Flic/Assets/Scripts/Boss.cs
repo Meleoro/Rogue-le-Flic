@@ -15,7 +15,7 @@ public class Boss : MonoBehaviour
 
     private BeaverBoss beaverScript;
     private FrogBoss frogScript;
-    private Turtle turtleScript;
+    private TurtleBoss turtleScript;
 
     [Header("References")]
     public Animator anim;
@@ -37,7 +37,7 @@ public class Boss : MonoBehaviour
                 break;
 
             case boss.Turtle:
-                turtleScript = GetComponent<Turtle>();
+                turtleScript = GetComponent<TurtleBoss>();
                 break;
         }
     }
@@ -54,6 +54,10 @@ public class Boss : MonoBehaviour
             case boss.Frog:
                 frogScript.FrogBehavior();
                 break;
+
+            case boss.Turtle:
+                turtleScript.TurtleBehavior();
+                break;
         }
     }
 
@@ -67,6 +71,10 @@ public class Boss : MonoBehaviour
             
             case boss.Frog:
                 frogScript.FixedFrogBehavior();
+                break;
+
+            case boss.Turtle:
+                turtleScript.FixedTurtleBehavior();
                 break;
         }
     }

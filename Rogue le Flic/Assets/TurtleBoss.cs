@@ -20,8 +20,6 @@ public class TurtleBoss : MonoBehaviour
     private int currentHealth;
     [SerializeField] private float cooldownMin;
     [SerializeField] private float cooldownMax;
-    [SerializeField] private Vector2 posLeft;
-    [SerializeField] private Vector2 posRight;
     [SerializeField] private float stunDuration;
     private float timer;
     private bool isAttacking;
@@ -30,11 +28,15 @@ public class TurtleBoss : MonoBehaviour
     private Vector2 direction;
     private bool lookLeft;
     private float stunTimer;
+    [HideInInspector] public bool isKicked;
 
     [Header("Charge Basique")]
     [SerializeField] private float chargeVitesseOriginale;
     [SerializeField] private float gainVitesseRebond;
     [SerializeField] private float vitesseMax;
+    private bool isSliding;
+    private Vector2 directionSlide;
+    private float currentSpeed;
 
     [Header("Charge Puissante")]
     [SerializeField] private float chargemementDuree;
@@ -78,7 +80,7 @@ public class TurtleBoss : MonoBehaviour
     }
 
 
-    public void FrogBehavior()
+    public void TurtleBehavior()
     {
         if (stunTimer <= 0)
         {
@@ -97,7 +99,7 @@ public class TurtleBoss : MonoBehaviour
                     }
                     else
                     {
-                        currentAttack = Random.Range(1, 4);
+                        currentAttack = 1;
                     }
                 }
             }
@@ -111,7 +113,7 @@ public class TurtleBoss : MonoBehaviour
                 // ATTAQUE SAUTEE
                 if (currentAttack == 1)
                 {
-                    Jump(true);
+                    StartCoroutine(Charge());
                 }
 
                 // SPAWN
@@ -123,9 +125,8 @@ public class TurtleBoss : MonoBehaviour
                 // TIR
                 else
                 {
-                    StartCoroutine(Shoot());
+                    StartCoroutine(GigeCharge());
                 }
-
 
                 currentAttack = 0;
             }
@@ -149,22 +150,10 @@ public class TurtleBoss : MonoBehaviour
             stunTimer -= Time.deltaTime;
             //boss.anim.SetTrigger("reset");
         }
-
-        /*if (!isAttacking)
-        {
-            if (lookLeft)
-            {
-                boss.sprite.transform.localPosition = posLeft;
-            }
-            else
-            {
-                boss.sprite.transform.localPosition = posRight;
-            }
-        }*/
     }
 
 
-    public void FixedFrogBehavior()
+    public void FixedTurtleBehavior()
     {
         if (!isAttacking && stunTimer <= 0)
         {
@@ -173,6 +162,19 @@ public class TurtleBoss : MonoBehaviour
             rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
 
             boss.anim.SetBool("isWalking", true);
+        }
+
+        else if (isSliding)
+        {
+            Debug.Log(12);
+
+            boss.anim.SetBool("isWalking", false);
+
+            if (!isKicked)
+                rb.AddForce(directionSlide * currentSpeed, ForceMode2D.Force);
+
+            else
+                rb.AddForce(directionSlide * currentSpeed * 1.5f, ForceMode2D.Force);
         }
 
         else
@@ -204,168 +206,47 @@ public class TurtleBoss : MonoBehaviour
     }
 
 
-    private void Jump(bool attaque)
+    IEnumerator Charge()
     {
-        float maxDistance = 0;
-        cooldownJump = 2;
+        canMove = false;
 
-        for (int k = 0; k < spotsJump.Count; k++)
-        {
-            float newDistance = Vector2.Distance(ManagerChara.Instance.transform.position, spotsJump[k].position);
+        boss.anim.SetTrigger("StartAttack");
+        boss.anim.SetBool("isWalking", false);
 
-            if (newDistance > maxDistance)
-            {
-                jumpDestination = spotsJump[k].position;
-                maxDistance = newDistance;
-            }
-        }
+        transform.DOShakePosition(0.75f, 0.3f);
 
-        if (!attaque)
-            StartCoroutine(JumpChoroutine(jumpDestination));
+        directionSlide = -direction.normalized;
 
-        else
-            StartCoroutine(JumpAttaqueChoroutine(ManagerChara.Instance.transform.position, jumpDestination));
+        yield return new WaitForSeconds(0.75f);
+
+        isSliding = true;
+        currentSpeed = chargeVitesseOriginale;
     }
 
 
-    IEnumerator JumpChoroutine(Vector2 destination)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        boss.spawnIndicator.SetActive(true);
-        GetComponent<BoxCollider2D>().enabled = false;
-        boss._collider2D.enabled = false;
+        if (!col.gameObject.CompareTag("Ennemy") && isSliding)
+        {
 
-        boss.sprite.transform.DOMoveY(transform.position.y + 20, 0.2f).SetEase(Ease.InCirc);
+            if(currentSpeed < vitesseMax)
+                currentSpeed += gainVitesseRebond;
 
-        boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0);
-        boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1);
+            directionSlide = Vector3.Reflect(directionSlide.normalized, col.contacts[0].normal);
 
-        transform.DOMove(destination, 2);
-
-        yield return new WaitForSeconds(0.2f);
-
-        boss.sprite.SetActive(false);
-
-        yield return new WaitForSeconds(0.8f);
-
-        boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 1f);
-
-        yield return new WaitForSeconds(1f);
-
-        boss.sprite.SetActive(true);
-
-        boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.2f).SetEase(Ease.InCirc); ;
-        boss.spawnIndicator.SetActive(false);
-
-        yield return new WaitForSeconds(0.2f);
-
-        GetComponent<BoxCollider2D>().enabled = true;
-        boss._collider2D.enabled = true;
-
-        isAttacking = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+            if (isKicked)
+            {
+                TakeDamages(3, col.gameObject);
+                boss.anim.SetTrigger("reset");
+            }
+        }
     }
 
 
-    IEnumerator JumpAttaqueChoroutine(Vector2 destination1, Vector2 destination2)
+
+    IEnumerator GigeCharge()
     {
-        for (int i = 0; i < 2; i++)
-        {
-            boss.spawnIndicator.SetActive(true);
-            GetComponent<BoxCollider2D>().enabled = false;
-            boss._collider2D.enabled = false;
-
-            if (i == 0)
-            {
-                boss.sprite.transform.DOMoveY(transform.position.y + 20, 0.1f).SetEase(Ease.InCirc);
-
-                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0);
-                boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
-
-                transform.DOMove(destination1, 1);
-
-                yield return new WaitForSeconds(0.1f);
-
-                boss.sprite.SetActive(false);
-
-                yield return new WaitForSeconds(0.4f);
-
-                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0.5f);
-
-                yield return new WaitForSeconds(0.5f);
-
-                boss.sprite.SetActive(true);
-
-                boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.1f).SetEase(Ease.InCirc);
-                boss.spawnIndicator.SetActive(false);
-
-                yield return new WaitForSeconds(0.5f);
-            }
-
-            else
-            {
-                boss.sprite.transform.DOMoveY(transform.position.y + 20, 0.2f).SetEase(Ease.InCirc);
-
-                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0);
-                boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1);
-
-                transform.DOMove(destination2, 2);
-
-                yield return new WaitForSeconds(0.2f);
-
-                boss.sprite.SetActive(false);
-
-                yield return new WaitForSeconds(0.8f);
-
-                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 1);
-
-                yield return new WaitForSeconds(1f);
-
-                boss.sprite.SetActive(true);
-
-                boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.2f).SetEase(Ease.InCirc);
-                boss.spawnIndicator.SetActive(false);
-
-                yield return new WaitForSeconds(0.2f);
-            }
-
-            GetComponent<BoxCollider2D>().enabled = true;
-            boss._collider2D.enabled = true;
-        }
-
-        isAttacking = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
-    }
-
-
-    IEnumerator Shoot()
-    {
-        for (int k = 0; k < 3; k++)
-        {
-            boss.anim.SetTrigger("isAttacking");
-
-            canMove = false;
-
-            Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
-            Vector2 destination = ManagerChara.Instance.transform.position + direction.normalized * 3;
-
-            transform.DOShakePosition(0.6f, 0.3f);
-
-            yield return new WaitForSeconds(0.6f);
-
-            GameObject currentTongue = Instantiate(tongue, transform.position, Quaternion.identity, transform);
-
-            currentTongue.GetComponent<BossFrogTongue>().destination = destination;
-            currentTongue.GetComponent<BossFrogTongue>().tongueDuration = shotDuration;
-
-            yield return new WaitForSeconds(shotDuration);
-
-            canMove = true;
-        }
-
-        //rb.AddForce(-direction.normalized, ForceMode2D.Impulse);
-
-        isAttacking = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+        yield return new WaitForSeconds(0.75f);
     }
 
 
@@ -388,7 +269,7 @@ public class TurtleBoss : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        int nbrEnnemies = Random.Range(minFrogSpawn, maxFrogSpawn + 1);
+        int nbrEnnemies = Random.Range(minTurtleSpawn, maxTurtleSpawn + 1);
 
         List<int> indexSelected = new List<int>();
 
@@ -401,7 +282,7 @@ public class TurtleBoss : MonoBehaviour
                 newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
             }
 
-            Instantiate(frog, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+            Instantiate(turtle, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
             indexSelected.Add(newIndex);
         }
 
