@@ -243,6 +243,8 @@ public class TurtleBoss : MonoBehaviour
             if(currentSpeed < vitesseMax)
                 currentSpeed += gainVitesseRebond;
 
+            directionSlide = Vector3.Reflect(directionSlide.normalized, col.contacts[0].normal);
+
             if (isKicked)
             {
                 TakeDamages(10, col.gameObject);
@@ -253,10 +255,6 @@ public class TurtleBoss : MonoBehaviour
 
                 isKicked = false;
                 isSliding = false;
-            }
-            else
-            {
-                directionSlide = Vector3.Reflect(directionSlide.normalized, col.contacts[0].normal);
             }
         }
     }
@@ -285,9 +283,11 @@ public class TurtleBoss : MonoBehaviour
         isAttacking = false;
         timer = Random.Range(cooldownMin, cooldownMax);
 
-        rb.AddForce(-directionSlide.normalized * 25, ForceMode2D.Impulse);
+        rb.AddForce(directionSlide.normalized * 25, ForceMode2D.Impulse);
 
         boss.anim.SetTrigger("reset");
+
+        CollideWall();
     }
 
 
@@ -336,5 +336,31 @@ public class TurtleBoss : MonoBehaviour
         {
             boss.Death();
         }
+    }
+
+
+    public void CollideWall()
+    {
+        int nbrItems = Random.Range(minBoxSpawn, maxBoxSpawn + 1);
+
+        List<int> indexSelected = new List<int>();
+
+        for (int i = 0; i < nbrItems; i++)
+        {
+            int newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
+
+            while (indexSelected.Contains(newIndex))
+            {
+                newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
+            }
+
+            GameObject newBox = Instantiate(box, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+
+            StartCoroutine(newBox.GetComponent<Box>().Fall());
+            indexSelected.Add(newIndex);
+        }
+
+        stunTimer = stunDuration;
+        ReferenceCamera.Instance._camera.DOShakePosition(1, 1f);
     }
 }
