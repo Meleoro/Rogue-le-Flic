@@ -78,6 +78,8 @@ public class FrogBoss : MonoBehaviour
         timer = Random.Range(cooldownMin, cooldownMax);
         currentAttack = 0;
         currentHealth = health;
+
+        boss.anim.SetBool("isWalking", false);
     }
 
 
@@ -163,6 +165,7 @@ public class FrogBoss : MonoBehaviour
         else
         {
             stunTimer -= Time.deltaTime;
+            boss.anim.SetTrigger("reset");
         }
 
         /*if (!isAttacking)
@@ -181,11 +184,13 @@ public class FrogBoss : MonoBehaviour
 
     public void FixedFrogBehavior()
     {
-        if (!isAttacking && stunTimer <= 0)
+        direction = AIPath.targetDirection;
+
+        /*if (!isAttacking && stunTimer <= 0)
         {
             direction = AIPath.targetDirection;
 
-            rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
+            //rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
 
             boss.anim.SetBool("isWalking", true);
         }
@@ -193,7 +198,7 @@ public class FrogBoss : MonoBehaviour
         else
         {
             boss.anim.SetBool("isWalking", false);
-        }
+        }*/
     }
 
 
@@ -377,7 +382,7 @@ public class FrogBoss : MonoBehaviour
             canMove = true;
         }
 
-        rb.AddForce(-direction.normalized, ForceMode2D.Impulse);
+        //rb.AddForce(-direction.normalized, ForceMode2D.Impulse);
 
         isAttacking = false;
         timer = Random.Range(cooldownMin, cooldownMax);
@@ -392,6 +397,8 @@ public class FrogBoss : MonoBehaviour
 
         isAttacking = false;
         timer = Random.Range(cooldownMin, cooldownMax);
+
+        boss.anim.SetTrigger("reset");
     }
 
 
@@ -430,6 +437,11 @@ public class FrogBoss : MonoBehaviour
         currentHealth -= degats;
 
         healthBar.fillAmount = (float) currentHealth / health;
+
+        if (bullet.CompareTag("Box"))
+        {
+            rb.AddForce(-direction.normalized * 20, ForceMode2D.Impulse);
+        }
 
         if (currentHealth <= 0)
         {
