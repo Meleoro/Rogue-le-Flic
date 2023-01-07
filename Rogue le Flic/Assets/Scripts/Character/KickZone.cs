@@ -61,6 +61,27 @@ public class KickZone : MonoBehaviour
                 col.GetComponent<Rigidbody2D>().AddForce(direction.normalized * KickChara.Instance.kickStrenght, ForceMode2D.Impulse);
             }
         }
+
+        else if (col.CompareTag("Boss"))
+        {
+            KickChara.Instance.kickedEnnemy = col.gameObject;
+
+            if (col.gameObject.GetComponent<Boss>().bossType == Boss.boss.Turtle)
+            {
+                if (col.gameObject.GetComponent<TurtleBoss>().isSliding)
+                {
+                    col.gameObject.GetComponent<TurtleBoss>().Kicked(-ManagerChara.Instance.transform.position + col.transform.position);
+                }
+
+                else
+                {
+                    col.gameObject.GetComponent<Ennemy>().isKicked();
+                }
+
+                KickChara.Instance.SlowMo(1.5f);
+                KickChara.Instance.CameraShake();
+            }
+        }
         
         else if (col.CompareTag("Box"))
         {

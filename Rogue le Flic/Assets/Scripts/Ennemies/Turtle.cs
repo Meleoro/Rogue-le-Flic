@@ -151,7 +151,7 @@ public class Turtle : MonoBehaviour
 
             if (isKicked)
             {
-                TakeDamages(3, col.gameObject);
+                TakeDamages(5, col.gameObject);
                 ennemy.anim.SetTrigger("reset");
             }
 
@@ -186,7 +186,7 @@ public class Turtle : MonoBehaviour
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(1, gameObject);
             
             else
-                col.gameObject.GetComponent<Ennemy>().TakeDamages(5, gameObject);
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(20, gameObject);
         }
         
         else if (col.gameObject.CompareTag("Box") && isSliding)

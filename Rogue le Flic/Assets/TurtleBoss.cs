@@ -34,7 +34,7 @@ public class TurtleBoss : MonoBehaviour
     [SerializeField] private float chargeVitesseOriginale;
     [SerializeField] private float gainVitesseRebond;
     [SerializeField] private float vitesseMax;
-    private bool isSliding;
+    [HideInInspector] public bool isSliding;
     private Vector2 directionSlide;
     private float currentSpeed;
 
@@ -166,8 +166,6 @@ public class TurtleBoss : MonoBehaviour
 
         else if (isSliding)
         {
-            Debug.Log(12);
-
             boss.anim.SetBool("isWalking", false);
 
             if (!isKicked)
@@ -194,15 +192,29 @@ public class TurtleBoss : MonoBehaviour
             HealthManager.Instance.LoseHealth(directionProj);
         }
 
-        /*else if (isKicked && col.CompareTag("Ennemy"))
+        else if (col.gameObject.CompareTag("Ennemy") && isSliding)
         {
-            col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
+            if (!isKicked)
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(2, gameObject);
+
+            else
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(20, gameObject);
+        }
+
+        else if (col.gameObject.CompareTag("Box") && isSliding)
+        {
+            col.gameObject.GetComponent<Box>().Explose();
+        }
+
+        else if (isKicked && col.CompareTag("Ennemy"))
+        {
+            col.GetComponent<Ennemy>().TakeDamages(20, gameObject);
         }
 
         else if (isKicked)
         {
-            TakeDamages(2, gameObject);
-        }*/
+            TakeDamages(5, gameObject);
+        }
     }
 
 
@@ -228,18 +240,32 @@ public class TurtleBoss : MonoBehaviour
     {
         if (!col.gameObject.CompareTag("Ennemy") && isSliding)
         {
-
             if(currentSpeed < vitesseMax)
                 currentSpeed += gainVitesseRebond;
 
-            directionSlide = Vector3.Reflect(directionSlide.normalized, col.contacts[0].normal);
-
             if (isKicked)
             {
-                TakeDamages(3, col.gameObject);
-                boss.anim.SetTrigger("reset");
+                TakeDamages(10, col.gameObject);
+
+                ReferenceCamera.Instance.transform.DOShakePosition(1, 1);
+
+                Stun();
+
+                isKicked = false;
+                isSliding = false;
+            }
+            else
+            {
+                directionSlide = Vector3.Reflect(directionSlide.normalized, col.contacts[0].normal);
             }
         }
+    }
+
+
+    public void Kicked(Vector2 direction)
+    {
+        directionSlide = direction;
+        isKicked = true;
     }
 
 
@@ -258,6 +284,8 @@ public class TurtleBoss : MonoBehaviour
 
         isAttacking = false;
         timer = Random.Range(cooldownMin, cooldownMax);
+
+        rb.AddForce(-directionSlide.normalized * 25, ForceMode2D.Impulse);
 
         boss.anim.SetTrigger("reset");
     }
