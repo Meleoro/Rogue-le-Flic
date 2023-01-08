@@ -236,6 +236,21 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(1);
 
 
+        switch (bossType)
+        {
+            case boss.Beaver:
+                LevelManager.Instance.banishedRooms.Add(0);
+                break;
+
+            case boss.Frog:
+                LevelManager.Instance.banishedRooms.Add(1);
+                break;
+
+            case boss.Turtle:
+                LevelManager.Instance.banishedRooms.Add(2);
+                break;
+        }
+
         ManagerChara.Instance.noControl = false;
         CameraMovements.Instance.bossEndRoom = false;
 
