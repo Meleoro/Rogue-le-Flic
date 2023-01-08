@@ -71,7 +71,7 @@ public class Boss : MonoBehaviour
         else if(canShake)
         {
             canShake = false;
-            transform.DOShakePosition(0.2f, 0.2f).OnComplete(() => canShake = true);
+            transform.DOShakePosition(0.12f, 0.2f).OnComplete(() => canShake = true);
         }
     }
 
@@ -125,7 +125,7 @@ public class Boss : MonoBehaviour
 
     IEnumerator CinematicDeath()
     {
-        ReferenceCamera.Instance.fondNoir.GetComponent<SpriteRenderer>().DOFade(1, 2);
+        ReferenceCamera.Instance.fondNoir.DOFade(1, 2);
         ReferenceCamera.Instance.finalCinematic = true;
 
         ManagerChara.Instance.noControl = true;
