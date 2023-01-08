@@ -23,9 +23,9 @@ public class HeightSortingChara : MonoBehaviour
             sortingGroup.sortingOrder = Mathf.RoundToInt(transform.position.y * 2) * -1;
 
         else if (!isChara && !ReferenceCamera.Instance.finalCinematicChara)
-            sortingGroup.sortingOrder = 30004;
+            sortingGroup.sortingOrder = 30005;
 
         else if (ReferenceCamera.Instance.finalCinematicChara)
-            sortingGroup.sortingOrder = 30004;
+            sortingGroup.sortingOrder = 30005;
     }
 }

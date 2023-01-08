@@ -138,12 +138,12 @@ public class Boss : MonoBehaviour
             case boss.Beaver:
                 if (!beaverScript.lookLeft)
                 {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(5, 0, 0);
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(4.5f, 0, 0);
                     lookLeft = false;
                 }
                 else
                 {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-5, 0, 0);
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-4.5f, 0, 0);
                     lookLeft = true;
                 }
                 break;
@@ -151,12 +151,12 @@ public class Boss : MonoBehaviour
             case boss.Frog:
                 if (!frogScript.lookLeft)
                 {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(5, 0, 0);
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(4.5f, 0, 0);
                     lookLeft = false;
                 }
                 else
                 {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-5, 0, 0);
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-4.5f, 0, 0);
                     lookLeft = true;
                 }
                 break;
@@ -164,12 +164,12 @@ public class Boss : MonoBehaviour
             case boss.Turtle:
                 if (!turtleScript.lookLeft)
                 {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(5, 0, 0);
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(4.5f, 0, 0);
                     lookLeft = false;
                 }
                 else
                 {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-5, 0, 0);
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-4.5f, 0, 0);
                     lookLeft = true;
                 }
                 break;
@@ -200,6 +200,10 @@ public class Boss : MonoBehaviour
         canShake = true;
 
         yield return new WaitForSeconds(2);
+
+
+        ReferenceChoice.Instance.kick.DOLocalMoveX(400, 2);
+        ReferenceChoice.Instance.spare.DOLocalMoveX(-400, 2);
 
 
         MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
