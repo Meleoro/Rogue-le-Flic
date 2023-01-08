@@ -37,6 +37,14 @@ public class LevelManager : MonoBehaviour
         currentLevel = startLevel;
     }
 
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.N))
+        {
+            ChangeScene();
+        }
+    }
+
     public void ChangeScene()
     {
         currentLevel += 1;

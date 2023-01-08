@@ -60,6 +60,8 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         controls = new Controls();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnEnable()
@@ -132,8 +134,6 @@ public class Gun : MonoBehaviour
                     
                     MovementsChara.Instance.lookLeft = false;
                 }
-                
-                
             }
 
             else
@@ -253,7 +253,7 @@ public class Gun : MonoBehaviour
             canBePicked = false;
 
             //explanation.SetActive(false);
-            
+
             if (ManagerChara.Instance.activeGun == null)
             {
                 ManagerChara.Instance.activeGun = gameObject;

@@ -12,8 +12,8 @@ public class ManagerChara : MonoBehaviour
     public static ManagerChara Instance;
     
     [HideInInspector] public Rigidbody2D rb;
-    [HideInInspector] public GameObject activeGun;
-    [HideInInspector] public GameObject stockWeapon;
+    public GameObject activeGun;
+    public GameObject stockWeapon;
 
     public Controls controls;
     [HideInInspector] public bool noControl;
