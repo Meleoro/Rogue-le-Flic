@@ -19,6 +19,11 @@ public class LevelManager : MonoBehaviour
     public List<GameObject> savedBoss = new List<GameObject>();
     public List<int> banishedRooms;
 
+    [Header("Save Weapons")]
+    public GameObject activeGun;
+    public GameObject stockedGun;
+
+
 
     private void Awake()
     {
@@ -47,6 +52,16 @@ public class LevelManager : MonoBehaviour
 
     public void ChangeScene()
     {
+        activeGun = Instantiate(ManagerChara.Instance.activeGun, ManagerChara.Instance.transform.position, Quaternion.identity, transform);
+
+        if(ManagerChara.Instance.stockWeapon != null)
+            stockedGun = Instantiate(ManagerChara.Instance.stockWeapon, ManagerChara.Instance.transform.position, Quaternion.identity, transform);
+
+        ManagerChara.Instance.activeGun = activeGun;
+
+        if(stockedGun != null)
+            ManagerChara.Instance.stockWeapon = stockedGun;
+
         currentLevel += 1;
 
         if(currentLevel == 1)
