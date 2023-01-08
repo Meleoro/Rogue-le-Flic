@@ -15,6 +15,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] [Range(0, 3)] private int startLevel;
     private int currentLevel;
 
+    [Header("Save Choices")]
+    public List<GameObject> savedBoss = new List<GameObject>();
+    public List<GameObject> killedBoss = new List<GameObject>();
+
 
     private void Awake()
     {

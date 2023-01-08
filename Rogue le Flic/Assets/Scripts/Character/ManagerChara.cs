@@ -37,8 +37,9 @@ public class ManagerChara : MonoBehaviour
     public Animator anim;
     public Image reload;
     [HideInInspector] public bool isFalling;
-    
-    
+    [HideInInspector] public Vector2 savePosition;
+
+
 
     private void Awake()
     {

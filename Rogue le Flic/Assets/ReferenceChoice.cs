@@ -9,9 +9,22 @@ public class ReferenceChoice : MonoBehaviour
     public RectTransform spare;
     public RectTransform kick;
 
+    public bool kicked;
+    public bool spared;
+
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    public void Kicked()
+    {
+        kicked = true;
+    }
+
+    public void Spared()
+    {
+        spared = true;
     }
 }

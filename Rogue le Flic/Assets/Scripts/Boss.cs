@@ -73,6 +73,11 @@ public class Boss : MonoBehaviour
             canShake = false;
             transform.DOShakePosition(0.12f, 0.2f).OnComplete(() => canShake = true);
         }
+
+        if (ReferenceChoice.Instance.kicked || ReferenceChoice.Instance.spared)
+        {
+            StartCoroutine(EndCinematicDeath());
+        }
     }
 
     private void FixedUpdate()
@@ -125,6 +130,8 @@ public class Boss : MonoBehaviour
 
     IEnumerator CinematicDeath()
     {
+        ManagerChara.Instance.savePosition = ManagerChara.Instance.transform.position;
+
         ReferenceCamera.Instance.fondNoir.DOFade(1, 2);
         ReferenceCamera.Instance.finalCinematic = true;
 
@@ -204,6 +211,20 @@ public class Boss : MonoBehaviour
 
         ReferenceChoice.Instance.kick.DOLocalMoveX(400, 2);
         ReferenceChoice.Instance.spare.DOLocalMoveX(-400, 2);
+    }
+
+
+    public IEnumerator EndCinematicDeath()
+    {
+        ManagerChara.Instance.transform.position = ManagerChara.Instance.savePosition;
+        CameraMovements.Instance.transform.position = ManagerChara.Instance.savePosition;
+
+        ReferenceChoice.Instance.kick.DOLocalMoveX(800, 1);
+        ReferenceChoice.Instance.spare.DOLocalMoveX(-800, 1);
+
+        ReferenceCamera.Instance.fondNoir.DOFade(0, 1);
+
+        yield return new WaitForSeconds(1);
 
 
         MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
