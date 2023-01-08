@@ -35,6 +35,7 @@ public class CameraMovements : MonoBehaviour
     [HideInInspector] public bool bossEndRoom;
     [HideInInspector] public Vector2 posCamera;
     [HideInInspector] public bool stopDezoom;
+    private bool doOnce;
 
 
     private void Awake()
@@ -184,14 +185,13 @@ public class CameraMovements : MonoBehaviour
 
     void BossEndRoomBehavior()
     {
-        if(timerZoom >= 0)
+        if(!doOnce)
         {
-            timerZoom -= Time.deltaTime;
+            doOnce = true;
 
-            _camera.orthographicSize = Mathf.Lerp(originalSize, originalSize / 1.2f, (1 - timerZoom / timeZoom) * 1.5f);
+            _camera.DOOrthoSize(originalSize / 1.2f, timeZoom);
 
-            transform.position = new Vector3(Mathf.Lerp(originalPos.x, posCamera.x, 1 - timerZoom / timeZoom),
-                Mathf.Lerp(originalPos.y, posCamera.y, 1 - timerZoom / timeZoom), transform.position.z);
+            transform.DOMove(posCamera, timeZoom - 0.2f);
         }
     }
 }

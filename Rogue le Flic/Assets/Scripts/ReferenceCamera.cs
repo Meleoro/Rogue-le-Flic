@@ -11,6 +11,7 @@ public class ReferenceCamera : MonoBehaviour
     public GameObject fondNoir;
 
     public bool finalCinematic;
+    public bool finalCinematicChara;
 
     private void Awake()
     {

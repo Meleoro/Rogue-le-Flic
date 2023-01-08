@@ -19,6 +19,9 @@ public class Boss : MonoBehaviour
     private TurtleBoss turtleScript;
 
     private bool death;
+    private bool canShake;
+    private bool lookLeft;
+
 
     [Header("References")]
     public Animator anim;
@@ -64,6 +67,11 @@ public class Boss : MonoBehaviour
                     turtleScript.TurtleBehavior();
                     break;
             }
+        }
+        else if(canShake)
+        {
+            canShake = false;
+            transform.DOShakePosition(0.2f, 0.2f).OnComplete(() => canShake = true);
         }
     }
 
@@ -120,14 +128,79 @@ public class Boss : MonoBehaviour
         ReferenceCamera.Instance.fondNoir.GetComponent<SpriteRenderer>().DOFade(1, 2);
         ReferenceCamera.Instance.finalCinematic = true;
 
+        ManagerChara.Instance.noControl = true;
+
         CameraMovements.Instance.bossEndRoom = true;
-        CameraMovements.Instance.timeZoom = 1;
-        CameraMovements.Instance.timerZoom = 1;
+        CameraMovements.Instance.timeZoom = 2;
 
-        CameraMovements.Instance.posCamera = transform.position + new Vector3(-5, 0, 0);
+        switch (bossType)
+        {
+            case boss.Beaver:
+                if (!beaverScript.lookLeft)
+                {
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(5, 0, 0);
+                    lookLeft = false;
+                }
+                else
+                {
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-5, 0, 0);
+                    lookLeft = true;
+                }
+                break;
+
+            case boss.Frog:
+                if (!frogScript.lookLeft)
+                {
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(5, 0, 0);
+                    lookLeft = false;
+                }
+                else
+                {
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-5, 0, 0);
+                    lookLeft = true;
+                }
+                break;
+
+            case boss.Turtle:
+                if (!turtleScript.lookLeft)
+                {
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(5, 0, 0);
+                    lookLeft = false;
+                }
+                else
+                {
+                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-5, 0, 0);
+                    lookLeft = true;
+                }
+                break;
+        }
+
+        yield return new WaitForSeconds(2);
 
 
-        yield return new WaitForSeconds(4);
+        transform.position = transform.position + new Vector3(0, -5000, 0);
+        CameraMovements.Instance.transform.position = CameraMovements.Instance.transform.position + new Vector3(0, -5000, 0);
+
+        ReferenceCamera.Instance.finalCinematicChara = true;
+
+        if (lookLeft)
+        {
+            ManagerChara.Instance.transform.position = transform.position + new Vector3(-20, 0, 0);
+
+            ManagerChara.Instance.transform.DOMoveX(transform.position.x - 10, 2).SetEase(Ease.Linear);
+        }
+
+        else
+        {
+            ManagerChara.Instance.transform.position = transform.position + new Vector3(20, 0, 0);
+
+            ManagerChara.Instance.transform.DOMoveX(transform.position.x + 10, 2).SetEase(Ease.Linear);
+        }
+
+        canShake = true;
+
+        yield return new WaitForSeconds(2);
+
 
         MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
 

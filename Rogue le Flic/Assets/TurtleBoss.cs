@@ -26,7 +26,7 @@ public class TurtleBoss : MonoBehaviour
     private bool canMove;
     private int currentAttack;
     private Vector2 direction;
-    private bool lookLeft;
+    [HideInInspector] public bool lookLeft;
     private float stunTimer;
     [HideInInspector] public bool isKicked;
 

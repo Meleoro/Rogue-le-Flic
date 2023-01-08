@@ -7,6 +7,8 @@ using UnityEngine.Rendering;
 public class HeightSortingChara : MonoBehaviour
 {
     private SortingGroup sortingGroup;
+
+    [SerializeField] private bool isChara;
     
 
     private void Start()
@@ -20,7 +22,10 @@ public class HeightSortingChara : MonoBehaviour
         if(!ReferenceCamera.Instance.finalCinematic)
             sortingGroup.sortingOrder = Mathf.RoundToInt(transform.position.y * 2) * -1;
 
-        else
+        else if (!isChara && !ReferenceCamera.Instance.finalCinematicChara)
+            sortingGroup.sortingOrder = 30003;
+
+        else if (ReferenceCamera.Instance.finalCinematicChara)
             sortingGroup.sortingOrder = 30003;
     }
 }

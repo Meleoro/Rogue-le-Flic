@@ -20,6 +20,7 @@ public class BeaverBoss : MonoBehaviour
     private int currentHealth;
     [SerializeField] private float cooldownMin;
     [SerializeField] private float cooldownMax;
+    [HideInInspector] public bool lookLeft;
     private float timer;
     private bool isAttacking;
     private bool canMove;
@@ -128,11 +129,13 @@ public class BeaverBoss : MonoBehaviour
             // ROTATION
             if (direction.x > 0.1f)
             {
+                lookLeft = false;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
 
             else if (direction.x < -0.1f)
             {
+                lookLeft = true;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
