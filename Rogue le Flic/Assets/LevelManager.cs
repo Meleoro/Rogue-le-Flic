@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
 
     [Header("Save Choices")]
     public List<GameObject> savedBoss = new List<GameObject>();
-    public List<GameObject> killedBoss = new List<GameObject>();
+    public List<int> banishedRooms;
 
 
     private void Awake()

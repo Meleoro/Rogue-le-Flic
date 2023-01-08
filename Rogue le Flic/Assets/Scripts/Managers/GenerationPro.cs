@@ -24,8 +24,8 @@ public class GenerationPro : MonoBehaviour
     //public List<GameObject> bigRooms;
     public List<GameObject> specialRooms;
     public List<Coord> roomsCreated;
-    public GameObject boss;
-    
+    public List<GameObject> bossRooms;
+
     [Header("Autres")]
     public Vector2 spawnLocation;
     private int saveX;
@@ -39,7 +39,10 @@ public class GenerationPro : MonoBehaviour
     private int boucleNbr;
     private int nbrBigRoom;
 
+    [Header("BossRoom")]
     private bool bossRoom;
+    private bool roomSelected;
+    private int indexBossRoom;
     private float maxDistance;
 
     private void Awake()
@@ -204,17 +207,20 @@ public class GenerationPro : MonoBehaviour
 
         SpecialRooms();
 
-        // SALLE DE BOSS
-        if (bossFloor)
-        {
-            if (map.list[saveX].list[saveY + 1] == null)
-            {
-                map.list[saveX].list[saveY + 1] = boss;
 
-                bossRoom = true;
+        // ROOM SELECTION
+        while (!roomSelected)
+        {
+            indexBossRoom = Random.Range(0, bossRooms.Count);
+
+            if (!LevelManager.Instance.banishedRooms.Contains(indexBossRoom))
+            {
+                roomSelected = true;
             }
         }
 
+
+        // SALLE DE BOSS
         while (!bossRoom)
         {
             if (!bossRoom)
@@ -234,18 +240,12 @@ public class GenerationPro : MonoBehaviour
                 {
                     if (map.list[saveX + 1].list[saveY] == null)
                     {
-                        if (!bossFloor)
-                        {
-                            map.list[saveX + 1].list[saveY] = boss;
+                        newSaveX = saveX + 1;
+                        newSaveY = saveY;
 
-                            bossRoom = true;
-                        }
+                        map.list[saveX + 1].list[saveY] = bossRooms[indexBossRoom];
 
-                        else
-                        {
-                            newSaveX = saveX + 1;
-                            newSaveY = saveY;
-                        }
+                        bossRoom = true;
                     }
                 }
 
@@ -254,18 +254,12 @@ public class GenerationPro : MonoBehaviour
                 {
                     if (map.list[saveX].list[saveY - 1] == null)
                     {
-                        if (!bossFloor)
-                        {
-                            map.list[saveX].list[saveY - 1] = boss;
+                        newSaveX = saveX;
+                        newSaveY = saveY - 1;
 
-                            bossRoom = true;
-                        }
+                        map.list[saveX].list[saveY - 1] = bossRooms[indexBossRoom];
 
-                        else
-                        {
-                            newSaveX = saveX;
-                            newSaveY = saveY - 1;
-                        }
+                        bossRoom = true;
                     }
                 }
 
@@ -274,18 +268,12 @@ public class GenerationPro : MonoBehaviour
                 {
                     if (map.list[saveX - 1].list[saveY] == null)
                     {
-                        if (!bossFloor)
-                        {
-                            map.list[saveX - 1].list[saveY] = boss;
+                        newSaveX = saveX - 1;
+                        newSaveY = saveY;
 
-                            bossRoom = true;
-                        }
+                        map.list[saveX - 1].list[saveY] = bossRooms[indexBossRoom];
 
-                        else
-                        {
-                            newSaveX = saveX - 1;
-                            newSaveY = saveY;
-                        }
+                        bossRoom = true;
                     }
                 }
 
@@ -294,26 +282,15 @@ public class GenerationPro : MonoBehaviour
                 {
                     if (map.list[saveX].list[saveY + 1] == null)
                     {
-                        if (!bossFloor)
-                        {
-                            map.list[saveX - 1].list[saveY] = boss;
+                        newSaveX = saveX;
+                        newSaveY = saveY + 1;
 
-                            bossRoom = true;
-                        }
+                        map.list[saveX].list[saveY + 1] = bossRooms[indexBossRoom];
 
-                        else
-                        {
-                            newSaveX = saveX;
-                            newSaveY = saveY + 1;
-                        }
+                        bossRoom = true;
                     }
                 }
             }
-        }
-
-        if (bossFloor && !bossRoom)
-        {
-
         }
     }
 
