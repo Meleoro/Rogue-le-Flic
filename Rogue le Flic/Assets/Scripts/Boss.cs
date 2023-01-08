@@ -211,11 +211,20 @@ public class Boss : MonoBehaviour
 
         ReferenceChoice.Instance.kick.DOLocalMoveX(400, 2);
         ReferenceChoice.Instance.spare.DOLocalMoveX(-400, 2);
+
+        yield return new WaitForSeconds(2);
+
+
+        ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = true;
+        ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = true;
     }
 
 
     public IEnumerator EndCinematicDeath()
     {
+        ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = false;
+        ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = false;
+
         ManagerChara.Instance.transform.position = ManagerChara.Instance.savePosition;
         CameraMovements.Instance.transform.position = ManagerChara.Instance.savePosition;
 
@@ -226,6 +235,9 @@ public class Boss : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
+
+        ManagerChara.Instance.noControl = false;
+        CameraMovements.Instance.bossEndRoom = false;
 
         MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
 
