@@ -8,13 +8,19 @@ public class HeightSortingChara : MonoBehaviour
 {
     private SortingGroup sortingGroup;
     
+
     private void Start()
     {
         sortingGroup = GetComponent<SortingGroup>();
     }
 
+
     void Update()
     {
-        sortingGroup.sortingOrder = Mathf.RoundToInt(transform.position.y * 2) * -1;
+        if(!ReferenceCamera.Instance.finalCinematic)
+            sortingGroup.sortingOrder = Mathf.RoundToInt(transform.position.y * 2) * -1;
+
+        else
+            sortingGroup.sortingOrder = 30003;
     }
 }

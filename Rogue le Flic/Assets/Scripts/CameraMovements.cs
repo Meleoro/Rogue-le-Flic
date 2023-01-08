@@ -16,8 +16,9 @@ public class CameraMovements : MonoBehaviour
     private float newY;
 
     public float multiplierMouse;
-    [HideInInspector] public bool canShake;
+    public GameObject fondNoir;
 
+    [HideInInspector] public bool canShake;
     [HideInInspector] public bool canMove;
 
     [Header("End Room Behavior")]
@@ -28,7 +29,13 @@ public class CameraMovements : MonoBehaviour
     private Vector2 originalPos;
     [HideInInspector] public float timerZoom;
     private float timerDezoom;
-    
+
+
+    [Header("Boss Room Behavior")]
+    [HideInInspector] public bool bossEndRoom;
+    [HideInInspector] public Vector2 posCamera;
+    [HideInInspector] public bool stopDezoom;
+
 
     private void Awake()
     {
@@ -54,19 +61,24 @@ public class CameraMovements : MonoBehaviour
         controls.Disable();
     }
 
+
     void Update()
     {
-        if (!endRoom && canMove)
+        if (!endRoom && canMove && !bossEndRoom)
         {
             transform.position = NormalBehavior();
-            
+
             originalSize = _camera.orthographicSize;
             originalPos = _camera.transform.position;
         }
 
-        else if (canMove)
+        else if (canMove && !bossEndRoom)
             EndRoomBehavior();
+
+        else if (canMove)
+            BossEndRoomBehavior();
     }
+
 
     Vector2 NormalBehavior()
     {
@@ -125,6 +137,7 @@ public class CameraMovements : MonoBehaviour
         return new Vector3(newX + newPos.x, newY + newPos.y, transform.position.z);
     }
 
+
     void EndRoomBehavior()
     {
         //ZOOM
@@ -166,6 +179,19 @@ public class CameraMovements : MonoBehaviour
             {
                 endRoom = false;
             }
+        }
+    }
+
+    void BossEndRoomBehavior()
+    {
+        if(timerZoom >= 0)
+        {
+            timerZoom -= Time.deltaTime;
+
+            _camera.orthographicSize = Mathf.Lerp(originalSize, originalSize / 1.2f, (1 - timerZoom / timeZoom) * 1.5f);
+
+            transform.position = new Vector3(Mathf.Lerp(originalPos.x, posCamera.x, 1 - timerZoom / timeZoom),
+                Mathf.Lerp(originalPos.y, posCamera.y, 1 - timerZoom / timeZoom), transform.position.z);
         }
     }
 }

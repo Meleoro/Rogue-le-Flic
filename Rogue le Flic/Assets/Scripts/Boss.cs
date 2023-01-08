@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Boss : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Boss : MonoBehaviour
     private BeaverBoss beaverScript;
     private FrogBoss frogScript;
     private TurtleBoss turtleScript;
+
+    private bool death;
 
     [Header("References")]
     public Animator anim;
@@ -45,37 +48,43 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
-        switch (bossType)
+        if (!death)
         {
-            case boss.Beaver:
-                beaverScript.BeaverBehavior();
-                break;
-            
-            case boss.Frog:
-                frogScript.FrogBehavior();
-                break;
+            switch (bossType)
+            {
+                case boss.Beaver:
+                    beaverScript.BeaverBehavior();
+                    break;
 
-            case boss.Turtle:
-                turtleScript.TurtleBehavior();
-                break;
+                case boss.Frog:
+                    frogScript.FrogBehavior();
+                    break;
+
+                case boss.Turtle:
+                    turtleScript.TurtleBehavior();
+                    break;
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        switch (bossType)
+        if (!death)
         {
-            case boss.Beaver:
-                beaverScript.FixedBeaverBehavior();
-                break;
-            
-            case boss.Frog:
-                frogScript.FixedFrogBehavior();
-                break;
+            switch (bossType)
+            {
+                case boss.Beaver:
+                    beaverScript.FixedBeaverBehavior();
+                    break;
 
-            case boss.Turtle:
-                turtleScript.FixedTurtleBehavior();
-                break;
+                case boss.Frog:
+                    frogScript.FixedFrogBehavior();
+                    break;
+
+                case boss.Turtle:
+                    turtleScript.FixedTurtleBehavior();
+                    break;
+            }
         }
     }
 
@@ -100,8 +109,28 @@ public class Boss : MonoBehaviour
 
     public void Death()
     {
+        death = true;
+
+        StartCoroutine(CinematicDeath());
+    }
+
+
+    IEnumerator CinematicDeath()
+    {
+        ReferenceCamera.Instance.fondNoir.GetComponent<SpriteRenderer>().DOFade(1, 2);
+        ReferenceCamera.Instance.finalCinematic = true;
+
+        CameraMovements.Instance.bossEndRoom = true;
+        CameraMovements.Instance.timeZoom = 1;
+        CameraMovements.Instance.timerZoom = 1;
+
+        CameraMovements.Instance.posCamera = transform.position + new Vector3(-5, 0, 0);
+
+
+        yield return new WaitForSeconds(4);
+
         MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
-        
+
         Destroy(gameObject);
     }
 }

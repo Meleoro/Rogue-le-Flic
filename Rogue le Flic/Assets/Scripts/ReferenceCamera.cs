@@ -8,6 +8,9 @@ public class ReferenceCamera : MonoBehaviour
     public static ReferenceCamera Instance;
 
     public Camera _camera;
+    public GameObject fondNoir;
+
+    public bool finalCinematic;
 
     private void Awake()
     {
