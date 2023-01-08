@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 
+
 public class Bullet : MonoBehaviour
 {
     [Header("General")]
@@ -34,6 +35,8 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public float timerArrow;
     private bool stopMoving;
     private bool doOnce;
+    private bool bounceWall;
+    private float sens;
 
     [Header("Modules")]
     [HideInInspector] public bool percante;
@@ -84,7 +87,7 @@ public class Bullet : MonoBehaviour
         // ARROW
         else if (isArrow)
         {
-            if (!stopMoving)
+            if (!stopMoving && !bounceWall)
             {
                 rb.velocity = direction * bulletSpeed;
 
@@ -103,6 +106,7 @@ public class Bullet : MonoBehaviour
                     if (!doOnce)
                     {
                         transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.3f);
+                        transform.GetComponent<SpriteRenderer>().DOFade(0.4f, 0.3f);
                         doOnce = true;
                     }
 
@@ -112,7 +116,38 @@ public class Bullet : MonoBehaviour
                 
                 else
                 {
+                    rb.velocity = direction * bulletSpeed;
+
                     bulletSpeed -= Time.deltaTime * arrowDeceleration;
+                }
+            }
+
+            if (bounceWall)
+            {
+                rb.velocity = direction * bulletSpeed;
+
+                timerArrow -= Time.deltaTime;
+
+                if(sens < 0)
+                    transform.Rotate(0, 0, 0.1f * bulletSpeed);
+
+                else
+                    transform.Rotate(0, 0, -0.1f * bulletSpeed);
+
+                if (!doOnce)
+                {
+                    transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1);
+                    transform.GetComponent<SpriteRenderer>().DOFade(0.4f, 1f);
+                    doOnce = true;
+                }
+
+                if (bulletSpeed > 0)
+                    bulletSpeed -= Time.deltaTime * arrowDeceleration;
+
+                if (timerArrow <= 0)
+                {
+                    rb.velocity = Vector2.zero;
+                    Destroy(this);
                 }
             }
         }
@@ -217,9 +252,11 @@ public class Bullet : MonoBehaviour
     {
         if (isArrow)
         {
-            transform.rotation = Quaternion.FromToRotation (-transform.right, collision.contacts[0].normal) * transform.rotation;
-            stopMoving = true;
-            rb.velocity = Vector2.zero;
+            bounceWall = true;
+
+            bulletSpeed = bulletSpeed / 2;
+            sens = UnityEngine.Random.Range(-1f, 1f);
+            timerArrow = 1f;
         }
         
         if (collision.gameObject.CompareTag("Box"))
