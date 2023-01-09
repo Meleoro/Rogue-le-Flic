@@ -46,6 +46,8 @@ public class Boss : MonoBehaviour
                 turtleScript = GetComponent<TurtleBoss>();
                 break;
         }
+        
+        canShake = false;
     }
 
 
@@ -122,9 +124,11 @@ public class Boss : MonoBehaviour
 
     public void Death()
     {
-        death = true;
-
-        StartCoroutine(CinematicDeath());
+        if (!death)
+        {
+            death = true;
+            StartCoroutine(CinematicDeath());
+        }
     }
 
 
@@ -199,6 +203,8 @@ public class Boss : MonoBehaviour
 
         else
         {
+            Debug.Log(transform.position);
+            
             ManagerChara.Instance.transform.position = transform.position + new Vector3(20, 0, 0);
 
             ManagerChara.Instance.transform.DOMoveX(transform.position.x + 10, 2).SetEase(Ease.Linear);

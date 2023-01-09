@@ -60,8 +60,6 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         controls = new Controls();
-
-        DontDestroyOnLoad(gameObject);
     }
 
     private void OnEnable()
