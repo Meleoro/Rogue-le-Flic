@@ -102,7 +102,7 @@ public class FrogBoss : MonoBehaviour
                     }
                     else
                     {
-                        currentAttack = Random.Range(1, 6);
+                        currentAttack = Random.Range(1, 2);
                     }
                 }
             }
@@ -167,18 +167,6 @@ public class FrogBoss : MonoBehaviour
             stunTimer -= Time.deltaTime;
             boss.anim.SetTrigger("reset");
         }
-
-        /*if (!isAttacking)
-        {
-            if (lookLeft)
-            {
-                boss.sprite.transform.localPosition = posLeft;
-            }
-            else
-            {
-                boss.sprite.transform.localPosition = posRight;
-            }
-        }*/
     }
     
 
@@ -278,6 +266,8 @@ public class FrogBoss : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
         
+        ReferenceCamera.Instance.transform.DOShakePosition(0.3f, 0.5f);
+        
         GetComponent<BoxCollider2D>().enabled = true;
         boss._collider2D.enabled = true;
         
@@ -315,8 +305,15 @@ public class FrogBoss : MonoBehaviour
 
                 boss.sprite.SetActive(true);
 
-                boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.1f).SetEase(Ease.InCirc);
+                boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.15f).SetEase(Ease.InCirc);
+                
+                yield return new WaitForSeconds(0.15f);
+
+                ReferenceCamera.Instance.transform.DOShakePosition(0.6f, 0.5f);
                 boss.spawnIndicator.SetActive(false);
+                
+                GetComponent<BoxCollider2D>().enabled = true;
+                boss._collider2D.enabled = true;
 
                 yield return new WaitForSeconds(0.5f);
             }
@@ -346,6 +343,8 @@ public class FrogBoss : MonoBehaviour
                 boss.spawnIndicator.SetActive(false);
 
                 yield return new WaitForSeconds(0.2f);
+                
+                ReferenceCamera.Instance.transform.DOShakePosition(0.3f, 0.4f);
             }
 
             GetComponent<BoxCollider2D>().enabled = true;
