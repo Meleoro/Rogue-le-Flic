@@ -100,7 +100,7 @@ public class FrogBoss : MonoBehaviour
 
                     if (cooldownSpawn > 0)
                     {
-                        currentAttack = Random.Range(1, 5);
+                        currentAttack = Random.Range(1, 4);
                     }
                     else
                     {
@@ -134,7 +134,7 @@ public class FrogBoss : MonoBehaviour
                     }
 
                     // SPAWN
-                    else if (currentAttack == 5 && cooldownSpawn <= 0)
+                    else if (currentAttack == 4 && cooldownSpawn <= 0)
                     {
                         StartCoroutine(Spawn());
                     }
@@ -319,6 +319,8 @@ public class FrogBoss : MonoBehaviour
                 boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.15f).SetEase(Ease.InCirc);
                 
                 yield return new WaitForSeconds(0.15f);
+                
+                SpawnBoxes();
 
                 ReferenceCamera.Instance.transform.DOShakePosition(0.7f, 0.6f);
                 boss.spawnIndicator.SetActive(false);
@@ -474,5 +476,27 @@ public class FrogBoss : MonoBehaviour
         yield return new WaitForSeconds(duration1);
         
         boss.sprite.transform.DOScale(new Vector3(originalScale.x, originalScale.y, originalScale.z), duration2);
+    }
+    
+    public void SpawnBoxes()
+    {
+        int nbrItems = Random.Range(minBoxSpawn, maxBoxSpawn + 1);
+
+        List<int> indexSelected = new List<int>();
+
+        for (int i = 0; i < nbrItems; i++)
+        {
+            int newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
+
+            while (indexSelected.Contains(newIndex))
+            {
+                newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
+            }
+
+            GameObject newBox = Instantiate(box, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+
+            StartCoroutine(newBox.GetComponent<Box>().Fall());
+            indexSelected.Add(newIndex);
+        }
     }
 }

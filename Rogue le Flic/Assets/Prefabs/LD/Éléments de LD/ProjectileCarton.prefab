@@ -276,6 +276,7 @@ MonoBehaviour:
   nbrFragments: 10
   shadow: {fileID: 2019294578}
   damageFromBox: 25
+  isInvincible: 0
 --- !u!61 &7521661537025544881
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -370,7 +371,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7521661537025544878}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 933ba6d96609d9943998e50c9a85aefb, type: 2}
   m_CullingMode: 0

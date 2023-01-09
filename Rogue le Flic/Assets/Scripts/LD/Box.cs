@@ -31,9 +31,6 @@ public class Box : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        
-        anim = GetComponent<Animator>();
-        anim.enabled = false;
     }
 
 
@@ -118,35 +115,19 @@ public class Box : MonoBehaviour
     public IEnumerator Fall()
     {
         anim = GetComponent<Animator>();
+        anim.enabled = true;
+        
         originalY = transform.position.y;
         boxCollider2D = GetComponent<BoxCollider2D>();
         
-        //shadow.SetActive(true);
-        //gameObject.GetComponent<SpriteRenderer>().enabled = false;
         boxCollider2D.enabled = false;
         
         transform.DOMoveY(originalY + 10, 0);
-        //shadow.transform.DOLocalMoveY(-10, 0);
 
         isFalling = true;
-        
-        /*
-        shadow.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0);
 
-        shadow.transform.DOScale(new Vector3(1.8f, 1.8f, 1.8f), 2);
-
-        yield return new WaitForSeconds(2f);
-
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        
-        anim.enabled = true;
-        anim.Play("Fall");
-        
-        shadow.SetActive(false);*/
-        
         transform.DOMoveY(originalY, 0.3f).SetEase(Ease.InCirc);
-        //shadow.transform.DOLocalMoveY(0, 0.3f).SetEase(Ease.InCirc);
-        
+
         yield return new WaitForSeconds(0.3f);
         
         anim.enabled = false;
