@@ -40,10 +40,11 @@ public class TurtleBoss : MonoBehaviour
 
     [Header("Charge Puissante")]
     [SerializeField] private float chargemementDuree;
-    [SerializeField] private float chargePuissanteStrenght;
+    [SerializeField] private float chargePuissanteSpeed;
     [SerializeField] private int minBoxSpawn;
     [SerializeField] private int maxBoxSpawn;
     [SerializeField] private GameObject box;
+    private bool isGigaSliding;
 
     [Header("Spawn")]
     [SerializeField] private int minTurtleSpawn;
@@ -99,7 +100,7 @@ public class TurtleBoss : MonoBehaviour
                     }
                     else
                     {
-                        currentAttack = 1;
+                        currentAttack = 2;
                     }
                 }
             }
@@ -155,6 +156,8 @@ public class TurtleBoss : MonoBehaviour
 
     public void FixedTurtleBehavior()
     {
+        direction = AIPath.targetDirection;
+        
         if (!isAttacking && stunTimer <= 0)
         {
             direction = AIPath.targetDirection;
@@ -173,6 +176,15 @@ public class TurtleBoss : MonoBehaviour
 
             else
                 rb.AddForce(directionSlide * currentSpeed * 1.5f, ForceMode2D.Force);
+        }
+        
+        else if (isGigaSliding)
+        {
+            if (!isKicked)
+                rb.AddForce(directionSlide * chargePuissanteSpeed, ForceMode2D.Force);
+
+            else
+                rb.AddForce(directionSlide * chargePuissanteSpeed * 1.5f, ForceMode2D.Force);
         }
 
         else
@@ -257,6 +269,18 @@ public class TurtleBoss : MonoBehaviour
                 isSliding = false;
             }
         }
+        
+        else if (!col.gameObject.CompareTag("Ennemy") && isGigaSliding)
+        {
+            TakeDamages(10, col.gameObject);
+
+            ReferenceCamera.Instance.transform.DOShakePosition(1, 1);
+
+            Stun();
+
+            isKicked = false;
+            isGigaSliding = false;
+        }
     }
 
 
@@ -270,7 +294,27 @@ public class TurtleBoss : MonoBehaviour
 
     IEnumerator GigeCharge()
     {
-        yield return new WaitForSeconds(0.75f);
+        boss.anim.SetTrigger("StartAttack");
+        boss.anim.SetBool("isWalking", false);
+        
+        transform.DOShakePosition(0.6f, 0.3f);
+        
+        yield return new WaitForSeconds(0.6f);
+        
+        transform.DOShakePosition(0.6f, 1f);
+        
+        yield return new WaitForSeconds(0.6f);
+        
+        transform.DOShakePosition(0.6f, 2f);
+        
+        yield return new WaitForSeconds(0.6f);
+        
+        canMove = false;
+
+        directionSlide = direction.normalized;
+
+        isGigaSliding = true;
+        currentSpeed = chargeVitesseOriginale;
     }
 
 
