@@ -54,6 +54,7 @@ public class FrogBoss : MonoBehaviour
     public AnimationCurve tonguePatern;
     [SerializeField] private GameObject tongue;
     public float shotDuration;
+    [HideInInspector] public bool recul;
 
     [Header("References")]
     public AIPath AIPath;
@@ -103,7 +104,7 @@ public class FrogBoss : MonoBehaviour
                     }
                     else
                     {
-                        currentAttack = Random.Range(1, 2);
+                        currentAttack = Random.Range(1, 5);
                     }
                 }
             }
@@ -450,7 +451,11 @@ public class FrogBoss : MonoBehaviour
 
         if (bullet.CompareTag("Box"))
         {
-            rb.AddForce(-direction.normalized * 20, ForceMode2D.Impulse);
+            /*if (isIn)
+            {
+                recul = false;
+                rb.AddForce((bullet.transform.position - transform.position).normalized * 20, ForceMode2D.Impulse);
+            }*/
         }
 
         if (currentHealth <= 0)

@@ -12,7 +12,7 @@ public class BossFrogTongue : MonoBehaviour
     public Vector2 retour;
     public float tongueDuration;
 
-    private float avancée;
+    private float avancÃ©e;
 
     private Rigidbody2D rb;
     private LineRenderer lr;
@@ -50,17 +50,17 @@ public class BossFrogTongue : MonoBehaviour
         edgeColliderPoints[1] = (-transform.position + frog.gameObject.transform.position) * 2;
         edgeCollider.SetPoints(edgeColliderPoints);
 
-        avancée += Time.deltaTime / frog.shotDuration;
+        avancÃ©e += Time.deltaTime / frog.shotDuration;
 
-        transform.position = new Vector2(Mathf.Lerp(retour.x, destination.x, frog.tonguePatern.Evaluate(avancée)),
-            Mathf.Lerp(retour.y, destination.y, frog.tonguePatern.Evaluate(avancée)));
+        transform.position = new Vector2(Mathf.Lerp(retour.x, destination.x, frog.tonguePatern.Evaluate(avancÃ©e)),
+            Mathf.Lerp(retour.y, destination.y, frog.tonguePatern.Evaluate(avancÃ©e)));
 
-        if (avancée >= 1)
+        if (avancÃ©e >= 1)
         {
             Destroy(gameObject);
         }
 
-        if (boxStuck)
+        else if (boxStuck)
         {
             box.transform.position = transform.position;
         }

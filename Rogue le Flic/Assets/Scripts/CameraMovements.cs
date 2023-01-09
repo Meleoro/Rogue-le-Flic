@@ -67,8 +67,6 @@ public class CameraMovements : MonoBehaviour
     {
         if (!endRoom && canMove && !bossEndRoom)
         {
-            Debug.Log(12);
-            
             transform.position = NormalBehavior();
 
             originalSize = _camera.orthographicSize;

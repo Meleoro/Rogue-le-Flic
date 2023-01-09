@@ -32,8 +32,6 @@ public class LevelManager : MonoBehaviour
 
         else
             Destroy(gameObject);
-        
-        DontDestroyOnLoad(gameObject);
     }
 
 

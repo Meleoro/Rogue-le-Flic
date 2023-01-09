@@ -40,7 +40,7 @@ public class Box : MonoBehaviour
     private void Update()
     {
         if (!isKicked
-            && !isFalling)
+            && !isFalling && !isInvincible)
         {
             rb.velocity = Vector2.zero;
 
