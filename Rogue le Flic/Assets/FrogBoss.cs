@@ -36,6 +36,7 @@ public class FrogBoss : MonoBehaviour
     [SerializeField] private List<Transform> spotsJump;
     private Vector2 jumpDestination;
     private int cooldownJump;
+    private Vector3 originalScale;
     
     [Header("Attaque sautée")]
     [SerializeField] private float duree;
@@ -284,6 +285,10 @@ public class FrogBoss : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
             boss._collider2D.enabled = false;
 
+            StartCoroutine(Decollage(0.4f, 0.1f));
+
+            yield return new WaitForSeconds(0.4f);
+
             if(i == 0)
             {
                 boss.sprite.transform.DOMoveY(transform.position.y + 20, 0.1f).SetEase(Ease.InCirc);
@@ -446,5 +451,17 @@ public class FrogBoss : MonoBehaviour
         {
             boss.Death();
         }
+    }
+
+
+    IEnumerator Decollage(float duration1, float duration2)
+    {
+        originalScale = boss.sprite.transform.localScale;
+        
+        boss.sprite.transform.DOScale(new Vector3(originalScale.x + 0.1f, originalScale.y - 0.1f, originalScale.z), duration1);
+        
+        yield return new WaitForSeconds(duration1);
+        
+        boss.sprite.transform.DOScale(new Vector3(originalScale.x, originalScale.y, originalScale.z), duration2);
     }
 }
