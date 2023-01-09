@@ -239,6 +239,10 @@ public class FrogBoss : MonoBehaviour
     
     IEnumerator JumpChoroutine(Vector2 destination)
     {
+        StartCoroutine(Decollage(0.4f, 0.1f));
+
+        yield return new WaitForSeconds(0.4f);
+        
         boss.spawnIndicator.SetActive(true);
         GetComponent<BoxCollider2D>().enabled = false;
         boss._collider2D.enabled = false;
@@ -263,9 +267,10 @@ public class FrogBoss : MonoBehaviour
         boss.sprite.SetActive(true); 
         
         boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.2f).SetEase(Ease.InCirc);;
-        boss.spawnIndicator.SetActive(false);
 
         yield return new WaitForSeconds(0.2f);
+        
+        boss.spawnIndicator.SetActive(false);
         
         ReferenceCamera.Instance.transform.DOShakePosition(0.3f, 0.5f);
         
@@ -281,13 +286,13 @@ public class FrogBoss : MonoBehaviour
     {
         for(int i = 0; i < 2; i++)
         {
-            boss.spawnIndicator.SetActive(true);
-            GetComponent<BoxCollider2D>().enabled = false;
-            boss._collider2D.enabled = false;
-
             StartCoroutine(Decollage(0.4f, 0.1f));
 
             yield return new WaitForSeconds(0.4f);
+            
+            boss.spawnIndicator.SetActive(true);
+            GetComponent<BoxCollider2D>().enabled = false;
+            boss._collider2D.enabled = false;
 
             if(i == 0)
             {
@@ -314,7 +319,7 @@ public class FrogBoss : MonoBehaviour
                 
                 yield return new WaitForSeconds(0.15f);
 
-                ReferenceCamera.Instance.transform.DOShakePosition(0.6f, 0.5f);
+                ReferenceCamera.Instance.transform.DOShakePosition(0.7f, 0.6f);
                 boss.spawnIndicator.SetActive(false);
                 
                 GetComponent<BoxCollider2D>().enabled = true;
@@ -345,9 +350,10 @@ public class FrogBoss : MonoBehaviour
                 boss.sprite.SetActive(true);
 
                 boss.sprite.transform.DOMoveY(transform.position.y + 1, 0.2f).SetEase(Ease.InCirc);
-                boss.spawnIndicator.SetActive(false);
 
                 yield return new WaitForSeconds(0.2f);
+                
+                boss.spawnIndicator.SetActive(false);
                 
                 ReferenceCamera.Instance.transform.DOShakePosition(0.3f, 0.4f);
             }
