@@ -21,6 +21,8 @@ public class Box : MonoBehaviour
 
     public int damageFromBox;
 
+    [SerializeField] private List<Sprite> piecesSprites;
+
     private float originalY;
     private bool isFalling;
 
@@ -96,6 +98,8 @@ public class Box : MonoBehaviour
             Vector3 basePos = new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.1f, 0.5f));
             
             GameObject currentFragment = Instantiate(fragment, transform.position + basePos, Quaternion.identity);
+
+            currentFragment.GetComponent<SpriteRenderer>().sprite = piecesSprites[Random.Range(0, piecesSprites.Count)];
 
             if(Random.Range(0, 2) == 0)
                 currentFragment.GetComponent<Fragment>().goLeft = true;

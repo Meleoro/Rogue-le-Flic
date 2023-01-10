@@ -203,8 +203,6 @@ public class Boss : MonoBehaviour
 
         else
         {
-            Debug.Log(transform.position);
-            
             ManagerChara.Instance.transform.position = transform.position + new Vector3(20, 0, 0);
 
             ManagerChara.Instance.transform.DOMoveX(transform.position.x + 10, 2).SetEase(Ease.Linear);
@@ -256,6 +254,9 @@ public class Boss : MonoBehaviour
                 LevelManager.Instance.banishedRooms.Add(2);
                 break;
         }
+        
+        ReferenceCamera.Instance.finalCinematic = false;
+        ReferenceCamera.Instance.finalCinematicChara = false;
 
         ManagerChara.Instance.noControl = false;
         CameraMovements.Instance.bossEndRoom = false;
