@@ -45,6 +45,8 @@ public class TurtleBoss : MonoBehaviour
     [SerializeField] private int maxBoxSpawn;
     [SerializeField] private GameObject box;
     private bool isGigaSliding;
+    private float timerShake;
+    private bool canShake;
 
     [Header("Spawn")]
     [SerializeField] private int minTurtleSpawn;
@@ -143,6 +145,17 @@ public class TurtleBoss : MonoBehaviour
             {
                 lookLeft = true;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+
+            if (timerShake > 0)
+            {
+                timerShake -= Time.deltaTime;
+
+                if (canShake)
+                {
+                    canShake = false;
+                    transform.DOShakePosition(0.05f, (chargemementDuree - timerShake) / 2).OnComplete((() => canShake = true));
+                }
             }
         }
 
@@ -296,22 +309,15 @@ public class TurtleBoss : MonoBehaviour
     {
         boss.anim.SetTrigger("StartAttack");
         boss.anim.SetBool("isWalking", false);
+
+        canShake = true;
+        timerShake = chargemementDuree;
         
-        transform.DOShakePosition(0.6f, 0.3f);
-        
-        yield return new WaitForSeconds(0.6f);
-        
-        transform.DOShakePosition(0.6f, 1f);
-        
-        yield return new WaitForSeconds(0.6f);
-        
-        transform.DOShakePosition(0.6f, 2f);
-        
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(chargemementDuree);
         
         canMove = false;
 
-        directionSlide = direction.normalized;
+        directionSlide = ManagerChara.Instance.transform.position - transform.position;
 
         isGigaSliding = true;
         currentSpeed = chargeVitesseOriginale;
