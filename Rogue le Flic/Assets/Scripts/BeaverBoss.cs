@@ -52,6 +52,7 @@ public class BeaverBoss : MonoBehaviour
     public AIDestinationSetter AIDestination;
     [SerializeField] private BossRoom bossRoom;
     [SerializeField] private Image healthBar;
+    [SerializeField] private GameObject VFXStun;
     private Rigidbody2D rb;
     private Boss boss;
 
@@ -78,6 +79,8 @@ public class BeaverBoss : MonoBehaviour
     {
         if(stunTimer <= 0)
         {
+            VFXStun.SetActive(false);
+            
             // COOLDOWN ENTRE LES ATTAQUES
             if (!isAttacking)
             {
@@ -143,6 +146,8 @@ public class BeaverBoss : MonoBehaviour
         else
         {
             stunTimer -= Time.deltaTime;
+            
+            VFXStun.SetActive(true);
         }
     }
     
