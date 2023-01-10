@@ -61,6 +61,7 @@ public class FrogBoss : MonoBehaviour
     public AIDestinationSetter AIDestination;
     [SerializeField] private BossRoom bossRoom;
     [SerializeField] private Image healthBar;
+    [SerializeField] private GameObject VFXStun;
     private Rigidbody2D rb;
     private Boss boss;
 
@@ -89,6 +90,8 @@ public class FrogBoss : MonoBehaviour
     {
         if(stunTimer <= 0)
         {
+            VFXStun.SetActive(false);
+            
             // COOLDOWN ENTRE LES ATTAQUES
             if (!isAttacking)
             {
@@ -168,6 +171,8 @@ public class FrogBoss : MonoBehaviour
         {
             stunTimer -= Time.deltaTime;
             boss.anim.SetTrigger("reset");
+            
+            VFXStun.SetActive(true);
         }
     }
     
