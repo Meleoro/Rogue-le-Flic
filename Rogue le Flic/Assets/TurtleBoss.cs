@@ -317,7 +317,7 @@ public class TurtleBoss : MonoBehaviour
         
         canMove = false;
 
-        directionSlide = ManagerChara.Instance.transform.position - transform.position;
+        directionSlide = (ManagerChara.Instance.transform.position - transform.position).normalized;
 
         isGigaSliding = true;
         currentSpeed = chargeVitesseOriginale;
