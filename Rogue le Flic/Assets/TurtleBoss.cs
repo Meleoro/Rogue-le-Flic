@@ -102,7 +102,7 @@ public class TurtleBoss : MonoBehaviour
                     }
                     else
                     {
-                        currentAttack = Random.Range(1, 4);
+                        currentAttack = 2;
                     }
                 }
             }

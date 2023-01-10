@@ -147,9 +147,9 @@ GameObject:
   - component: {fileID: 4404858517026568700}
   - component: {fileID: 4404858517026568699}
   - component: {fileID: 4404858517026568698}
-  - component: {fileID: -4563267113754132629}
+  - component: {fileID: -8949964698654439812}
   m_Layer: 0
-  m_Name: Arc2
+  m_Name: Nerf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,7 +213,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: ebb0aa82f5dc90c4cabfab387eee1af8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c7c3136152b0f844fa411d199a390920, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -236,22 +236,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640a90d7c4493ef4e92d6abfce58d850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 4177285485063945854, guid: dab0a0d503aaf5e4fa975717934f652b, type: 3}
+  bullet: {fileID: 4177285485063945854, guid: 05306da631c114c4582d4acfad6d76cb, type: 3}
   lightShot: {fileID: 4404858517643633303}
-  gunData: {fileID: 11400000, guid: eacd73cbe78ad894ba5ae87f49a5691e, type: 2}
+  gunData: {fileID: 11400000, guid: 532aaf10be902b448914b384c1b9f760, type: 2}
   posLeft: {x: -0.3, y: -0.3}
   posRight: {x: 0.3, y: -0.3}
   ballesPercantes: 0
   ballesRebondissantes: 0
   grossissementBalles: 0
   critiques: 0
-  itemName: Arc
-  itemDescription: Projete un projectile unique qui doit etre charge
+  itemName: Nerf
+  itemDescription: A le comportement d'un pistolet
   currentChargeurAmmo: 0
   currentAmmo: 0
   isStocked: 0
   isHeld: 0
   canBePicked: 0
+  autoAim: 0
   explanation: {fileID: 302315948960048074}
 --- !u!61 &4404858517026568698
 BoxCollider2D:
@@ -270,7 +271,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.368, y: 2.048}
+    oldSize: {x: 1.025, y: 0.6075}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -279,7 +280,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 2.5}
   m_EdgeRadius: 0
---- !u!114 &-4563267113754132629
+--- !u!114 &-8949964698654439812
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -339,7 +340,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.504
-  m_Color: {r: 0.8068946, g: 0.17412782, b: 0.8584906, a: 1}
+  m_Color: {r: 0.7924528, g: 0.40557393, b: 0, a: 1}
   m_Intensity: 0
   m_LightVolumeIntensity: 0
   m_LightVolumeIntensityEnabled: 0
