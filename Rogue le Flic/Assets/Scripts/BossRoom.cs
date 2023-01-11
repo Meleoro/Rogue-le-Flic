@@ -5,4 +5,6 @@ using UnityEngine;
 public class BossRoom : MonoBehaviour
 {
     public List<Transform> spawnPoints;
+
+    public bool isLastBoss;
 }

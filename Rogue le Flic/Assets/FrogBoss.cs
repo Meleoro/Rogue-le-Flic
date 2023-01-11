@@ -103,11 +103,11 @@ public class FrogBoss : MonoBehaviour
 
                     if (cooldownSpawn > 0)
                     {
-                        currentAttack = Random.Range(1, 4);
+                        currentAttack = Random.Range(1, 3);
                     }
                     else
                     {
-                        currentAttack = Random.Range(1, 5);
+                        currentAttack = Random.Range(1, 4);
                     }
                 }
             }
@@ -137,7 +137,7 @@ public class FrogBoss : MonoBehaviour
                     }
 
                     // SPAWN
-                    else if (currentAttack == 4 && cooldownSpawn <= 0)
+                    else if (currentAttack == 3 && cooldownSpawn <= 0)
                     {
                         StartCoroutine(Spawn());
                     }
@@ -246,9 +246,9 @@ public class FrogBoss : MonoBehaviour
     IEnumerator JumpChoroutine(Vector2 destination)
     {
         StartCoroutine(Decollage(0.4f, 0.1f));
-
-        yield return new WaitForSeconds(0.4f);
         
+        yield return new WaitForSeconds(0.4f);
+
         boss.spawnIndicator.SetActive(true);
         GetComponent<BoxCollider2D>().enabled = false;
         boss._collider2D.enabled = false;
@@ -478,7 +478,11 @@ public class FrogBoss : MonoBehaviour
         
         boss.sprite.transform.DOScale(new Vector3(originalScale.x + 0.1f, originalScale.y - 0.1f, originalScale.z), duration1);
         
-        yield return new WaitForSeconds(duration1);
+        yield return new WaitForSeconds(duration1 / 2);
+        
+        boss.anim.SetTrigger("isJumping");
+        
+        yield return new WaitForSeconds(duration1 / 2);
         
         boss.sprite.transform.DOScale(new Vector3(originalScale.x, originalScale.y, originalScale.z), duration2);
     }
