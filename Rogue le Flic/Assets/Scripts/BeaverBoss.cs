@@ -65,6 +65,24 @@ public class BeaverBoss : MonoBehaviour
             bossData = affaibli;
         }
         
+        
+        if (boss.bossNumber == 0)
+        {
+            ReferenceBossUI.Instance.object1.SetActive(true);
+            healthBar = ReferenceBossUI.Instance.healthBar1;
+        }
+        else if (boss.bossNumber == 1)
+        {
+            ReferenceBossUI.Instance.object2.SetActive(true);
+            healthBar = ReferenceBossUI.Instance.healthBar2;
+        }
+        else if (boss.bossNumber == 2)
+        {
+            ReferenceBossUI.Instance.object3.SetActive(true);
+            healthBar = ReferenceBossUI.Instance.healthBar3;
+        }
+        
+        
         rb = GetComponent<Rigidbody2D>();
         rb.drag = bossData.dragDeceleration * bossData.dragMultiplier;
 

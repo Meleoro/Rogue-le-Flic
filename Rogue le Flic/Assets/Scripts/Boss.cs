@@ -52,23 +52,7 @@ public class Boss : MonoBehaviour
                 {
                     beaverScript.currentHealth = beaverScript.bossData.health;
                 }
-                
-                if (bossNumber == 0)
-                {
-                    ReferenceBossUI.Instance.object1.SetActive(true);
-                    beaverScript.healthBar = ReferenceBossUI.Instance.healthBar1;
-                }
-                else if (bossNumber == 1)
-                {
-                    ReferenceBossUI.Instance.object2.SetActive(true);
-                    beaverScript.healthBar = ReferenceBossUI.Instance.healthBar2;
-                }
-                else if (bossNumber == 2)
-                {
-                    ReferenceBossUI.Instance.object3.SetActive(true);
-                    beaverScript.healthBar = ReferenceBossUI.Instance.healthBar3;
-                }
-                
+
                 break;
 
             
@@ -82,22 +66,6 @@ public class Boss : MonoBehaviour
                 else
                 {
                     frogScript.currentHealth = frogScript.bossData.health;
-                }
-                
-                if (bossNumber == 0)
-                {
-                    ReferenceBossUI.Instance.object1.SetActive(true);
-                    frogScript.healthBar = ReferenceBossUI.Instance.healthBar1;
-                }
-                else if (bossNumber == 1)
-                {
-                    ReferenceBossUI.Instance.object2.SetActive(true);
-                    frogScript.healthBar = ReferenceBossUI.Instance.healthBar2;
-                }
-                else if (bossNumber == 2)
-                {
-                    ReferenceBossUI.Instance.object3.SetActive(true);
-                    frogScript.healthBar = ReferenceBossUI.Instance.healthBar3;
                 }
                 
                 break;
@@ -114,23 +82,7 @@ public class Boss : MonoBehaviour
                 {
                     turtleScript.currentHealth = turtleScript.bossData.health;
                 }
-                
-                if (bossNumber == 0)
-                {
-                    ReferenceBossUI.Instance.object1.SetActive(true);
-                    turtleScript.healthBar = ReferenceBossUI.Instance.healthBar1;
-                }
-                else if (bossNumber == 1)
-                {
-                    ReferenceBossUI.Instance.object2.SetActive(true);
-                    turtleScript.healthBar = ReferenceBossUI.Instance.healthBar2;
-                }
-                else if (bossNumber == 2)
-                {
-                    ReferenceBossUI.Instance.object3.SetActive(true);
-                    turtleScript.healthBar = ReferenceBossUI.Instance.healthBar3;
-                }
-                
+
                 break;
         }
 
