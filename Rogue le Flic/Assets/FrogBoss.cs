@@ -7,22 +7,11 @@ using UnityEngine.UI;
 
 public class FrogBoss : MonoBehaviour
 {
-    [Header("Movement Speeds")]
-    public float speedX;
-    public float speedY;
-
-    [Header("Deceleration")]
-    public float dragDeceleration;
-    public float dragMultiplier;
+    public FrogBossData bossData;
+    public List<Transform> spotsJump;
 
     [Header("Frog")]
-    [SerializeField] private int health;
-    private int currentHealth;
-    [SerializeField] private float cooldownMin;
-    [SerializeField] private float cooldownMax;
-    [SerializeField] private Vector2 posLeft;
-    [SerializeField] private Vector2 posRight;
-    [SerializeField] private float stunDuration;
+    [HideInInspector] public int currentHealth;
     private float timer;
     private bool isAttacking;
     private bool canMove;
@@ -32,35 +21,21 @@ public class FrogBoss : MonoBehaviour
     private float stunTimer;
 
     [Header("Saut")]
-    [SerializeField] private float distanceJumpTrigger;
-    [SerializeField] private List<Transform> spotsJump;
     private Vector2 jumpDestination;
     private int cooldownJump;
     private Vector3 originalScale;
-    
-    [Header("Attaque sautée")]
-    [SerializeField] private float duree;
-    [SerializeField] private int minBoxSpawn;
-    [SerializeField] private int maxBoxSpawn;
-    [SerializeField] private GameObject box;
 
     [Header("Spawn")]
-    [SerializeField] private int minFrogSpawn;
-    [SerializeField] private int maxFrogSpawn;
-    [SerializeField] private GameObject frog;
     private int cooldownSpawn;
 
     [Header("Tir")]
-    public AnimationCurve tonguePatern;
-    [SerializeField] private GameObject tongue;
-    public float shotDuration;
     [HideInInspector] public bool recul;
 
     [Header("References")]
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
     [SerializeField] private BossRoom bossRoom;
-    [SerializeField] private Image healthBar;
+    public Image healthBar;
     [SerializeField] private GameObject VFXStun;
     private Rigidbody2D rb;
     private Boss boss;
@@ -70,7 +45,7 @@ public class FrogBoss : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.drag = dragDeceleration * dragMultiplier;
+        rb.drag = bossData.dragDeceleration * bossData.dragMultiplier;
 
         canMove = true;
 
@@ -78,9 +53,8 @@ public class FrogBoss : MonoBehaviour
 
         boss = GetComponent<Boss>();
 
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
         currentAttack = 0;
-        currentHealth = health;
 
         boss.anim.SetBool("isWalking", false);
     }
@@ -91,6 +65,7 @@ public class FrogBoss : MonoBehaviour
         if(stunTimer <= 0)
         {
             VFXStun.SetActive(false);
+            healthBar.fillAmount = (float) currentHealth / bossData.health;
             
             // COOLDOWN ENTRE LES ATTAQUES
             if (!isAttacking)
@@ -120,7 +95,7 @@ public class FrogBoss : MonoBehaviour
                 float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
                                             Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
 
-                if (distance < distanceJumpTrigger && cooldownJump <= 0)
+                if (distance < bossData.distanceJumpTrigger && cooldownJump <= 0)
                 {
                     Jump(false);
                 }
@@ -284,7 +259,7 @@ public class FrogBoss : MonoBehaviour
         boss._collider2D.enabled = true;
         
         isAttacking = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
     }
 
 
@@ -371,7 +346,7 @@ public class FrogBoss : MonoBehaviour
         }
 
         isAttacking = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
     }
 
 
@@ -390,12 +365,12 @@ public class FrogBoss : MonoBehaviour
 
             yield return new WaitForSeconds(0.6f);
 
-            GameObject currentTongue = Instantiate(tongue, transform.position, Quaternion.identity, transform);
+            GameObject currentTongue = Instantiate(bossData.tongue, transform.position, Quaternion.identity, transform);
 
             currentTongue.GetComponent<BossFrogTongue>().destination = destination;
-            currentTongue.GetComponent<BossFrogTongue>().tongueDuration = shotDuration;
+            currentTongue.GetComponent<BossFrogTongue>().tongueDuration = bossData.shotDuration;
 
-            yield return new WaitForSeconds(shotDuration);
+            yield return new WaitForSeconds(bossData.shotDuration);
 
             canMove = true;
         }
@@ -403,18 +378,18 @@ public class FrogBoss : MonoBehaviour
         //rb.AddForce(-direction.normalized, ForceMode2D.Impulse);
 
         isAttacking = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
     }
 
 
     public void Stun()
     {
-        stunTimer = stunDuration;
+        stunTimer = bossData.stunDuration;
 
         StopAllCoroutines();
 
         isAttacking = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
 
         boss.anim.SetTrigger("reset");
     }
@@ -426,7 +401,7 @@ public class FrogBoss : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        int nbrEnnemies = Random.Range(minFrogSpawn, maxFrogSpawn + 1);
+        int nbrEnnemies = Random.Range(bossData.minFrogSpawn, bossData.maxFrogSpawn + 1);
 
         List<int> indexSelected = new List<int>();
 
@@ -439,12 +414,12 @@ public class FrogBoss : MonoBehaviour
                 newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
             }
 
-            Instantiate(frog, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+            Instantiate(bossData.frog, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
             indexSelected.Add(newIndex);
         }
 
         isAttacking = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
 
         cooldownSpawn = 2;
     }
@@ -454,7 +429,7 @@ public class FrogBoss : MonoBehaviour
     {
         currentHealth -= degats;
 
-        healthBar.fillAmount = (float) currentHealth / health;
+        healthBar.fillAmount = (float) currentHealth / bossData.health;
 
         if (bullet.CompareTag("Box"))
         {
@@ -489,7 +464,7 @@ public class FrogBoss : MonoBehaviour
     
     public void SpawnBoxes()
     {
-        int nbrItems = Random.Range(minBoxSpawn, maxBoxSpawn + 1);
+        int nbrItems = Random.Range(bossData.minBoxSpawn, bossData.maxBoxSpawn + 1);
 
         List<int> indexSelected = new List<int>();
 
@@ -502,7 +477,7 @@ public class FrogBoss : MonoBehaviour
                 newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
             }
 
-            GameObject newBox = Instantiate(box, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+            GameObject newBox = Instantiate(bossData.box, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
 
             StartCoroutine(newBox.GetComponent<Box>().Fall());
             indexSelected.Add(newIndex);

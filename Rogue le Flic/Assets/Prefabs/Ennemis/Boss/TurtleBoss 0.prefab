@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 4844934969148064292}
   m_Layer: 9
   m_Name: TurtleBoss 0
-  m_TagString: Ennemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -466,6 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossType: 2
+  isHurt: 1
   anim: {fileID: 5290507874984418254}
   sprite: {fileID: 5290507874984418255}
   spawnIndicator: {fileID: 3139682111376741497}
@@ -487,15 +488,18 @@ MonoBehaviour:
   dragDeceleration: 3
   dragMultiplier: 3
   health: 200
+  currentHealth: 0
   cooldownMin: 4
   cooldownMax: 6
   stunDuration: 2
+  lookLeft: 0
   isKicked: 0
   chargeVitesseOriginale: 100
   gainVitesseRebond: 20
   vitesseMax: 340
+  isSliding: 0
   chargemementDuree: 0
-  chargePuissanteStrenght: 0
+  chargePuissanteSpeed: 0
   minBoxSpawn: 0
   maxBoxSpawn: 0
   box: {fileID: 0}
@@ -506,6 +510,7 @@ MonoBehaviour:
   AIDestination: {fileID: 6263996166541424038}
   bossRoom: {fileID: 0}
   healthBar: {fileID: 0}
+  VFXStun: {fileID: 0}
 --- !u!1001 &362754056721950700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -604,6 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b383b9657341aa045aad3a82b949c0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isChara: 0
 --- !u!4 &5290507874984418257 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5504359740532341821, guid: 4790f22cf3508d645a14fa77046793c2, type: 3}

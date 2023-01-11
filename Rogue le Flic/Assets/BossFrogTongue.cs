@@ -50,10 +50,10 @@ public class BossFrogTongue : MonoBehaviour
         edgeColliderPoints[1] = (-transform.position + frog.gameObject.transform.position) * 2;
         edgeCollider.SetPoints(edgeColliderPoints);
 
-        avancée += Time.deltaTime / frog.shotDuration;
+        avancée += Time.deltaTime / frog.bossData.shotDuration;
 
-        transform.position = new Vector2(Mathf.Lerp(retour.x, destination.x, frog.tonguePatern.Evaluate(avancée)),
-            Mathf.Lerp(retour.y, destination.y, frog.tonguePatern.Evaluate(avancée)));
+        transform.position = new Vector2(Mathf.Lerp(retour.x, destination.x, frog.bossData.tonguePatern.Evaluate(avancée)),
+            Mathf.Lerp(retour.y, destination.y, frog.bossData.tonguePatern.Evaluate(avancée)));
 
         if (avancée >= 1)
         {

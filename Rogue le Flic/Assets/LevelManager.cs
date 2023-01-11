@@ -18,6 +18,11 @@ public class LevelManager : MonoBehaviour
     [Header("Save Choices")]
     public List<GameObject> savedBoss = new List<GameObject>();
     public List<int> banishedRooms;
+    
+    [Header("HurtBosses")] 
+    public GameObject beaverHurt;
+    public GameObject frogBoss;
+    public GameObject turtleBoss;
 
     [Header("Save Weapons")]
     public GameObject activeGun;

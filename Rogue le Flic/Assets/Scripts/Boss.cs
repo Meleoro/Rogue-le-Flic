@@ -14,6 +14,10 @@ public class Boss : MonoBehaviour
 
     public boss bossType;
 
+    public bool isHurt;
+
+    [HideInInspector] public int bossNumber;
+
     private BeaverBoss beaverScript;
     private FrogBoss frogScript;
     private TurtleBoss turtleScript;
@@ -36,17 +40,79 @@ public class Boss : MonoBehaviour
         {
             case boss.Beaver:
                 beaverScript = GetComponent<BeaverBoss>();
+
+                if (isHurt)
+                {
+                    beaverScript.currentHealth = beaverScript.bossData.health / 2;
+                    
+                    if (bossNumber == 1)
+                    {
+                        ReferenceBossUI.Instance.object2.SetActive(true);
+                        beaverScript.healthBar = ReferenceBossUI.Instance.healthBar2;
+                    }
+                    else if (bossNumber == 2)
+                    {
+                        ReferenceBossUI.Instance.object3.SetActive(true);
+                        beaverScript.healthBar = ReferenceBossUI.Instance.healthBar3;
+                    }
+                }
+                else
+                {
+                    beaverScript.currentHealth = beaverScript.bossData.health;
+                }
                 break;
 
             case boss.Frog:
                 frogScript = GetComponent<FrogBoss>();
+                
+                if (isHurt)
+                {
+                    frogScript.currentHealth = frogScript.bossData.health / 2;
+                    
+                    if (bossNumber == 1)
+                    {
+                        ReferenceBossUI.Instance.object2.SetActive(true);
+                        frogScript.healthBar = ReferenceBossUI.Instance.healthBar2;
+                    }
+                    else if (bossNumber == 2)
+                    {
+                        ReferenceBossUI.Instance.object3.SetActive(true);
+                        frogScript.healthBar = ReferenceBossUI.Instance.healthBar3;
+                    }
+                }
+                else
+                {
+                    frogScript.currentHealth = frogScript.bossData.health;
+                }
+                
                 break;
 
             case boss.Turtle:
                 turtleScript = GetComponent<TurtleBoss>();
+                
+                if (isHurt)
+                {
+                    turtleScript.currentHealth = turtleScript.health / 2;
+                    
+                    if (bossNumber == 1)
+                    {
+                        ReferenceBossUI.Instance.object2.SetActive(true);
+                        turtleScript.healthBar = ReferenceBossUI.Instance.healthBar2;
+                    }
+                    else if (bossNumber == 2)
+                    {
+                        ReferenceBossUI.Instance.object3.SetActive(true);
+                        turtleScript.healthBar = ReferenceBossUI.Instance.healthBar3;
+                    }
+                }
+                else
+                {
+                    turtleScript.currentHealth = turtleScript.health;
+                }
+                
                 break;
         }
-        
+
         canShake = false;
     }
 
@@ -78,6 +144,25 @@ public class Boss : MonoBehaviour
 
         if (ReferenceChoice.Instance.kicked || ReferenceChoice.Instance.spared)
         {
+            if (ReferenceChoice.Instance.spared)
+            {
+                switch (bossType)
+                {
+                    case boss.Beaver:
+                        LevelManager.Instance.savedBoss.Add(LevelManager.Instance.beaverHurt);
+                        break;
+
+                    case boss.Frog:
+                        LevelManager.Instance.savedBoss.Add(LevelManager.Instance.frogBoss);
+                        break;
+
+                    case boss.Turtle:
+                        LevelManager.Instance.savedBoss.Add(LevelManager.Instance.turtleBoss);
+                        break;
+                }
+                
+            }
+            
             StartCoroutine(EndCinematicDeath());
         }
     }

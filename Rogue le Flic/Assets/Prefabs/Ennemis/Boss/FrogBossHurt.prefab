@@ -244,8 +244,8 @@ GameObject:
   - component: {fileID: 6263996166541424047}
   - component: {fileID: 1061652188930730977}
   m_Layer: 9
-  m_Name: FrogBoss 0
-  m_TagString: Ennemy
+  m_Name: FrogBossHurt
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -466,6 +466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossType: 1
+  isHurt: 1
+  bossNumber: 0
   anim: {fileID: 2659703175153638874}
   sprite: {fileID: 2659703175153638872}
   spawnIndicator: {fileID: 3139682111376741497}
@@ -482,94 +484,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4403439e494ceb448a583171892282f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 0
-  speedY: 0
-  dragDeceleration: 3
-  dragMultiplier: 3
-  health: 150
-  cooldownMin: 2
-  cooldownMax: 3
-  posLeft: {x: 5, y: 0.5}
-  posRight: {x: 5, y: 0.5}
-  stunDuration: 3
-  lookLeft: 0
-  distanceJumpTrigger: 8
+  bossData: {fileID: 11400000, guid: 3cb694f09aa1cce4f986df95750a18dd, type: 2}
   spotsJump: []
-  duree: 0
-  minBoxSpawn: 2
-  maxBoxSpawn: 3
-  box: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
-  minFrogSpawn: 2
-  maxFrogSpawn: 3
-  frog: {fileID: 3801439837385764994, guid: 61a87daa0d297ef48a372f41d7aac6c5, type: 3}
-  tonguePatern:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 8.868863
-      outSlope: 8.868863
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.06413925
-      value: 0.5688422
-      inSlope: 3.748619
-      outSlope: 3.748619
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.24564663
-      value: 0.94179124
-      inSlope: 0.567202
-      outSlope: 0.567202
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.39082977
-    - serializedVersion: 3
-      time: 0.8171482
-      value: 0.96914697
-      inSlope: -0.19199975
-      outSlope: -0.19199975
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.57018733
-      outWeight: 0.78218806
-    - serializedVersion: 3
-      time: 0.9491023
-      value: 0.73628443
-      inSlope: -2.4344475
-      outSlope: -2.4344475
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.64163196
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -14.465961
-      outSlope: -14.465961
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  tongue: {fileID: 8267943327727956763, guid: d9459fed8ca498c41856b6117c5dee79, type: 3}
-  shotDuration: 0.5
+  currentHealth: 0
+  lookLeft: 0
   recul: 0
   AIPath: {fileID: 6263996166541424041}
   AIDestination: {fileID: 6263996166541424038}
   bossRoom: {fileID: 0}
   healthBar: {fileID: 0}
-  VFXStun: {fileID: 0}
+  VFXStun: {fileID: 9107214215254816732}
 --- !u!1001 &3437170131910118590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -747,6 +671,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a55c733f6cbc0aa44a4aab50d85e8016, type: 3}
+--- !u!1 &9107214215254816732 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4965037103967986049, guid: a55c733f6cbc0aa44a4aab50d85e8016, type: 3}
+  m_PrefabInstance: {fileID: 4216506021939762781}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9107214215254816735 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4965037103967986050, guid: a55c733f6cbc0aa44a4aab50d85e8016, type: 3}

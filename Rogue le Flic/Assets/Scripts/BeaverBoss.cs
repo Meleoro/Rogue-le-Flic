@@ -7,19 +7,10 @@ using DG.Tweening;
 
 public class BeaverBoss : MonoBehaviour
 {
-    [Header("Movement Speeds")]
-    public float speedX;
-    public float speedY;
-
-    [Header("Deceleration")]
-    public float dragDeceleration;
-    public float dragMultiplier;
+    public BeaverBossData bossData;
 
     [Header("Castor")]
-    [SerializeField] private int health;
-    private int currentHealth;
-    [SerializeField] private float cooldownMin;
-    [SerializeField] private float cooldownMax;
+    [HideInInspector] public int currentHealth;
     [HideInInspector] public bool lookLeft;
     private float timer;
     private bool isAttacking;
@@ -28,22 +19,12 @@ public class BeaverBoss : MonoBehaviour
     private Vector2 direction;
 
     [Header("Charge")]
-    [SerializeField] private float distanceJumpTrigger;
-    [SerializeField] private float strenghtJump;
     private bool isCharging;
 
     [Header("Spawn")]
-    [SerializeField] private int minCastorSpawn;
-    [SerializeField] private int maxCastorSpawn;
-    [SerializeField] private GameObject castor;
     private int cooldownSpawn;
 
     [Header("GigaCharge")]
-    [SerializeField] private float strenghtGigaJump;
-    [SerializeField] private int minBoxSpawn;
-    [SerializeField] private int maxBoxSpawn;
-    [SerializeField] private float stunDuration;
-    [SerializeField] private GameObject box;
     private bool isGigaCharging;
     private float stunTimer;
 
@@ -51,7 +32,7 @@ public class BeaverBoss : MonoBehaviour
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
     [SerializeField] private BossRoom bossRoom;
-    [SerializeField] private Image healthBar;
+    public Image healthBar;
     [SerializeField] private GameObject VFXStun;
     private Rigidbody2D rb;
     private Boss boss;
@@ -61,7 +42,7 @@ public class BeaverBoss : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.drag = dragDeceleration * dragMultiplier;
+        rb.drag = bossData.dragDeceleration * bossData.dragMultiplier;
 
         canMove = true;
 
@@ -69,9 +50,8 @@ public class BeaverBoss : MonoBehaviour
 
         boss = GetComponent<Boss>();
 
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
         currentAttack = 0;
-        currentHealth = health;
     }
 
 
@@ -80,6 +60,7 @@ public class BeaverBoss : MonoBehaviour
         if(stunTimer <= 0)
         {
             VFXStun.SetActive(false);
+            healthBar.fillAmount = (float) currentHealth / bossData.health;
             
             // COOLDOWN ENTRE LES ATTAQUES
             if (!isAttacking)
@@ -162,7 +143,7 @@ public class BeaverBoss : MonoBehaviour
         {
             direction = AIPath.targetDirection;
 
-            rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
+            rb.AddForce(new Vector2(direction.x * bossData.speedX, direction.y * bossData.speedY) * 5, ForceMode2D.Force);
 
             boss.anim.SetBool("isWalking", true);
         }
@@ -204,19 +185,19 @@ public class BeaverBoss : MonoBehaviour
 
     IEnumerator Charge(Vector2 directionJump)
     {
-        rb.AddForce(-directionJump.normalized * (strenghtJump / 5), ForceMode2D.Impulse);
+        rb.AddForce(-directionJump.normalized * (bossData.strenghtJump / 5), ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.6f);
 
         isCharging = true;
 
-        rb.AddForce(directionJump.normalized * strenghtJump, ForceMode2D.Impulse);
+        rb.AddForce(directionJump.normalized * bossData.strenghtJump, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.25f);
 
         isAttacking = false;
         isCharging = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
     }
 
 
@@ -226,7 +207,7 @@ public class BeaverBoss : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        int nbrEnnemies = Random.Range(minCastorSpawn, maxCastorSpawn + 1);
+        int nbrEnnemies = Random.Range(bossData.minCastorSpawn, bossData.maxCastorSpawn + 1);
 
         List<int> indexSelected = new List<int>();
 
@@ -239,12 +220,12 @@ public class BeaverBoss : MonoBehaviour
                 newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
             }
 
-            Instantiate(castor, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+            Instantiate(bossData.castor, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
             indexSelected.Add(newIndex);
         }
 
         isAttacking = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
 
         cooldownSpawn = 2;
     }
@@ -252,19 +233,19 @@ public class BeaverBoss : MonoBehaviour
 
     IEnumerator GigaCharge(Vector2 directionJump)
     {
-        rb.AddForce(-directionJump.normalized * (strenghtGigaJump / 5), ForceMode2D.Impulse);
+        rb.AddForce(-directionJump.normalized * (bossData.strenghtGigaJump / 5), ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(1f);
 
         isGigaCharging = true;
 
-        rb.AddForce(directionJump.normalized * strenghtGigaJump, ForceMode2D.Impulse);
+        rb.AddForce(directionJump.normalized * bossData.strenghtGigaJump, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.32f);
 
         isAttacking = false;
         isGigaCharging = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
     }
 
 
@@ -273,7 +254,7 @@ public class BeaverBoss : MonoBehaviour
     {
         currentHealth -= degats;
 
-        healthBar.fillAmount = (float) currentHealth / health;
+        healthBar.fillAmount = (float) currentHealth / bossData.health;
 
         if (currentHealth <= 0)
         {
@@ -285,7 +266,7 @@ public class BeaverBoss : MonoBehaviour
     {
         if (isGigaCharging || isCharging)
         {
-            int nbrItems = Random.Range(minBoxSpawn, maxBoxSpawn + 1);
+            int nbrItems = Random.Range(bossData.minBoxSpawn, bossData.maxBoxSpawn + 1);
 
             List<int> indexSelected = new List<int>();
 
@@ -298,13 +279,13 @@ public class BeaverBoss : MonoBehaviour
                     newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
                 }
 
-                GameObject newBox = Instantiate(box, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+                GameObject newBox = Instantiate(bossData.box, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
 
                 StartCoroutine(newBox.GetComponent<Box>().Fall());
                 indexSelected.Add(newIndex);
             }
 
-            stunTimer = stunDuration;
+            stunTimer = bossData.stunDuration;
             ReferenceCamera.Instance._camera.DOShakePosition(1, 1f);
         }
     }

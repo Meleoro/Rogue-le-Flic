@@ -16,8 +16,8 @@ public class TurtleBoss : MonoBehaviour
     public float dragMultiplier;
 
     [Header("Turtle")]
-    [SerializeField] private int health;
-    private int currentHealth;
+    public int health;
+    [HideInInspector] public int currentHealth;
     [SerializeField] private float cooldownMin;
     [SerializeField] private float cooldownMax;
     [SerializeField] private float stunDuration;
@@ -58,7 +58,7 @@ public class TurtleBoss : MonoBehaviour
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
     [SerializeField] private BossRoom bossRoom;
-    [SerializeField] private Image healthBar;
+    public Image healthBar;
     [SerializeField] private GameObject VFXStun;
     private Rigidbody2D rb;
     private Boss boss;
@@ -78,7 +78,6 @@ public class TurtleBoss : MonoBehaviour
 
         timer = Random.Range(cooldownMin, cooldownMax);
         currentAttack = 0;
-        currentHealth = health;
 
         boss.anim.SetBool("isWalking", false);
     }
@@ -89,6 +88,7 @@ public class TurtleBoss : MonoBehaviour
         if (stunTimer <= 0)
         {
             VFXStun.SetActive(false);
+            healthBar.fillAmount = (float) currentHealth / health;
             
             // COOLDOWN ENTRE LES ATTAQUES
             if (!isAttacking)
