@@ -27,6 +27,8 @@ public class Ennemy : MonoBehaviour
     [Header("Kicked")] 
     private float timerKick;
 
+    [Header("Feedbacks")] public Color hitColor;
+
     [Header("Loot")] 
     [SerializeField] private int minCoins;
     [SerializeField] private int maxCoins;
@@ -134,6 +136,13 @@ public class Ennemy : MonoBehaviour
     {
         if (!isDying)
         {
+            SpriteRenderer[] sprites = sprite.GetComponentsInChildren<SpriteRenderer>();
+
+            foreach (SpriteRenderer k in sprites)
+            {
+                StartCoroutine(FeedbackDamage(k));
+            }
+            
             switch (ennemyType)
             {
                 case ennemies.Beaver:
@@ -149,6 +158,15 @@ public class Ennemy : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public IEnumerator FeedbackDamage(SpriteRenderer currentSprite)
+    {
+        currentSprite.DOColor(hitColor, 0.12f);
+
+        yield return new WaitForSeconds(0.12f);
+        
+        currentSprite.DOColor(Color.white, 0.12f);
     }
 
     public void isKicked()
