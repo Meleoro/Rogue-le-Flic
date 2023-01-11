@@ -7,27 +7,19 @@ using DG.Tweening;
 
 public class Turtle : MonoBehaviour
 {
-    [Header("Movement Speeds")]
-    public float speedX;
-    public float speedY;
+    public TurtleData niveau1;
+    public TurtleData niveau2;
+    public TurtleData niveau3;
 
-    [Header("Deceleration")]
-    public float dragDeceleration;
-    public float dragMultiplier;
-
-    [Header("Turtle")]
-    [SerializeField] private int health;
-    [SerializeField] private float distanceSlideTrigger;
-    [SerializeField] private float speedSlide;
-    [SerializeField] private int nbrRebonds;
-    [SerializeField] private float cooldown;
+    private TurtleData turtleData;
+    
+    
     [HideInInspector] public bool isSliding;
 
     [Header("Autres")]
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
     [SerializeField] private ParticleSystem hitEffect;
-    public GameObject coins;
     private Rigidbody2D rb;
     private bool canMove;
     private float timerCooldown;
@@ -43,14 +35,28 @@ public class Turtle : MonoBehaviour
 
     private void Start()
     {
+        if (LevelManager.Instance.currentLevel == 1)
+        {
+            turtleData = niveau1;
+        }
+        else if (LevelManager.Instance.currentLevel == 2)
+        {
+            turtleData = niveau2;
+        }
+        else if (LevelManager.Instance.currentLevel == 3)
+        {
+            turtleData = niveau3;
+        }
+        
+        
         rb = GetComponent<Rigidbody2D>();
-        rb.drag = dragDeceleration * dragMultiplier;
+        rb.drag = turtleData.dragDeceleration * turtleData.dragMultiplier;
 
         canMove = true;
 
         AIDestination.target = ManagerChara.Instance.transform;
         
-        timerCooldown = cooldown;
+        timerCooldown = turtleData.cooldown;
 
         ennemy = GetComponent<Ennemy>();
     }
@@ -58,7 +64,7 @@ public class Turtle : MonoBehaviour
 
     public void TurtleBehavior()
     {
-        if (health <= 0 && !stopDeath)
+        if (turtleData.health <= 0 && !stopDeath)
         {
             isKicked = false;
             stopDeath = true;
@@ -94,7 +100,7 @@ public class Turtle : MonoBehaviour
 
             if (!isSliding && canMove)
             {
-                if (timerCooldown <= 0 && distance < distanceSlideTrigger)
+                if (timerCooldown <= 0 && distance < turtleData.distanceSlideTrigger)
                 {
                     StartCoroutine(Slide(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
                 }
@@ -126,16 +132,16 @@ public class Turtle : MonoBehaviour
         {
             direction = AIPath.targetDirection;
 
-            rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
+            rb.AddForce(new Vector2(direction.x * turtleData.speedX, direction.y * turtleData.speedY) * 5, ForceMode2D.Force);
         }
 
         else if (isSliding)
         {
             if(!isKicked)
-                rb.AddForce(slideDirection * speedSlide, ForceMode2D.Force);
+                rb.AddForce(slideDirection * turtleData.speedSlide, ForceMode2D.Force);
             
             else
-                rb.AddForce(slideDirection * speedSlide * 1.5f, ForceMode2D.Force);
+                rb.AddForce(slideDirection * turtleData.speedSlide * 1.5f, ForceMode2D.Force);
         }
     }
 
@@ -156,13 +162,13 @@ public class Turtle : MonoBehaviour
             }
 
             // ON STOP SON COMPORTEMENT DE SLIDE
-            if(currentNbrRebonds >= nbrRebonds)
+            if(currentNbrRebonds >= turtleData.nbrRebonds)
             {
                 isSliding = false;
                 isKicked = false;
                 canMove = true;
 
-                timerCooldown = cooldown;
+                timerCooldown = turtleData.cooldown;
 
                 currentNbrRebonds = 0;
 
@@ -208,7 +214,7 @@ public class Turtle : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject collider)
     {
-        health -= damages;
+        turtleData.health -= damages;
 
         // RECUL
         if(collider.CompareTag("Bullet")) 
@@ -232,7 +238,7 @@ public class Turtle : MonoBehaviour
         slideDirection = direction;
         isKicked = true;
 
-        currentNbrRebonds = nbrRebonds;
+        currentNbrRebonds = turtleData.nbrRebonds;
     }
 
 
@@ -246,7 +252,7 @@ public class Turtle : MonoBehaviour
 
             isSliding = false;
             isKicked = false;
-            timerCooldown = cooldown;
+            timerCooldown = turtleData.cooldown;
             
             if(!stopDeath)
                 ennemy.anim.SetTrigger("reset");

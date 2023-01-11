@@ -14595,7 +14595,7 @@ GameObject:
   - component: {fileID: 611322478800896692}
   - component: {fileID: 4376012204993926796}
   m_Layer: 9
-  m_Name: Turtle 2
+  m_Name: Turtle
   m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14822,11 +14822,7 @@ MonoBehaviour:
   hitColor: {r: 1, g: 0.5896226, b: 0.5896226, a: 1}
   minCoins: 3
   maxCoins: 4
-  ammunitionActive: 0
-  probaAmmunition: 30
   coin: {fileID: 7454127418636556160, guid: 5a049748f43b0b54ab007c5d5874a306, type: 3}
-  ammunition: {fileID: 4197107675258616838, guid: 740aa92ee9ac5bb479382d2639de1ca9, type: 3}
-  cible: {fileID: 8151852789033315837}
   anim: {fileID: 3528663874204241385}
   spawnIndicator: {fileID: 4739753317862848332}
   sprite: {fileID: 3528663874204241384}
@@ -14843,20 +14839,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a9d6619b6c74d948aca84bd93700c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 5
-  speedY: 4
-  dragDeceleration: 3
-  dragMultiplier: 3
-  health: 18
-  distanceSlideTrigger: 10
-  speedSlide: 140
-  nbrRebonds: 3
-  cooldown: 4
+  niveau1: {fileID: 11400000, guid: 56023cd320c694441a7fc1b7c4a8503b, type: 2}
+  niveau2: {fileID: 11400000, guid: be11bff36b991c24eb9b1c99d06d0906, type: 2}
+  niveau3: {fileID: 11400000, guid: fe1b2e71ce6a067418fcc894601a1fed, type: 2}
   isSliding: 0
   AIPath: {fileID: 4376012204993926812}
   AIDestination: {fileID: 4376012204993926803}
   hitEffect: {fileID: 1456856938700952811}
-  coins: {fileID: 7454127418636556160, guid: 5a049748f43b0b54ab007c5d5874a306, type: 3}
   isKicked: 0
 --- !u!1 &4739753317862848332
 GameObject:

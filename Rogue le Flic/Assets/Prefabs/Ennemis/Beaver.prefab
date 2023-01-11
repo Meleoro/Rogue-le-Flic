@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 1294591140}
   - component: {fileID: 3801439837385765002}
   m_Layer: 9
-  m_Name: Beaver 3
+  m_Name: Beaver
   m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303,11 +303,7 @@ MonoBehaviour:
   hitColor: {r: 1, g: 0.5921569, b: 0.5921569, a: 1}
   minCoins: 2
   maxCoins: 3
-  ammunitionActive: 0
-  probaAmmunition: 60
   coin: {fileID: 7454127418636556160, guid: 5a049748f43b0b54ab007c5d5874a306, type: 3}
-  ammunition: {fileID: 4197107675258616838, guid: 740aa92ee9ac5bb479382d2639de1ca9, type: 3}
-  cible: {fileID: 8744557149710044141}
   anim: {fileID: 1165195475023699897}
   spawnIndicator: {fileID: 5313444958537765212}
   sprite: {fileID: 1165195475023699896}
@@ -324,13 +320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c696b03ba2b92b44f9cadbe955a3a3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 6
-  speedY: 5
-  dragDeceleration: 3
-  dragMultiplier: 3
-  health: 15
-  distanceJumpTrigger: 6
-  strenghtJump: 70
+  niveau1: {fileID: 11400000, guid: b8a859b27fd9d9842bb0cc99c1c73b9c, type: 2}
+  niveau2: {fileID: 11400000, guid: 1bf05c7129ef5344ab29340341c38c63, type: 2}
+  niveau3: {fileID: 11400000, guid: 93d8b907ef5794c4eba362fb149d442d, type: 2}
   AIPath: {fileID: 3801439837385765004}
   AIDestination: {fileID: 3801439837385764995}
   hitEffect: {fileID: 2039023581012112123}

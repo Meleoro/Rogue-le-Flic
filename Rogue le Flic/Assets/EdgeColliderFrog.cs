@@ -18,8 +18,8 @@ public class EdgeColliderFrog : MonoBehaviour
 
         Debug.DrawRay(transform.position, ManagerChara.Instance.transform.position - transform.position, Color.red, 0.2f);
 
-        hit = Physics2D.Raycast(transform.position, ManagerChara.Instance.transform.position - transform.position, frog.distanceShotTrigger, obstacleLayer);
-        touchedSomething = Physics2D.Raycast(transform.position, ManagerChara.Instance.transform.position - transform.position, frog.distanceShotTrigger, obstacleLayer);
+        hit = Physics2D.Raycast(transform.position, ManagerChara.Instance.transform.position - transform.position, frog.frogData.distanceShotTrigger, obstacleLayer);
+        touchedSomething = Physics2D.Raycast(transform.position, ManagerChara.Instance.transform.position - transform.position, frog.frogData.distanceShotTrigger, obstacleLayer);
 
         if (touchedSomething)
         {

@@ -11,7 +11,7 @@ public class Frog : MonoBehaviour
     public FrogData niveau2;
     public FrogData niveau3;
 
-    public FrogData frogData;
+    [HideInInspector] public FrogData frogData;
 
     private bool cooldownShot;
     private Vector2 direction;
