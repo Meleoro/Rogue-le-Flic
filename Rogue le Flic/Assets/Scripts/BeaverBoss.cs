@@ -96,7 +96,7 @@ public class BeaverBoss : MonoBehaviour
                     }
                     else
                     {
-                        currentAttack = Random.Range(1, 4);
+                        currentAttack = Random.Range(3, 4);
                     }
                 }
             }
@@ -104,25 +104,29 @@ public class BeaverBoss : MonoBehaviour
             // ATTAQUE
             if (isAttacking && currentAttack != 0)
             {
-                boss.anim.SetTrigger("isAttacking");
-
                 cooldownSpawn -= 1;
 
                 // CHARGE
                 if (currentAttack == 1)
                 {
+                    boss.anim.SetTrigger("isAttacking");
+                    
                     StartCoroutine(Charge(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
                 }
 
                 // SPAWN
                 else if (currentAttack == 3)
                 {
+                    boss.anim.SetTrigger("isSummoning");
+                    
                     StartCoroutine(Spawn());
                 }
 
                 // GIGA CHARGE
                 else
                 {
+                    boss.anim.SetTrigger("isAttacking");
+                    
                     StartCoroutine(GigaCharge(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
                 }
 
@@ -218,7 +222,7 @@ public class BeaverBoss : MonoBehaviour
 
     IEnumerator Spawn()
     {
-        transform.DOShakePosition(1, 1);
+        transform.DOShakePosition(1, 0.5f);
 
         yield return new WaitForSeconds(1);
 
