@@ -27,18 +27,15 @@ public class Ennemy : MonoBehaviour
     [Header("Kicked")] 
     private float timerKick;
 
-    [Header("Feedbacks")] public Color hitColor;
+    [Header("Feedbacks")] 
+    public Color hitColor;
 
     [Header("Loot")] 
     [SerializeField] private int minCoins;
     [SerializeField] private int maxCoins;
-    [SerializeField] private bool ammunitionActive;
-    [Range(0, 100)] [SerializeField] private int probaAmmunition;
     [SerializeField] private GameObject coin;
-    [SerializeField] private GameObject ammunition;
- 
+
     [Header("References")]
-    public GameObject cible;
     public Animator anim;
     [SerializeField] private GameObject spawnIndicator;
     public GameObject sprite;
@@ -201,32 +198,11 @@ public class Ennemy : MonoBehaviour
 
     public IEnumerator Death()
     {
-        if (ammunitionActive)
+        int coinNumber = Random.Range(minCoins, maxCoins + 1);
+
+        for (int k = 0; k < coinNumber; k++)
         {
-            int ammo = Random.Range(0, 100);
-
-            if (ammo < probaAmmunition)
-            {
-                Instantiate(ammunition, transform.position, Quaternion.identity);
-            }
-            else
-            {
-                int coinNumber = Random.Range(minCoins, maxCoins + 1);
-
-                for (int k = 0; k < coinNumber; k++)
-                {
-                    Instantiate(coin,transform.position, Quaternion.identity);
-                }
-            }
-        }
-        else
-        {
-            int coinNumber = Random.Range(minCoins, maxCoins + 1);
-
-            for (int k = 0; k < coinNumber; k++)
-            {
-                Instantiate(coin,transform.position, Quaternion.identity);
-            }
+            Instantiate(coin,transform.position, Quaternion.identity);
         }
 
         isDying = true;
@@ -236,6 +212,7 @@ public class Ennemy : MonoBehaviour
         //ScoreManager.instance.EnemyKilled();
         
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        _collider2D.enabled = false;
 
         yield return new WaitForSeconds(0.5f);
 

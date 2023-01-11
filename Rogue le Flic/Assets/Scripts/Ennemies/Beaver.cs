@@ -9,18 +9,14 @@ using UnityEngine.TextCore.Text;
 
 public class Beaver : MonoBehaviour
 {
-    [Header("Movement Speeds")] 
-    public float speedX;
-    public float speedY;
+    public BeaverData niveau1;
+    public BeaverData niveau2;
+    public BeaverData niveau3;
 
-    [Header("Deceleration")] 
-    public float dragDeceleration;
-    public float dragMultiplier;
+    private BeaverData beaverData;
+    
     
     [Header("Castor")]
-    [SerializeField] private int health;
-    [SerializeField] private float distanceJumpTrigger;
-    [SerializeField] private float strenghtJump;
     private bool isJumping;
 
     [Header("Autres")] 
@@ -39,8 +35,23 @@ public class Beaver : MonoBehaviour
 
     private void Start()
     {
+        if (LevelManager.Instance.currentLevel == 1)
+        {
+            beaverData = niveau1;
+        }
+        
+        else if (LevelManager.Instance.currentLevel == 2)
+        {
+            beaverData = niveau2;
+        }
+        
+        else if (LevelManager.Instance.currentLevel == 3)
+        {
+            beaverData = niveau3;
+        }
+
         rb = GetComponent<Rigidbody2D>();
-        rb.drag = dragDeceleration * dragMultiplier;
+        rb.drag = beaverData.dragDeceleration * beaverData.dragMultiplier;
 
         canMove = true;
         
@@ -52,7 +63,7 @@ public class Beaver : MonoBehaviour
 
     public void BeaverBehavior()
     {
-        if (health <= 0 && !stopDeath)
+        if (beaverData.health <= 0 && !stopDeath)
         {
             stopDeath = true;
             isKicked = false;
@@ -87,7 +98,7 @@ public class Beaver : MonoBehaviour
             float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
                                         Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
         
-            if (distance < distanceJumpTrigger && !isJumping)
+            if (distance < beaverData.distanceJumpTrigger && !isJumping)
             {
                 ennemy.anim.SetTrigger("isAttacking");
 
@@ -114,7 +125,7 @@ public class Beaver : MonoBehaviour
         {
             direction = AIPath.targetDirection;
             
-            rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
+            rb.AddForce(new Vector2(direction.x * beaverData.speedX, direction.y * beaverData.speedY) * 5, ForceMode2D.Force);
 
             ennemy.anim.SetBool("isWalking", true);
         }
@@ -149,7 +160,7 @@ public class Beaver : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject bullet)
     {
-        health -= damages;
+        beaverData.health -= damages;
 
         // RECUL
         if(bullet.CompareTag("Bullet"))
@@ -186,7 +197,7 @@ public class Beaver : MonoBehaviour
         isJumping = true;
         canMove = false;
         
-        rb.AddForce(-directionJump.normalized * (strenghtJump / 5), ForceMode2D.Impulse);
+        rb.AddForce(-directionJump.normalized * (beaverData.strenghtJump / 5), ForceMode2D.Impulse);
 
         //transform.DOShakePosition(0.75f, 0.3f);
 
@@ -194,7 +205,7 @@ public class Beaver : MonoBehaviour
         
         yield return new WaitForSeconds(0.75f);
 
-        rb.AddForce(directionJump.normalized * strenghtJump, ForceMode2D.Impulse);
+        rb.AddForce(directionJump.normalized * beaverData.strenghtJump, ForceMode2D.Impulse);
         
         GetComponent<Ennemy>().isCharging = false;
         

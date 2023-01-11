@@ -7,24 +7,13 @@ using Pathfinding;
 
 public class Frog : MonoBehaviour
 {
-    [Header("Movement Speeds")] 
-    public float speedX;
-    public float speedY;
+    public FrogData niveau1;
+    public FrogData niveau2;
+    public FrogData niveau3;
 
-    [Header("Deceleration")] 
-    public float dragDeceleration;
-    public float dragMultiplier;
-    
-    [Header("Frog")]
-    [SerializeField] private int health;
-    public GameObject tongue;
-    public float distanceShotTrigger;
-    public float shotDuration;
-    public AnimationCurve tonguePatern;
+    public FrogData frogData;
+
     private bool cooldownShot;
-    
-    [SerializeField] private Vector2 posLeft;
-    [SerializeField] private Vector2 posRight;
     private Vector2 direction;
     private bool lookLeft;
     private Ennemy ennemy;
@@ -46,8 +35,21 @@ public class Frog : MonoBehaviour
 
     private void Start()
     {
+        if (LevelManager.Instance.currentLevel == 1)
+        {
+            frogData = niveau1;
+        }
+        else if (LevelManager.Instance.currentLevel == 2)
+        {
+            frogData = niveau2;
+        }
+        else if (LevelManager.Instance.currentLevel == 3)
+        {
+            frogData = niveau3;
+        }
+        
         rb = GetComponent<Rigidbody2D>();
-        rb.drag = dragDeceleration * dragMultiplier;
+        rb.drag = frogData.dragDeceleration * frogData.dragMultiplier;
 
         canMove = true;
         
@@ -59,7 +61,7 @@ public class Frog : MonoBehaviour
 
     public void FrogBehavior()
     {
-        if (health <= 0 && !stopDeath)
+        if (frogData.health <= 0 && !stopDeath)
         {
             isKicked = false;
             stopDeath = true;
@@ -93,7 +95,7 @@ public class Frog : MonoBehaviour
             float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
                                         Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
         
-            if (distance <= distanceShotTrigger && !cooldownShot)
+            if (distance <= frogData.distanceShotTrigger && !cooldownShot)
             {
                 if (canShoot)
                 {
@@ -116,14 +118,14 @@ public class Frog : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
 
-            if (lookLeft)
+            /*if (lookLeft)
             {
-                ennemy.sprite.transform.localPosition = posLeft;
+                ennemy.sprite.transform.localPosition = frogData.posLeft;
             }
             else
             {
-                ennemy.sprite.transform.localPosition = posRight;
-            }
+                ennemy.sprite.transform.localPosition = frogData.posRight;
+            }*/
         }
     }
 
@@ -133,7 +135,7 @@ public class Frog : MonoBehaviour
         {
             direction = AIPath.targetDirection;
 
-            rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
+            rb.AddForce(new Vector2(direction.x * frogData.speedX, direction.y * frogData.speedY) * 5, ForceMode2D.Force);
             
             ennemy.anim.SetBool("isWalking", true);
         }
@@ -161,18 +163,18 @@ public class Frog : MonoBehaviour
         
         GetComponent<Ennemy>().isCharging = false;
         
-        GameObject currentTongue = Instantiate(tongue, transform.position, Quaternion.identity, transform);
+        GameObject currentTongue = Instantiate(frogData.tongue, transform.position, Quaternion.identity, transform);
 
         currentTongue.GetComponent<FrogTongue>().destination = destination;
-        currentTongue.GetComponent<FrogTongue>().tongueDuration = shotDuration;
+        currentTongue.GetComponent<FrogTongue>().tongueDuration = frogData.shotDuration;
 
-        yield return new WaitForSeconds(shotDuration);
+        yield return new WaitForSeconds(frogData.shotDuration);
 
         canMove = true;
         
         rb.AddForce(-direction * 3, ForceMode2D.Impulse);
         
-        yield return new WaitForSeconds(shotDuration / 2);
+        yield return new WaitForSeconds(frogData.shotDuration / 2);
 
         cooldownShot = false;
     }
@@ -225,7 +227,7 @@ public class Frog : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject bullet)
     {
-        health -= damages;
+        frogData.health -= damages;
 
         rb.velocity = Vector2.zero;
 

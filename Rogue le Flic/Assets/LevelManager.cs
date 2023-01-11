@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private string level2;
     [SerializeField] private string level3;
     [SerializeField] [Range(0, 3)] private int startLevel;
-    private int currentLevel;
+    [HideInInspector] public int currentLevel;
 
     [Header("Save Choices")]
     public List<GameObject> savedBoss = new List<GameObject>();
