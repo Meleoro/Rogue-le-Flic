@@ -71,7 +71,7 @@ public class BeaverBoss : MonoBehaviour
                 {
                     isAttacking = true;
 
-                    if (cooldownSpawn > 0)
+                    if (cooldownSpawn > 0 || boss.isHurt)
                     {
                         currentAttack = Random.Range(1, 3);
                     }

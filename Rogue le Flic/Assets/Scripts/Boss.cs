@@ -44,70 +44,88 @@ public class Boss : MonoBehaviour
                 if (isHurt)
                 {
                     beaverScript.currentHealth = beaverScript.bossData.health / 2;
-                    
-                    if (bossNumber == 1)
-                    {
-                        ReferenceBossUI.Instance.object2.SetActive(true);
-                        beaverScript.healthBar = ReferenceBossUI.Instance.healthBar2;
-                    }
-                    else if (bossNumber == 2)
-                    {
-                        ReferenceBossUI.Instance.object3.SetActive(true);
-                        beaverScript.healthBar = ReferenceBossUI.Instance.healthBar3;
-                    }
                 }
                 else
                 {
                     beaverScript.currentHealth = beaverScript.bossData.health;
                 }
+                
+                if (bossNumber == 0)
+                {
+                    ReferenceBossUI.Instance.object1.SetActive(true);
+                    beaverScript.healthBar = ReferenceBossUI.Instance.healthBar1;
+                }
+                else if (bossNumber == 1)
+                {
+                    ReferenceBossUI.Instance.object2.SetActive(true);
+                    beaverScript.healthBar = ReferenceBossUI.Instance.healthBar2;
+                }
+                else if (bossNumber == 2)
+                {
+                    ReferenceBossUI.Instance.object3.SetActive(true);
+                    beaverScript.healthBar = ReferenceBossUI.Instance.healthBar3;
+                }
+                
                 break;
 
+            
             case boss.Frog:
                 frogScript = GetComponent<FrogBoss>();
                 
                 if (isHurt)
                 {
                     frogScript.currentHealth = frogScript.bossData.health / 2;
-                    
-                    if (bossNumber == 1)
-                    {
-                        ReferenceBossUI.Instance.object2.SetActive(true);
-                        frogScript.healthBar = ReferenceBossUI.Instance.healthBar2;
-                    }
-                    else if (bossNumber == 2)
-                    {
-                        ReferenceBossUI.Instance.object3.SetActive(true);
-                        frogScript.healthBar = ReferenceBossUI.Instance.healthBar3;
-                    }
                 }
                 else
                 {
                     frogScript.currentHealth = frogScript.bossData.health;
                 }
                 
+                if (bossNumber == 0)
+                {
+                    ReferenceBossUI.Instance.object1.SetActive(true);
+                    frogScript.healthBar = ReferenceBossUI.Instance.healthBar1;
+                }
+                else if (bossNumber == 1)
+                {
+                    ReferenceBossUI.Instance.object2.SetActive(true);
+                    frogScript.healthBar = ReferenceBossUI.Instance.healthBar2;
+                }
+                else if (bossNumber == 2)
+                {
+                    ReferenceBossUI.Instance.object3.SetActive(true);
+                    frogScript.healthBar = ReferenceBossUI.Instance.healthBar3;
+                }
+                
                 break;
 
+            
             case boss.Turtle:
                 turtleScript = GetComponent<TurtleBoss>();
                 
                 if (isHurt)
                 {
                     turtleScript.currentHealth = turtleScript.bossData.health / 2;
-                    
-                    if (bossNumber == 1)
-                    {
-                        ReferenceBossUI.Instance.object2.SetActive(true);
-                        turtleScript.healthBar = ReferenceBossUI.Instance.healthBar2;
-                    }
-                    else if (bossNumber == 2)
-                    {
-                        ReferenceBossUI.Instance.object3.SetActive(true);
-                        turtleScript.healthBar = ReferenceBossUI.Instance.healthBar3;
-                    }
                 }
                 else
                 {
                     turtleScript.currentHealth = turtleScript.bossData.health;
+                }
+                
+                if (bossNumber == 0)
+                {
+                    ReferenceBossUI.Instance.object1.SetActive(true);
+                    turtleScript.healthBar = ReferenceBossUI.Instance.healthBar1;
+                }
+                else if (bossNumber == 1)
+                {
+                    ReferenceBossUI.Instance.object2.SetActive(true);
+                    turtleScript.healthBar = ReferenceBossUI.Instance.healthBar2;
+                }
+                else if (bossNumber == 2)
+                {
+                    ReferenceBossUI.Instance.object3.SetActive(true);
+                    turtleScript.healthBar = ReferenceBossUI.Instance.healthBar3;
                 }
                 
                 break;
@@ -209,10 +227,14 @@ public class Boss : MonoBehaviour
 
     public void Death()
     {
-        if (!death)
+        if (!death && !isHurt)
         {
             death = true;
             StartCoroutine(CinematicDeath());
+        }
+        else if(isHurt)
+        {
+            Destroy(gameObject);
         }
     }
 

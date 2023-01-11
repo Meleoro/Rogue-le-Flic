@@ -78,13 +78,13 @@ public class TurtleBoss : MonoBehaviour
                 {
                     isAttacking = true;
 
-                    if (cooldownSpawn > 0)
+                    if (cooldownSpawn > 0 || boss.isHurt)
                     {
                         currentAttack = Random.Range(1, 3);
                     }
                     else
                     {
-                        currentAttack = 2;
+                        currentAttack = Random.Range(1, 4);
                     }
                 }
             }

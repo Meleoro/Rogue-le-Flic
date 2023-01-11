@@ -34,7 +34,7 @@ public class FrogBoss : MonoBehaviour
     [Header("References")]
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
-    [SerializeField] private BossRoom bossRoom;
+    private BossRoom bossRoom;
     public Image healthBar;
     [SerializeField] private GameObject VFXStun;
     private Rigidbody2D rb;
@@ -57,6 +57,8 @@ public class FrogBoss : MonoBehaviour
         currentAttack = 0;
 
         boss.anim.SetBool("isWalking", false);
+
+        bossRoom = GetComponentInParent<BossRoom>();
     }
 
 
@@ -76,7 +78,7 @@ public class FrogBoss : MonoBehaviour
                 {
                     isAttacking = true;
 
-                    if (cooldownSpawn > 0)
+                    if (cooldownSpawn > 0 || boss.isHurt)
                     {
                         currentAttack = Random.Range(1, 3);
                     }
