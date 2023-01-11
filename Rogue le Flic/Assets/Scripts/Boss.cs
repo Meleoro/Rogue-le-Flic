@@ -92,7 +92,7 @@ public class Boss : MonoBehaviour
                 
                 if (isHurt)
                 {
-                    turtleScript.currentHealth = turtleScript.health / 2;
+                    turtleScript.currentHealth = turtleScript.bossData.health / 2;
                     
                     if (bossNumber == 1)
                     {
@@ -107,7 +107,7 @@ public class Boss : MonoBehaviour
                 }
                 else
                 {
-                    turtleScript.currentHealth = turtleScript.health;
+                    turtleScript.currentHealth = turtleScript.bossData.health;
                 }
                 
                 break;

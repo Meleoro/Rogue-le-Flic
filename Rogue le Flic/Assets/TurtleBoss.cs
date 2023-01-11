@@ -7,20 +7,10 @@ using UnityEngine.UI;
 
 public class TurtleBoss : MonoBehaviour
 {
-    [Header("Movement Speeds")]
-    public float speedX;
-    public float speedY;
-
-    [Header("Deceleration")]
-    public float dragDeceleration;
-    public float dragMultiplier;
+    public TurtleBossData bossData;
 
     [Header("Turtle")]
-    public int health;
     [HideInInspector] public int currentHealth;
-    [SerializeField] private float cooldownMin;
-    [SerializeField] private float cooldownMax;
-    [SerializeField] private float stunDuration;
     private float timer;
     private bool isAttacking;
     private bool canMove;
@@ -31,27 +21,16 @@ public class TurtleBoss : MonoBehaviour
     [HideInInspector] public bool isKicked;
 
     [Header("Charge Basique")]
-    [SerializeField] private float chargeVitesseOriginale;
-    [SerializeField] private float gainVitesseRebond;
-    [SerializeField] private float vitesseMax;
     [HideInInspector] public bool isSliding;
     private Vector2 directionSlide;
     private float currentSpeed;
 
     [Header("Charge Puissante")]
-    [SerializeField] private float chargemementDuree;
-    [SerializeField] private float chargePuissanteSpeed;
-    [SerializeField] private int minBoxSpawn;
-    [SerializeField] private int maxBoxSpawn;
-    [SerializeField] private GameObject box;
     private bool isGigaSliding;
     private float timerShake;
     private bool canShake;
 
     [Header("Spawn")]
-    [SerializeField] private int minTurtleSpawn;
-    [SerializeField] private int maxTurtleSpawn;
-    [SerializeField] private GameObject turtle;
     private int cooldownSpawn;
 
     [Header("References")]
@@ -68,7 +47,7 @@ public class TurtleBoss : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.drag = dragDeceleration * dragMultiplier;
+        rb.drag = bossData.dragDeceleration * bossData.dragMultiplier;
 
         canMove = true;
 
@@ -76,7 +55,7 @@ public class TurtleBoss : MonoBehaviour
 
         boss = GetComponent<Boss>();
 
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
         currentAttack = 0;
 
         boss.anim.SetBool("isWalking", false);
@@ -88,7 +67,7 @@ public class TurtleBoss : MonoBehaviour
         if (stunTimer <= 0)
         {
             VFXStun.SetActive(false);
-            healthBar.fillAmount = (float) currentHealth / health;
+            healthBar.fillAmount = (float) currentHealth / bossData.health;
             
             // COOLDOWN ENTRE LES ATTAQUES
             if (!isAttacking)
@@ -157,7 +136,7 @@ public class TurtleBoss : MonoBehaviour
                 if (canShake)
                 {
                     canShake = false;
-                    transform.DOShakePosition(0.05f, (chargemementDuree - timerShake) / 2).OnComplete((() => canShake = true));
+                    transform.DOShakePosition(0.05f, (bossData.chargemementDuree - timerShake) / 2).OnComplete((() => canShake = true));
                 }
             }
         }
@@ -180,7 +159,7 @@ public class TurtleBoss : MonoBehaviour
         {
             direction = AIPath.targetDirection;
 
-            rb.AddForce(new Vector2(direction.x * speedX, direction.y * speedY) * 5, ForceMode2D.Force);
+            rb.AddForce(new Vector2(direction.x * bossData.speedX, direction.y * bossData.speedY) * 5, ForceMode2D.Force);
 
             boss.anim.SetBool("isWalking", true);
         }
@@ -199,10 +178,10 @@ public class TurtleBoss : MonoBehaviour
         else if (isGigaSliding)
         {
             if (!isKicked)
-                rb.AddForce(directionSlide * chargePuissanteSpeed, ForceMode2D.Force);
+                rb.AddForce(directionSlide * bossData.chargePuissanteSpeed, ForceMode2D.Force);
 
             else
-                rb.AddForce(directionSlide * chargePuissanteSpeed * 1.5f, ForceMode2D.Force);
+                rb.AddForce(directionSlide * bossData.chargePuissanteSpeed * 1.5f, ForceMode2D.Force);
         }
 
         else
@@ -262,7 +241,7 @@ public class TurtleBoss : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
 
         isSliding = true;
-        currentSpeed = chargeVitesseOriginale;
+        currentSpeed = bossData.chargeVitesseOriginale;
     }
 
 
@@ -270,8 +249,8 @@ public class TurtleBoss : MonoBehaviour
     {
         if (!col.gameObject.CompareTag("Ennemy") && isSliding)
         {
-            if(currentSpeed < vitesseMax)
-                currentSpeed += gainVitesseRebond;
+            if(currentSpeed < bossData.vitesseMax)
+                currentSpeed += bossData.gainVitesseRebond;
 
             directionSlide = Vector3.Reflect(directionSlide.normalized, col.contacts[0].normal);
 
@@ -316,27 +295,27 @@ public class TurtleBoss : MonoBehaviour
         boss.anim.SetBool("isWalking", false);
 
         canShake = true;
-        timerShake = chargemementDuree;
+        timerShake = bossData.chargemementDuree;
         
-        yield return new WaitForSeconds(chargemementDuree);
+        yield return new WaitForSeconds(bossData.chargemementDuree);
         
         canMove = false;
 
         directionSlide = (ManagerChara.Instance.transform.position - transform.position).normalized;
 
         isGigaSliding = true;
-        currentSpeed = chargeVitesseOriginale;
+        currentSpeed = bossData.chargeVitesseOriginale;
     }
 
 
     public void Stun()
     {
-        stunTimer = stunDuration;
+        stunTimer = bossData.stunDuration;
 
         StopAllCoroutines();
 
         isAttacking = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
 
         rb.AddForce(directionSlide.normalized * 25, ForceMode2D.Impulse);
 
@@ -352,7 +331,7 @@ public class TurtleBoss : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        int nbrEnnemies = Random.Range(minTurtleSpawn, maxTurtleSpawn + 1);
+        int nbrEnnemies = Random.Range(bossData.minTurtleSpawn, bossData.maxTurtleSpawn + 1);
 
         List<int> indexSelected = new List<int>();
 
@@ -365,12 +344,12 @@ public class TurtleBoss : MonoBehaviour
                 newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
             }
 
-            Instantiate(turtle, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+            Instantiate(bossData.turtle, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
             indexSelected.Add(newIndex);
         }
 
         isAttacking = false;
-        timer = Random.Range(cooldownMin, cooldownMax);
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
 
         cooldownSpawn = 2;
     }
@@ -380,7 +359,7 @@ public class TurtleBoss : MonoBehaviour
     {
         currentHealth -= degats;
 
-        healthBar.fillAmount = (float)currentHealth / health;
+        healthBar.fillAmount = (float)currentHealth / bossData.health;
 
         if (bullet.CompareTag("Box"))
         {
@@ -396,7 +375,7 @@ public class TurtleBoss : MonoBehaviour
 
     public void CollideWall()
     {
-        int nbrItems = Random.Range(minBoxSpawn, maxBoxSpawn + 1);
+        int nbrItems = Random.Range(bossData.minBoxSpawn, bossData.maxBoxSpawn + 1);
 
         List<int> indexSelected = new List<int>();
 
@@ -409,13 +388,13 @@ public class TurtleBoss : MonoBehaviour
                 newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
             }
 
-            GameObject newBox = Instantiate(box, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+            GameObject newBox = Instantiate(bossData.box, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
 
             StartCoroutine(newBox.GetComponent<Box>().Fall());
             indexSelected.Add(newIndex);
         }
 
-        stunTimer = stunDuration;
+        stunTimer = bossData.stunDuration;
         ReferenceCamera.Instance._camera.DOShakePosition(1, 1f);
     }
 }

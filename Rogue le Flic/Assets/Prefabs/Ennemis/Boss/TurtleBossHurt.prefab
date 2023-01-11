@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 6263996166541424047}
   - component: {fileID: 4844934969148064292}
   m_Layer: 9
-  m_Name: TurtleBoss 0
+  m_Name: TurtleBossHurt
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -467,6 +467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossType: 2
   isHurt: 1
+  bossNumber: 0
   anim: {fileID: 5290507874984418254}
   sprite: {fileID: 5290507874984418255}
   spawnIndicator: {fileID: 3139682111376741497}
@@ -483,34 +484,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3192dba10a66344db460cb069ccf1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 5
-  speedY: 4
-  dragDeceleration: 3
-  dragMultiplier: 3
-  health: 200
+  bossData: {fileID: 11400000, guid: a9df555d537bb1c4588b59a73272b3b6, type: 2}
   currentHealth: 0
-  cooldownMin: 4
-  cooldownMax: 6
-  stunDuration: 2
   lookLeft: 0
   isKicked: 0
-  chargeVitesseOriginale: 100
-  gainVitesseRebond: 20
-  vitesseMax: 340
   isSliding: 0
-  chargemementDuree: 0
-  chargePuissanteSpeed: 0
-  minBoxSpawn: 0
-  maxBoxSpawn: 0
-  box: {fileID: 0}
-  minTurtleSpawn: 0
-  maxTurtleSpawn: 0
-  turtle: {fileID: 0}
   AIPath: {fileID: 6263996166541424041}
   AIDestination: {fileID: 6263996166541424038}
   bossRoom: {fileID: 0}
   healthBar: {fileID: 0}
-  VFXStun: {fileID: 0}
+  VFXStun: {fileID: 9107214215254816732}
 --- !u!1001 &362754056721950700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -684,6 +667,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a55c733f6cbc0aa44a4aab50d85e8016, type: 3}
+--- !u!1 &9107214215254816732 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4965037103967986049, guid: a55c733f6cbc0aa44a4aab50d85e8016, type: 3}
+  m_PrefabInstance: {fileID: 4216506021939762781}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9107214215254816735 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4965037103967986050, guid: a55c733f6cbc0aa44a4aab50d85e8016, type: 3}
