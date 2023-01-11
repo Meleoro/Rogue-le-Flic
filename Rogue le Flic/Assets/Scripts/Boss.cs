@@ -15,6 +15,9 @@ public class Boss : MonoBehaviour
     public boss bossType;
 
     public bool isHurt;
+    
+    [Header("Feedbacks")] 
+    public Color hitColor;
 
     [HideInInspector] public int bossNumber;
 
@@ -189,6 +192,13 @@ public class Boss : MonoBehaviour
     {
         if (!death)
         {
+            SpriteRenderer[] sprites = sprite.GetComponentsInChildren<SpriteRenderer>();
+
+            foreach (SpriteRenderer k in sprites)
+            {
+                StartCoroutine(FeedbackDamage(k));
+            }
+            
             switch (bossType)
             {
                 case boss.Beaver:
@@ -223,6 +233,15 @@ public class Boss : MonoBehaviour
                     turtleScript.TakeDamages(damages, bullet);
                     break;
             }
+    }
+    
+    public IEnumerator FeedbackDamage(SpriteRenderer currentSprite)
+    {
+        currentSprite.DOColor(hitColor, 0.12f);
+
+        yield return new WaitForSeconds(0.12f);
+        
+        currentSprite.DOColor(Color.white, 0.12f);
     }
 
     public void Death()
