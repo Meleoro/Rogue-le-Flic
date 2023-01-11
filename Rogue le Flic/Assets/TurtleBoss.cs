@@ -7,7 +7,13 @@ using UnityEngine.UI;
 
 public class TurtleBoss : MonoBehaviour
 {
-    public TurtleBossData bossData;
+    [Header("Levels")] 
+    public TurtleBossData niveau1;
+    public TurtleBossData niveau2;
+    public TurtleBossData niveau3;
+    public TurtleBossData affaibli;
+    
+    [HideInInspector] public TurtleBossData bossData;
 
     [Header("Turtle")]
     [HideInInspector] public int currentHealth;
@@ -46,6 +52,24 @@ public class TurtleBoss : MonoBehaviour
 
     private void Start()
     {
+        if (LevelManager.Instance.currentLevel == 1)
+        {
+            bossData = niveau1;
+        }
+        else if (LevelManager.Instance.currentLevel == 2)
+        {
+            bossData = niveau2;
+        }
+        else if (LevelManager.Instance.currentLevel == 3)
+        {
+            bossData = niveau3;
+        }
+
+        if (boss.isHurt)
+        {
+            bossData = affaibli;
+        }
+        
         rb = GetComponent<Rigidbody2D>();
         rb.drag = bossData.dragDeceleration * bossData.dragMultiplier;
 

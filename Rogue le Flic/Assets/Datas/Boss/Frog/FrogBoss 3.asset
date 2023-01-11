@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d9058a1b59313428fcf1919ed5b555, type: 3}
+  m_Name: FrogBoss 3
+  m_EditorClassIdentifier: 
+  speedX: 0
+  speedY: 0
+  dragDeceleration: 3
+  dragMultiplier: 3
+  health: 300
+  cooldownMin: 1
+  cooldownMax: 2
+  posLeft: {x: 5, y: 0.5}
+  posRight: {x: 5, y: 0.5}
+  stunDuration: 3
+  distanceJumpTrigger: 10
+  duree: 2
+  minBoxSpawn: 2
+  maxBoxSpawn: 4
+  box: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
+  minFrogSpawn: 2
+  maxFrogSpawn: 3
+  frog: {fileID: 3801439837385764994, guid: 61a87daa0d297ef48a372f41d7aac6c5, type: 3}
+  tonguePatern:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 8.868863
+      outSlope: 8.868863
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.06413925
+      value: 0.5688422
+      inSlope: 3.748619
+      outSlope: 3.748619
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.24564663
+      value: 0.94179124
+      inSlope: 0.567202
+      outSlope: 0.567202
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.39082977
+    - serializedVersion: 3
+      time: 0.8171482
+      value: 0.96914697
+      inSlope: -0.19199975
+      outSlope: -0.19199975
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.57018733
+      outWeight: 0.78218806
+    - serializedVersion: 3
+      time: 0.9491023
+      value: 0.73628443
+      inSlope: -2.4344475
+      outSlope: -2.4344475
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.64163196
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -14.465961
+      outSlope: -14.465961
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  tongue: {fileID: 8267943327727956763, guid: d9459fed8ca498c41856b6117c5dee79, type: 3}
+  shotDuration: 1

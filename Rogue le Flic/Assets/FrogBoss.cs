@@ -7,7 +7,16 @@ using UnityEngine.UI;
 
 public class FrogBoss : MonoBehaviour
 {
-    public FrogBossData bossData;
+    [Header("Levels")] 
+    public FrogBossData niveau1;
+    public FrogBossData niveau2;
+    public FrogBossData niveau3;
+    public FrogBossData affaibli;
+
+    [HideInInspector] public FrogBossData bossData;
+    
+    
+    
     public List<Transform> spotsJump;
 
     [Header("Frog")]
@@ -44,6 +53,24 @@ public class FrogBoss : MonoBehaviour
 
     private void Start()
     {
+        if (LevelManager.Instance.currentLevel == 1)
+        {
+            bossData = niveau1;
+        }
+        else if (LevelManager.Instance.currentLevel == 2)
+        {
+            bossData = niveau2;
+        }
+        else if (LevelManager.Instance.currentLevel == 3)
+        {
+            bossData = niveau3;
+        }
+
+        if (boss.isHurt)
+        {
+            bossData = affaibli;
+        }
+        
         rb = GetComponent<Rigidbody2D>();
         rb.drag = bossData.dragDeceleration * bossData.dragMultiplier;
 

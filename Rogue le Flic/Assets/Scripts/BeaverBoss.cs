@@ -7,7 +7,13 @@ using DG.Tweening;
 
 public class BeaverBoss : MonoBehaviour
 {
-    public BeaverBossData bossData;
+    [Header("Levels")] 
+    public BeaverBossData niveau1;
+    public BeaverBossData niveau2;
+    public BeaverBossData niveau3;
+    public BeaverBossData affaibli;
+
+    [HideInInspector] public BeaverBossData bossData;
 
     [Header("Castor")]
     [HideInInspector] public int currentHealth;
@@ -31,8 +37,8 @@ public class BeaverBoss : MonoBehaviour
     [Header("References")]
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
-    [SerializeField] private BossRoom bossRoom;
-    public Image healthBar;
+    [HideInInspector] public BossRoom bossRoom;
+    [HideInInspector] public Image healthBar;
     [SerializeField] private GameObject VFXStun;
     private Rigidbody2D rb;
     private Boss boss;
@@ -41,6 +47,24 @@ public class BeaverBoss : MonoBehaviour
 
     private void Start()
     {
+        if (LevelManager.Instance.currentLevel == 1)
+        {
+            bossData = niveau1;
+        }
+        else if (LevelManager.Instance.currentLevel == 2)
+        {
+            bossData = niveau2;
+        }
+        else if (LevelManager.Instance.currentLevel == 3)
+        {
+            bossData = niveau3;
+        }
+
+        if (boss.isHurt)
+        {
+            bossData = affaibli;
+        }
+        
         rb = GetComponent<Rigidbody2D>();
         rb.drag = bossData.dragDeceleration * bossData.dragMultiplier;
 
