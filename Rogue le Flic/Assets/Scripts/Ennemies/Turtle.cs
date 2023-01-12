@@ -16,6 +16,8 @@ public class Turtle : MonoBehaviour
     
     [HideInInspector] public bool isSliding;
 
+    private int currentHealth;
+
     [Header("Autres")]
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
@@ -47,7 +49,8 @@ public class Turtle : MonoBehaviour
         {
             turtleData = niveau3;
         }
-        
+
+        currentHealth = turtleData.health;
         
         rb = GetComponent<Rigidbody2D>();
         rb.drag = turtleData.dragDeceleration * turtleData.dragMultiplier;
@@ -64,7 +67,7 @@ public class Turtle : MonoBehaviour
 
     public void TurtleBehavior()
     {
-        if (turtleData.health <= 0 && !stopDeath)
+        if (currentHealth <= 0 && !stopDeath)
         {
             isKicked = false;
             stopDeath = true;
@@ -214,7 +217,7 @@ public class Turtle : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject collider)
     {
-        turtleData.health -= damages;
+        currentHealth -= damages;
 
         // RECUL
         if(collider.CompareTag("Bullet")) 

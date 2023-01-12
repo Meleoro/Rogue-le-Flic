@@ -144,13 +144,6 @@ public class Boss : MonoBehaviour
     {
         if (!death)
         {
-            SpriteRenderer[] sprites = sprite.GetComponentsInChildren<SpriteRenderer>();
-
-            foreach (SpriteRenderer k in sprites)
-            {
-                StartCoroutine(FeedbackDamage(k));
-            }
-            
             switch (bossType)
             {
                 case boss.Beaver:
@@ -171,20 +164,27 @@ public class Boss : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject bullet)
     {
-            switch (bossType)
-            {
-                case boss.Beaver:
-                    beaverScript.TakeDamages(damages, bullet);
-                    break;
+        SpriteRenderer[] sprites = sprite.GetComponentsInChildren<SpriteRenderer>();
 
-                case boss.Frog:
-                    frogScript.TakeDamages(damages, bullet);
-                    break;
+        foreach (SpriteRenderer k in sprites)
+        {
+            StartCoroutine(FeedbackDamage(k));
+        }
+        
+        switch (bossType)
+        { 
+            case boss.Beaver:
+                beaverScript.TakeDamages(damages, bullet);
+                break;
 
-                case boss.Turtle:
-                    turtleScript.TakeDamages(damages, bullet);
-                    break;
-            }
+            case boss.Frog:
+                frogScript.TakeDamages(damages, bullet);
+                break;
+
+            case boss.Turtle:
+                turtleScript.TakeDamages(damages, bullet);
+                break;
+        }
     }
     
     public IEnumerator FeedbackDamage(SpriteRenderer currentSprite)

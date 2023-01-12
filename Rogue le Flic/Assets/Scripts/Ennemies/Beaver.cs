@@ -14,6 +14,8 @@ public class Beaver : MonoBehaviour
     public BeaverData niveau3;
 
     private BeaverData beaverData;
+
+    private int currentHealth;
     
     
     [Header("Castor")]
@@ -50,6 +52,8 @@ public class Beaver : MonoBehaviour
             beaverData = niveau3;
         }
 
+        currentHealth = beaverData.health;
+
         rb = GetComponent<Rigidbody2D>();
         rb.drag = beaverData.dragDeceleration * beaverData.dragMultiplier;
 
@@ -63,7 +67,7 @@ public class Beaver : MonoBehaviour
 
     public void BeaverBehavior()
     {
-        if (beaverData.health <= 0 && !stopDeath)
+        if (currentHealth <= 0 && !stopDeath)
         {
             stopDeath = true;
             isKicked = false;
@@ -160,7 +164,7 @@ public class Beaver : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject bullet)
     {
-        beaverData.health -= damages;
+        currentHealth -= damages;
 
         // RECUL
         if(bullet.CompareTag("Bullet"))

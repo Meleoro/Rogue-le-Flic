@@ -65,6 +65,9 @@ public class FrogBoss : MonoBehaviour
         {
             bossData = niveau3;
         }
+        
+        
+        boss = GetComponent<Boss>();
 
         if (boss.isHurt)
         {
@@ -95,8 +98,6 @@ public class FrogBoss : MonoBehaviour
         canMove = true;
 
         AIDestination.target = ManagerChara.Instance.transform;
-
-        boss = GetComponent<Boss>();
 
         timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
         currentAttack = 0;

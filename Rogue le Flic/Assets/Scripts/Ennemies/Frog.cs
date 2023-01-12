@@ -18,6 +18,8 @@ public class Frog : MonoBehaviour
     private bool lookLeft;
     private Ennemy ennemy;
 
+    private int currentHealth;
+
     [Header("Autres")]
     public AIPath AIPath;
     public AIDestinationSetter AIDestination;
@@ -47,6 +49,8 @@ public class Frog : MonoBehaviour
         {
             frogData = niveau3;
         }
+
+        currentHealth = frogData.health;
         
         rb = GetComponent<Rigidbody2D>();
         rb.drag = frogData.dragDeceleration * frogData.dragMultiplier;
@@ -61,7 +65,7 @@ public class Frog : MonoBehaviour
 
     public void FrogBehavior()
     {
-        if (frogData.health <= 0 && !stopDeath)
+        if (currentHealth <= 0 && !stopDeath)
         {
             isKicked = false;
             stopDeath = true;
@@ -227,7 +231,7 @@ public class Frog : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject bullet)
     {
-        frogData.health -= damages;
+        currentHealth -= damages;
 
         rb.velocity = Vector2.zero;
 
