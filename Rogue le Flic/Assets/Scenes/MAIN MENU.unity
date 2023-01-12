@@ -2099,32 +2099,32 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 850769816}
-          m_TargetAssemblyTypeName: ButtonStart, Assembly-CSharp
-          m_MethodName: OnPointerEnter
-          m_Mode: 1
+        - m_Target: {fileID: 1406281541}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: SetTrigger
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: isOn
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 850769816}
-          m_TargetAssemblyTypeName: ButtonStart, Assembly-CSharp
-          m_MethodName: OnPointerExit
-          m_Mode: 1
+        - m_Target: {fileID: 1406281541}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: SetTrigger
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: isOff
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &850769816
@@ -3070,6 +3070,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378503342}
   m_CullTransparentMesh: 1
+--- !u!95 &1406281541 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3156453425458344073, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+  m_PrefabInstance: {fileID: 1678909629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1473860154
 GameObject:
   m_ObjectHideFlags: 0
@@ -3415,6 +3420,71 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &1678909629
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3156453424862343921, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344071, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_Name
+      value: Menu Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344072, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344072, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344072, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344072, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344072, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344072, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344072, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344072, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344072, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344072, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425458344072, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156453425459127410, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cad094543cf2bde47a455a9bcada155d, type: 3}
 --- !u!1 &1891144660
 GameObject:
   m_ObjectHideFlags: 0
@@ -4093,6 +4163,10 @@ PrefabInstance:
     - target: {fileID: 8305988039248249964, guid: e01284f5c6aa56d409d2cadbbce55c15, type: 3}
       propertyPath: m_Name
       value: Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305988039248249964, guid: e01284f5c6aa56d409d2cadbbce55c15, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e01284f5c6aa56d409d2cadbbce55c15, type: 3}
