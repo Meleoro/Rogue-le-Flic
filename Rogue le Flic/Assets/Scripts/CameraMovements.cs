@@ -36,6 +36,10 @@ public class CameraMovements : MonoBehaviour
     [HideInInspector] public Vector2 posCamera;
     [HideInInspector] public bool stopDezoom;
     private bool doOnce;
+    
+    [Header("PlayerDeath")]
+    private bool doOnce2;
+    [HideInInspector] public bool playerDeath;
 
 
     private void Awake()
@@ -65,19 +69,27 @@ public class CameraMovements : MonoBehaviour
 
     void Update()
     {
-        if (!endRoom && canMove && !bossEndRoom)
+        if (playerDeath)
         {
-            transform.position = NormalBehavior();
-
-            originalSize = _camera.orthographicSize;
-            originalPos = _camera.transform.position;
+            DeathBeahvior();
         }
+        
+        else
+        {
+            if (!endRoom && canMove && !bossEndRoom)
+            {
+                transform.position = NormalBehavior();
 
-        else if (canMove && !bossEndRoom)
-            EndRoomBehavior();
+                originalSize = _camera.orthographicSize;
+                originalPos = _camera.transform.position;
+            }
 
-        else if (canMove)
-            BossEndRoomBehavior();
+            else if (canMove && !bossEndRoom)
+                EndRoomBehavior();
+
+            else if (canMove)
+                BossEndRoomBehavior();
+        }
     }
 
 
@@ -190,6 +202,18 @@ public class CameraMovements : MonoBehaviour
             doOnce = true;
 
             _camera.DOOrthoSize(originalSize / 1.2f, timeZoom);
+
+            transform.DOMove(posCamera, timeZoom - 0.2f);
+        }
+    }
+
+    void DeathBeahvior()
+    {
+        if(!doOnce)
+        {
+            doOnce2 = true;
+
+            _camera.DOOrthoSize(originalSize / 1.5f, timeZoom);
 
             transform.DOMove(posCamera, timeZoom - 0.2f);
         }

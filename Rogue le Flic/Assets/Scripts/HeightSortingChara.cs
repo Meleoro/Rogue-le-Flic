@@ -19,7 +19,7 @@ public class HeightSortingChara : MonoBehaviour
 
     void Update()
     {
-        if(!ReferenceCamera.Instance.finalCinematic)
+        if(!ReferenceCamera.Instance.finalCinematic && !ReferenceCamera.Instance.finalCinematicChara)
             sortingGroup.sortingOrder = Mathf.RoundToInt(transform.position.y * 2) * -1;
 
         else if (!isChara && !ReferenceCamera.Instance.finalCinematicChara)
