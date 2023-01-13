@@ -168,31 +168,34 @@ public class Ennemy : MonoBehaviour
 
     public void isKicked()
     {
-        switch (ennemyType)
+        if (!isDying)
         {
-            case ennemies.Beaver:
-                if(!beaverScript.isKicked)
-                {
-                    beaverScript.isKicked = true;
-                    timerKick = 0.3f;
-                }
-                break;
+            switch (ennemyType)
+            {
+                case ennemies.Beaver:
+                    if(!beaverScript.isKicked)
+                    {
+                        beaverScript.isKicked = true;
+                        timerKick = 0.3f;
+                    }
+                    break;
 
-            case ennemies.Frog:
-                if (!frogScript.isKicked)
-                {
-                    frogScript.isKicked = true;
-                    timerKick = 0.3f;
-                }
-                break;
+                case ennemies.Frog:
+                    if (!frogScript.isKicked)
+                    {
+                        frogScript.isKicked = true;
+                        timerKick = 0.3f;
+                    }
+                    break;
 
-            case ennemies.Turtle:
-                if (!turtleScript.isKicked)
-                {
-                    turtleScript.isKicked = true;
-                    timerKick = 0.3f;
-                }
-                break;
+                case ennemies.Turtle:
+                    if (!turtleScript.isKicked)
+                    {
+                        turtleScript.isKicked = true;
+                        timerKick = 0.3f;
+                    }
+                    break;
+            }
         }
     }
 
@@ -225,6 +228,8 @@ public class Ennemy : MonoBehaviour
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
         sprite.transform.DOScale(new Vector3(0, 0, 0), 0.5f);
+        
+        isDying = true;
 
 
         yield return new WaitForSeconds(0.5f);
@@ -236,8 +241,6 @@ public class Ennemy : MonoBehaviour
         {
             Instantiate(coin, transform.position, Quaternion.identity);
         }
-
-        isDying = true;
 
         anim.SetTrigger("death");
 

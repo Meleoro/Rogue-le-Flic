@@ -22,7 +22,7 @@ public class DeathZone : MonoBehaviour
         
         else if (col.CompareTag("Ennemy"))
         {
-            col.GetComponent<Ennemy>().TakeDamages(1000, gameObject);
+            StartCoroutine(col.gameObject.GetComponent<Ennemy>().Fall());
         }
     }
 
@@ -41,7 +41,19 @@ public class DeathZone : MonoBehaviour
         
         else if (col.gameObject.CompareTag("Ennemy"))
         {
-            StartCoroutine(col.gameObject.GetComponent<Ennemy>().Fall());
+            if (!GenerationPro.Instance.testLDMode) 
+            {
+                MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
+            }
+
+            if (MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount <= 0)
+            {
+                StartCoroutine(col.gameObject.GetComponent<Ennemy>().FinalDeath());
+            }
+            else
+            {
+                StartCoroutine(col.gameObject.GetComponent<Ennemy>().Fall());
+            }
         }
     }
 
