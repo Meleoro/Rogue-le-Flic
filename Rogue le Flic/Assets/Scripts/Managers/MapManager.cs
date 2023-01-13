@@ -55,6 +55,8 @@ public class MapManager : MonoBehaviour
         activeRoom.GetComponent<DoorManager>().PortesActives();
         
         EnterRoom(activeRoom.GetComponent<DoorManager>().currentEnnemies);
+
+        ManagerChara.Instance.transform.position = Vector3.zero;
     }
 
 
