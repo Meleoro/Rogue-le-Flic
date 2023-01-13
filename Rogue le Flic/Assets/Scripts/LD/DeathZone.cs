@@ -20,10 +20,10 @@ public class DeathZone : MonoBehaviour
             }
         }
         
-        else if (col.CompareTag("Ennemy"))
+        /*else if (col.CompareTag("Ennemy"))
         {
             StartCoroutine(col.gameObject.GetComponent<Ennemy>().Fall());
-        }
+        }*/
     }
 
 
