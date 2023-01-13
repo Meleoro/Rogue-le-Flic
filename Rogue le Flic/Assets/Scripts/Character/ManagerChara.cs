@@ -74,6 +74,9 @@ public class ManagerChara : MonoBehaviour
         canSwitch = true;
         
         reload.GetComponentInParent<Canvas>().enabled = false;
+        
+        
+        MenuMortManager.Instance.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -178,6 +181,8 @@ public class ManagerChara : MonoBehaviour
 
     public IEnumerator Death()
     {
+        MenuMortManager.Instance.gameObject.SetActive(true);
+        
         noControl = true;
         
         anim.SetTrigger("isDying");
