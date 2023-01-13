@@ -191,7 +191,7 @@ public class ManagerChara : MonoBehaviour
         CameraMovements.Instance.timeZoom = 2;
         CameraMovements.Instance.posCamera = transform.position + new Vector3(-7, 0, 0);
 
-        MenuMortManager.Instance.transform.DOMoveX(MenuMortManager.Instance.transform.position.x + 9, 1);
+        MenuMortManager.Instance.transform.DOMoveX(transform.position.x - 6.8f, 1).SetEase(Ease.OutSine);
 
         yield return new WaitForSeconds(2f);
     }
