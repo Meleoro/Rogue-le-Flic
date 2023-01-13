@@ -34,12 +34,12 @@ public class MainMenuButtons : MonoBehaviour
 
     public void OpenSettings()
     {
-        settPanel.SetActive(true);
+        
     }
 
     public void CloseSettings()
     {
-        settPanel.SetActive(false);
+        
     }
 
     public void OpenControls()
