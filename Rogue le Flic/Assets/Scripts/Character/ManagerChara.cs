@@ -31,6 +31,8 @@ public class ManagerChara : MonoBehaviour
     public Vector2 posLeft;
     public Vector2 posRight;
 
+    [Header("Death")] public Image fondMort;
+
     [Header("Autres")] 
     public float switchCooldown;
     public bool canSwitch;
@@ -76,6 +78,11 @@ public class ManagerChara : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            StartCoroutine(Death());
+        }
+        
         if (!noControl)
         {
             MovementsChara.Instance.RotateCharacter();
@@ -171,12 +178,34 @@ public class ManagerChara : MonoBehaviour
 
     public IEnumerator Death()
     {
+        noControl = true;
+        
         anim.SetTrigger("isDying");
+        ReferenceCamera.Instance.finalCinematicChara = true;
 
-        yield return new WaitForSeconds(0.9f);
+        MenuMortManager.Instance.fondMort.DOFade(1, 1);
+        
+        yield return new WaitForSeconds(1f);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CameraMovements.Instance.playerDeath = true;
+        CameraMovements.Instance.timeZoom = 2;
+        CameraMovements.Instance.posCamera = transform.position + new Vector3(-7, 0, 0);
+
+        MenuMortManager.Instance.transform.DOMoveX(MenuMortManager.Instance.transform.position.x + 9, 1);
+
+        yield return new WaitForSeconds(2f);
     }
+
+
+    public void Reset()
+    {
+        noControl = false;
+        anim.SetTrigger("reset");
+
+        LevelManager.Instance.activeGun = null;
+        LevelManager.Instance.stockedGun = null;
+    }
+    
 
     public IEnumerator Fall(float fallDuration, Vector2 newPos)
     {
