@@ -227,6 +227,30 @@ public class Boss : MonoBehaviour
 
     IEnumerator CinematicDeath()
     {
+        switch (bossType)
+        {
+            case boss.Beaver:
+                foreach (GameObject k in beaverScript.ennemies)
+                {
+                    Destroy(k);
+                }
+                break;
+
+            case boss.Frog:
+                foreach (GameObject k in frogScript.ennemies)
+                {
+                    Destroy(k);
+                }
+                break;
+
+            case boss.Turtle:
+                foreach (GameObject k in turtleScript.ennemies)
+                {
+                    Destroy(k);
+                }
+                break;
+        }
+        
         anim.SetBool("isWalking", false);
         
         ManagerChara.Instance.savePosition = ManagerChara.Instance.transform.position;

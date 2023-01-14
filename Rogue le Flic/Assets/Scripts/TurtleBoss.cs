@@ -48,6 +48,8 @@ public class TurtleBoss : MonoBehaviour
     private Rigidbody2D rb;
     private Boss boss;
 
+    public List<GameObject> ennemies = new List<GameObject>();
+
 
 
     private void Start()
@@ -386,7 +388,7 @@ public class TurtleBoss : MonoBehaviour
                 newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
             }
 
-            Instantiate(bossData.turtle, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+            ennemies.Add(Instantiate(bossData.turtle, bossRoom.spawnPoints[newIndex].position, Quaternion.identity));
             indexSelected.Add(newIndex);
         }
 
