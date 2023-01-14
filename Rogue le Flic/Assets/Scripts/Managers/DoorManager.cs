@@ -38,6 +38,8 @@ public class DoorManager : MonoBehaviour
 
     [Header("Loot")]
     public List<spawnChance> spawnLoots;
+    public GameObject healObject;
+    public int probaDropHeal;
     [HideInInspector] public bool isFinished;
     private float timerFinish;
     private bool stopItem;
@@ -193,6 +195,22 @@ public class DoorManager : MonoBehaviour
             bool createdItem = false;
             stopItem = false;
 
+            // DROP HEAL
+            int indexHeal = Random.Range(0, 100);
+
+            if (indexHeal <= probaDropHeal)
+            {
+                GameObject heal = Instantiate(healObject, posSpawn, Quaternion.identity);
+
+                Vector2 randomDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                
+                Debug.Log(randomDirection);
+                
+                heal.GetComponentInParent<Rigidbody2D>().AddForce(randomDirection.normalized * 4, ForceMode2D.Impulse);
+            }
+            
+            
+            // DROP ITEM
             foreach (spawnChance k in spawnLoots)
             {
                 int index = Random.Range(0, 100);

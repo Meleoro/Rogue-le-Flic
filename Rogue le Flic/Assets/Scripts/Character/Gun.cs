@@ -91,6 +91,7 @@ public class Gun : MonoBehaviour
             {
                 // ON RETIRE LE TEXTE
                 explanation.SetActive(false);
+                UIArme.SetActive(false);
 
                 float angle = OrientateGun();
             

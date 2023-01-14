@@ -1839,6 +1839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 0
+  isFinalDoor: 0
 --- !u!1 &4045115571177933048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2100,6 +2101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 2
+  isFinalDoor: 0
 --- !u!1 &6159346021856155929
 GameObject:
   m_ObjectHideFlags: 0
@@ -2212,7 +2214,10 @@ MonoBehaviour:
     spawnChances: 20
   - element: {fileID: 7161395903424992997, guid: c2013118a0a59bf47a33c29552f75ec0, type: 3}
     spawnChances: 20
+  healObject: {fileID: 6276320648922257725, guid: ac550bf16be7c944eba1d90831c323de, type: 3}
+  probaDropHeal: 40
   isFinished: 0
+  bossRoom: 0
 --- !u!114 &6614252433785645192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2605,6 +2610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 3
+  isFinalDoor: 0
 --- !u!1 &8936175314132522071
 GameObject:
   m_ObjectHideFlags: 0
@@ -3362,6 +3368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 1
+  isFinalDoor: 0
 --- !u!1001 &5854051266317339406
 PrefabInstance:
   m_ObjectHideFlags: 0

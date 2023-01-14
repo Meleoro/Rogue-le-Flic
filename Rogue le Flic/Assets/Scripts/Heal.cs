@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class Heal : MonoBehaviour
 {
+    public Transform parent;
+    
     private bool canInteract;
     private bool goUp;
     private bool goDown;
@@ -29,13 +31,13 @@ public class Heal : MonoBehaviour
         if (goUp)
         {
             goUp = false;
-            transform.DOLocalMoveY(transform.localPosition.y + 0.25f, 0.8f).OnComplete((() => goDown = true)).SetEase(Ease.InOutQuad);
+            transform.DOLocalMoveY(transform.localPosition.y + 0.15f, 0.8f).OnComplete((() => goDown = true)).SetEase(Ease.InOutQuad);
         }
         
         else if (goDown)
         {
             goDown = false;
-            transform.DOLocalMoveY(transform.localPosition.y - 0.25f, 0.8f).OnComplete((() => goUp = true)).SetEase(Ease.InOutQuad);
+            transform.DOLocalMoveY(transform.localPosition.y - 0.15f, 0.8f).OnComplete((() => goUp = true)).SetEase(Ease.InOutQuad);
         }
     }
 

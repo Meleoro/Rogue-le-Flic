@@ -98,8 +98,6 @@ public class HealthManager : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
-        
-        Debug.Log(currentHealth);
 
         for (int k = 0; k < currentHealth; k++)
         {
