@@ -136,22 +136,24 @@ public class KickChara : MonoBehaviour
     }
 
 
-    public IEnumerator Kick()
+    public IEnumerator Kick(Vector2 direction)
     {
         // ON RECUPERE LA POSITION DE LA SOURIS ET DU JOUEUR 
-        Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>());
-        Vector2 charaPos = ManagerChara.Instance.transform.position;
+        /*Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>());
+        Vector2 charaPos = ManagerChara.Instance.transform.position;*/
 
         hasKicked = false;
 
-        if (mouseDirection)
+        /*if (mouseDirection)
         {
             kickDirection = new Vector2(-mousePos.x + charaPos.x, -mousePos.y + charaPos.y).normalized;
         }
         else
         {
             kickDirection = -MovementsChara.Instance.direction.normalized;
-        }
+        }*/
+
+        kickDirection = direction;
 
         kick.SetActive(true);
         kick.GetComponent<CircleCollider2D>().enabled = false;
@@ -159,7 +161,7 @@ public class KickChara : MonoBehaviour
         
         ManagerChara.Instance.noControl = true;
 
-        if (mousePos.x > charaPos.x)
+        if (direction.x < 0)
         {
             ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
             
@@ -173,7 +175,7 @@ public class KickChara : MonoBehaviour
         }
 
         yield return new WaitForSeconds(kickDelay);
-        
+
         // ON PLACE LA ZONE DE KICK ET ON L'AFFICHE
         kick.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(-kickDirection.y, -kickDirection.x) * Mathf.Rad2Deg, Vector3.forward);
         kick.GetComponent<CircleCollider2D>().enabled = true;

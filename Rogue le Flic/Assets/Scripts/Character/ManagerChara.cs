@@ -26,6 +26,7 @@ public class ManagerChara : MonoBehaviour
     [Header("Kick")] 
     private bool isKicking;
     private float timerKick;
+    public bool mouseDirection;
 
     [Header("Repositionnement")] 
     public Vector2 posLeft;
@@ -105,7 +106,22 @@ public class ManagerChara : MonoBehaviour
                 activeGun.GetComponent<SpriteRenderer>().enabled = false;
                 
                 anim.SetTrigger("isKicking");
-                StartCoroutine(KickChara.Instance.Kick());
+                
+                Vector2 mousePos = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>());
+                Vector2 charaPos = ManagerChara.Instance.transform.position;
+
+                Vector2 kickDirection;
+                
+                if (mouseDirection)
+                {
+                    kickDirection = new Vector2(-mousePos.x + charaPos.x, -mousePos.y + charaPos.y).normalized;
+                }
+                else
+                {
+                    kickDirection = -MovementsChara.Instance.direction.normalized;
+                }
+                
+                StartCoroutine(KickChara.Instance.Kick(kickDirection));
             }
 
             if (isDashing)

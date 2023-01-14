@@ -28,6 +28,7 @@ public class Boss : MonoBehaviour
     private bool death;
     private bool canShake;
     private bool lookLeft;
+    private bool doOnce;
 
 
     [Header("References")]
@@ -117,26 +118,31 @@ public class Boss : MonoBehaviour
 
         if (ReferenceChoice.Instance.kicked || ReferenceChoice.Instance.spared)
         {
-            if (ReferenceChoice.Instance.spared)
+            if (!doOnce)
             {
-                switch (bossType)
-                {
-                    case boss.Beaver:
-                        LevelManager.Instance.savedBoss.Add(LevelManager.Instance.beaverHurt);
-                        break;
-
-                    case boss.Frog:
-                        LevelManager.Instance.savedBoss.Add(LevelManager.Instance.frogBoss);
-                        break;
-
-                    case boss.Turtle:
-                        LevelManager.Instance.savedBoss.Add(LevelManager.Instance.turtleBoss);
-                        break;
-                }
+                doOnce = true;
                 
-            }
+                if (ReferenceChoice.Instance.spared)
+                {
+                    switch (bossType)
+                    {
+                        case boss.Beaver:
+                            LevelManager.Instance.savedBoss.Add(LevelManager.Instance.beaverHurt);
+                            break;
+
+                        case boss.Frog:
+                            LevelManager.Instance.savedBoss.Add(LevelManager.Instance.frogBoss);
+                            break;
+
+                        case boss.Turtle:
+                            LevelManager.Instance.savedBoss.Add(LevelManager.Instance.turtleBoss);
+                            break;
+                    }
+                
+                }
             
-            StartCoroutine(EndCinematicDeath());
+                StartCoroutine(EndCinematicDeath());
+            }
         }
     }
 
@@ -212,6 +218,8 @@ public class Boss : MonoBehaviour
 
     IEnumerator CinematicDeath()
     {
+        anim.SetBool("isWalking", false);
+        
         ManagerChara.Instance.savePosition = ManagerChara.Instance.transform.position;
 
         ReferenceCamera.Instance.fondNoir.DOFade(1, 2);
@@ -285,11 +293,15 @@ public class Boss : MonoBehaviour
 
             ManagerChara.Instance.transform.DOMoveX(transform.position.x + 10, 2).SetEase(Ease.Linear);
         }
+        
+        ManagerChara.Instance.anim.SetBool("isWalking", true);
 
         canShake = true;
 
         yield return new WaitForSeconds(2);
 
+        
+        ManagerChara.Instance.anim.SetBool("isWalking", false);
 
         ReferenceChoice.Instance.kick.DOLocalMoveX(400, 2);
         ReferenceChoice.Instance.spare.DOLocalMoveX(-400, 2);
@@ -306,12 +318,56 @@ public class Boss : MonoBehaviour
     {
         ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = false;
         ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = false;
+        
+        ReferenceChoice.Instance.kick.DOLocalMoveX(800, 1);
+        ReferenceChoice.Instance.spare.DOLocalMoveX(-800, 1);
+        
+        
+        if (ReferenceChoice.Instance.kicked)
+        {
+            ManagerChara.Instance.anim.SetBool("isWalking", true);
+            
+            if (lookLeft)
+            {
+                ManagerChara.Instance.transform.DOMoveX(transform.position.x - 5, 1).SetEase(Ease.Linear);
+            }
+            else
+            {
+                ManagerChara.Instance.transform.DOMoveX(transform.position.x + 5, 1).SetEase(Ease.Linear);
+            }
+            
+            yield return new WaitForSeconds(1f);
+            
+            ManagerChara.Instance.anim.SetBool("isWalking", false);
+            
+            yield return new WaitForSeconds(0.2f);
+            
+            ManagerChara.Instance.anim.SetTrigger("isKicking");
+            
+            if (ManagerChara.Instance.transform.position.x > transform.position.x)
+            {
+                StartCoroutine(KickChara.Instance.Kick(Vector2.right));
+            }
+            else
+            {
+                StartCoroutine(KickChara.Instance.Kick(Vector2.left));
+            }
+            
+            yield return new WaitForSeconds(0.1f);
+            
+            anim.SetTrigger("death");
+            
+            yield return new WaitForSeconds(1f);
+        }
+
+        else
+        {
+            
+        }
+        
 
         ManagerChara.Instance.transform.position = ManagerChara.Instance.savePosition;
         CameraMovements.Instance.transform.position = ManagerChara.Instance.savePosition;
-
-        ReferenceChoice.Instance.kick.DOLocalMoveX(800, 1);
-        ReferenceChoice.Instance.spare.DOLocalMoveX(-800, 1);
 
         ReferenceCamera.Instance.fondNoir.DOFade(0, 1);
 
