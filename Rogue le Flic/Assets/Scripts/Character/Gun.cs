@@ -9,6 +9,8 @@ using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using DG.Tweening;
+using TMPro;
+using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine.Rendering.Universal;
 
@@ -20,6 +22,10 @@ public class Gun : MonoBehaviour
     public Light2D lightShot;
     private Controls controls;
     public GunData gunData;
+
+    [Header("UI")] 
+    public GameObject UIArme;
+    public TextMeshProUGUI textNom;
 
     [Header("Positions")] 
     public Vector2 posLeft;
@@ -34,10 +40,6 @@ public class Gun : MonoBehaviour
     [HideInInspector] public bool grossissementBalles;
     [HideInInspector] public bool critiques;
 
-    [Header("Shop")] 
-    public string itemName;
-    public string itemDescription;
-    
     [Header("Others")]
     private float timerShot;
     private float timerLight;
@@ -250,6 +252,8 @@ public class Gun : MonoBehaviour
             canBePicked = false;
 
             //explanation.SetActive(false);
+            
+            UIArme.SetActive(false);
 
             if (ManagerChara.Instance.activeGun == null)
             {
@@ -414,6 +418,9 @@ public class Gun : MonoBehaviour
         {
             canBePicked = true;
             explanation.SetActive(true);
+            
+            UIArme.SetActive(true);
+            textNom.text = gunData.itemName;
         }
     }
 
@@ -423,6 +430,8 @@ public class Gun : MonoBehaviour
         {
             canBePicked = false;
             explanation.SetActive(false);
+            
+            UIArme.SetActive(false);
         }
     }
 
