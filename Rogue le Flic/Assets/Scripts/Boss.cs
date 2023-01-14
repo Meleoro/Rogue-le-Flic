@@ -321,6 +321,10 @@ public class Boss : MonoBehaviour
 
     public IEnumerator EndCinematicDeath()
     {
+        CameraMovements.Instance.posCamera = ManagerChara.Instance.transform.position;
+        CameraMovements.Instance.timeZoom = 0.2f;
+        CameraMovements.Instance.Reboot();
+        
         ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = false;
         ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = false;
         
