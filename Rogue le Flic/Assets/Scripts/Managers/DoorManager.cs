@@ -202,7 +202,7 @@ public class DoorManager : MonoBehaviour
             {
                 GameObject heal = Instantiate(healObject, posSpawn, Quaternion.identity);
 
-                Vector2 randomDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                Vector2 randomDirection = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
                 
                 Debug.Log(randomDirection);
                 
