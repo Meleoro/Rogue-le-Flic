@@ -1024,6 +1024,8 @@ MonoBehaviour:
   currentEnnemies: []
   ennemyCount: 0
   spawnLoots: []
+  healObject: {fileID: 0}
+  probaDropHeal: 0
   isFinished: 0
   bossRoom: 1
 --- !u!114 &4483744444501607187
@@ -1065,6 +1067,7 @@ MonoBehaviour:
   - {fileID: 1590777404913450429}
   - {fileID: 3046268134269590373}
   isLastBoss: 1
+  boss: {fileID: 6301977091852409884}
 --- !u!1 &1547605855439420294
 GameObject:
   m_ObjectHideFlags: 0
@@ -4259,6 +4262,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6263996166541424042, guid: 066419e31370f6c4cb765423dd241697, type: 3}
   m_PrefabInstance: {fileID: 115740735132608955}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6301977091852409884 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6263996166541424039, guid: 066419e31370f6c4cb765423dd241697, type: 3}
+  m_PrefabInstance: {fileID: 115740735132608955}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &151756195343435150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4272,7 +4280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -350768
+      value: -591380
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4420,7 +4428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -350810
+      value: -591422
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4490,7 +4498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -350838
+      value: -591450
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4560,7 +4568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -350866
+      value: -591478
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4630,7 +4638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -350894
+      value: -591506
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4700,7 +4708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -350922
+      value: -591534
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4770,7 +4778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1002769124198127509, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -351494
+      value: -591598
       objectReference: {fileID: 0}
     - target: {fileID: 1418315126583206281, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_Name
@@ -4782,7 +4790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1790184603908811065, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -351524
+      value: -591562
       objectReference: {fileID: 0}
     - target: {fileID: 1861707932445966549, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_Mesh
@@ -4790,7 +4798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1861707932445966549, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -351504
+      value: -591586
       objectReference: {fileID: 0}
     - target: {fileID: 4688382581991402027, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_RootOrder
@@ -4842,7 +4850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593546575279171571, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -351514
+      value: -591574
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 478adb2ad110be14d9188cd871481566, type: 3}
@@ -4864,7 +4872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -350950
+      value: -591612
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4996,7 +5004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -351058
+      value: -591722
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -5066,7 +5074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1002769124198127509, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -351534
+      value: -591786
       objectReference: {fileID: 0}
     - target: {fileID: 1418315126583206281, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_Name
@@ -5078,7 +5086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1790184603908811065, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -351564
+      value: -591750
       objectReference: {fileID: 0}
     - target: {fileID: 1861707932445966549, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_Mesh
@@ -5086,7 +5094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1861707932445966549, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -351544
+      value: -591774
       objectReference: {fileID: 0}
     - target: {fileID: 4688382581991402027, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_RootOrder
@@ -5138,7 +5146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593546575279171571, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -351554
+      value: -591762
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 478adb2ad110be14d9188cd871481566, type: 3}
@@ -5160,7 +5168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -351086
+      value: -591800
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -5230,7 +5238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -351114
+      value: -591828
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -5300,7 +5308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -351142
+      value: -591856
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name

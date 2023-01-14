@@ -738,6 +738,8 @@ MonoBehaviour:
   currentEnnemies: []
   ennemyCount: 0
   spawnLoots: []
+  healObject: {fileID: 0}
+  probaDropHeal: 0
   isFinished: 0
   bossRoom: 1
 --- !u!114 &4483744444501607187
@@ -779,6 +781,7 @@ MonoBehaviour:
   - {fileID: 1590777404913450429}
   - {fileID: 3046268134269590373}
   isLastBoss: 1
+  boss: {fileID: 4043055109203538910}
 --- !u!1 &1547605855439420294
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,7 +3831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -369972
+      value: -602232
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -3898,7 +3901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -370000
+      value: -602260
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -3968,7 +3971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -370028
+      value: -602288
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4038,7 +4041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -370056
+      value: -602316
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4170,7 +4173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -370164
+      value: -602426
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4240,7 +4243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -370192
+      value: -602454
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4412,7 +4415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -370424
+      value: -602686
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4639,7 +4642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1002769124198127509, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -371250
+      value: -602952
       objectReference: {fileID: 0}
     - target: {fileID: 1418315126583206281, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_Name
@@ -4651,7 +4654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1790184603908811065, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -371280
+      value: -602916
       objectReference: {fileID: 0}
     - target: {fileID: 1861707932445966549, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_Mesh
@@ -4659,7 +4662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1861707932445966549, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -371260
+      value: -602940
       objectReference: {fileID: 0}
     - target: {fileID: 4688382581991402027, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_RootOrder
@@ -4711,7 +4714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593546575279171571, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -371270
+      value: -602928
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 478adb2ad110be14d9188cd871481566, type: 3}
@@ -4733,7 +4736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -370654
+      value: -602966
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4803,7 +4806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1002769124198127509, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -371290
+      value: -603030
       objectReference: {fileID: 0}
     - target: {fileID: 1418315126583206281, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_Name
@@ -4815,7 +4818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1790184603908811065, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -371320
+      value: -602994
       objectReference: {fileID: 0}
     - target: {fileID: 1861707932445966549, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_Mesh
@@ -4823,7 +4826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1861707932445966549, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -371300
+      value: -603018
       objectReference: {fileID: 0}
     - target: {fileID: 4688382581991402027, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_RootOrder
@@ -4875,7 +4878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593546575279171571, guid: 478adb2ad110be14d9188cd871481566, type: 3}
       propertyPath: m_InstanceId
-      value: -371310
+      value: -603006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 478adb2ad110be14d9188cd871481566, type: 3}
@@ -4897,7 +4900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -370682
+      value: -603044
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -4967,7 +4970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -370710
+      value: -603072
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -5037,7 +5040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200508662259682044, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_InstanceId
-      value: -370738
+      value: -603100
       objectReference: {fileID: 0}
     - target: {fileID: 7521661537025544878, guid: dedaba800b4f2974a8ecd439b1f71d3e, type: 3}
       propertyPath: m_Name
@@ -5253,6 +5256,11 @@ Animator:
 --- !u!4 &4043055109203538899 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6263996166541424042, guid: 6fd19f790e2976845abf2b1813ae79d4, type: 3}
+  m_PrefabInstance: {fileID: 7995576402449237625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4043055109203538910 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6263996166541424039, guid: 6fd19f790e2976845abf2b1813ae79d4, type: 3}
   m_PrefabInstance: {fileID: 7995576402449237625}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9029258777937276210
