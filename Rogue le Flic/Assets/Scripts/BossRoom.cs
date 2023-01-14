@@ -36,7 +36,8 @@ public class BossRoom : MonoBehaviour
     IEnumerator LaunchRoom()
     {
         CameraMovements.Instance.transform.position = ManagerChara.Instance.transform.position;
-        
+        CameraMovements.Instance._camera.orthographicSize = GetComponent<CameraManager>().cameraSize;
+
         CameraMovements.Instance.bossStartRoom = true;
         CameraMovements.Instance.posCamera = boss.transform.position;
         CameraMovements.Instance.timeZoom = 2;
