@@ -172,17 +172,9 @@ public class ManagerChara : MonoBehaviour
             stockWeapon.GetComponent<Gun>().Stocking();
 
             StartCoroutine(CooldownSwitch());
-            
-            if (munitionsActives)
-            {
-                HUDManager.Instance.UpdateAmmo(activeGun.GetComponent<Gun>().currentAmmo, activeGun.GetComponent<Gun>().gunData.maxAmmo, 
-                    activeGun.GetComponent<SpriteRenderer>().sprite);
-            }
-            else
-            {
-                HUDManager.Instance.UpdateAmmo(activeGun.GetComponent<Gun>().currentChargeurAmmo, activeGun.GetComponent<Gun>().gunData.chargeurSize, 
-                    activeGun.GetComponent<SpriteRenderer>().sprite);
-            }
+
+            HUDManager.Instance.UpdateAmmo(activeGun.GetComponent<Gun>().currentChargeurAmmo, activeGun.GetComponent<Gun>().gunData.chargeurSize, 
+                activeGun.GetComponent<SpriteRenderer>().sprite);
         }
     }
 

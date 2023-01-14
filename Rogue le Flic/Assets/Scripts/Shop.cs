@@ -148,16 +148,19 @@ public class Shop : MonoBehaviour
     {
         Debug.Log(CoinManager.Instance.currentCoins);
 
-        if (itemID == 1 && CoinManager.Instance.currentCoins >= 20)
+        if (itemID == 1)
         {
-            GameObject newGun = Instantiate(currentItems[0]);
+            if (CoinManager.Instance.currentCoins >= currentItems[itemID - 1].GetComponent<Gun>().gunData.itemPrice)
+            {
+                GameObject newGun = Instantiate(currentItems[0]);
 
-            CoinManager.Instance.currentCoins -= 20;
+                CoinManager.Instance.currentCoins -= 20;
 
-            newGun.GetComponent<Gun>().canBePicked = true;
-            newGun.GetComponent<Gun>().PickWeapon();
+                newGun.GetComponent<Gun>().canBePicked = true;
+                newGun.GetComponent<Gun>().PickWeapon();
             
-            item1.enabled = false;
+                item1.enabled = false;
+            }
         }
 
         else if(itemID >= 2 && CoinManager.Instance.currentCoins >= 10)
@@ -181,9 +184,9 @@ public class Shop : MonoBehaviour
     {
         if (buttonNumber == 1)
         {
-            itemName.text = currentItems[buttonNumber - 1].GetComponent<Gun>().itemName;
-            itemDescription.text = currentItems[buttonNumber - 1].GetComponent<Gun>().itemDescription;
-            itemPrice.text = "20$";
+            itemName.text = currentItems[buttonNumber - 1].GetComponent<Gun>().gunData.itemName;
+            itemDescription.text = currentItems[buttonNumber - 1].GetComponent<Gun>().gunData.itemDesciption;
+            itemPrice.text = currentItems[buttonNumber - 1].GetComponent<Gun>().gunData.itemPrice + "$";
         }
 
         else

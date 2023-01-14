@@ -77,7 +77,6 @@ public class Gun : MonoBehaviour
         lightShot.intensity = 0;
 
         currentChargeurAmmo = gunData.chargeurSize;
-        currentAmmo = gunData.maxAmmo;
     }
 
 
@@ -277,11 +276,12 @@ public class Gun : MonoBehaviour
             
             HUDManager.Instance.TakeWeapon();
             
-            if (ManagerChara.Instance.munitionsActives && !isStocked)
+            /*if (ManagerChara.Instance.munitionsActives && !isStocked)
             {
                 HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo, GetComponent<SpriteRenderer>().sprite);
-            }
-            else if(!isStocked)
+            }*/
+            
+            if(!isStocked)
             {
                 HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
             }
@@ -370,15 +370,8 @@ public class Gun : MonoBehaviour
 
             if(CameraMovements.Instance.canShake)
                 ReferenceCamera.Instance.transform.DOShakePosition(gunData.shakeDuration, gunData.shakeAmplitude);
-
-            if (ManagerChara.Instance.munitionsActives)
-            {
-                HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo, GetComponent<SpriteRenderer>().sprite);
-            }
-            else
-            {
-                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
-            }
+            
+            HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
         }
     }
 
@@ -442,7 +435,7 @@ public class Gun : MonoBehaviour
     }
     
 
-    public void AddAmmo(int ammoAdded)
+    /*public void AddAmmo(int ammoAdded)
     {
         currentAmmo += ammoAdded;
 
@@ -455,5 +448,5 @@ public class Gun : MonoBehaviour
         {
             HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo, GetComponent<SpriteRenderer>().sprite);
         }
-    }
+    }*/
 }

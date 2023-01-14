@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ammo : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D col)
+    /*private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
@@ -13,5 +13,5 @@ public class Ammo : MonoBehaviour
             
             Destroy(gameObject);
         }
-    }
+    }*/
 }

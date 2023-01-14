@@ -5,6 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GunData", menuName = "GunData")]
 public class GunData : ScriptableObject
 {
+    [Header("Shop")] 
+    public int itemPrice;
+    public string itemName;
+    public string itemDesciption;
+    
     [Header("ShotProprieties")] 
     public int damages;
     public int nbrBulletPerShot;
@@ -13,6 +18,7 @@ public class GunData : ScriptableObject
     public float charaKnockback;
     public AnimationCurve gunKnockback;
 
+    
     [Header("TirChargeable")] 
     public bool tirChargeable;
     public float dureeChargement;
@@ -22,10 +28,6 @@ public class GunData : ScriptableObject
     public Sprite charge4;
     public Sprite charge0;
     
-
-    [Header("Munitions")] 
-    public int maxAmmo;
-    public int ammoPerSupply;
     
     [Header("Reload")] 
     public int chargeurSize;
