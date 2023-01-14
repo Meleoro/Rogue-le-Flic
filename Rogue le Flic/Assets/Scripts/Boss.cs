@@ -29,6 +29,7 @@ public class Boss : MonoBehaviour
     private bool canShake;
     private bool lookLeft;
     private bool doOnce;
+    private Vector3 originalScale;
 
 
     [Header("References")]
@@ -323,6 +324,7 @@ public class Boss : MonoBehaviour
         ReferenceChoice.Instance.spare.DOLocalMoveX(-800, 1);
         
         
+        // ON CHOISI DE KICK
         if (ReferenceChoice.Instance.kicked)
         {
             ManagerChara.Instance.anim.SetBool("isWalking", true);
@@ -360,9 +362,15 @@ public class Boss : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
+        
+        // ON CHOISI DE SPARE
         else
         {
+            canShake = false;
             
+            StartCoroutine(JumpChoroutine());
+
+            yield return new WaitForSeconds(1f);
         }
         
 
@@ -398,5 +406,30 @@ public class Boss : MonoBehaviour
         MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
 
         Destroy(gameObject);
+    }
+    
+    
+    IEnumerator JumpChoroutine()
+    {
+        StartCoroutine(Decollage(0.4f, 0.1f));
+
+        yield return new WaitForSeconds(0.5f);
+
+        sprite.transform.DOMoveY(transform.position.y + 20, 0.2f).SetEase(Ease.InCirc);
+    }
+
+    IEnumerator Decollage(float duration1, float duration2)
+    {
+        originalScale = sprite.transform.localScale;
+        
+        sprite.transform.DOScale(new Vector3(originalScale.x + 0.2f, originalScale.y - 0.2f, originalScale.z), duration1);
+        
+        yield return new WaitForSeconds(duration1 / 2);
+        
+        //anim.SetTrigger("isJumping");
+        
+        yield return new WaitForSeconds(duration1 / 2);
+        
+        sprite.transform.DOScale(new Vector3(originalScale.x - 0.1f, originalScale.y + 0.1f, originalScale.z), duration2);
     }
 }

@@ -26,7 +26,7 @@ public class ManagerChara : MonoBehaviour
     [Header("Kick")] 
     private bool isKicking;
     private float timerKick;
-    public bool mouseDirection;
+    public bool keyboardDirection;
 
     [Header("Repositionnement")] 
     public Vector2 posLeft;
@@ -112,7 +112,7 @@ public class ManagerChara : MonoBehaviour
 
                 Vector2 kickDirection;
                 
-                if (mouseDirection)
+                if (!keyboardDirection)
                 {
                     kickDirection = new Vector2(-mousePos.x + charaPos.x, -mousePos.y + charaPos.y).normalized;
                 }
