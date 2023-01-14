@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,11 @@ public class ReferenceCamera : MonoBehaviour
 
     public bool finalCinematic;
     public bool finalCinematicChara;
+    
+    [Header("Splash")]
+    public GameObject splash;
+    public SpriteRenderer bossSprite;
+    public TextMeshProUGUI bossName;
 
     private void Awake()
     {

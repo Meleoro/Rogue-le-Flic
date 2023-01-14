@@ -31,6 +31,8 @@ public class Boss : MonoBehaviour
     private bool doOnce;
     private Vector3 originalScale;
 
+    [HideInInspector] public bool canMove;
+
 
     [Header("References")]
     public Animator anim;
@@ -41,6 +43,8 @@ public class Boss : MonoBehaviour
 
     private void Start()
     {
+        canMove = true;
+        
         switch (bossType)
         {
             case boss.Beaver:
@@ -94,7 +98,7 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
-        if (!death)
+        if (!death && canMove)
         {
             switch (bossType)
             {
@@ -149,7 +153,7 @@ public class Boss : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!death)
+        if (!death && canMove)
         {
             switch (bossType)
             {

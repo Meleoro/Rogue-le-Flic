@@ -25,13 +25,17 @@ public class CameraMovements : MonoBehaviour
     [HideInInspector] public bool endRoom;
     [HideInInspector] public float timeZoom;
     [HideInInspector] public Vector2 ennemyPos;
-    private float originalSize;
-    private Vector2 originalPos;
+    [HideInInspector] public float originalSize;
+    [HideInInspector] public Vector2 originalPos;
     [HideInInspector] public float timerZoom;
     private float timerDezoom;
 
+    [Header("Boss Begin Room Behavior")]
+    [HideInInspector] public bool bossStartRoom;
+    private bool doOnce3;
+    
 
-    [Header("Boss Room Behavior")]
+    [Header("Boss End Room Behavior")]
     [HideInInspector] public bool bossEndRoom;
     [HideInInspector] public Vector2 posCamera;
     [HideInInspector] public bool stopDezoom;
@@ -72,6 +76,11 @@ public class CameraMovements : MonoBehaviour
         if (playerDeath)
         {
             DeathBeahvior();
+        }
+        
+        else if (bossStartRoom)
+        {
+            StartRoomBehavior();
         }
         
         else
@@ -151,6 +160,29 @@ public class CameraMovements : MonoBehaviour
     }
 
 
+    private void StartRoomBehavior()
+    {
+        if(!doOnce3)
+        {
+            originalSize = _camera.orthographicSize;
+            originalPos = _camera.transform.position;
+            
+            doOnce3 = true;
+
+            _camera.DOOrthoSize(originalSize / 1.2f, timeZoom);
+
+            transform.DOMove(posCamera, timeZoom - 0.2f);
+        }
+    }
+    
+    public void Reboot()
+    {
+        _camera.DOOrthoSize(originalSize, timeZoom);
+
+        transform.DOMove(posCamera, timeZoom);
+    }
+    
+
     void EndRoomBehavior()
     {
         //ZOOM
@@ -209,7 +241,7 @@ public class CameraMovements : MonoBehaviour
 
     void DeathBeahvior()
     {
-        if(!doOnce)
+        if(!doOnce2)
         {
             doOnce2 = true;
 

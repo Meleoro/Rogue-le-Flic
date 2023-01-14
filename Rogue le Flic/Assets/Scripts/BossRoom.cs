@@ -10,8 +10,12 @@ public class BossRoom : MonoBehaviour
 
     public bool isLastBoss;
 
+    public GameObject boss;
+
     private void Start()
     {
+        StartCoroutine(LaunchRoom());
+        
         if (isLastBoss)
         {
             for (int k = 0; k < LevelManager.Instance.savedBoss.Count; k++)
@@ -27,5 +31,36 @@ public class BossRoom : MonoBehaviour
                 newBoss.GetComponent<Boss>().bossNumber = k + 1;
             }
         }
+    }
+
+    IEnumerator LaunchRoom()
+    {
+        CameraMovements.Instance.bossStartRoom = true;
+        CameraMovements.Instance.posCamera = boss.transform.position;
+        CameraMovements.Instance.timeZoom = 2;
+
+        ManagerChara.Instance.noControl = true;
+        
+        boss.GetComponent<Boss>().canMove = false;
+        
+        yield return new WaitForSeconds(2);
+
+        ReferenceCamera.Instance.splash.SetActive(true);
+        
+        yield return new WaitForSeconds(3);
+        
+        ReferenceCamera.Instance.splash.SetActive(false);
+        
+        
+        CameraMovements.Instance.posCamera = ManagerChara.Instance.transform.position;
+        CameraMovements.Instance.timeZoom = 0.2f;
+        CameraMovements.Instance.Reboot();
+
+        yield return new WaitForSeconds(0.2f);
+        
+        ManagerChara.Instance.noControl = false;
+        boss.GetComponent<Boss>().canMove = true;
+        
+        CameraMovements.Instance.bossStartRoom = false;
     }
 }
