@@ -11,6 +11,7 @@ public class HealthManager : MonoBehaviour
     
     [SerializeField] private List<GameObject> hearts = new List<GameObject>();
     private int currentHealth;
+    private int maxHealth;
     private bool isInvincible;
     [SerializeField] private float invincibleTime;
     private float timerInvincible;
@@ -34,6 +35,7 @@ public class HealthManager : MonoBehaviour
     private void Start()
     {
         currentHealth = hearts.Count;
+        maxHealth = hearts.Count;
     }
     
 
@@ -85,6 +87,31 @@ public class HealthManager : MonoBehaviour
 
             
             timerInvincible = invincibleTime;
+        }
+    }
+
+    public void AddHealth()
+    {
+        currentHealth += 2;
+
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        
+        Debug.Log(currentHealth);
+
+        for (int k = 0; k < currentHealth; k++)
+        {
+            if (k % 2 == 0)
+            {
+                hearts[k].SetActive(true);
+            }
+            else
+            {
+                hearts[k - 1].SetActive(false);
+                hearts[k].SetActive(true);
+            }
         }
     }
 
