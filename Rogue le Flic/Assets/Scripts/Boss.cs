@@ -413,9 +413,9 @@ public class Boss : MonoBehaviour
     {
         StartCoroutine(Decollage(0.4f, 0.1f));
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
 
-        sprite.transform.DOMoveY(transform.position.y + 20, 0.2f).SetEase(Ease.InCirc);
+        sprite.transform.DOMoveY(transform.position.y + 30, 0.2f).SetEase(Ease.InCirc);
     }
 
     IEnumerator Decollage(float duration1, float duration2)
