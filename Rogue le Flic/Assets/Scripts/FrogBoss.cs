@@ -49,6 +49,7 @@ public class FrogBoss : MonoBehaviour
     private Rigidbody2D rb;
     private Boss boss;
 
+    public List<GameObject> ennemies = new List<GameObject>();
 
 
     private void Start()
@@ -462,7 +463,7 @@ public class FrogBoss : MonoBehaviour
                 newIndex = Random.Range(0, bossRoom.spawnPoints.Count);
             }
 
-            Instantiate(bossData.frog, bossRoom.spawnPoints[newIndex].position, Quaternion.identity);
+            ennemies.Add(Instantiate(bossData.frog, bossRoom.spawnPoints[newIndex].position, Quaternion.identity));
             indexSelected.Add(newIndex);
         }
 

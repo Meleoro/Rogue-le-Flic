@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,10 +42,13 @@ public class Boss : MonoBehaviour
     public BoxCollider2D _collider2D;
 
 
-    private void Start()
+    private void Awake()
     {
         canMove = true;
-        
+    }
+
+    private void Start()
+    {
         switch (bossType)
         {
             case boss.Beaver:
@@ -223,6 +227,30 @@ public class Boss : MonoBehaviour
 
     IEnumerator CinematicDeath()
     {
+        switch (bossType)
+        {
+            case boss.Beaver:
+                foreach (GameObject k in beaverScript.ennemies)
+                {
+                    Destroy(k);
+                }
+                break;
+
+            case boss.Frog:
+                foreach (GameObject k in frogScript.ennemies)
+                {
+                    Destroy(k);
+                }
+                break;
+
+            case boss.Turtle:
+                foreach (GameObject k in turtleScript.ennemies)
+                {
+                    Destroy(k);
+                }
+                break;
+        }
+        
         anim.SetBool("isWalking", false);
         
         ManagerChara.Instance.savePosition = ManagerChara.Instance.transform.position;
@@ -366,7 +394,6 @@ public class Boss : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        
         // ON CHOISI DE SPARE
         else
         {
@@ -376,10 +403,16 @@ public class Boss : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
         }
-        
+
+
+        Vector2 offsetCamera = ManagerChara.Instance.transform.position - CameraMovements.Instance.transform.position;
 
         ManagerChara.Instance.transform.position = ManagerChara.Instance.savePosition;
-        CameraMovements.Instance.transform.position = ManagerChara.Instance.savePosition;
+        CameraMovements.Instance.transform.position = ManagerChara.Instance.savePosition + offsetCamera;
+        
+        CameraMovements.Instance.posCamera = ManagerChara.Instance.transform.position;
+        CameraMovements.Instance.timeZoom = 0.2f;
+        CameraMovements.Instance.Reboot();
 
         ReferenceCamera.Instance.fondNoir.DOFade(0, 1);
 
