@@ -248,7 +248,10 @@ public class TurtleBoss : MonoBehaviour
         else if (col.gameObject.CompareTag("Ennemy") && isSliding)
         {
             if (!isKicked)
+            {
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(2, gameObject);
+                StartCoroutine(SetInvincible(col.gameObject));
+            }
 
             else
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(20, gameObject);
@@ -268,6 +271,15 @@ public class TurtleBoss : MonoBehaviour
         {
             TakeDamages(5, gameObject);
         }
+    }
+    
+    IEnumerator SetInvincible(GameObject collider)
+    {
+        collider.GetComponent<Ennemy>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall2");
+
+        yield return new WaitForSeconds(0.5f);
+        
+        collider.GetComponent<Ennemy>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall");;
     }
 
 
