@@ -122,6 +122,8 @@ public class Frog : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
 
+            ennemy.sprite.transform.localPosition = new Vector3(3, 0.5f, 0);
+            
             /*if (lookLeft)
             {
                 ennemy.sprite.transform.localPosition = frogData.posLeft;
