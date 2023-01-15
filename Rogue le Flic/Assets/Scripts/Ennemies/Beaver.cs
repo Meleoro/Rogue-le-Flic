@@ -33,6 +33,8 @@ public class Beaver : MonoBehaviour
     
     private bool stopDeath;
     [HideInInspector] public bool isKicked;
+
+    private float stunTimer;
     
 
     private void Start()

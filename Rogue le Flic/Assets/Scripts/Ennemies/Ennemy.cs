@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -41,6 +42,11 @@ public class Ennemy : MonoBehaviour
     public GameObject sprite;
     public BoxCollider2D _collider2D;
 
+    [Header("Stun")]
+    public float stunDuration;
+    public GameObject VFXStun;
+    private float stunTimer;
+
 
     private void Start()
     {
@@ -65,23 +71,34 @@ public class Ennemy : MonoBehaviour
 
     private void Update()
     {
-        if (!isSpawning)
+        if (stunTimer <= 0)
         {
-            switch (ennemyType)
-            {
-                case ennemies.Beaver :
-                    beaverScript.BeaverBehavior();
-                    break;
+            VFXStun.SetActive(false);
             
-                case ennemies.Frog :
-                    frogScript.FrogBehavior();
-                    break;
+            if (!isSpawning)
+            {
+                switch (ennemyType)
+                {
+                    case ennemies.Beaver :
+                        beaverScript.BeaverBehavior();
+                        break;
+            
+                    case ennemies.Frog :
+                        frogScript.FrogBehavior();
+                        break;
 
-                case ennemies.Turtle :
-                    turtleScript.TurtleBehavior();
-                    break;
+                    case ennemies.Turtle :
+                        turtleScript.TurtleBehavior();
+                        break;
+                }
             }
         }
+        
+        else
+        {
+            stunTimer -= Time.deltaTime;
+        }
+        
 
         if (timerKick > 0)
         {
@@ -109,7 +126,7 @@ public class Ennemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isSpawning)
+        if (!isSpawning && stunTimer <= 0)
         {
             switch (ennemyType)
             {
@@ -126,6 +143,13 @@ public class Ennemy : MonoBehaviour
                     break;
             }
         }
+    }
+
+
+    public void Stun()
+    {
+        stunTimer = stunDuration;
+        VFXStun.SetActive(true);
     }
 
 
