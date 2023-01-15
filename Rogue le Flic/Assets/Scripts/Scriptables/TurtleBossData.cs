@@ -23,6 +23,7 @@ public class TurtleBossData : ScriptableObject
     public float chargeVitesseOriginale;
     public float gainVitesseRebond;
     public float vitesseMax;
+    public int rebondsMax;
     
     [Header("Charge Puissante")]
     public float chargemementDuree;
