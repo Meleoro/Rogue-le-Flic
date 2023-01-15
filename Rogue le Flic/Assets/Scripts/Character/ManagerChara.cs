@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using DG.Tweening.Plugins.Core.PathCore;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Pathfinding;
 
 public class ManagerChara : MonoBehaviour
 {
@@ -41,6 +43,9 @@ public class ManagerChara : MonoBehaviour
     public Image reload;
     [HideInInspector] public bool isFalling;
     [HideInInspector] public Vector2 savePosition;
+
+    private bool doOnce;
+    public GameObject test;
 
 
 
@@ -80,8 +85,24 @@ public class ManagerChara : MonoBehaviour
         MenuMortManager.Instance.gameObject.SetActive(false);
     }
 
+    /*public IEnumerator ScanGraphs () {
+        foreach (var progress in AstarPath.active.ScanAsync()) {
+            yield return null;
+        }
+    }*/
+
     private void Update()
     {
+        if (!doOnce)
+        {
+            doOnce = true;
+            
+            var guo = new GraphUpdateObject(test.GetComponent<BoxCollider2D>().bounds);
+            // Set some settings
+            guo.updatePhysics = true;
+            AstarPath.active.UpdateGraphs (guo);
+        }
+        
         if (Input.GetKeyDown(KeyCode.A))
         {
             StartCoroutine(Death());
@@ -134,6 +155,7 @@ public class ManagerChara : MonoBehaviour
                 if (timerDash <= 0)
                 {
                     isDashing = false;
+                    doOnce = false;
                 }
             }
 

@@ -31,6 +31,8 @@ public class DashChara : MonoBehaviour
     public float duration;
     public float amplitude;
 
+    private bool doOnce;
+
 
     private void Awake()
     {
@@ -62,7 +64,7 @@ public class DashChara : MonoBehaviour
         {
             ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * dashForceX, direction.y * dashForceY), ForceMode2D.Force);
         }
-
+        
         if (timerEffects > 0)
         {
             dashEffects.weight = timerEffects / noHitTime;

@@ -191,9 +191,11 @@ public class Turtle : MonoBehaviour
         
         else if (col.gameObject.CompareTag("Ennemy") && isSliding)
         {
-            if(!isKicked)
+            if (!isKicked)
+            {
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(1, gameObject);
-            
+            }
+
             else
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(20, gameObject);
         }
