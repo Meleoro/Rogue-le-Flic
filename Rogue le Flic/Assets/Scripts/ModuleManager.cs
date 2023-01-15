@@ -9,6 +9,8 @@ public class ModuleManager : MonoBehaviour
     public static ModuleManager Instance;
     public int Module1;
     public int Module2;
+    public int levelModule1;
+    public int levelModule2;
 
     [Header("Infos1")] 
     public string moduleName1;
@@ -20,17 +22,33 @@ public class ModuleManager : MonoBehaviour
     public string description2;
     public Sprite image2;
     
+    
+    [Header("Perçantes")] 
+    public int nbrPercagesMaxLvl1;
+    public int nbrPercagesMaxLvl2;
+    public int nbrPercagesMaxLvl3;
+    [HideInInspector] public int nbrPercagesMax;
+    
     [Header("Rebonds")] 
-    //[SerializeField] private int nbrRebondsMax;
+    public int nbrRebondsMaxLvl1;
+    public int nbrRebondsMaxLvl2;
+    public int nbrRebondsMaxLvl3;
+    [HideInInspector] public int nbrRebondsMax;
 
     [Header("Grossissement")] 
-    public float multiplicateurTaille;
+    public float multiplicateurTailleLvl1;
+    public float multiplicateurTailleLvl2;
+    public float multiplicateurTailleLvl3;
+    [HideInInspector] public float multiplicateurTaille;
 
     [Header("Critique")] 
-    [Range(0, 100)] public float probaCritique;
-    public float mulitplicateurTaille;
-    public float multiplicateurVitesse;
-    public float multiplicateurDegats;
+    [Range(0, 100)] public float probaCritiqueLvl1;
+    [Range(0, 100)] public float probaCritiqueLvl2;
+    [Range(0, 100)] public float probaCritiqueLvl3;
+    [HideInInspector] public float probaCritique;
+    public float multiplicateurTailleCrit;
+    public float multiplicateurVitesseCrit;
+    public float multiplicateurDegatsCrit;
     
     private Gun gun;
 
@@ -58,51 +76,94 @@ public class ModuleManager : MonoBehaviour
         
         if (Module1 != 0)
         {
-            Search(Module1);
+            Search(Module1, 1);
         }
         
         if (Module2 != 0)
         {
-            Search(Module2);
+            Search(Module2, 2);
         }
     }
 
 
-    public void Search(int module)
+    public void Search(int module, int nbrEmplacement)
     {
         if (module == 1)
-            Effet1();
+            Effet1(nbrEmplacement);
 
         else if (module == 2)
-            Effet2();
+            Effet2(nbrEmplacement);
 
         else if (module == 3)
-            Effet3();
+            Effet3(nbrEmplacement);
         
         else if (module == 4)
-            Effet4();
+            Effet4(nbrEmplacement);
     }
     
+    
 
-    // GROSSISSEMENT DES BALLES
-    public void Effet1()
+    // BALLES PERCANTES
+    public void Effet1(int nbrEmplacement)
     {
         gun.ballesPercantes = true;
     }
     
-    // DOUBLE TIRE
-    public void Effet2()
+    
+    // BALLES REBONDISSANTES
+    public void Effet2(int nbrEmplacement)
     {
         gun.ballesRebondissantes = true;
-    }
 
-    public void Effet3()
+        if (levelModule1 == 1)
+        {
+            nbrRebondsMax = nbrRebondsMaxLvl1;
+        }
+        else if (levelModule1 == 2)
+        {
+            nbrRebondsMax = nbrRebondsMaxLvl2;
+        }
+        else
+        {
+            nbrRebondsMax = nbrRebondsMaxLvl3;
+        }
+    }
+    
+
+    public void Effet3(int nbrEmplacement)
     {
         gun.grossissementBalles = true;
+        
+        if (levelModule1 == 1)
+        {
+            multiplicateurTaille = multiplicateurTailleLvl1;
+        }
+        else if (levelModule1 == 2)
+        {
+            multiplicateurTaille = multiplicateurTailleLvl2;
+        }
+        else
+        {
+            multiplicateurTaille = multiplicateurTailleLvl3;
+        }
     }
-
-    public void Effet4()
+    
+    
+    public void Effet4(int nbrEmplacement)
     {
         gun.critiques = true;
+        
+        if (levelModule1 == 1)
+        {
+            probaCritique = probaCritiqueLvl1;
+        }
+        else if (levelModule1 == 2)
+        {
+            probaCritique = probaCritiqueLvl2;
+        }
+        else
+        {
+            probaCritique = probaCritiqueLvl3;
+        }
     }
 }

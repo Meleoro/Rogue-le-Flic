@@ -329,18 +329,25 @@ public class Gun : MonoBehaviour
                 if (ballesPercantes)
                 {
                     refBullet.GetComponent<Bullet>().percante = true;
+                    refBullet.GetComponent<Bullet>().nbrPercesMax = ModuleManager.Instance.nbrPercagesMax;
                 }
 
                 if (ballesRebondissantes)
                 {
                     refBullet.GetComponent<Bullet>().rebondissante = true;
+                    refBullet.GetComponent<Bullet>().nbrRebondsMax = ModuleManager.Instance.nbrPercagesMax;
                 }
 
                 if (grossissementBalles)
                 {
                     refBullet.GetComponent<CircleCollider2D>().radius = (float) 0.15 * ModuleManager.Instance.multiplicateurTaille;
-                    refBullet.GetComponent<Bullet>().objetAGrossir.transform.localScale = new Vector3(1 * ModuleManager.Instance.multiplicateurTaille, 
-                        1 * ModuleManager.Instance.multiplicateurTaille, 1);
+                    if(!refBullet.GetComponent<Bullet>().isArrow)
+                        refBullet.GetComponent<Bullet>().objetAGrossir.transform.localScale = new Vector3(1 * ModuleManager.Instance.multiplicateurTaille, 
+                            1 * ModuleManager.Instance.multiplicateurTaille, 1);
+                    
+                    else
+                        refBullet.transform.localScale = new Vector3(1 * ModuleManager.Instance.multiplicateurTaille, 
+                            1 * ModuleManager.Instance.multiplicateurTaille, 1);
                 }
 
                 if (critiques)

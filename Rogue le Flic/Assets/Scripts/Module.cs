@@ -10,6 +10,7 @@ public class Module : MonoBehaviour
     private bool canBeGrab;
 
     public int numberEffect;
+    [Range(1, 3)] public int levelEffect;
 
     [SerializeField] GameObject UIExplications;
     [SerializeField] GameObject UIChoix;
@@ -72,6 +73,7 @@ public class Module : MonoBehaviour
         if (slot == 1)
         {
             ModuleManager.Instance.Module1 = numberEffect;
+            ModuleManager.Instance.levelModule1 = levelEffect;
 
             ModuleManager.Instance.moduleName1 = itemName;
             ModuleManager.Instance.description1 = itemDescription;
@@ -81,6 +83,7 @@ public class Module : MonoBehaviour
         else
         {
             ModuleManager.Instance.Module2 = numberEffect;
+            ModuleManager.Instance.levelModule2 = levelEffect;
             
             ModuleManager.Instance.moduleName2 = itemName;
             ModuleManager.Instance.description2 = itemDescription;

@@ -40,7 +40,11 @@ public class Bullet : MonoBehaviour
 
     [Header("Modules")]
     [HideInInspector] public bool percante;
+    [HideInInspector] public int nbrPercesMax;
+    private int currentPerces;
     [HideInInspector] public bool rebondissante;
+    [HideInInspector] public int nbrRebondsMax;
+    private int currentRebonds;
 
     [Header("Autres")]
     [SerializeField] private BoxCollider2D bounceWalls;
@@ -160,9 +164,9 @@ public class Bullet : MonoBehaviour
         // SI LE TIRE EST CRITIQUE
         if (isCritique)
         {
-            bulletDamages = (int) (bulletDamages * ModuleManager.Instance.multiplicateurDegats);
-            bulletSpeed *= ModuleManager.Instance.multiplicateurVitesse;
-            objetAGrossir.transform.localScale *= ModuleManager.Instance.multiplicateurTaille;
+            bulletDamages = (int) (bulletDamages * ModuleManager.Instance.multiplicateurDegatsCrit);
+            bulletSpeed *= ModuleManager.Instance.multiplicateurVitesseCrit;
+            objetAGrossir.transform.localScale *= ModuleManager.Instance.multiplicateurTailleCrit;
             
             isCritique = false;
         }
@@ -180,8 +184,11 @@ public class Bullet : MonoBehaviour
         {
             collision.GetComponent<Ennemy>().TakeDamages(bulletDamages, gameObject);
 
-            if (!percante)
+            if (!percante || currentPerces >= nbrPercesMax)
                 Destroy(gameObject);
+
+            else
+                currentPerces += 1;
 
             bounceWalls.enabled = false;
         }
@@ -190,23 +197,35 @@ public class Bullet : MonoBehaviour
         {
             collision.GetComponent<Boss>().TakeDamages(bulletDamages, gameObject);
 
-            if (!percante)
+            if (!percante || currentPerces >= nbrPercesMax)
                 Destroy(gameObject);
+
+            else
+                currentPerces += 1;
 
             bounceWalls.enabled = false;
         }
 
         else if (collision.CompareTag("Box"))
         {
-            if (!rebondissante)
+            if (!percante || currentPerces >= nbrPercesMax)
             {
-                Destroy(gameObject);
-                collision.GetComponent<Box>().Explose();
-            }
+                if (!rebondissante)
+                {
+                    Destroy(gameObject);
+                    collision.GetComponent<Box>().Explose();
+                }
 
+                else
+                {
+                    bounceWalls.enabled = true;
+                }
+            }
+            
             else
             {
-                bounceWalls.enabled = true;
+                currentPerces += 1;
+                collision.GetComponent<Box>().Explose();
             }
         }
 
@@ -231,7 +250,7 @@ public class Bullet : MonoBehaviour
 
         else
         {
-            if (!rebondissante)
+            if (!rebondissante || nbrRebondsMax >= currentRebonds)
             {
                 if (isArrow)
                 {
@@ -267,6 +286,8 @@ public class Bullet : MonoBehaviour
         direction = Vector3.Reflect(direction.normalized, collision.contacts[0].normal);
 
         bounceWalls.enabled = false;
+
+        currentRebonds += 1;
     }
 }
 
