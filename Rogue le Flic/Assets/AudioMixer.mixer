@@ -61,6 +61,7 @@ AudioMixerController:
     - ace14684e75f80c40ae8dfb73d5b5f54
     - c29f84f64faef444582cb2b80ce16fba
     - 9b773eeebeefade46bdb0a6fd51bc6fd
+    - 5a45a6014f6508844973aeaf1e21ce4d
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -77,6 +78,7 @@ AudioMixerGroupController:
   - {fileID: -6855225055717260768}
   - {fileID: 6206242786758078050}
   - {fileID: 430762343419437014}
+  - {fileID: 2468134556237637505}
   m_Volume: 67f866c58f2249640ac415f9a0de85d1
   m_Pitch: 475d625fb7a7e65428d694dc7a23672d
   m_Send: 00000000000000000000000000000000
@@ -109,7 +111,8 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 455a1c7b5a33fcc48b7eddf66ba1601a
-  m_FloatValues: {}
+  m_FloatValues:
+    6d220e56f75ffc748aeffd66fd573637: 0
   m_TransitionOverrides: {}
 --- !u!244 &31538310170960041
 AudioMixerEffectController:
@@ -144,6 +147,39 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!243 &2468134556237637505
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 5a45a6014f6508844973aeaf1e21ce4d
+  m_Children: []
+  m_Volume: 6d220e56f75ffc748aeffd66fd573637
+  m_Pitch: e28ae3c3655b3d44bad730193ff16b02
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 2808553000044608489}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &2808553000044608489
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Attenuation
+  m_EffectID: 33936ea5e63469946afe790983f18c60
+  m_EffectName: Attenuation
+  m_MixLevel: fda8f8c39700cc941b7276f2f1b063e6
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &6206242786758078050
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
