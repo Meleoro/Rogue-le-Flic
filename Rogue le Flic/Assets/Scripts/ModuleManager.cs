@@ -107,6 +107,38 @@ public class ModuleManager : MonoBehaviour
     public void Effet1(int nbrEmplacement)
     {
         gun.ballesPercantes = true;
+        
+        if (nbrEmplacement == 1)
+        {
+            if (levelModule1 == 1)
+            {
+                nbrPercagesMax = nbrPercagesMaxLvl1;
+            }
+            else if (levelModule1 == 2)
+            {
+                nbrPercagesMax = nbrPercagesMaxLvl2;
+            }
+            else
+            {
+                nbrPercagesMax = nbrPercagesMaxLvl3;
+            }
+        }
+
+        else
+        {
+            if (levelModule2 == 1)
+            {
+                nbrPercagesMax = nbrPercagesMaxLvl1;
+            }
+            else if (levelModule2 == 2)
+            {
+                nbrPercagesMax = nbrPercagesMaxLvl2;
+            }
+            else
+            {
+                nbrPercagesMax = nbrPercagesMaxLvl3;
+            }
+        }
     }
     
     
@@ -152,18 +184,37 @@ public class ModuleManager : MonoBehaviour
     public void Effet3(int nbrEmplacement)
     {
         gun.grossissementBalles = true;
+
+        if (nbrEmplacement == 1)
+        {
+            if (levelModule1 == 1)
+            {
+                multiplicateurTaille = multiplicateurTailleLvl1;
+            }
+            else if (levelModule1 == 2)
+            {
+                multiplicateurTaille = multiplicateurTailleLvl2;
+            }
+            else
+            {
+                multiplicateurTaille = multiplicateurTailleLvl3;
+            }
+        }
         
-        if (levelModule1 == 1)
-        {
-            multiplicateurTaille = multiplicateurTailleLvl1;
-        }
-        else if (levelModule1 == 2)
-        {
-            multiplicateurTaille = multiplicateurTailleLvl2;
-        }
         else
         {
-            multiplicateurTaille = multiplicateurTailleLvl3;
+            if (levelModule2 == 1)
+            {
+                multiplicateurTaille = multiplicateurTailleLvl1;
+            }
+            else if (levelModule2 == 2)
+            {
+                multiplicateurTaille = multiplicateurTailleLvl2;
+            }
+            else
+            {
+                multiplicateurTaille = multiplicateurTailleLvl3;
+            }
         }
     }
     
@@ -171,18 +222,37 @@ public class ModuleManager : MonoBehaviour
     public void Effet4(int nbrEmplacement)
     {
         gun.critiques = true;
-        
-        if (levelModule1 == 1)
+
+        if (nbrEmplacement == 1)
         {
-            probaCritique = probaCritiqueLvl1;
+            if (levelModule1 == 1)
+            {
+                probaCritique = probaCritiqueLvl1;
+            }
+            else if (levelModule1 == 2)
+            {
+                probaCritique = probaCritiqueLvl2;
+            }
+            else
+            {
+                probaCritique = probaCritiqueLvl3;
+            }
         }
-        else if (levelModule1 == 2)
-        {
-            probaCritique = probaCritiqueLvl2;
-        }
+
         else
         {
-            probaCritique = probaCritiqueLvl3;
+            if (levelModule2 == 1)
+            {
+                probaCritique = probaCritiqueLvl1;
+            }
+            else if (levelModule2 == 2)
+            {
+                probaCritique = probaCritiqueLvl2;
+            }
+            else
+            {
+                probaCritique = probaCritiqueLvl3;
+            }
         }
     }
 }
