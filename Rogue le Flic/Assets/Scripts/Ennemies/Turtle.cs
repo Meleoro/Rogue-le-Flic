@@ -34,6 +34,9 @@ public class Turtle : MonoBehaviour
     private bool stopDeath;
     private Vector2 direction;
 
+    public LayerMask layerNormal;
+    public LayerMask layerInvincible;
+
 
     private void Start()
     {
@@ -194,6 +197,8 @@ public class Turtle : MonoBehaviour
             if (!isKicked)
             {
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(1, gameObject);
+                
+                StartCoroutine(SetInvincible(col.gameObject));
             }
 
             else
@@ -228,7 +233,7 @@ public class Turtle : MonoBehaviour
         else
         {
             Vector2 directionForce = new Vector2(transform.position.x - collider.transform.position.x, transform.position.y - collider.transform.position.y);
-            
+
             StopCoroutine();
             
             rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
@@ -236,6 +241,15 @@ public class Turtle : MonoBehaviour
 
         hitEffect.Clear();
         hitEffect.Play();
+    }
+
+    IEnumerator SetInvincible(GameObject collider)
+    {
+        collider.GetComponent<Ennemy>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall2");
+
+        yield return new WaitForSeconds(1f);
+        
+        collider.GetComponent<Ennemy>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall");;
     }
 
     public void Kicked(Vector2 direction)

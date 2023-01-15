@@ -213,7 +213,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.02822733, y: -0.40930158}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -224,7 +224,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.3669596, y: 1.8186032}
   m_EdgeRadius: 0
 --- !u!1 &6263996166541424039
 GameObject:
@@ -419,7 +419,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.021170616, y: -0.38107383}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -430,7 +430,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.4093018, y: 1.7621477}
   m_EdgeRadius: 0
 --- !u!50 &6263996166541424044
 Rigidbody2D:
@@ -469,6 +469,7 @@ MonoBehaviour:
   isHurt: 1
   hitColor: {r: 1, g: 0.5921569, b: 0.5921569, a: 1}
   bossNumber: 0
+  canMove: 0
   anim: {fileID: 2659703175153638874}
   sprite: {fileID: 2659703175153638872}
   spawnIndicator: {fileID: 3139682111376741497}
@@ -498,6 +499,7 @@ MonoBehaviour:
   AIDestination: {fileID: 6263996166541424038}
   healthBar: {fileID: 0}
   VFXStun: {fileID: 9107214215254816732}
+  ennemies: []
 --- !u!1001 &3437170131910118590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -596,6 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isChara: 0
+  isEnnemi: 0
 --- !u!4 &2659703175153638873 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 818073983358800231, guid: c64bf1a2baaea054aaa63d3b46b08c88, type: 3}
