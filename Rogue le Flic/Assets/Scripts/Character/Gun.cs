@@ -335,7 +335,7 @@ public class Gun : MonoBehaviour
                 if (ballesRebondissantes)
                 {
                     refBullet.GetComponent<Bullet>().rebondissante = true;
-                    refBullet.GetComponent<Bullet>().nbrRebondsMax = ModuleManager.Instance.nbrPercagesMax;
+                    refBullet.GetComponent<Bullet>().nbrRebondsMax = ModuleManager.Instance.nbrRebondsMax;
                 }
 
                 if (grossissementBalles)
