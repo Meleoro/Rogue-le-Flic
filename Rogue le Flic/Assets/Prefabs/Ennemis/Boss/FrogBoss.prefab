@@ -469,6 +469,7 @@ MonoBehaviour:
   isHurt: 0
   hitColor: {r: 1, g: 0.5921569, b: 0.5921569, a: 1}
   bossNumber: 0
+  canMove: 0
   anim: {fileID: 2659703175153638874}
   sprite: {fileID: 2659703175153638872}
   spawnIndicator: {fileID: 3139682111376741497}
@@ -498,6 +499,7 @@ MonoBehaviour:
   AIDestination: {fileID: 6263996166541424038}
   healthBar: {fileID: 0}
   VFXStun: {fileID: 9107214215254816732}
+  ennemies: []
 --- !u!1001 &3437170131910118590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -565,6 +567,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 818073983751826698, guid: c64bf1a2baaea054aaa63d3b46b08c88, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 818073983751826698, guid: c64bf1a2baaea054aaa63d3b46b08c88, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ac8e36bdb4a676745b4ac9a5795b9ee7, type: 2}
+    - target: {fileID: 818073983751826709, guid: c64bf1a2baaea054aaa63d3b46b08c88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c64bf1a2baaea054aaa63d3b46b08c88, type: 3}
 --- !u!1 &2659703175153638872 stripped
@@ -596,6 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isChara: 0
+  isEnnemi: 0
 --- !u!4 &2659703175153638873 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 818073983358800231, guid: c64bf1a2baaea054aaa63d3b46b08c88, type: 3}
