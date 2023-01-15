@@ -40,7 +40,11 @@ public class Bullet : MonoBehaviour
 
     [Header("Modules")]
     [HideInInspector] public bool percante;
+    [HideInInspector] public int nbrPercesMax;
+    private int currentPerces;
     [HideInInspector] public bool rebondissante;
+    [HideInInspector] public int nbrRebondsMax;
+    private int currentRebonds;
 
     [Header("Autres")]
     [SerializeField] private BoxCollider2D bounceWalls;
@@ -160,9 +164,9 @@ public class Bullet : MonoBehaviour
         // SI LE TIRE EST CRITIQUE
         if (isCritique)
         {
-            bulletDamages = (int) (bulletDamages * ModuleManager.Instance.multiplicateurDegats);
-            bulletSpeed *= ModuleManager.Instance.multiplicateurVitesse;
-            objetAGrossir.transform.localScale *= ModuleManager.Instance.multiplicateurTaille;
+            bulletDamages = (int) (bulletDamages * ModuleManager.Instance.multiplicateurDegatsCrit);
+            bulletSpeed *= ModuleManager.Instance.multiplicateurVitesseCrit;
+            objetAGrossir.transform.localScale *= ModuleManager.Instance.multiplicateurTailleCrit;
             
             isCritique = false;
         }
