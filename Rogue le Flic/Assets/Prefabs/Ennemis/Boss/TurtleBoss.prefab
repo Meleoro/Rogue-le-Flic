@@ -469,6 +469,7 @@ MonoBehaviour:
   isHurt: 0
   hitColor: {r: 1, g: 0.5921569, b: 0.5921569, a: 1}
   bossNumber: 0
+  canMove: 0
   anim: {fileID: 5290507874984418254}
   sprite: {fileID: 5290507874984418255}
   spawnIndicator: {fileID: 3139682111376741497}
@@ -499,6 +500,7 @@ MonoBehaviour:
   bossRoom: {fileID: 0}
   healthBar: {fileID: 0}
   VFXStun: {fileID: 9107214215254816732}
+  ennemies: []
 --- !u!1001 &362754056721950700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -506,6 +508,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6263996166541424042}
     m_Modifications:
+    - target: {fileID: 5504359739393154243, guid: 4790f22cf3508d645a14fa77046793c2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 12da6f50c7dc5184e9a0e7597a7e9ef6, type: 2}
     - target: {fileID: 5504359740532341795, guid: 4790f22cf3508d645a14fa77046793c2, type: 3}
       propertyPath: m_Name
       value: Turtle (1)
@@ -598,6 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isChara: 0
+  isEnnemi: 0
 --- !u!4 &5290507874984418257 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5504359740532341821, guid: 4790f22cf3508d645a14fa77046793c2, type: 3}
