@@ -225,9 +225,10 @@ public class Frog : MonoBehaviour
             col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
         }
         
-        else if (isKicked)
+        else if (isKicked && !col.CompareTag("Kick"))
         {
             TakeDamages(2, gameObject);
+            ennemy.Stun();
         }
     }
 

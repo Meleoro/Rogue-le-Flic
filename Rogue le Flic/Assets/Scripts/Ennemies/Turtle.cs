@@ -202,7 +202,11 @@ public class Turtle : MonoBehaviour
             }
 
             else
+            {
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(20, gameObject);
+                
+                ennemy.Stun();
+            }
         }
         
         else if (col.gameObject.CompareTag("Box") && isSliding)
@@ -215,9 +219,10 @@ public class Turtle : MonoBehaviour
             col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
         }
         
-        else if (isKicked)
+        else if (isKicked && !col.CompareTag("Kick"))
         {
             TakeDamages(2, gameObject);
+            ennemy.Stun();
         }
     }
 
