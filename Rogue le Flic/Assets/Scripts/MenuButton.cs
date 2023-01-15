@@ -4,9 +4,12 @@ using UnityEngine.EventSystems;
 public class MenuButton : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    public AudioSource m_MyAudioSource;
+
     
     private void Start()
     {
+        m_MyAudioSource = GetComponent<AudioSource>();
         animator.SetBool("In", false);
     }
 
@@ -19,4 +22,12 @@ public class MenuButton : MonoBehaviour
     {
         animator.SetBool("In", false);
     }
+
+    public void PlayAudioHover()
+    {
+        m_MyAudioSource.Play();
+    }
+    
+    
+    
 }
