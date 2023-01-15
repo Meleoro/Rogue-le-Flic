@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0189, y: 4.027}
+  m_AnchoredPosition: {x: 0.0189, y: 2.95}
   m_SizeDelta: {x: 16.5896, y: 3.175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &28058914
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 688472908}
   - component: {fileID: 688472907}
   - component: {fileID: 688472906}
+  - component: {fileID: 6686742080676127451}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -238,6 +239,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6686742080676127451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688472904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6611f6fb18e16d040911ffa43a23f830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nom: {fileID: 1764353054}
+  description: {fileID: 28058913}
 --- !u!1 &834113365
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +612,7 @@ GameObject:
   - component: {fileID: 571252457800942927}
   - component: {fileID: 571252457800942924}
   m_Layer: 0
-  m_Name: Percant
+  m_Name: Percant 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -711,7 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberEffect: 1
-  levelEffect: 1
+  levelEffect: 3
   UIExplications: {fileID: 688472904}
   UIChoix: {fileID: 2108229910698290070}
   moduleName1: {fileID: 8780827673464093688}
@@ -720,7 +735,7 @@ MonoBehaviour:
   moduleName2: {fileID: 2552049366793082418}
   description2: {fileID: 3055551126843963388}
   image2: {fileID: 3793270958294775673}
-  itemName: Percant
+  itemName: Percant Niv.3
   itemDescription: "Vos tirs traversent d\xE9sormais vos adversaires"
 --- !u!1 &2108229910698290070
 GameObject:
