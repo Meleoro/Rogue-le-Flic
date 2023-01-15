@@ -39,7 +39,7 @@ public class Ennemy : MonoBehaviour
     public Animator anim;
     [SerializeField] private GameObject spawnIndicator;
     public GameObject sprite;
-    [SerializeField] private BoxCollider2D _collider2D;
+    public BoxCollider2D _collider2D;
 
 
     private void Start()
