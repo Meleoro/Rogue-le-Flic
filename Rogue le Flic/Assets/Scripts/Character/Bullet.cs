@@ -61,6 +61,9 @@ public class Bullet : MonoBehaviour
         timerBubble = timeExplosion;
 
         direction = transform.right;
+
+        currentPerces = 0;
+        currentRebonds = 0;
     }
 
     void Update()
@@ -184,7 +187,7 @@ public class Bullet : MonoBehaviour
         {
             collision.GetComponent<Ennemy>().TakeDamages(bulletDamages, gameObject);
 
-            if (!percante || currentPerces >= nbrPercesMax)
+            if (!percante || currentPerces <= nbrPercesMax)
                 Destroy(gameObject);
 
             else
@@ -197,7 +200,7 @@ public class Bullet : MonoBehaviour
         {
             collision.GetComponent<Boss>().TakeDamages(bulletDamages, gameObject);
 
-            if (!percante || currentPerces >= nbrPercesMax)
+            if (!percante || currentPerces <= nbrPercesMax)
                 Destroy(gameObject);
 
             else
@@ -208,7 +211,7 @@ public class Bullet : MonoBehaviour
 
         else if (collision.CompareTag("Box"))
         {
-            if (!percante || currentPerces >= nbrPercesMax)
+            if (!percante || currentPerces <= nbrPercesMax)
             {
                 if (!rebondissante)
                 {
@@ -250,7 +253,7 @@ public class Bullet : MonoBehaviour
 
         else
         {
-            if (!rebondissante || nbrRebondsMax >= currentRebonds)
+            if (!rebondissante || nbrRebondsMax <= currentRebonds)
             {
                 if (isArrow)
                 {

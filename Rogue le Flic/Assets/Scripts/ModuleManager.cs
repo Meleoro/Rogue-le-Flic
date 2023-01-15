@@ -115,17 +115,36 @@ public class ModuleManager : MonoBehaviour
     {
         gun.ballesRebondissantes = true;
 
-        if (levelModule1 == 1)
+        if (nbrEmplacement == 1)
         {
-            nbrRebondsMax = nbrRebondsMaxLvl1;
+            if (levelModule1 == 1)
+            {
+                nbrRebondsMax = nbrRebondsMaxLvl1;
+            }
+            else if (levelModule1 == 2)
+            {
+                nbrRebondsMax = nbrRebondsMaxLvl2;
+            }
+            else
+            {
+                nbrRebondsMax = nbrRebondsMaxLvl3;
+            }
         }
-        else if (levelModule1 == 2)
-        {
-            nbrRebondsMax = nbrRebondsMaxLvl2;
-        }
+
         else
         {
-            nbrRebondsMax = nbrRebondsMaxLvl3;
+            if (levelModule2 == 1)
+            {
+                nbrRebondsMax = nbrRebondsMaxLvl1;
+            }
+            else if (levelModule2 == 2)
+            {
+                nbrRebondsMax = nbrRebondsMaxLvl2;
+            }
+            else
+            {
+                nbrRebondsMax = nbrRebondsMaxLvl3;
+            }
         }
     }
     
