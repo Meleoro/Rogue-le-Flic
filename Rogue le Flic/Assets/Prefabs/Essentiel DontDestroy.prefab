@@ -1628,6 +1628,7 @@ GameObject:
   - component: {fileID: 7016868028689388866}
   - component: {fileID: 7016868028689388867}
   - component: {fileID: 7016868028689388876}
+  - component: {fileID: 8867955666129102459}
   m_Layer: 0
   m_Name: GameManager DontDestroy
   m_TagString: Untagged
@@ -1704,6 +1705,47 @@ MonoBehaviour:
   gunImage: {fileID: 7016868029927998269}
   ammo: {fileID: 7016868028815424991}
   bowPos: {x: -67.5, y: 3.4}
+--- !u!114 &8867955666129102459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7016868028689388864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6191f9c43a22f1a45a736129cf04b528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Module1: 0
+  Module2: 0
+  levelModule1: 0
+  levelModule2: 0
+  moduleName1: 
+  description1: 
+  image1: {fileID: 0}
+  moduleName2: 
+  description2: 
+  image2: {fileID: 0}
+  nbrPercagesMaxLvl1: 1
+  nbrPercagesMaxLvl2: 2
+  nbrPercagesMaxLvl3: 3
+  nbrPercagesMax: 0
+  nbrRebondsMaxLvl1: 1
+  nbrRebondsMaxLvl2: 2
+  nbrRebondsMaxLvl3: 3
+  nbrRebondsMax: 0
+  multiplicateurTailleLvl1: 1.5
+  multiplicateurTailleLvl2: 2
+  multiplicateurTailleLvl3: 2.5
+  multiplicateurTaille: 0
+  probaCritiqueLvl1: 15
+  probaCritiqueLvl2: 30
+  probaCritiqueLvl3: 50
+  probaCritique: 0
+  multiplicateurTailleCrit: 1.5
+  multiplicateurVitesseCrit: 1.2
+  multiplicateurDegatsCrit: 3
 --- !u!1 &7016868028815424989
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,7 +2739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1990982738, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
       propertyPath: m_InstanceId
-      value: -5226
+      value: -535772
       objectReference: {fileID: 0}
     - target: {fileID: 1503478015596987154, guid: 018796ef7819d5844bf672f133a680ea, type: 3}
       propertyPath: test

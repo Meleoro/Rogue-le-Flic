@@ -184,8 +184,11 @@ public class Bullet : MonoBehaviour
         {
             collision.GetComponent<Ennemy>().TakeDamages(bulletDamages, gameObject);
 
-            if (!percante)
+            if (!percante || currentPerces >= nbrPercesMax)
                 Destroy(gameObject);
+
+            else
+                currentPerces += 1;
 
             bounceWalls.enabled = false;
         }
@@ -194,23 +197,35 @@ public class Bullet : MonoBehaviour
         {
             collision.GetComponent<Boss>().TakeDamages(bulletDamages, gameObject);
 
-            if (!percante)
+            if (!percante || currentPerces >= nbrPercesMax)
                 Destroy(gameObject);
+
+            else
+                currentPerces += 1;
 
             bounceWalls.enabled = false;
         }
 
         else if (collision.CompareTag("Box"))
         {
-            if (!rebondissante)
+            if (!percante || currentPerces >= nbrPercesMax)
             {
-                Destroy(gameObject);
-                collision.GetComponent<Box>().Explose();
-            }
+                if (!rebondissante)
+                {
+                    Destroy(gameObject);
+                    collision.GetComponent<Box>().Explose();
+                }
 
+                else
+                {
+                    bounceWalls.enabled = true;
+                }
+            }
+            
             else
             {
-                bounceWalls.enabled = true;
+                currentPerces += 1;
+                collision.GetComponent<Box>().Explose();
             }
         }
 
@@ -235,7 +250,7 @@ public class Bullet : MonoBehaviour
 
         else
         {
-            if (!rebondissante)
+            if (!rebondissante || nbrRebondsMax >= currentRebonds)
             {
                 if (isArrow)
                 {
@@ -271,6 +286,8 @@ public class Bullet : MonoBehaviour
         direction = Vector3.Reflect(direction.normalized, collision.contacts[0].normal);
 
         bounceWalls.enabled = false;
+
+        currentRebonds += 1;
     }
 }
 

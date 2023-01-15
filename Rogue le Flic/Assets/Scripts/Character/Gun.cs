@@ -329,11 +329,13 @@ public class Gun : MonoBehaviour
                 if (ballesPercantes)
                 {
                     refBullet.GetComponent<Bullet>().percante = true;
+                    refBullet.GetComponent<Bullet>().nbrPercesMax = ModuleManager.Instance.nbrPercagesMax;
                 }
 
                 if (ballesRebondissantes)
                 {
                     refBullet.GetComponent<Bullet>().rebondissante = true;
+                    refBullet.GetComponent<Bullet>().nbrRebondsMax = ModuleManager.Instance.nbrPercagesMax;
                 }
 
                 if (grossissementBalles)
