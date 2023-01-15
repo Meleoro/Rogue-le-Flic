@@ -28,6 +28,7 @@ public class TurtleBoss : MonoBehaviour
 
     [Header("Charge Basique")]
     [HideInInspector] public bool isSliding;
+    private int currentRebonds;
     private Vector2 directionSlide;
     private float currentSpeed;
 
@@ -287,6 +288,8 @@ public class TurtleBoss : MonoBehaviour
     {
         canMove = false;
 
+        currentRebonds = 0;
+        
         boss.anim.SetTrigger("StartAttack");
         boss.anim.SetBool("isWalking", false);
 
@@ -309,6 +312,14 @@ public class TurtleBoss : MonoBehaviour
                 currentSpeed += bossData.gainVitesseRebond;
 
             directionSlide = Vector3.Reflect(directionSlide.normalized, col.contacts[0].normal);
+
+            currentRebonds += 1;
+
+            if (currentRebonds >= bossData.rebondsMax)
+            {
+                isKicked = false;
+                isSliding = false;
+            }
 
             if (isKicked)
             {
