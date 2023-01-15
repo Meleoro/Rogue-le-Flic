@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 6915907660425229418}
   - component: {fileID: 4190934726569244943}
   - component: {fileID: 7538191874164953039}
-  - component: {fileID: 6157799314903548744}
+  - component: {fileID: 418545110}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -824,7 +824,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6157799314903548744
+--- !u!114 &418545110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1121,7 +1121,7 @@ GameObject:
   - component: {fileID: 8633518367942238777}
   - component: {fileID: 8633518367942238774}
   m_Layer: 0
-  m_Name: Rebond2
+  m_Name: Rebond 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1235,7 +1235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberEffect: 2
-  levelEffect: 2
+  levelEffect: 1
   UIExplications: {fileID: 2745408753465435161}
   UIChoix: {fileID: 398094075285291346}
   moduleName1: {fileID: 1241316300204984338}
@@ -1244,8 +1244,8 @@ MonoBehaviour:
   moduleName2: {fileID: 4607165468296795772}
   description2: {fileID: 9027436790924668102}
   image2: {fileID: 5782072715539236100}
-  itemName: Rebond Niv.2
-  itemDescription: Vos tirs rebondissent sur les murs
+  itemName: Rebond Niv.1
+  itemDescription: Vos tirs rebondissent une fois contre les murs
 --- !u!1 &8678696589711249628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0189, y: 4.027}
+  m_AnchoredPosition: {x: 0.0189, y: 3.05}
   m_SizeDelta: {x: 16.5896, y: 3.175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3060384397980334598
@@ -1347,7 +1347,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
