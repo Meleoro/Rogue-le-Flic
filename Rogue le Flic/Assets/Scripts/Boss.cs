@@ -93,7 +93,7 @@ public class Boss : MonoBehaviour
 
         canShake = false;
     }
-
+    
 
     private void Update()
     {
@@ -219,6 +219,27 @@ public class Boss : MonoBehaviour
         }
     }
 
+
+    public void VerifyBossType()
+    {
+        switch (bossType)
+        {
+            case boss.Beaver:
+                ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.beaver;
+                break;
+
+            
+            case boss.Frog:
+                ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.frog;
+                break;
+
+            
+            case boss.Turtle:
+                ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.turtle;
+                break;
+        }
+    }
+    
 
     IEnumerator CinematicDeath()
     {

@@ -20,6 +20,11 @@ public class ReferenceCamera : MonoBehaviour
     public SpriteRenderer bossSprite;
     public TextMeshProUGUI bossName;
 
+    [Header("Différents splash")] 
+    public Sprite beaver;
+    public Sprite frog;
+    public Sprite turtle;
+
     private void Awake()
     {
         if (Instance == null)

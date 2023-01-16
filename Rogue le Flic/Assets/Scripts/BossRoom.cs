@@ -65,7 +65,8 @@ public class BossRoom : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         ReferenceCamera.Instance.splash.SetActive(true);
-        
+        boss.GetComponent<Boss>().VerifyBossType();
+
         yield return new WaitForSeconds(3);
         
         ReferenceCamera.Instance.splash.SetActive(false);
