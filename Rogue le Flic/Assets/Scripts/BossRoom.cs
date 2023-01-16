@@ -7,6 +7,7 @@ using UnityEngine;
 public class BossRoom : MonoBehaviour
 {
     public List<Transform> spawnPoints;
+    public List<Transform> spotFrog;
 
     public bool isLastBoss;
 
@@ -23,10 +24,10 @@ public class BossRoom : MonoBehaviour
                 GameObject newBoss = null;
                 
                 if(k == 0)
-                    newBoss = Instantiate(LevelManager.Instance.savedBoss[k], transform.position + new Vector3(3, 0, 0), Quaternion.identity);
+                    newBoss = Instantiate(LevelManager.Instance.savedBoss[k], transform.position + new Vector3(3, 0, 0), Quaternion.identity, transform);
                 
                 else if (k == 1)
-                    newBoss = Instantiate(LevelManager.Instance.savedBoss[k], transform.position + new Vector3(-3, 0, 0), Quaternion.identity);
+                    newBoss = Instantiate(LevelManager.Instance.savedBoss[k], transform.position + new Vector3(-3, 0, 0), Quaternion.identity, transform);
 
                 newBoss.GetComponent<Boss>().bossNumber = k + 1;
             }
