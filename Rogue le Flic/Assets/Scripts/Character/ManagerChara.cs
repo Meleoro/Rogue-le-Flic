@@ -19,7 +19,9 @@ public class ManagerChara : MonoBehaviour
 
     public Controls controls;
     [HideInInspector] public bool noControl;
-    public bool munitionsActives;
+    //public bool munitionsActives;
+    
+    public bool isInTuto;
 
     [Header("Dash")] 
     [HideInInspector] public bool isDashing;
