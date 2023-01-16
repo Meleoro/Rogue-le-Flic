@@ -319,6 +319,11 @@ public class TurtleBoss : MonoBehaviour
             {
                 isKicked = false;
                 isSliding = false;
+                
+                isAttacking = false;
+                timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
+
+                boss.anim.SetTrigger("reset");
             }
 
             if (isKicked)
