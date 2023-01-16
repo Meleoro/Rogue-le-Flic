@@ -341,6 +341,7 @@ public class Ennemy : MonoBehaviour
         isSpawning = false;
         
         VFXSpawn.SetActive(true);
+        StartCoroutine(VFXSpawn.GetComponentInChildren<BlastWave>().Blast());
         
         yield return new WaitForSeconds(0.2f);
         

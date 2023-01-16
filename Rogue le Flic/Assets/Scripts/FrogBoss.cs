@@ -49,6 +49,8 @@ public class FrogBoss : MonoBehaviour
     private Rigidbody2D rb;
     private Boss boss;
 
+    public GameObject VFXJump;
+
     public List<GameObject> ennemies = new List<GameObject>();
 
 
@@ -310,6 +312,13 @@ public class FrogBoss : MonoBehaviour
         
         isAttacking = false;
         timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
+        
+        VFXJump.SetActive(true);
+        StartCoroutine(VFXJump.GetComponentInChildren<BlastWave>().Blast());
+        
+        yield return new WaitForSeconds(0.2f);
+        
+        VFXJump.SetActive(false);
     }
 
 
@@ -357,8 +366,15 @@ public class FrogBoss : MonoBehaviour
                 
                 GetComponent<BoxCollider2D>().enabled = true;
                 boss._collider2D.enabled = true;
+                
+                VFXJump.SetActive(true);
+                StartCoroutine(VFXJump.GetComponentInChildren<BlastWave>().Blast());
+        
+                yield return new WaitForSeconds(0.2f);
+        
+                VFXJump.SetActive(false);
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.3f);
             }
 
             else
@@ -397,6 +413,13 @@ public class FrogBoss : MonoBehaviour
 
         isAttacking = false;
         timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
+        
+        VFXJump.SetActive(true);
+        StartCoroutine(VFXJump.GetComponentInChildren<BlastWave>().Blast());
+        
+        yield return new WaitForSeconds(0.2f);
+        
+        VFXJump.SetActive(false);
     }
 
 
