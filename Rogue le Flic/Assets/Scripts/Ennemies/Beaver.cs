@@ -54,6 +54,11 @@ public class Beaver : MonoBehaviour
             beaverData = niveau3;
         }
 
+        else
+        {
+            beaverData = niveau1;
+        }
+
         currentHealth = beaverData.health;
 
         rb = GetComponent<Rigidbody2D>();
