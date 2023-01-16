@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -62,8 +63,11 @@ public class LevelManager : MonoBehaviour
 
         ManagerChara.Instance.activeGun = activeGun;
 
-        if(stockedGun != null)
+        if (stockedGun != null)
+        {
             ManagerChara.Instance.stockWeapon = stockedGun;
+            ManagerChara.Instance.stockWeapon.GetComponent<Gun>().isStocked = true;
+        }
 
         currentLevel += 1;
 
