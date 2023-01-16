@@ -89,6 +89,8 @@ public class Gun : MonoBehaviour
     {
         if (!isStocked)
         {
+            VFXTake.SetActive(true);
+            
             // ON POSITIONNE LE GUN SI LE JOUEUR LE PORTE
             if (isHeld)
             {
@@ -228,6 +230,8 @@ public class Gun : MonoBehaviour
 
         if (isReloading && isHeld)
         {
+            VFXTake.SetActive(false);
+            
             ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = true;
             
             timerReload -= Time.deltaTime;
