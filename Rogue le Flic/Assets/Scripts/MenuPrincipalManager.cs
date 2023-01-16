@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuPrincipalManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class MenuPrincipalManager : MonoBehaviour
     public GameObject start;
     public GameObject options;
     public GameObject exit;
+    public Button startButton;
+    public Button optionButton;
+    public Button exitButton;
 
     [Header("Menu2")] 
     public GameObject menu2;
@@ -42,6 +46,10 @@ public class MenuPrincipalManager : MonoBehaviour
         
         menu2.transform.DOMoveY(menu2.transform.position.y + 16, 2).SetEase(Ease.InOutBack);
 
+        startButton.enabled = false;
+        optionButton.enabled = false;
+        exitButton.enabled = false;
+
         StartCoroutine(Zoom(_camera.orthographicSize));
     }
 
@@ -53,6 +61,10 @@ public class MenuPrincipalManager : MonoBehaviour
         exit.transform.DOMoveY(exit.transform.position.y - 16, 2).SetEase(Ease.InOutBack);
         
         menu2.transform.DOMoveY(menu2.transform.position.y - 16, 2).SetEase(Ease.InOutBack);
+        
+        startButton.enabled = true;
+        optionButton.enabled = true;
+        exitButton.enabled = true;
 
         StartCoroutine(Zoom(_camera.orthographicSize));
 
