@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 
 public class Ennemy : MonoBehaviour
 {
+    public bool dontMove;
+    
     public enum ennemies
     {
         Beaver,
@@ -72,54 +74,57 @@ public class Ennemy : MonoBehaviour
 
     private void Update()
     {
-        if (stunTimer <= 0)
+        if (!dontMove)
         {
-            VFXStun.SetActive(false);
-            
-            if (!isSpawning)
+            if (stunTimer <= 0)
             {
-                switch (ennemyType)
-                {
-                    case ennemies.Beaver :
-                        beaverScript.BeaverBehavior();
-                        break;
+                VFXStun.SetActive(false);
             
-                    case ennemies.Frog :
-                        frogScript.FrogBehavior();
-                        break;
+                if (!isSpawning)
+                {
+                    switch (ennemyType)
+                    {
+                        case ennemies.Beaver :
+                            beaverScript.BeaverBehavior();
+                            break;
+            
+                        case ennemies.Frog :
+                            frogScript.FrogBehavior();
+                            break;
 
-                    case ennemies.Turtle :
-                        turtleScript.TurtleBehavior();
-                        break;
+                        case ennemies.Turtle :
+                            turtleScript.TurtleBehavior();
+                            break;
+                    }
                 }
             }
-        }
         
-        else
-        {
-            stunTimer -= Time.deltaTime;
-        }
-        
-
-        if (timerKick > 0)
-        {
-            timerKick -= Time.deltaTime;
-
-            if (timerKick <= 0)
+            else
             {
-                switch (ennemyType)
+                stunTimer -= Time.deltaTime;
+            }
+        
+
+            if (timerKick > 0)
+            {
+                timerKick -= Time.deltaTime;
+
+                if (timerKick <= 0)
                 {
-                    case ennemies.Beaver:
-                        beaverScript.isKicked = false;
-                        break;
+                    switch (ennemyType)
+                    {
+                        case ennemies.Beaver:
+                            beaverScript.isKicked = false;
+                            break;
 
-                    case ennemies.Frog:
-                        frogScript.isKicked = false;
-                        break;
+                        case ennemies.Frog:
+                            frogScript.isKicked = false;
+                            break;
 
-                    case ennemies.Turtle:
-                        turtleScript.isKicked = false;
-                        break;
+                        case ennemies.Turtle:
+                            turtleScript.isKicked = false;
+                            break;
+                    }
                 }
             }
         }
@@ -127,21 +132,24 @@ public class Ennemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isSpawning && stunTimer <= 0)
+        if (!dontMove)
         {
-            switch (ennemyType)
+            if (!isSpawning && stunTimer <= 0)
             {
-                case ennemies.Beaver :
-                    beaverScript.BeaverFixedBehavior();
-                    break;
+                switch (ennemyType)
+                {
+                    case ennemies.Beaver :
+                        beaverScript.BeaverFixedBehavior();
+                        break;
                 
-                case ennemies.Frog :
-                    frogScript.FrogFixedBehavior();
-                    break;
+                    case ennemies.Frog :
+                        frogScript.FrogFixedBehavior();
+                        break;
 
-                case ennemies.Turtle:
-                    turtleScript.TurtleFixedBehavior();
-                    break;
+                    case ennemies.Turtle:
+                        turtleScript.TurtleFixedBehavior();
+                        break;
+                }
             }
         }
     }
