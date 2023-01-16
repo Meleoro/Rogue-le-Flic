@@ -250,4 +250,21 @@ public class CameraMovements : MonoBehaviour
             transform.DOMove(posCamera, timeZoom - 0.2f);
         }
     }
+    
+    
+    Sequence mySequence = DOTween.Sequence();
+
+    public void CameraShake(float duration, float amplitude)
+    {
+        if (canShake)
+        {
+            canShake = false;
+            mySequence.Append(transform.DOShakePosition(duration, amplitude).OnComplete((() => canShake = true)));
+        }
+    }
+
+    public void CancelShake()
+    {
+        mySequence.Kill();
+    }
 }
