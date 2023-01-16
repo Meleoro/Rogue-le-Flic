@@ -56,7 +56,8 @@ public class MapManager : MonoBehaviour
         
         EnterRoom(activeRoom.GetComponent<DoorManager>().currentEnnemies);
 
-        ManagerChara.Instance.transform.position = Vector3.zero;
+        if(LevelManager.Instance.currentLevel != 0)
+            ManagerChara.Instance.transform.position = Vector3.zero;
     }
 
 
