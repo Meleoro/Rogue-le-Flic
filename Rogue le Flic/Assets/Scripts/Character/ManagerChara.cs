@@ -123,8 +123,9 @@ public class ManagerChara : MonoBehaviour
             }
             
             if (controls.Character.Kick.WasPerformedThisFrame() && !isKicking)
-            { 
-                activeGun.GetComponent<SpriteRenderer>().enabled = false;
+            {
+                if(activeGun != null) 
+                    activeGun.GetComponent<SpriteRenderer>().enabled = false;
                 
                 anim.SetTrigger("isKicking");
                 
