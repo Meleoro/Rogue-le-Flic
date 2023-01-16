@@ -22,6 +22,7 @@ public class Gun : MonoBehaviour
     public Light2D lightShot;
     private Controls controls;
     public GunData gunData;
+    public GameObject VFXTake;
 
     [Header("UI")] 
     public GameObject UIArme;
@@ -78,6 +79,8 @@ public class Gun : MonoBehaviour
     {
         lightShot.intensity = 0;
 
+        VFXTake.SetActive(true);
+
         currentChargeurAmmo = gunData.chargeurSize;
     }
 
@@ -89,6 +92,8 @@ public class Gun : MonoBehaviour
             // ON POSITIONNE LE GUN SI LE JOUEUR LE PORTE
             if (isHeld)
             {
+                VFXTake.SetActive(false);
+                
                 // ON RETIRE LE TEXTE
                 explanation.SetActive(false);
                 UIArme.SetActive(false);
