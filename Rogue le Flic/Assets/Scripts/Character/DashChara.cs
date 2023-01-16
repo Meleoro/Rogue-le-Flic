@@ -36,7 +36,14 @@ public class DashChara : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(gameObject); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
     }
 
     private void Update()

@@ -59,7 +59,14 @@ public class KickChara : MonoBehaviour
 
     public void Awake()
     {
-        Instance = this;
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(gameObject); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
 
         kick.SetActive(false);
     }

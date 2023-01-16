@@ -1694,6 +1694,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 468927538}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: reset
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &260103508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5718,6 +5730,9 @@ MonoBehaviour:
   start: {fileID: 1346947141}
   options: {fileID: 1775647331}
   exit: {fileID: 1589675462}
+  startButton: {fileID: 850769817}
+  optionButton: {fileID: 260103507}
+  exitButton: {fileID: 51308428}
   menu2: {fileID: 6971571}
 --- !u!4 &1321010263
 Transform:

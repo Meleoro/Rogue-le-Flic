@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DontDestroyOnLoad : MonoBehaviour
+public class Destroy : MonoBehaviour
 {
-    public static DontDestroyOnLoad Instance;
+    public static Destroy Instance;
     
     private void Awake()
     {
@@ -16,7 +17,5 @@ public class DontDestroyOnLoad : MonoBehaviour
         { 
             Instance = this; 
         } 
-        
-        DontDestroyOnLoad(gameObject);
     }
 }

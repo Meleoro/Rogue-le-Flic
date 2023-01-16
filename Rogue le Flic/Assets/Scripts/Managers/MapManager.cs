@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using Pathfinding;
 
 public class MapManager : MonoBehaviour
 {
@@ -20,12 +21,20 @@ public class MapManager : MonoBehaviour
     
     public Map mapActive = new Map();
 
+    public ProceduralGridMover _proceduralGridMover;
+
 
     void Awake()
     {
         Instance = this;
     }
-    
+
+
+    private void Start()
+    {
+        _proceduralGridMover.target = ManagerChara.Instance.gameObject.transform;
+    }
+
 
     void Update()
     {
