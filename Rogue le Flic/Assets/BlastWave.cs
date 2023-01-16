@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
@@ -17,7 +18,12 @@ public class BlastWave : MonoBehaviour
         lineRenderer.positionCount = pointsCount + 1;
     }
 
-    private IEnumerator Blast()
+   private void Start()
+   {
+       StartCoroutine(Blast());
+   }
+
+   public IEnumerator Blast()
     {
         float currentRadius = 0f;
 
@@ -27,6 +33,8 @@ public class BlastWave : MonoBehaviour
             Draw(currentRadius);
             yield return null;
         }
+        
+        lineRenderer.sortingOrder = (Mathf.RoundToInt(transform.position.y * 2) * -1) - 1;
     }
 
     private void Draw(float currentRadius)
@@ -47,7 +55,7 @@ public class BlastWave : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-            StartCoroutine(Blast());
+        /*if (Input.GetKeyDown(KeyCode.A))
+            StartCoroutine(Blast());*/
     }
 }

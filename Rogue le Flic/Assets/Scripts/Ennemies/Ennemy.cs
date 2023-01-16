@@ -41,6 +41,7 @@ public class Ennemy : MonoBehaviour
     [SerializeField] private GameObject spawnIndicator;
     public GameObject sprite;
     public BoxCollider2D _collider2D;
+    public GameObject VFXSpawn;
 
     [Header("Stun")]
     public float stunDuration;
@@ -333,11 +334,17 @@ public class Ennemy : MonoBehaviour
         sprite.transform.DOMoveY(transform.position.y, 0.2f).SetEase(Ease.InCirc);;
         
         yield return new WaitForSeconds(0.2f);
-        
+
         GetComponent<BoxCollider2D>().enabled = true;
         _collider2D.enabled = true;
         
         isSpawning = false;
+        
+        VFXSpawn.SetActive(true);
+        
+        yield return new WaitForSeconds(0.2f);
+        
+        VFXSpawn.SetActive(false);
     }
 
 
