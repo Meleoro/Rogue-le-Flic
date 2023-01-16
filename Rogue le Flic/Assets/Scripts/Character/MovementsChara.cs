@@ -29,7 +29,14 @@ public class MovementsChara : MonoBehaviour
     {
         controls = new Controls();
 
-        Instance = this;
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
     }
 
     private void OnEnable()

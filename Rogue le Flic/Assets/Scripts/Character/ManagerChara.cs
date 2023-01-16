@@ -53,11 +53,14 @@ public class ManagerChara : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        
-        else
-            Destroy(gameObject);
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(gameObject); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
 
         rb = GetComponent<Rigidbody2D>();
         
@@ -181,6 +184,7 @@ public class ManagerChara : MonoBehaviour
         if(!isDashing && !noControl)
             MovementsChara.Instance.MoveCharacter();
     }
+    
 
     void SwitchWeapons()
     {
