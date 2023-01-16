@@ -106,6 +106,7 @@ public class FrogBoss : MonoBehaviour
         boss.anim.SetBool("isWalking", false);
 
         bossRoom = GetComponentInParent<BossRoom>();
+        spotsJump = bossRoom.spotFrog;
     }
 
 

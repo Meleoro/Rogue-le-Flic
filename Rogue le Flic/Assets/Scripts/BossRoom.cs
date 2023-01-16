@@ -7,34 +7,50 @@ using UnityEngine;
 public class BossRoom : MonoBehaviour
 {
     public List<Transform> spawnPoints;
+    public List<Transform> spotFrog;
 
     public bool isLastBoss;
 
     public GameObject boss;
 
+    private GameObject boss2;
+    private GameObject boss3;
+
     private void Start()
     {
-        StartCoroutine(LaunchRoom());
-        
         if (isLastBoss)
         {
             for (int k = 0; k < LevelManager.Instance.savedBoss.Count; k++)
             {
-                GameObject newBoss = null;
-                
                 if(k == 0)
-                    newBoss = Instantiate(LevelManager.Instance.savedBoss[k], transform.position + new Vector3(3, 0, 0), Quaternion.identity);
+                    boss2 = Instantiate(LevelManager.Instance.savedBoss[k], transform.position + new Vector3(3, 0, 0), Quaternion.identity, transform);
                 
                 else if (k == 1)
-                    newBoss = Instantiate(LevelManager.Instance.savedBoss[k], transform.position + new Vector3(-3, 0, 0), Quaternion.identity);
+                    boss3 = Instantiate(LevelManager.Instance.savedBoss[k], transform.position + new Vector3(-3, 0, 0), Quaternion.identity, transform);
 
-                newBoss.GetComponent<Boss>().bossNumber = k + 1;
+                
+                if (k == 0)
+                    boss2.GetComponent<Boss>().bossNumber = k + 1;
+                
+                else if (k == 1)
+                    boss3.GetComponent<Boss>().bossNumber = k + 1;
             }
         }
+        
+        StartCoroutine(LaunchRoom());
     }
 
     IEnumerator LaunchRoom()
     {
+        if (boss2 is not null)
+        {
+            boss2.GetComponent<Boss>().canMove = false;
+        }
+        if (boss3 is not null)
+        {
+            boss3.GetComponent<Boss>().canMove = false;
+        }
+        
         CameraMovements.Instance.transform.position = ManagerChara.Instance.transform.position;
         CameraMovements.Instance._camera.orthographicSize = GetComponent<CameraManager>().cameraSize;
 
@@ -65,5 +81,14 @@ public class BossRoom : MonoBehaviour
         boss.GetComponent<Boss>().canMove = true;
         
         CameraMovements.Instance.bossStartRoom = false;
+        
+        if (boss2 is not null)
+        {
+            boss2.GetComponent<Boss>().canMove = true;
+        }
+        if (boss3 is not null)
+        {
+            boss3.GetComponent<Boss>().canMove = true;
+        }
     }
 }
