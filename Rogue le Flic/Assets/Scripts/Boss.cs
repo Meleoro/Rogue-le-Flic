@@ -40,12 +40,7 @@ public class Boss : MonoBehaviour
     public GameObject sprite;
     public GameObject spawnIndicator;
     public BoxCollider2D _collider2D;
-
-
-    private void Awake()
-    {
-        canMove = true;
-    }
+    
 
     private void Start()
     {
