@@ -196,14 +196,14 @@ public class Turtle : MonoBehaviour
         {
             if (!isKicked)
             {
-                col.gameObject.GetComponent<Ennemy>().TakeDamages(1, gameObject);
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(2, gameObject);
                 
                 StartCoroutine(SetInvincible(col.gameObject));
             }
 
             else
             {
-                col.gameObject.GetComponent<Ennemy>().TakeDamages(20, gameObject);
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsTurtleKicked, gameObject);
                 
                 ennemy.Stun();
             }
@@ -216,12 +216,12 @@ public class Turtle : MonoBehaviour
         
         else if (isKicked && col.CompareTag("Ennemy"))
         {
-            col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
+            col.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsKickedEnnemy, gameObject);
         }
         
         else if (isKicked && !col.CompareTag("Kick"))
         {
-            TakeDamages(2, gameObject);
+            TakeDamages(DegatsManager.Instance.degatsEnnemyIntoWall, gameObject);
             ennemy.Stun();
         }
     }
