@@ -266,6 +266,8 @@ public class Boss : MonoBehaviour
     
     IEnumerator CinematicDeath()
     {
+        transform.localScale = Vector3.one;
+        
         switch (bossType)
         {
             case boss.Beaver:

@@ -33,6 +33,7 @@ public class FrogBoss : MonoBehaviour
     private Vector2 jumpDestination;
     private int cooldownJump;
     private Vector3 originalScale;
+    private bool mustJump;
 
     [Header("Spawn")]
     private int cooldownSpawn;
@@ -106,6 +107,9 @@ public class FrogBoss : MonoBehaviour
         timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
         currentAttack = 0;
 
+        cooldownSpawn = Random.Range(2, 4);
+        mustJump = true;
+
         boss.anim.SetBool("isWalking", false);
 
         bossRoom = GetComponentInParent<BossRoom>();
@@ -160,16 +164,16 @@ public class FrogBoss : MonoBehaviour
                     cooldownSpawn -= 1;
                     cooldownJump -= 1;
 
-                    // ATTAQUE SAUTEE
-                    if (currentAttack == 1)
-                    {
-                        Jump(true);
-                    }
-
-                    // SPAWN
-                    else if (currentAttack == 3 && cooldownSpawn <= 0)
+                    if (cooldownSpawn <= 0 && !boss.isHurt)
                     {
                         StartCoroutine(Spawn());
+                    }
+
+                    // ATTAQUE SAUTEE
+                    else if (mustJump)
+                    {
+                        Jump(true);
+                        mustJump = false;
                     }
 
                     // TIR
@@ -181,6 +185,7 @@ public class FrogBoss : MonoBehaviour
                     else
                     {
                         Jump(true);
+                        mustJump = false;
                     }
                 }
 
@@ -259,16 +264,25 @@ public class FrogBoss : MonoBehaviour
         float maxDistance = 0;
         cooldownJump = 2;
 
+        List<Transform> possibleSpots = new List<Transform>();
+
         for (int k = 0; k < spotsJump.Count; k++)
         {
             float newDistance = Vector2.Distance(ManagerChara.Instance.transform.position, spotsJump[k].position);
 
-            if(newDistance > maxDistance)
+            if (newDistance > 3)
+            {
+                possibleSpots.Add(spotsJump[k]);
+            }
+
+            /*if(newDistance > maxDistance)
             {
                 jumpDestination = spotsJump[k].position;
                 maxDistance = newDistance;
-            }
+            }*/
         }
+
+        jumpDestination = possibleSpots[Random.Range(0, possibleSpots.Count)].position;
 
         if (!attaque)
             StartCoroutine(JumpChoroutine(jumpDestination));
@@ -441,6 +455,8 @@ public class FrogBoss : MonoBehaviour
 
     IEnumerator Shoot()
     {
+        mustJump = true;
+        
         for(int k = 0; k < 3; k++)
         {
             boss.anim.SetTrigger("isAttacking");
@@ -510,7 +526,7 @@ public class FrogBoss : MonoBehaviour
         isAttacking = false;
         timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
 
-        cooldownSpawn = 2;
+        cooldownSpawn = Random.Range(3, 5);
     }
 
 
