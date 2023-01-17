@@ -265,4 +265,14 @@ public class ManagerChara : MonoBehaviour
         
         HealthManager.Instance.LoseHealth(Vector2.zero);
     }
+
+
+    public void StopChoroutines()
+    {
+        StopAllCoroutines();
+        
+        rb.velocity = Vector2.zero;
+        isDashing = false;
+        isKicking = false;
+    }
 }

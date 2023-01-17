@@ -79,8 +79,8 @@ public class HealthManager : MonoBehaviour
 
             isInvincible = true;
 
-            ReferenceCamera.Instance._camera.DOShakePosition(shakeDuration, shakeAmplitude);
-        
+            CameraMovements.Instance.CameraShake(shakeDuration, shakeAmplitude);
+                
             ManagerChara.Instance.rb.AddForce(direction.normalized * reculForce, ForceMode2D.Impulse);
         
             timerEffects = 1;

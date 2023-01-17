@@ -44,6 +44,8 @@ public class CameraMovements : MonoBehaviour
     [Header("PlayerDeath")]
     private bool doOnce2;
     [HideInInspector] public bool playerDeath;
+    
+    Sequence mySequence = DOTween.Sequence();
 
 
     private void Awake()
@@ -251,8 +253,6 @@ public class CameraMovements : MonoBehaviour
         }
     }
     
-    
-    Sequence mySequence = DOTween.Sequence();
 
     public void CameraShake(float duration, float amplitude)
     {

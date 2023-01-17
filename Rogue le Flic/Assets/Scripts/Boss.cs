@@ -208,6 +208,8 @@ public class Boss : MonoBehaviour
 
     public void Death()
     {
+        StopChoroutines();
+        
         if (!death && !isHurt)
         {
             death = true;
@@ -239,8 +241,28 @@ public class Boss : MonoBehaviour
                 break;
         }
     }
-    
 
+
+    public void StopChoroutines()
+    {
+        switch (bossType)
+        {
+            case boss.Beaver:
+                //beaverScript.StopCoroutines();
+                break;
+
+            case boss.Frog:
+                frogScript.StopChoroutines();
+                break;
+
+            case boss.Turtle:
+                break;
+        }
+
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+    }
+    
+    
     IEnumerator CinematicDeath()
     {
         switch (bossType)
@@ -266,6 +288,8 @@ public class Boss : MonoBehaviour
                 }
                 break;
         }
+        
+        CameraMovements.Instance.Reboot();
         
         anim.SetBool("isWalking", false);
         
@@ -322,6 +346,9 @@ public class Boss : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2);
+        
+        ManagerChara.Instance.StopChoroutines();
+        ManagerChara.Instance.noControl = true;
 
 
         transform.position = transform.position + new Vector3(0, -5000, 0);
@@ -361,7 +388,7 @@ public class Boss : MonoBehaviour
         ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = true;
         ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = true;
     }
-
+    
 
     public IEnumerator EndCinematicDeath()
     {

@@ -269,6 +269,14 @@ public class FrogBoss : MonoBehaviour
             StartCoroutine(JumpAttaqueChoroutine(ManagerChara.Instance.transform.position, jumpDestination));
     }
 
+
+    public void StopChoroutines()
+    {
+        StopAllCoroutines();
+        
+        boss.anim.SetTrigger("reset");
+    }
+    
     
     IEnumerator JumpChoroutine(Vector2 destination)
     {
