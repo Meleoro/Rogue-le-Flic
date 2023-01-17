@@ -44,8 +44,8 @@ public class CameraMovements : MonoBehaviour
     [Header("PlayerDeath")]
     private bool doOnce2;
     [HideInInspector] public bool playerDeath;
-    
-    Sequence mySequence = DOTween.Sequence();
+
+    private Sequence mySequence;
 
 
     private void Awake()
@@ -57,9 +57,8 @@ public class CameraMovements : MonoBehaviour
         
         else
             Destroy(gameObject);
-
-        canShake = true;
-        canMove = true;
+        
+        mySequence = DOTween.Sequence();
     }
 
     private void OnEnable()
@@ -70,6 +69,13 @@ public class CameraMovements : MonoBehaviour
     private void OnDisable()
     {
         controls.Disable();
+    }
+
+
+    private void Start()
+    {
+        canShake = true;
+        canMove = true;
     }
 
 
