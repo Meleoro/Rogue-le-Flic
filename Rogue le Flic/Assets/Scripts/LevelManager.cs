@@ -62,6 +62,7 @@ public class LevelManager : MonoBehaviour
             stockedGun = Instantiate(ManagerChara.Instance.stockWeapon, ManagerChara.Instance.transform.position, Quaternion.identity, transform);
 
         ManagerChara.Instance.activeGun = activeGun;
+        ManagerChara.Instance.activeGun.GetComponent<Gun>().isHeld = true;
 
         if (stockedGun != null)
         {
