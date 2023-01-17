@@ -50,6 +50,8 @@ public class Ennemy : MonoBehaviour
     public GameObject VFXStun;
     private float stunTimer;
 
+    [HideInInspector] public bool canBeShot;
+
 
     private void Start()
     {
@@ -193,10 +195,12 @@ public class Ennemy : MonoBehaviour
     public IEnumerator FeedbackDamage(SpriteRenderer currentSprite)
     {
         currentSprite.DOColor(hitColor, 0.12f);
+        canBeShot = false;
 
         yield return new WaitForSeconds(0.12f);
         
         currentSprite.DOColor(Color.white, 0.12f);
+        canBeShot = true;
     }
 
     public void isKicked()
@@ -354,6 +358,7 @@ public class Ennemy : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         
         VFXSpawn.SetActive(false);
+        canBeShot = true;
     }
 
 
@@ -378,5 +383,7 @@ public class Ennemy : MonoBehaviour
                     break;
             }
         }
+
+        canBeShot = true;
     }
 }

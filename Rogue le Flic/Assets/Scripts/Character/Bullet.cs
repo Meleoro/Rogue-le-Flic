@@ -185,22 +185,25 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Ennemy"))
         {
-            collision.GetComponent<Ennemy>().TakeDamages(bulletDamages, gameObject);
+            if (collision.GetComponent<Ennemy>().canBeShot)
+            {
+                collision.GetComponent<Ennemy>().TakeDamages(bulletDamages, gameObject);
 
-            if (!percante || currentPerces <= nbrPercesMax)
-                Destroy(gameObject);
+                if (!percante || currentPerces >= nbrPercesMax)
+                    Destroy(gameObject);
 
-            else
-                currentPerces += 1;
+                else
+                    currentPerces += 1;
 
-            bounceWalls.enabled = false;
+                bounceWalls.enabled = false;
+            }
         }
 
         else if (collision.CompareTag("Boss"))
         {
             collision.GetComponent<Boss>().TakeDamages(bulletDamages, gameObject);
 
-            if (!percante || currentPerces <= nbrPercesMax)
+            if (!percante || currentPerces >= nbrPercesMax)
                 Destroy(gameObject);
 
             else
@@ -211,7 +214,7 @@ public class Bullet : MonoBehaviour
 
         else if (collision.CompareTag("Box"))
         {
-            if (!percante || currentPerces <= nbrPercesMax)
+            if (!percante || currentPerces >= nbrPercesMax)
             {
                 if (!rebondissante)
                 {

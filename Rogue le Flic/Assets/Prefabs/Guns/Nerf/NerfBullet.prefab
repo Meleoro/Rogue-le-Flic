@@ -223,8 +223,17 @@ MonoBehaviour:
   bubble: {fileID: 0}
   bubbleExplosion: {fileID: 0}
   originalVelocity: {x: 0, y: 0}
+  isArrow: 0
+  arrowDeceleration: 0
+  arrowDuration1: 0
+  arrowDuration2: 0
+  arrowDuration3: 0
+  arrowDuration4: 0
+  timerArrow: 0
   percante: 0
+  nbrPercesMax: 0
   rebondissante: 0
+  nbrRebondsMax: 0
   bounceWalls: {fileID: 3443196921413445983}
   objetAGrossir: {fileID: 6459866243884530899}
   directionBullet: {x: 0, y: 0}
@@ -248,7 +257,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &3443196921413445983
 BoxCollider2D:
   m_ObjectHideFlags: 0
