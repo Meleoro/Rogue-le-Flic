@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1138822845192359178}
   - component: {fileID: 7190613724793491636}
   - component: {fileID: -699518187122780353}
+  - component: {fileID: 7768771347314477154}
   m_Layer: 0
   m_Name: carton ouvert canards 1
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062604602599482112}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.6458278, y: 3.6811945, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
@@ -112,7 +113,7 @@ MonoBehaviour:
   - {x: 1.236088, y: -1.8290725, z: 0}
   m_ShapePathHash: 538181590
   m_Mesh: {fileID: 0}
-  m_InstanceId: 358016
+  m_InstanceId: -2551966
 --- !u!114 &-699518187122780353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,3 +126,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121a428d3c238a1499652fd61d6ca45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &7768771347314477154
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062604602599482112}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.03846097, y: 0.20768976}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.7, y: 3.74}
+    newSize: {x: 3.7, y: 3.74}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.5154023, y: 1.9400263}
+  m_EdgeRadius: 0
