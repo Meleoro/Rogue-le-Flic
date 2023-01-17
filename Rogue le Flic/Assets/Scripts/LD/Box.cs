@@ -65,7 +65,7 @@ public class Box : MonoBehaviour
 
             else if(col.gameObject.CompareTag("Ennemy") && !isInvincible)
             {
-                col.gameObject.GetComponent<Ennemy>().TakeDamages(damageFromBox, gameObject);
+                col.gameObject.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsBox, gameObject);
                 Explose();
             }
 
@@ -73,13 +73,13 @@ public class Box : MonoBehaviour
             {
                 if (isInvincible)
                 {
-                    col.gameObject.GetComponent<Boss>().TakeDamages(damageFromBox, gameObject);
+                    col.gameObject.GetComponent<Boss>().TakeDamages(DegatsManager.Instance.degatsBox, gameObject);
                     col.gameObject.GetComponent<FrogBoss>().Stun();
                     Explose();
                 }
                 else
                 {
-                    col.gameObject.GetComponent<Boss>().TakeDamages(damageFromBox, gameObject);
+                    col.gameObject.GetComponent<Boss>().TakeDamages(DegatsManager.Instance.degatsBox, gameObject);
                     Explose();
                 }
             }

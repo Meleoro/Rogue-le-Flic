@@ -222,12 +222,12 @@ public class Frog : MonoBehaviour
         
         else if (isKicked && col.CompareTag("Ennemy"))
         {
-            col.GetComponent<Ennemy>().TakeDamages(2, gameObject);
+            col.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsKickedEnnemy, gameObject);
         }
         
         else if (isKicked && !col.CompareTag("Kick"))
         {
-            TakeDamages(2, gameObject);
+            TakeDamages(DegatsManager.Instance.degatsEnnemyIntoWall, gameObject);
             ennemy.Stun();
         }
     }
