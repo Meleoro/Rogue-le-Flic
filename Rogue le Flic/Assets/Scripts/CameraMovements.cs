@@ -47,6 +47,11 @@ public class CameraMovements : MonoBehaviour
 
     private Sequence mySequence;
 
+    [Header("Transition")] 
+    [HideInInspector] public float timerTransition;
+    [HideInInspector] public bool isInTransition;
+    [HideInInspector] public Vector3 departTransition;
+
 
     private void Awake()
     {
@@ -81,7 +86,12 @@ public class CameraMovements : MonoBehaviour
 
     void Update()
     {
-        if (playerDeath)
+        if (isInTransition)
+        {
+            Transition(NormalBehavior());
+        }
+        
+        else if (playerDeath)
         {
             DeathBeahvior();
         }
@@ -165,6 +175,19 @@ public class CameraMovements : MonoBehaviour
         Vector2 newPos = new Vector2( mousePos.x * multiplierMouse - multiplierMouse / 2,  mousePos.y * multiplierMouse- multiplierMouse / 2);
 
         return new Vector3(newX + newPos.x, newY + newPos.y, transform.position.z);
+    }
+
+    private void Transition(Vector2 objectif)
+    {
+        timerTransition -= Time.deltaTime * 2;
+
+        transform.position = new Vector3(Mathf.Lerp(objectif.x, departTransition.x, timerTransition),
+            Mathf.Lerp(objectif.y, departTransition.y, timerTransition), 0);
+
+        if (timerTransition <= 0)
+        {
+            isInTransition = false;
+        }
     }
 
 
