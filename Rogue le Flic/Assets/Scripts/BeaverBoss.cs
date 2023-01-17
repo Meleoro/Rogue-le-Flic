@@ -96,6 +96,8 @@ public class BeaverBoss : MonoBehaviour
 
         timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
         currentAttack = 0;
+        
+        healthBar.fillAmount = (float) currentHealth / bossData.health;
     }
 
 
@@ -105,7 +107,7 @@ public class BeaverBoss : MonoBehaviour
         {
             VFXStun.SetActive(false);
             healthBar.fillAmount = (float) currentHealth / bossData.health;
-            
+
             // COOLDOWN ENTRE LES ATTAQUES
             if (!isAttacking)
             {

@@ -109,6 +109,8 @@ public class FrogBoss : MonoBehaviour
 
         bossRoom = GetComponentInParent<BossRoom>();
         spotsJump = bossRoom.spotFrog;
+        
+        healthBar.fillAmount = (float) currentHealth / bossData.health;
     }
 
 

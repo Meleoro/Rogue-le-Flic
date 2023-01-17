@@ -104,6 +104,8 @@ public class TurtleBoss : MonoBehaviour
         currentAttack = 0;
 
         boss.anim.SetBool("isWalking", false);
+        
+        healthBar.fillAmount = (float) currentHealth / bossData.health;
     }
 
 
