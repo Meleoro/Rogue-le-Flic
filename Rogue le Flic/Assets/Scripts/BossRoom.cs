@@ -72,9 +72,13 @@ public class BossRoom : MonoBehaviour
         ReferenceCamera.Instance.splash.SetActive(false);
         
         
-        CameraMovements.Instance.posCamera = ManagerChara.Instance.transform.position;
+        /*CameraMovements.Instance.posCamera = ManagerChara.Instance.transform.position;
         CameraMovements.Instance.timeZoom = 0.2f;
-        CameraMovements.Instance.Reboot();
+        CameraMovements.Instance.Reboot();*/
+
+        CameraMovements.Instance.timerTransition = 1;
+        CameraMovements.Instance.departTransition = CameraMovements.Instance.transform.position;
+        CameraMovements.Instance.isInTransition = true;
 
         yield return new WaitForSeconds(0.2f);
         
