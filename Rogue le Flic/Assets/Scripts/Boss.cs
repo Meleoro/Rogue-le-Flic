@@ -292,19 +292,19 @@ public class Boss : MonoBehaviour
                 break;
         }
         
-        CameraMovements.Instance.Reboot();
+        CameraMovements.Instance.CancelShake();
         
         anim.SetBool("isWalking", false);
         
         ManagerChara.Instance.savePosition = ManagerChara.Instance.transform.position;
 
-        ReferenceCamera.Instance.fondNoir.DOFade(1, 2);
+        ReferenceCamera.Instance.fondNoir.DOFade(1, 2f);
         ReferenceCamera.Instance.finalCinematic = true;
 
         ManagerChara.Instance.noControl = true;
 
         CameraMovements.Instance.bossEndRoom = true;
-        CameraMovements.Instance.timeZoom = 2;
+        CameraMovements.Instance.timeZoom = 2f;
 
         switch (bossType)
         {
