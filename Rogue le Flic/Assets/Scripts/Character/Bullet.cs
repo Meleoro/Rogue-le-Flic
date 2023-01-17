@@ -52,6 +52,8 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public Vector2 directionBullet;
     private Rigidbody2D rb;
 
+    private bool isPercing;
+
 
 
     private void Start()
@@ -181,21 +183,33 @@ public class Bullet : MonoBehaviour
     }
 
 
+    IEnumerator isPercing2()
+    {
+        isPercing = true;
+        
+        yield return new WaitForSeconds(0.04f);
+
+        isPercing = false;
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ennemy"))
         {
-            if (collision.GetComponent<Ennemy>().canBeShot)
+            if (!isPercing)
             {
                 collision.GetComponent<Ennemy>().TakeDamages(bulletDamages, gameObject);
 
                 if (!percante || currentPerces >= nbrPercesMax)
                     Destroy(gameObject);
-
+            
                 else
                     currentPerces += 1;
 
                 bounceWalls.enabled = false;
+
+                StartCoroutine(isPercing2());
             }
         }
 
