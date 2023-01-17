@@ -56,19 +56,27 @@ public class LevelManager : MonoBehaviour
 
     public void ChangeScene()
     {
-        activeGun = Instantiate(ManagerChara.Instance.activeGun, ManagerChara.Instance.transform.position, Quaternion.identity, transform);
+        if (!ManagerChara.Instance.activeGun.GetComponent<Gun>().isDontDestoy)
+        {
+            activeGun = Instantiate(ManagerChara.Instance.activeGun, ManagerChara.Instance.transform.position, Quaternion.identity, transform);
+
+            ManagerChara.Instance.activeGun = activeGun;
+            ManagerChara.Instance.activeGun.GetComponent<Gun>().isHeld = true;
+            ManagerChara.Instance.activeGun.GetComponent<Gun>().isDontDestoy = true;
+        }
 
         if(ManagerChara.Instance.stockWeapon != null)
-            stockedGun = Instantiate(ManagerChara.Instance.stockWeapon, ManagerChara.Instance.transform.position, Quaternion.identity, transform);
-
-        ManagerChara.Instance.activeGun = activeGun;
-        ManagerChara.Instance.activeGun.GetComponent<Gun>().isHeld = true;
-
-        if (stockedGun != null)
         {
-            ManagerChara.Instance.stockWeapon = stockedGun;
-            ManagerChara.Instance.stockWeapon.GetComponent<Gun>().isStocked = true;
+            if (!stockedGun.GetComponent<Gun>().isDontDestoy)
+            {
+                stockedGun = Instantiate(ManagerChara.Instance.stockWeapon, ManagerChara.Instance.transform.position, Quaternion.identity, transform);
+
+                ManagerChara.Instance.stockWeapon = stockedGun;
+                ManagerChara.Instance.stockWeapon.GetComponent<Gun>().isStocked = true;
+                ManagerChara.Instance.stockWeapon.GetComponent<Gun>().isDontDestoy = true;
+            }
         }
+
 
         currentLevel += 1;
 
