@@ -277,7 +277,7 @@ public class Ennemy : MonoBehaviour
 
         anim.SetTrigger("death");
 
-        //ScoreManager.instance.EnemyKilled();
+        ScoreManager.instance.EnemyKilled();
 
         Destroy(gameObject);
     }
@@ -289,7 +289,7 @@ public class Ennemy : MonoBehaviour
         {
             if (!MapManager.Instance.activeRoom.GetComponent<DoorManager>().disableEndEffect && !MapManager.Instance.activeRoom.GetComponent<DoorManager>().bossRoom)
             {
-                //ScoreManager.instance.EnemyKilled();
+                ScoreManager.instance.EnemyKilled();
                 
                 isDying = true;
 
