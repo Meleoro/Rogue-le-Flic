@@ -305,9 +305,17 @@ public class Bullet : MonoBehaviour
         
         direction = Vector3.Reflect(direction.normalized, collision.contacts[0].normal);
 
+        transform.rotation = Quaternion.Euler(0, 0, Angle(direction) - 90);
+
         bounceWalls.enabled = false;
 
         currentRebonds += 1;
+    }
+    
+    
+    public static float Angle(Vector2 vector2)
+    {
+        return 360 - (Mathf.Atan2(vector2.x, vector2.y) * Mathf.Rad2Deg);
     }
 }
 
