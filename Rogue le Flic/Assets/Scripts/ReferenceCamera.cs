@@ -39,5 +39,7 @@ public class ReferenceCamera : MonoBehaviour
         _camera = GetComponent<Camera>();
 
         CameraMovements.Instance._camera = _camera;
+
+        ReferenceUI.Instance.canvas.worldCamera = _camera;
     }
 }
