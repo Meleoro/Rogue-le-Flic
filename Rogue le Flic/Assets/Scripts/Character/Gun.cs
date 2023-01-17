@@ -59,6 +59,8 @@ public class Gun : MonoBehaviour
 
     public GameObject explanation;
 
+    public bool isDontDestoy;
+
 
     private void Awake()
     {
