@@ -58,6 +58,12 @@ public class BossFrogTongue : MonoBehaviour
         if (avancée >= 1)
         {
             Destroy(gameObject);
+
+            if (boxStuck)
+            {
+                Destroy(box);
+                frog.Stun();
+            }
         }
 
         else if (boxStuck)

@@ -39,6 +39,7 @@ public class FrogBoss : MonoBehaviour
 
     [Header("Tir")]
     [HideInInspector] public bool recul;
+    [HideInInspector] public bool canShoot;
 
     [Header("References")]
     public AIPath AIPath;
@@ -149,7 +150,7 @@ public class FrogBoss : MonoBehaviour
                 float distance = Mathf.Sqrt(Mathf.Pow(AIPath.destination.x - transform.position.x, 2) + 
                                             Mathf.Pow(AIPath.destination.y - transform.position.y, 2));
 
-                if (distance < bossData.distanceJumpTrigger && cooldownJump <= 0)
+                if (distance < bossData.distanceJumpTrigger && cooldownJump <= -1000)
                 {
                     Jump(false);
                 }
@@ -172,9 +173,14 @@ public class FrogBoss : MonoBehaviour
                     }
 
                     // TIR
-                    else
+                    else if (canShoot)
                     {
                         StartCoroutine(Shoot());
+                    }
+                    
+                    else
+                    {
+                        Jump(true);
                     }
                 }
 
