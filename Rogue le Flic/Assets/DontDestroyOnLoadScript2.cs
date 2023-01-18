@@ -17,5 +17,7 @@ public class DontDestroyOnLoadScript2 : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 }
