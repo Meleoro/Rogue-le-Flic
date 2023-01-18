@@ -1194,8 +1194,8 @@ GameObject:
   - component: {fileID: 3958258268626863589}
   - component: {fileID: 3958258268626863588}
   - component: {fileID: 3958258268626863590}
-  - component: {fileID: 3958258268626863591}
   - component: {fileID: 3958258268626863592}
+  - component: {fileID: 2496528394108113514}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1497,47 +1497,6 @@ MonoBehaviour:
       - {fileID: 0}
       - {fileID: 0}
   _proceduralGridMover: {fileID: 5762377789867046939}
---- !u!114 &3958258268626863591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3958258268626863587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6191f9c43a22f1a45a736129cf04b528, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Module1: 0
-  Module2: 0
-  levelModule1: 0
-  levelModule2: 0
-  moduleName1: Vide
-  description1: Cliquez pour equipper un module
-  image1: {fileID: 0}
-  moduleName2: Vide
-  description2: Cliquez pour equipper un module
-  image2: {fileID: 0}
-  nbrPercagesMaxLvl1: 0
-  nbrPercagesMaxLvl2: 0
-  nbrPercagesMaxLvl3: 0
-  nbrPercagesMax: 0
-  nbrRebondsMaxLvl1: 0
-  nbrRebondsMaxLvl2: 0
-  nbrRebondsMaxLvl3: 0
-  nbrRebondsMax: 0
-  multiplicateurTailleLvl1: 0
-  multiplicateurTailleLvl2: 0
-  multiplicateurTailleLvl3: 0
-  multiplicateurTaille: 2
-  probaCritiqueLvl1: 0
-  probaCritiqueLvl2: 0
-  probaCritiqueLvl3: 0
-  probaCritique: 16
-  multiplicateurTailleCrit: 0
-  multiplicateurVitesseCrit: 0
-  multiplicateurDegatsCrit: 0
 --- !u!114 &3958258268626863592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1553,6 +1512,22 @@ MonoBehaviour:
   origin: {x: -100, y: 100, z: 0}
   cameraMini: {fileID: 5830905054022177153}
   room: {fileID: 5917814786928162047, guid: e1e2c9602dde8aa4f8340d8733a46548, type: 3}
+--- !u!114 &2496528394108113514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958258268626863587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33434f21fa461c14cb63492794216e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyDropPerEnnemy: 2
+  moneyBossSpare: 50
+  modulePrice: 10
+  healthPrice: 10
 --- !u!1 &4090459185084298423
 GameObject:
   m_ObjectHideFlags: 0

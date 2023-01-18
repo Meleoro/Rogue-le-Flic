@@ -243,9 +243,7 @@ public class Ennemy : MonoBehaviour
 
     public IEnumerator Death()
     {
-        int coinNumber = Random.Range(minCoins, maxCoins + 1);
-
-        for (int k = 0; k < coinNumber; k++)
+        for (int k = 0; k < MoneyManager.Instance.moneyDropPerEnnemy; k++)
         {
             Instantiate(coin,transform.position, Quaternion.identity);
         }

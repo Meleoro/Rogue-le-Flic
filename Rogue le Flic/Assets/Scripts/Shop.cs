@@ -157,7 +157,7 @@ public class Shop : MonoBehaviour
             {
                 GameObject newGun = Instantiate(currentItems[0]);
 
-                CoinManager.Instance.currentCoins -= 20;
+                CoinManager.Instance.currentCoins -= currentItems[itemID - 1].GetComponent<Gun>().gunData.itemPrice;
 
                 newGun.GetComponent<Gun>().canBePicked = true;
                 newGun.GetComponent<Gun>().PickWeapon();
@@ -166,22 +166,22 @@ public class Shop : MonoBehaviour
             }
         }
 
-        else if(itemID == 2 && CoinManager.Instance.currentCoins >= 10)
+        else if(itemID == 2 && CoinManager.Instance.currentCoins >= MoneyManager.Instance.modulePrice)
         {
             GameObject newModule = Instantiate(currentItems[itemID - 1]);
 
-            CoinManager.Instance.currentCoins -= 10;
+            CoinManager.Instance.currentCoins -= MoneyManager.Instance.modulePrice;
 
             newModule.GetComponent<Module>().OpenChoice();
             
             item2.enabled = false;
         }
         
-        else if (itemID == 3 && CoinManager.Instance.currentCoins >= 10)
+        else if (itemID == 3 && CoinManager.Instance.currentCoins >= MoneyManager.Instance.healthPrice)
         {
             HealthManager.Instance.AddHealth();
             
-            CoinManager.Instance.currentCoins -= 10;
+            CoinManager.Instance.currentCoins -= MoneyManager.Instance.healthPrice;
             
             item3.enabled = false;
         }
@@ -201,14 +201,14 @@ public class Shop : MonoBehaviour
         {
             itemName.text = currentItems[buttonNumber - 1].GetComponent<Module>().itemName;
             itemDescription.text = currentItems[buttonNumber - 1].GetComponent<Module>().itemDescription;
-            itemPrice.text = "10$";
+            itemPrice.text = MoneyManager.Instance.modulePrice + "$";
         }
 
         else
         {
             itemName.text = "Soin";
             itemDescription.text = "Rend un point de vie";
-            itemPrice.text = "10$";
+            itemPrice.text = MoneyManager.Instance.healthPrice + "$";
         }
     }
     
