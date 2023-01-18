@@ -70,7 +70,7 @@ public class MenuPauseManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level 1");
     }
 
 
