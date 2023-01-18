@@ -36,7 +36,9 @@ public class BossRoom : MonoBehaviour
                     boss3.GetComponent<Boss>().bossNumber = k + 1;
             }
         }
-        
+
+        boss.GetComponent<Boss>().bossRoom = gameObject;
+
         StartCoroutine(LaunchRoom());
     }
 

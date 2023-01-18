@@ -50,6 +50,16 @@ public class ModuleManager : MonoBehaviour
     public float multiplicateurVitesseCrit;
     public float multiplicateurDegatsCrit;
     
+    [Header("Booster")] 
+    public float multiplicateurChargeurLvl1;
+    public float multiplicateurChargeurLvl2;
+    public float multiplicateurChargeurLvl3;
+    [HideInInspector] public float multiplicateurChargeur;
+    public float multiplicateurFireRateLvl1;
+    public float multiplicateurFireRateLvl2;
+    public float multiplicateurFireRateLvl3;
+    [HideInInspector] public float multiplicateurFireRate;
+    
     private Gun gun;
 
     private void Awake()
@@ -72,6 +82,7 @@ public class ModuleManager : MonoBehaviour
             gun.ballesRebondissantes = false;
             gun.grossissementBalles = false;
             gun.critiques = false;
+            gun.isBoosted = false;
         }
         
         if (Module1 != 0)
@@ -99,6 +110,9 @@ public class ModuleManager : MonoBehaviour
         
         else if (module == 4)
             Effet4(nbrEmplacement);
+        
+        else if(module == 5)
+            Effet5(nbrEmplacement);
     }
     
     
@@ -252,6 +266,50 @@ public class ModuleManager : MonoBehaviour
             else
             {
                 probaCritique = probaCritiqueLvl3;
+            }
+        }
+    }
+
+
+    public void Effet5(int nbrEmplacement)
+    {
+        gun.isBoosted = true;
+
+        if (nbrEmplacement == 1)
+        {
+            if (levelModule1 == 1)
+            {
+                multiplicateurFireRate = multiplicateurFireRateLvl1;
+                multiplicateurChargeur = multiplicateurChargeurLvl1;
+            }
+            else if (levelModule1 == 2)
+            {
+                multiplicateurFireRate = multiplicateurFireRateLvl2;
+                multiplicateurChargeur = multiplicateurChargeurLvl2;
+            }
+            else
+            {
+                multiplicateurFireRate = multiplicateurFireRateLvl3;
+                multiplicateurChargeur = multiplicateurChargeurLvl3;
+            }
+        }
+
+        else
+        {
+            if (levelModule2 == 1)
+            {
+                multiplicateurFireRate = multiplicateurFireRateLvl1;
+                multiplicateurChargeur = multiplicateurChargeurLvl1;
+            }
+            else if (levelModule2 == 2)
+            {
+                multiplicateurFireRate = multiplicateurFireRateLvl2;
+                multiplicateurChargeur = multiplicateurChargeurLvl2;
+            }
+            else
+            {
+                multiplicateurFireRate = multiplicateurFireRateLvl3;
+                multiplicateurChargeur = multiplicateurChargeurLvl3;
             }
         }
     }
