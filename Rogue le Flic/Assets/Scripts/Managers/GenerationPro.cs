@@ -43,7 +43,13 @@ public class GenerationPro : MonoBehaviour
     private bool bossRoom;
     private bool roomSelected;
     private int indexBossRoom;
+
     private float maxDistance;
+    private Vector2 farestRoom;
+    private Vector2 directionFarestRoom;
+    private int directionChoisie;
+    
+    
 
     private void Awake()
     {
@@ -219,6 +225,9 @@ public class GenerationPro : MonoBehaviour
             }
         }
 
+        DistantRoom();
+
+        saveDirection = -1;
 
         // SALLE DE BOSS
         while (!bossRoom)
@@ -232,6 +241,13 @@ public class GenerationPro : MonoBehaviour
                 {
                     direction = Random.Range(0, 4);
                 }
+                
+                if (directionChoisie < 4 && saveDirection == -1)
+                {
+                    direction = directionChoisie;
+                }
+                
+                
 
                 saveDirection = direction;
 
@@ -333,18 +349,58 @@ public class GenerationPro : MonoBehaviour
         }
     }
     
-
     
     public void DistantRoom()
     {
-        for (int x = 0; x < map.list.Count; x++)
+        maxDistance = 0;
+        
+        for(int i = 0; i < roomsCreated.Count; i++)
         {
-            for (int y = 0; y < map.list.Count; y++)
+            float currentDistance = Vector2.Distance(new Vector2(roomsCreated[i].x, roomsCreated[i].y), spawnLocation);
+
+            if (currentDistance > maxDistance)
             {
-                if(map.list[x].list[y] != null)
-                    Instantiate(map.list[x].list[y], new Vector3(x * 2 - map.list.Count, y * 2 - map.list.Count, 0), Quaternion.identity);
+                farestRoom = new Vector2(roomsCreated[i].x, roomsCreated[i].y);
+                maxDistance = currentDistance;
             }
         }
+
+        directionFarestRoom = farestRoom - spawnLocation;
+
+        if (Mathf.Abs(directionFarestRoom.x) > Mathf.Abs(directionFarestRoom.y))
+        {
+            if (directionFarestRoom.x > 0)
+            {
+                directionChoisie = 0;
+            }
+
+            else
+            {
+                directionChoisie = 2;
+            }
+        }
+        
+        else if (Mathf.Abs(directionFarestRoom.x) < Mathf.Abs(directionFarestRoom.y))
+        {
+            if (directionFarestRoom.y < 0)
+            {
+                directionChoisie = 1;
+            }
+
+            else
+            {
+                directionChoisie = 3;
+            }
+        }
+
+        else
+        {
+            directionChoisie = 5;
+        }
+
+
+        saveX = (int) farestRoom.x;
+        saveY = (int) farestRoom.y;
     }
 }
 

@@ -245,7 +245,7 @@ public class Ennemy : MonoBehaviour
         
         anim.SetTrigger("death");
         
-        //ScoreManager.instance.EnemyKilled();
+        ScoreManager.instance.EnemyKilled();
         
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         _collider2D.enabled = false;
