@@ -289,7 +289,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isArrow)
+        if (isArrow && nbrRebondsMax <= currentRebonds)
         {
             bounceWall = true;
 
@@ -305,7 +305,16 @@ public class Bullet : MonoBehaviour
         
         direction = Vector3.Reflect(direction.normalized, collision.contacts[0].normal);
 
-        transform.rotation = Quaternion.Euler(0, 0, Angle(direction) - 90);
+
+        if (!isArrow)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, Angle(direction) - 90);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, Angle(direction) + 90);
+        }
+
 
         bounceWalls.enabled = false;
 
