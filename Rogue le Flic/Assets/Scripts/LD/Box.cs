@@ -66,6 +66,7 @@ public class Box : MonoBehaviour
             else if(col.gameObject.CompareTag("Ennemy") && !isInvincible)
             {
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsBox, gameObject);
+                col.gameObject.GetComponent<Ennemy>().Stun();
                 Explose();
             }
 

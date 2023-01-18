@@ -243,10 +243,47 @@ public class Turtle : MonoBehaviour
             
             rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
         }
+        
+        VerifyDeath();
 
         hitEffect.Clear();
         hitEffect.Play();
     }
+    
+    
+    public void VerifyDeath()
+    {
+        if (currentHealth <= 0 && !stopDeath)
+        {
+            stopDeath = true;
+            isKicked = false;
+
+            GetComponent<BoxCollider2D>().enabled = false;
+            
+            StopCoroutine();
+            canMove = false;
+            
+            if (!GenerationPro.Instance.testLDMode) 
+            {
+                MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount -= 1;
+            }
+
+            if (!GenerationPro.Instance.testLDMode)
+            {
+                if(MapManager.Instance.activeRoom.GetComponent<DoorManager>().ennemyCount <= 0)
+                    StartCoroutine(ennemy.FinalDeath());
+                
+                                
+                else
+                    StartCoroutine(ennemy.Death());
+            }
+            else
+            {
+                StartCoroutine(ennemy.Death());
+            }
+        }
+    }
+    
 
     IEnumerator SetInvincible(GameObject collider)
     {
