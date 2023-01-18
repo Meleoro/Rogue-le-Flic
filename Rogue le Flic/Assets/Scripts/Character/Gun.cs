@@ -91,6 +91,8 @@ public class Gun : MonoBehaviour
         chargeurSize = gunData.chargeurSize;
         currentFireRate = gunData.cooldownShot;
 
+        currentChargeurAmmo = chargeurSize;
+
         spriteWeapon = GetComponent<SpriteRenderer>().sprite;
     }
 
@@ -266,7 +268,7 @@ public class Gun : MonoBehaviour
             if (timerReload <= 0)
             {
                 isReloading = false;
-                currentChargeurAmmo = gunData.chargeurSize;
+                currentChargeurAmmo = chargeurSize;
 
                 ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = false;
                 
@@ -322,7 +324,7 @@ public class Gun : MonoBehaviour
             
             if(!isStocked)
             {
-                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
+                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, chargeurSize, GetComponent<SpriteRenderer>().sprite);
             }
         }
     }
@@ -480,7 +482,7 @@ public class Gun : MonoBehaviour
     
     IEnumerator ShotCooldown()
     {
-        yield return new WaitForSeconds(gunData.cooldownShot);
+        yield return new WaitForSeconds(currentFireRate);
 
         onCooldown = false;
     }
