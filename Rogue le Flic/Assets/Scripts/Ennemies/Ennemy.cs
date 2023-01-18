@@ -49,6 +49,7 @@ public class Ennemy : MonoBehaviour
     public float stunDuration;
     public GameObject VFXStun;
     private float stunTimer;
+    public bool infiniteStun;
 
 
     private void Start()
@@ -157,8 +158,16 @@ public class Ennemy : MonoBehaviour
 
     public void Stun()
     {
-        stunTimer = stunDuration;
-        VFXStun.SetActive(true);
+        if (infiniteStun)
+        {
+            stunTimer = 10000;
+            VFXStun.SetActive(true);
+        }
+        else
+        {
+            stunTimer = stunDuration;
+            VFXStun.SetActive(true);
+        }
     }
 
 
