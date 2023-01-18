@@ -423,15 +423,15 @@ public class Boss : MonoBehaviour
         
         if (lookLeft)
         {
-            ManagerChara.Instance.transform.position = bossRoom.transform.position + new Vector3(-4.5f, 1, 0);
-            transform.position = bossRoom.transform.position + new Vector3(5.5f, 1, 0);
-            CameraMovements.Instance.transform.position = bossRoom.transform.position + new Vector3(0.5f, 1, 0);
+            ManagerChara.Instance.transform.position = bossRoom.transform.position + new Vector3(-4.5f, 6, 0);
+            transform.position = bossRoom.transform.position + new Vector3(5.5f, 6, 0);
+            CameraMovements.Instance.transform.position = bossRoom.transform.position + new Vector3(0.5f, 6, 0);
         }
         else
         {
-            ManagerChara.Instance.transform.position = bossRoom.transform.position + new Vector3(5.5f, 1, 0);
-            transform.position = bossRoom.transform.position + new Vector3(-4.5f, 1, 0);
-            CameraMovements.Instance.transform.position = bossRoom.transform.position + new Vector3(0.5f, 1, 0);
+            ManagerChara.Instance.transform.position = bossRoom.transform.position + new Vector3(5.5f, 6, 0);
+            transform.position = bossRoom.transform.position + new Vector3(-4.5f, 6, 0);
+            CameraMovements.Instance.transform.position = bossRoom.transform.position + new Vector3(0.5f, 6, 0);
         }
 
         yield return new WaitForSeconds(0.1f);
@@ -498,8 +498,8 @@ public class Boss : MonoBehaviour
 
         Vector2 offsetCamera = ManagerChara.Instance.transform.position - CameraMovements.Instance.transform.position;
 
-        ManagerChara.Instance.transform.position = ManagerChara.Instance.savePosition;
-        CameraMovements.Instance.transform.position = ManagerChara.Instance.savePosition + offsetCamera;
+        //ManagerChara.Instance.transform.position = ManagerChara.Instance.savePosition;
+        //CameraMovements.Instance.transform.position = ManagerChara.Instance.savePosition + offsetCamera;
         
         CameraMovements.Instance.posCamera = ManagerChara.Instance.transform.position;
         CameraMovements.Instance.timeZoom = 0.2f;
