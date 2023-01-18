@@ -19,8 +19,6 @@ public class Box : MonoBehaviour
     private BoxCollider2D boxCollider2D;
     private Animator anim;
 
-    public int damageFromBox;
-
     [SerializeField] private List<Sprite> piecesSprites;
 
     private float originalY;
