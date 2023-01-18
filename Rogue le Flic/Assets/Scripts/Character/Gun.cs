@@ -40,6 +40,9 @@ public class Gun : MonoBehaviour
     [HideInInspector] public bool ballesRebondissantes;
     [HideInInspector] public bool grossissementBalles;
     [HideInInspector] public bool critiques;
+    [HideInInspector] public bool isBoosted;
+    private int chargeurSize;
+    private float currentFireRate;
 
     [Header("Others")]
     private float timerShot;
@@ -60,6 +63,8 @@ public class Gun : MonoBehaviour
     public GameObject explanation;
 
     public bool isDontDestoy;
+
+    private Sprite spriteWeapon;
 
 
     private void Awake()
@@ -83,7 +88,10 @@ public class Gun : MonoBehaviour
 
         VFXTake.SetActive(true);
 
-        currentChargeurAmmo = gunData.chargeurSize;
+        chargeurSize = gunData.chargeurSize;
+        currentFireRate = gunData.cooldownShot;
+
+        spriteWeapon = GetComponent<SpriteRenderer>().sprite;
     }
 
 
@@ -143,6 +151,21 @@ public class Gun : MonoBehaviour
                     
                     MovementsChara.Instance.lookLeft = false;
                 }
+                
+                
+                //MODULE BOOST
+                if (isBoosted)
+                {
+                    chargeurSize = (int) (gunData.chargeurSize * ModuleManager.Instance.multiplicateurChargeur);
+                    currentFireRate = gunData.cooldownShot / ModuleManager.Instance.multiplicateurFireRate;
+                }
+                else
+                {
+                    chargeurSize = gunData.chargeurSize;
+                    currentFireRate = gunData.cooldownShot;
+                }
+                
+                HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, chargeurSize, spriteWeapon);
             }
 
             else
@@ -249,7 +272,7 @@ public class Gun : MonoBehaviour
                 
                 if(!ManagerChara.Instance.munitionsActives && !isStocked)
                 {
-                    HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
+                    HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, chargeurSize, spriteWeapon);
                 }
             }
         }
@@ -394,7 +417,7 @@ public class Gun : MonoBehaviour
             if(CameraMovements.Instance.canShake)
                 ReferenceCamera.Instance.transform.DOShakePosition(gunData.shakeDuration, gunData.shakeAmplitude);
             
-            HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, gunData.chargeurSize, GetComponent<SpriteRenderer>().sprite);
+            HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, chargeurSize, GetComponent<SpriteRenderer>().sprite);
         }
     }
 
