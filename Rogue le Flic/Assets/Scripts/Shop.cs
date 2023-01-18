@@ -134,11 +134,14 @@ public class Shop : MonoBehaviour
 
             else
             {
-                int choice = Random.Range(0, items.Count);
+                /*int choice = Random.Range(0, items.Count);
                 
                 item3.sprite = items[choice].GetComponent<SpriteRenderer>().sprite;
                 item3.SetNativeSize();
-                currentItems.Add(items[choice]);
+                currentItems.Add(items[choice]);*/
+
+                item3.sprite = HealthManager.Instance.vie;
+                item3.SetNativeSize();
             }
         }
     }
@@ -163,19 +166,24 @@ public class Shop : MonoBehaviour
             }
         }
 
-        else if(itemID >= 2 && CoinManager.Instance.currentCoins >= 10)
+        else if(itemID == 2 && CoinManager.Instance.currentCoins >= 10)
         {
             GameObject newModule = Instantiate(currentItems[itemID - 1]);
 
             CoinManager.Instance.currentCoins -= 10;
 
             newModule.GetComponent<Module>().OpenChoice();
-
-            if (itemID == 2)
-                item2.enabled = false;
             
-            else
-                item3.enabled = false;
+            item2.enabled = false;
+        }
+        
+        else if (itemID == 3 && CoinManager.Instance.currentCoins >= 10)
+        {
+            HealthManager.Instance.AddHealth();
+            
+            CoinManager.Instance.currentCoins -= 10;
+            
+            item3.enabled = false;
         }
     }
 
@@ -189,10 +197,17 @@ public class Shop : MonoBehaviour
             itemPrice.text = currentItems[buttonNumber - 1].GetComponent<Gun>().gunData.itemPrice + "$";
         }
 
-        else
+        else if (buttonNumber == 2)
         {
             itemName.text = currentItems[buttonNumber - 1].GetComponent<Module>().itemName;
             itemDescription.text = currentItems[buttonNumber - 1].GetComponent<Module>().itemDescription;
+            itemPrice.text = "10$";
+        }
+
+        else
+        {
+            itemName.text = "Soin";
+            itemDescription.text = "Rend un point de vie";
             itemPrice.text = "10$";
         }
     }

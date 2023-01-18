@@ -16,6 +16,7 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private float invincibleTime;
     private float timerInvincible;
     public bool immortel;
+    public Sprite vie;
 
     [Header("Feedback Hit")] 
     [SerializeField] private Volume volume;
