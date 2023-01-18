@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering.Universal;
+using Random = UnityEngine.Random;
 
 public class Boss : MonoBehaviour
 {
@@ -35,12 +36,12 @@ public class Boss : MonoBehaviour
 
     [HideInInspector] public bool canMove;
 
-
     [Header("References")]
     public Animator anim;
     public GameObject sprite;
     public GameObject spawnIndicator;
     public BoxCollider2D _collider2D;
+    [HideInInspector] public GameObject bossRoom;
     
 
     private void Start()
@@ -223,6 +224,29 @@ public class Boss : MonoBehaviour
     }
 
 
+    void ChooseLoot(bool kicked)
+    {
+        if (kicked)
+        {
+            int index = Random.Range(0, MoneyManager.Instance.itemsKick.Count);
+
+            Instantiate(MoneyManager.Instance.itemsKick[index], transform.position, Quaternion.identity);
+        }
+
+        else
+        {
+            for (int k = 0; k < MoneyManager.Instance.moneyBossSpare; k++)
+            {
+                Instantiate(MoneyManager.Instance.coin, transform.position, Quaternion.identity);
+            }
+        }
+
+
+        for(int k = 0; k < MoneyManager.Instance.nbrCoeurs; k++)
+            Instantiate(MoneyManager.Instance.health, transform.position, Quaternion.identity);
+    }
+
+
     public void VerifyBossType()
     {
         switch (bossType)
@@ -395,6 +419,27 @@ public class Boss : MonoBehaviour
 
     public IEnumerator EndCinematicDeath()
     {
+        DOTween.KillAll();
+        
+        if (lookLeft)
+        {
+            ManagerChara.Instance.transform.position = bossRoom.transform.position + new Vector3(-4.5f, 1, 0);
+            transform.position = bossRoom.transform.position + new Vector3(5.5f, 1, 0);
+            CameraMovements.Instance.transform.position = bossRoom.transform.position + new Vector3(0.5f, 1, 0);
+        }
+        else
+        {
+            ManagerChara.Instance.transform.position = bossRoom.transform.position + new Vector3(5.5f, 1, 0);
+            transform.position = bossRoom.transform.position + new Vector3(-4.5f, 1, 0);
+            CameraMovements.Instance.transform.position = bossRoom.transform.position + new Vector3(0.5f, 1, 0);
+        }
+
+        yield return new WaitForSeconds(0.1f);
+        
+
+        ChooseLoot(ReferenceChoice.Instance.kicked);
+        
+        
         ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = false;
         ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = false;
         
