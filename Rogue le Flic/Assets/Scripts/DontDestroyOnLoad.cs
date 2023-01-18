@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DontDestroyOnLoad : MonoBehaviour
+public class DontDestroyOnLoadS : MonoBehaviour
 {
-    public static DontDestroyOnLoad Instance;
+    public static DontDestroyOnLoadS Instance;
     
     private void Awake()
     {
