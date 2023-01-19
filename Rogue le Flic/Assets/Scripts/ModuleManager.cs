@@ -11,6 +11,8 @@ public class ModuleManager : MonoBehaviour
     public int Module2;
     public int levelModule1;
     public int levelModule2;
+    public GameObject objectModule1;
+    public GameObject objectModule2;
 
     [Header("Infos1")] 
     public string moduleName1;
