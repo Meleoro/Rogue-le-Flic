@@ -208,7 +208,7 @@ public class DoorManager : MonoBehaviour
             }
             
             
-            // DROP ITEM
+            /*// DROP ITEM
             foreach (spawnChance k in spawnLoots)
             {
                 int index = Random.Range(0, 100);
@@ -230,7 +230,14 @@ public class DoorManager : MonoBehaviour
                 }
             }
 
-            timerFinish = 1;
+            timerFinish = 1;*/
+            
+            for (int i = 0; i < MoneyManager.Instance.moneyDropPerEnnemy; i++)
+            {
+                Instantiate(CoinManager.Instance.coin, posSpawn, quaternion.identity);
+            }
+            
+            LootManager.Instance.EndRoom(posSpawn);
 
             PortesActives();
         }

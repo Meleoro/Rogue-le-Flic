@@ -183,6 +183,7 @@ public class Beaver : MonoBehaviour
         else if (bullet.CompareTag("Bullet") && isInTuto)
         {
             currentHealth -= damages * 3;
+            rb.velocity = Vector2.zero;
         }
 
         else if(!isInTuto)
@@ -193,11 +194,7 @@ public class Beaver : MonoBehaviour
             
             rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
         }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
-        
+
         VerifyDeath();
 
         hitEffect.Clear();

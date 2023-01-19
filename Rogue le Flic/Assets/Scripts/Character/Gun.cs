@@ -63,6 +63,7 @@ public class Gun : MonoBehaviour
     public GameObject explanation;
 
     public bool isDontDestoy;
+    public int weaponType;
 
     private Sprite spriteWeapon;
 
