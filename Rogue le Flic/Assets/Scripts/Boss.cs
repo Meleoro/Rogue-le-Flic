@@ -208,6 +208,41 @@ public class Boss : MonoBehaviour
         currentSprite.DOColor(Color.white, 0.12f);
     }
 
+    /*public void isKicked()
+    {
+        if (!death)
+        {
+            switch (bossType)
+            {
+                case ennemies.Beaver:
+                    if (!beaverScript.isKicked)
+                    {
+                        beaverScript.isKicked = true;
+                        timerKick = 0.3f;
+                    }
+                    break;
+
+                case ennemies.Frog:
+                    if (!frogScript.isKicked)
+                    {
+                        frogScript.isKicked = true;
+                        timerKick = 0.3f;
+                    }
+                    break;
+
+                case ennemies.Turtle:
+                    if (!turtleScript.isKicked)
+                    {
+                        turtleScript.isKicked = true;
+                        timerKick = 0.3f;
+                    }
+                    break;
+            }
+        }
+    }*/
+
+
+
     public void Death()
     {
         StopChoroutines();
