@@ -164,7 +164,7 @@ public class Beaver : MonoBehaviour
             col.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsKickedEnnemy, gameObject);
         }
         
-        else if (isKicked && !col.CompareTag("Kick"))
+        else if (isKicked && !col.CompareTag("Kick") && !col.CompareTag("Player"))
         {
             TakeDamages(DegatsManager.Instance.degatsEnnemyIntoWall, gameObject);
             ennemy.Stun();
@@ -174,8 +174,13 @@ public class Beaver : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject bullet)
     {
+        if (bullet.CompareTag("Kick"))
+        {
+            currentHealth -= damages;
+        }
+
         // RECUL
-        if (bullet.CompareTag("Bullet") && !isInTuto)
+        else if (bullet.CompareTag("Bullet") && !isInTuto)
         {
             currentHealth -= damages;
             rb.AddForce(bullet.GetComponent<Bullet>().directionBullet * bullet.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);

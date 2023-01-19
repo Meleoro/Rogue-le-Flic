@@ -56,6 +56,8 @@ public class KickZone : MonoBehaviour
                     col.gameObject.GetComponent<Ennemy>().isKicked();
                 }
 
+                col.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsNormalKick, gameObject);
+
                 Vector2 direction = col.transform.position - transform.position;
 
                 col.GetComponent<Rigidbody2D>().AddForce(direction.normalized * KickChara.Instance.kickStrenght, ForceMode2D.Impulse);
