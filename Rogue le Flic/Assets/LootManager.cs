@@ -156,17 +156,17 @@ public class LootManager : MonoBehaviour
         
         if (index < probaWeaponLvl1)
         {
-            return weaponsLevel1[Random.Range(0, weaponsLevel1.Count)];
+            return weaponsLevel1[weaponSelected - 1];
         }
         
         else if (index < probaWeaponLvl1 + probaWeaponLvl2)
         {
-            return weaponsLevel2[Random.Range(0, weaponsLevel2.Count)];
+            return weaponsLevel2[weaponSelected - 1];
         }
         
         else
         {
-            return weaponsLevel3[Random.Range(0, weaponsLevel3.Count)];
+            return weaponsLevel3[weaponSelected - 1];
         }
     }
 
