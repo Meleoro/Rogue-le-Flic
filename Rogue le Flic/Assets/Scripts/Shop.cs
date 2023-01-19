@@ -91,6 +91,7 @@ public class Shop : MonoBehaviour
         }
 
         currentMoney.text = CoinManager.Instance.currentCoins + "";
+        CoinManager.Instance.AddCoin(0);
     }
 
 
