@@ -104,8 +104,6 @@ public class Shop : MonoBehaviour
     
     void CloseShop()
     {
-        MenuPauseManager.Instance.otherMenuActive = false;
-        
         shopkeeperUI.DOLocalMove(originalPosShopkeeper, closingDuration);
         detailsUI.DOLocalMove(originalPosDetails, closingDuration);
         fond.DOFade(0f, 0.5f);
@@ -118,9 +116,18 @@ public class Shop : MonoBehaviour
         CameraMovements.Instance.timerTransition = 1;
         CameraMovements.Instance.isInTransition = true;
         CameraMovements.Instance.departTransition = CameraMovements.Instance.transform.position;
+
+        StartCoroutine(Wait());
     }
 
-    
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.1f);
+        
+        MenuPauseManager.Instance.otherMenuActive = false;
+    }
+
+
     void ChoiceItems()
     {
         for (int k = 0; k < 3; k++)
