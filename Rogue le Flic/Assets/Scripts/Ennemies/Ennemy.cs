@@ -340,18 +340,22 @@ public class Ennemy : MonoBehaviour
         isSpawning = true;
 
         spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0);
-        spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 2);
+        spawnIndicator.transform.DOScale(new Vector3(2f, 1.5f, 2f), 2);
+
+        spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.1f, 0);
+        spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.8f, 2);
         
         sprite.transform.DOMoveY(transform.position.y + 15, 0);
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.9f);
         
-        spawnIndicator.SetActive(false);
         sprite.SetActive(true);
         
         sprite.transform.DOMoveY(transform.position.y, 0.2f).SetEase(Ease.InCirc);;
         
         yield return new WaitForSeconds(0.2f);
+        
+        spawnIndicator.SetActive(false);
 
         GetComponent<BoxCollider2D>().enabled = true;
         _collider2D.enabled = true;

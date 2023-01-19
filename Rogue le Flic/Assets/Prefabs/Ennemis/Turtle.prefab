@@ -14818,6 +14818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8f4959e23bf5349b91a065d722e876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontMove: 0
   ennemyType: 2
   isCharging: 0
   isDying: 0
@@ -14832,6 +14833,7 @@ MonoBehaviour:
   VFXSpawn: {fileID: 4413537175323954193}
   stunDuration: 2
   VFXStun: {fileID: 6776527313848232106}
+  infiniteStun: 0
 --- !u!114 &4376012204993926796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14916,8 +14918,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4739753317862848332}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: -0.63, z: 0}
+  m_LocalScale: {x: 2, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4376012204993926815}
@@ -14965,7 +14967,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.6313726}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6313726}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
