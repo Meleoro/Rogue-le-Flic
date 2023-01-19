@@ -35,6 +35,6 @@ public class MenuMortManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level 1");
         
-        Destroy(global::DontDestroyOnLoad.Instance.gameObject);
+        Destroy(DontDestroyOnLoadScript2.Instance.gameObject);
     }
 }
