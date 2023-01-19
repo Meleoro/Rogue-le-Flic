@@ -60,6 +60,11 @@ public class Shop : MonoBehaviour
     
     private void Update()
     {
+        if (isOpen && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseShop();
+        }
+        
         if (ManagerChara.Instance.controls.Character.Enter.WasPressedThisFrame() && canUseShop)
         {
             if(!isOpen)
@@ -82,6 +87,8 @@ public class Shop : MonoBehaviour
 
     void OpenShop()
     {
+        MenuPauseManager.Instance.otherMenuActive = true;
+        
         shopkeeperUI.DOLocalMove(posShopkeeper, openingDuration);
         detailsUI.DOLocalMove(posDetails, openingDuration);
         fond.DOFade(0.8f, 0.5f);
@@ -97,6 +104,8 @@ public class Shop : MonoBehaviour
     
     void CloseShop()
     {
+        MenuPauseManager.Instance.otherMenuActive = false;
+        
         shopkeeperUI.DOLocalMove(originalPosShopkeeper, closingDuration);
         detailsUI.DOLocalMove(originalPosDetails, closingDuration);
         fond.DOFade(0f, 0.5f);
@@ -105,6 +114,10 @@ public class Shop : MonoBehaviour
         CameraMovements.Instance.canMove = true;
 
         isOpen = false;
+        
+        CameraMovements.Instance.timerTransition = 1;
+        CameraMovements.Instance.isInTransition = true;
+        CameraMovements.Instance.departTransition = CameraMovements.Instance.transform.position;
     }
 
     
