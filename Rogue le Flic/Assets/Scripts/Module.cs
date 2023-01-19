@@ -28,7 +28,7 @@ public class Module : MonoBehaviour
     public string itemDescription;
 
     private bool UIActive;
-    
+
 
     private void Start()
     {
@@ -41,6 +41,10 @@ public class Module : MonoBehaviour
     {
         if (MovementsChara.Instance.controls.Character.Enter.WasPerformedThisFrame() && canBeGrab)
             OpenChoice();
+        
+        else if((MovementsChara.Instance.controls.Character.Enter.WasPerformedThisFrame() 
+                || Input.GetKeyDown(KeyCode.Escape)) && UIActive)
+            CloseChoice();
 
         else if(UIActive)
             UIChoix.SetActive(true);
@@ -48,7 +52,10 @@ public class Module : MonoBehaviour
     
     public void OpenChoice()
     {
+        canBeGrab = false;
+        
         UIActive = true;
+        MenuPauseManager.Instance.otherMenuActive = true;
         
         UIExplications.SetActive(false);
         UIChoix.SetActive(true);
@@ -65,9 +72,33 @@ public class Module : MonoBehaviour
 
         CameraMovements.Instance.canMove = false;
     }
+
+    public void CloseChoice()
+    {
+        UIExplications.SetActive(true);
+        UIChoix.SetActive(false);
+
+        UIActive = false;
+        
+        ManagerChara.Instance.noControl = false;
+        CameraMovements.Instance.canMove = true;
+        
+        MenuPauseManager.Instance.otherMenuActive = true;
+
+        CameraMovements.Instance.departTransition = CameraMovements.Instance.transform.position;
+        CameraMovements.Instance.timerTransition = 1;
+        CameraMovements.Instance.isInTransition = true;
+
+        canBeGrab = true;
+    }
     
     public void ChoiceSlot(int slot)
     {
+        CameraMovements.Instance.timerTransition = 1;
+        CameraMovements.Instance.isInTransition = true;
+        CameraMovements.Instance.departTransition = CameraMovements.Instance.transform.position;
+        
+        MenuPauseManager.Instance.otherMenuActive = true;
         CameraMovements.Instance.canMove = true;
 
         if (slot == 1)

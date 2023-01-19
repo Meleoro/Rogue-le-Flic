@@ -1,17 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEditor;
 
 
 public class MenuPauseManager : MonoBehaviour
 {
+    public static MenuPauseManager Instance;
+    
     public GameObject menuPause;
 
     private bool pausedGame;
+    [HideInInspector] public bool otherMenuActive;
 
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        
+        else
+            Destroy(gameObject);
+    }
 
 
     private void Start()
@@ -26,16 +40,19 @@ public class MenuPauseManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        if (!otherMenuActive)
         {
-            if (pausedGame)
+            if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
             {
-                ResumeGame();
-            }
+                if (pausedGame)
+                {
+                    ResumeGame();
+                }
 
-            else
-            {
-                PauseGame();
+                else
+                {
+                    PauseGame();
+                }
             }
         }
     }

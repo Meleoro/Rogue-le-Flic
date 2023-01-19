@@ -179,7 +179,7 @@ public class CameraMovements : MonoBehaviour
 
     private void Transition(Vector2 objectif)
     {
-        timerTransition -= Time.deltaTime * 2;
+        timerTransition -= Time.deltaTime * 10;
 
         transform.position = new Vector3(Mathf.Lerp(objectif.x, departTransition.x, timerTransition),
             Mathf.Lerp(objectif.y, departTransition.y, timerTransition), 0);
