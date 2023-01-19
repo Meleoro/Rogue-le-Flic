@@ -492,6 +492,21 @@ public class Boss : MonoBehaviour
             
             StartCoroutine(JumpChoroutine());
 
+            switch (bossType)
+            {
+                case boss.Beaver:
+                    LevelManager.Instance.savedBoss.Add(LevelManager.Instance.beaverHurt);
+                    break;
+
+                case boss.Frog:
+                    LevelManager.Instance.savedBoss.Add(LevelManager.Instance.frogBoss);
+                    break;
+
+                case boss.Turtle:
+                    LevelManager.Instance.savedBoss.Add(LevelManager.Instance.turtleBoss);
+                    break;
+            }
+
             yield return new WaitForSeconds(1f);
         }
 
