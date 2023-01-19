@@ -342,8 +342,8 @@ public class Ennemy : MonoBehaviour
         spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0);
         spawnIndicator.transform.DOScale(new Vector3(2f, 1.5f, 2f), 2);
 
-        spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.2f, 0);
-        spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.7f, 2);
+        spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.1f, 0);
+        spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.8f, 2);
         
         sprite.transform.DOMoveY(transform.position.y + 15, 0);
 
