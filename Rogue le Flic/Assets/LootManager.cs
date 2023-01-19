@@ -41,6 +41,8 @@ public class LootManager : MonoBehaviour
     [Header("Other")] 
     private bool weaponChosen;
     private bool moduleChosen;
+    private int currentWeapon1;
+    private int currentWeapon2;
     private int currentModule1;
     private int currentModule2;
     
@@ -129,6 +131,29 @@ public class LootManager : MonoBehaviour
     {
         int index = Random.Range(0, 100);
 
+        int weaponSelected = 0;
+        weaponChosen = false;
+        
+        if (ManagerChara.Instance.activeGun != null)
+        {
+            currentWeapon1 = ManagerChara.Instance.activeGun.GetComponent<Gun>().weaponType;
+        }
+
+        if (ManagerChara.Instance.stockWeapon != null)
+        {
+            currentWeapon2 = ManagerChara.Instance.stockWeapon.GetComponent<Gun>().weaponType;
+        }
+
+        while (!weaponChosen)
+        {
+            weaponSelected = Random.Range(1, 4);
+
+            if (weaponSelected != currentWeapon1 && weaponSelected != currentWeapon2)
+            {
+                weaponChosen = true;
+            }
+        }
+        
         if (index < probaWeaponLvl1)
         {
             return weaponsLevel1[Random.Range(0, weaponsLevel1.Count)];
