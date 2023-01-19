@@ -59,7 +59,7 @@ public class Shop : MonoBehaviour
     {
         originalPosShopkeeper = shopkeeperUI.localPosition;
         originalPosDetails = detailsUI.localPosition;
-        originalPosDetails = moneyUI.localPosition;
+        originalPosMoney = moneyUI.localPosition;
         
         ChoiceItems();
     }
