@@ -11,7 +11,7 @@ public class KickZone : MonoBehaviour
     {
         if (col.CompareTag("Ennemy"))
         {
-            if (!col.gameObject.GetComponent<Ennemy>().isDying)
+            if (!col.gameObject.GetComponent<Ennemy>().isDying && !col.gameObject.GetComponent<Ennemy>().isKickedBool)
             {
                 KickChara.Instance.kickedEnnemy = col.gameObject;
 
