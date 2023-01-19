@@ -60,6 +60,24 @@ public class Module : MonoBehaviour
         UIExplications.SetActive(false);
         UIChoix.SetActive(true);
 
+        if (ModuleManager.Instance.Module1 != 0)
+        {
+            image1.enabled = true;
+        }
+        else
+        {
+            image1.enabled = false;
+        }
+        
+        if (ModuleManager.Instance.Module2 != 0)
+        {
+            image2.enabled = true;
+        }
+        else
+        {
+            image2.enabled = false;
+        }
+
         moduleName1.text = ModuleManager.Instance.moduleName1;
         description1.text = ModuleManager.Instance.description1;
         image1.sprite = ModuleManager.Instance.image1;
