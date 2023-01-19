@@ -7,6 +7,8 @@ public class DegatsManager : MonoBehaviour
     public static DegatsManager Instance;
 
     public int degatsBox;
+
+    public int degatsNormalKick;
     public int degatsEnnemyIntoWall;
     public int degatsKickedEnnemy;
 

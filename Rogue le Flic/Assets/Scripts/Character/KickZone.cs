@@ -11,7 +11,7 @@ public class KickZone : MonoBehaviour
     {
         if (col.CompareTag("Ennemy"))
         {
-            if (!col.gameObject.GetComponent<Ennemy>().isDying)
+            if (!col.gameObject.GetComponent<Ennemy>().isDying && !col.gameObject.GetComponent<Ennemy>().isKickedBool)
             {
                 KickChara.Instance.kickedEnnemy = col.gameObject;
 
@@ -72,15 +72,15 @@ public class KickZone : MonoBehaviour
                 {
                     col.gameObject.GetComponent<TurtleBoss>().Kicked(-ManagerChara.Instance.transform.position + col.transform.position);
                 }
-
-                else
-                {
-                    col.gameObject.GetComponent<Ennemy>().isKicked();
-                }
-
-                KickChara.Instance.SlowMo(1.5f);
-                KickChara.Instance.CameraShake();
             }
+
+            KickChara.Instance.SlowMo(0.9f);
+            KickChara.Instance.CameraShake();
+
+
+            Vector2 direction = col.transform.position - transform.position;
+
+            col.GetComponent<Rigidbody2D>().AddForce(direction.normalized * KickChara.Instance.kickStrenght / 2, ForceMode2D.Impulse);
         }
         
         else if (col.CompareTag("Box"))

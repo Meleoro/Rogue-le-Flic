@@ -50,6 +50,7 @@ public class Ennemy : MonoBehaviour
     public GameObject VFXStun;
     private float stunTimer;
     public bool infiniteStun;
+    [HideInInspector] public bool isKickedBool;
 
 
     private void Start()
@@ -175,6 +176,11 @@ public class Ennemy : MonoBehaviour
     {
         if (!isDying)
         {
+            if (bullet.CompareTag("Ennemy"))
+            {
+                Stun();
+            }
+
             SpriteRenderer[] sprites = sprite.GetComponentsInChildren<SpriteRenderer>();
 
             foreach (SpriteRenderer k in sprites)
@@ -212,6 +218,8 @@ public class Ennemy : MonoBehaviour
     {
         if (!isDying)
         {
+            isKickedBool = true;
+
             switch (ennemyType)
             {
                 case ennemies.Beaver:
@@ -238,8 +246,18 @@ public class Ennemy : MonoBehaviour
                     }
                     break;
             }
+
+            StartCoroutine(WaitBoolKicked());
         }
     }
+
+    IEnumerator WaitBoolKicked()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        isKickedBool = false;
+    }
+
 
     public IEnumerator Death()
     {
@@ -374,6 +392,7 @@ public class Ennemy : MonoBehaviour
     public void StopCoroutines()
     {
         isCharging = false;
+        isKickedBool = false;
 
         if (!isDying)
         {
