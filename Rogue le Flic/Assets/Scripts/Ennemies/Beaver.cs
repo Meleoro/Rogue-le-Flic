@@ -188,6 +188,8 @@ public class Beaver : MonoBehaviour
 
         else if(!isInTuto)
         {
+            currentHealth -= damages;
+            
             Vector2 directionForce = new Vector2(transform.position.x - bullet.transform.position.x, transform.position.y - bullet.transform.position.y);
             
             StopCoroutine();
