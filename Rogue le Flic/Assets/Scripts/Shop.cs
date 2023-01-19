@@ -11,15 +11,18 @@ public class Shop : MonoBehaviour
 {
     [SerializeField] private RectTransform shopkeeperUI;
     [SerializeField] private RectTransform detailsUI;
+    [SerializeField] private RectTransform moneyUI;
 
     [Header("Ouverture / Fermeture Shop")] 
     [SerializeField] private Vector2 posShopkeeper;
     [SerializeField] private Vector2 posDetails;
+    [SerializeField] private Vector2 posMoney;
     [SerializeField] private float openingDuration;
     [SerializeField] private AnimationCurve rotationItems;
     private float timerEnter;
     private Vector2 originalPosShopkeeper;
     private Vector2 originalPosDetails;
+    private Vector2 originalPosMoney;
     [SerializeField] private float closingDuration;
 
     [Header("Marchandise")] 
@@ -31,6 +34,9 @@ public class Shop : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemDescription;
     [SerializeField] private TextMeshProUGUI itemPrice;
+    
+    [Header("Current Money")]
+    [SerializeField] private TextMeshProUGUI currentMoney;
 
     [Header("Références")]
     [SerializeField] private Image item1;
@@ -53,6 +59,7 @@ public class Shop : MonoBehaviour
     {
         originalPosShopkeeper = shopkeeperUI.localPosition;
         originalPosDetails = detailsUI.localPosition;
+        originalPosDetails = moneyUI.localPosition;
         
         ChoiceItems();
     }
@@ -82,6 +89,8 @@ public class Shop : MonoBehaviour
             ancrage2.rotation = Quaternion.Euler(0, 0, rotationItems.Evaluate(4f - timerEnter) * 100);
             ancrage3.rotation = Quaternion.Euler(0, 0, rotationItems.Evaluate(4f - timerEnter) * 100);
         }
+
+        currentMoney.text = CoinManager.Instance.currentCoins + "";
     }
 
 
@@ -91,6 +100,7 @@ public class Shop : MonoBehaviour
         
         shopkeeperUI.DOLocalMove(posShopkeeper, openingDuration);
         detailsUI.DOLocalMove(posDetails, openingDuration);
+        moneyUI.DOLocalMove(posMoney, openingDuration);
         fond.DOFade(0.8f, 0.5f);
         
         ManagerChara.Instance.noControl = true;
@@ -106,6 +116,7 @@ public class Shop : MonoBehaviour
     {
         shopkeeperUI.DOLocalMove(originalPosShopkeeper, closingDuration);
         detailsUI.DOLocalMove(originalPosDetails, closingDuration);
+        moneyUI.DOLocalMove(originalPosMoney, closingDuration);
         fond.DOFade(0f, 0.5f);
         
         ManagerChara.Instance.noControl = false;
