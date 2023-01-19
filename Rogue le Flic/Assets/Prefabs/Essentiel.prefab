@@ -1196,6 +1196,7 @@ GameObject:
   - component: {fileID: 3958258268626863590}
   - component: {fileID: 3958258268626863592}
   - component: {fileID: 2496528394108113514}
+  - component: {fileID: 8627102150782483272}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1535,6 +1536,60 @@ MonoBehaviour:
   nbrCoeurs: 0
   coin: {fileID: 7454127418636556160, guid: 5a049748f43b0b54ab007c5d5874a306, type: 3}
   health: {fileID: 6276320648922257725, guid: ac550bf16be7c944eba1d90831c323de, type: 3}
+--- !u!114 &8627102150782483272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958258268626863587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1844dae4ee7e91642bcbd770306132a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponsLevel1:
+  - {fileID: 4404858517026568697, guid: 0079c9710dd48c240bffecf26d3f7535, type: 3}
+  - {fileID: 4404858517026568697, guid: 0a12cc2e4dba0c74b8aacbaf03ce09c1, type: 3}
+  - {fileID: 4404858517026568697, guid: 9e5165ecf35d1894aa6e2d2109012e7e, type: 3}
+  weaponsLevel2:
+  - {fileID: 4404858517026568697, guid: 9d56bb2e47dce1d4581e3922601a25b3, type: 3}
+  - {fileID: 4404858517026568697, guid: 768b54d59e58c234e932c3e274c844d0, type: 3}
+  - {fileID: 4404858517026568697, guid: c5022e2bd1e90f04bacc628c90b2b6fb, type: 3}
+  weaponsLevel3:
+  - {fileID: 4404858517026568697, guid: dda0fb2ff4b40d949bb0a7ecaf3cae62, type: 3}
+  - {fileID: 4404858517026568697, guid: 365765822abfa204ca91b4158c2ca377, type: 3}
+  - {fileID: 4404858517026568697, guid: b53cc2db08a342f4bb7fb40fde5276f1, type: 3}
+  modulesLevel1:
+  - {fileID: 8633518367942238775, guid: a8bf0ca18e7bd324e977c7c802a0f44d, type: 3}
+  - {fileID: 571252457800942925, guid: d9f2f2e91abcef347a9b6f813f76f37e, type: 3}
+  - {fileID: 8633518367942238775, guid: dbc5c06fa8f151448ab65adb285f973d, type: 3}
+  - {fileID: 7161395903424992997, guid: c2013118a0a59bf47a33c29552f75ec0, type: 3}
+  - {fileID: 7161395903424992997, guid: a8459502d103608408fc07d496927904, type: 3}
+  modulesLevel2:
+  - {fileID: 8633518367942238775, guid: 2dc483ede1f761344a6d1829ff0aa25c, type: 3}
+  - {fileID: 571252457800942925, guid: 90376a08fe7d0b542be80a670861012b, type: 3}
+  - {fileID: 8633518367942238775, guid: 93892c6e68abd974c9a1c2898b4f0d69, type: 3}
+  - {fileID: 7161395903424992997, guid: 28084589c0c9bbd498cd41b1d64056fa, type: 3}
+  - {fileID: 7161395903424992997, guid: e22ca2fafbe8cfd46a97c0937451a97f, type: 3}
+  modulesLevel3:
+  - {fileID: 8633518367942238775, guid: debb9a6b57e104f4f92dcbd39880ee01, type: 3}
+  - {fileID: 571252457800942925, guid: fea46d994348c4c4d94ee66bb43ed400, type: 3}
+  - {fileID: 8633518367942238775, guid: b70c5eb3543c04949b59f630828516ea, type: 3}
+  - {fileID: 7161395903424992997, guid: 4f2250601413d524da5fc17caa3a2e4b, type: 3}
+  - {fileID: 7161395903424992997, guid: fcc4d24c5e6382241a808d981fa1abac, type: 3}
+  probaLootSalle1: 25
+  probaLootSalle2: 85
+  probaLootSalle3: 100
+  probaLootSalle4: 100
+  probaWeapon: 25
+  probaWeaponLvl1: 60
+  probaWeaponLvl2: 40
+  probaWeaponLvl3: 0
+  probaModule: 75
+  probaModuleLvl1: 60
+  probaModuleLvl2: 40
+  probaModuleLvl3: 0
 --- !u!1 &4090459185084298423
 GameObject:
   m_ObjectHideFlags: 0
