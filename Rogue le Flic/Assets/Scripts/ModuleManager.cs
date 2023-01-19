@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ModuleManager : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class ModuleManager : MonoBehaviour
     public int levelModule2;
     public GameObject objectModule1;
     public GameObject objectModule2;
+    public Image spot1;
+    public Image imageSpot1;
+    public Image spot2;
+    public Image imageSpot2;
 
     [Header("Infos1")] 
     public string moduleName1;
@@ -117,6 +122,23 @@ public class ModuleManager : MonoBehaviour
             Effet5(nbrEmplacement);
     }
     
+
+
+    public void ActualiserHUD()
+    {
+        if(Module1 != 0)
+        {
+            spot1.gameObject.SetActive(true);
+            imageSpot1.sprite = objectModule1.GetComponent<SpriteRenderer>().sprite;
+        }
+
+        if (Module2 != 0)
+        {
+            spot2.gameObject.SetActive(true);
+            imageSpot2.sprite = objectModule2.GetComponent<SpriteRenderer>().sprite;
+        }
+    }
+
     
 
     // BALLES PERCANTES

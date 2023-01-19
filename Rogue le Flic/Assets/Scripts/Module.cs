@@ -160,6 +160,8 @@ public class Module : MonoBehaviour
         Destroy(gameObject);
         
         ManagerChara.Instance.noControl = false;
+
+        ModuleManager.Instance.ActualiserHUD();
     }
 
 
