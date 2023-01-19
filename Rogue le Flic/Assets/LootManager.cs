@@ -42,11 +42,15 @@ public class LootManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        currentRoom = 0;
     }
 
 
     public void EndRoom(Vector2 posSpawn)
     {
+        currentRoom += 1;
+        
         if (currentRoom == 1)
         {
             currentProba = probaLootSalle1;
@@ -85,6 +89,8 @@ public class LootManager : MonoBehaviour
                 GameObject newWeapon = LootIsWeapon();
 
                 Instantiate(newWeapon, posSpawn, Quaternion.identity);
+
+                currentRoom = 0;
             }
 
             else
@@ -92,6 +98,8 @@ public class LootManager : MonoBehaviour
                 GameObject newModule = LootIsModule();
                 
                 Instantiate(newModule, posSpawn, Quaternion.identity);
+                
+                currentRoom = 0;
             }
         }
     }

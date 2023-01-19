@@ -232,6 +232,11 @@ public class DoorManager : MonoBehaviour
 
             timerFinish = 1;*/
             
+            for (int i = 0; i < MoneyManager.Instance.moneyDropPerEnnemy; i++)
+            {
+                Instantiate(CoinManager.Instance.coin, posSpawn, quaternion.identity);
+            }
+            
             LootManager.Instance.EndRoom(posSpawn);
 
             PortesActives();

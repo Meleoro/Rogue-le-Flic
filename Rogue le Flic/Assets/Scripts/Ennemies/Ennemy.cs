@@ -245,7 +245,7 @@ public class Ennemy : MonoBehaviour
     {
         for (int k = 0; k < MoneyManager.Instance.moneyDropPerEnnemy; k++)
         {
-            Instantiate(coin,transform.position, Quaternion.identity);
+            Instantiate(MoneyManager.Instance.coin,transform.position, Quaternion.identity);
         }
 
         isDying = true;
