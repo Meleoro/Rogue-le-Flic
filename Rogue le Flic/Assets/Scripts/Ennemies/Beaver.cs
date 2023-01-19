@@ -36,6 +36,8 @@ public class Beaver : MonoBehaviour
 
     private float stunTimer;
     
+    public bool isInTuto;
+    
 
     private void Start()
     {
@@ -172,19 +174,28 @@ public class Beaver : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject bullet)
     {
-        currentHealth -= damages;
-
         // RECUL
-        if(bullet.CompareTag("Bullet"))
+        if (bullet.CompareTag("Bullet") && !isInTuto)
+        {
+            currentHealth -= damages;
             rb.AddForce(bullet.GetComponent<Bullet>().directionBullet * bullet.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+        }
+        else if (bullet.CompareTag("Bullet") && isInTuto)
+        {
+            currentHealth -= damages * 3;
+        }
 
-        else
+        else if(!isInTuto)
         {
             Vector2 directionForce = new Vector2(transform.position.x - bullet.transform.position.x, transform.position.y - bullet.transform.position.y);
             
             StopCoroutine();
             
             rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
         
         VerifyDeath();
