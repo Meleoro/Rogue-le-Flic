@@ -121,6 +121,14 @@ public class Module : MonoBehaviour
 
         if (slot == 1)
         {
+            if(ModuleManager.Instance.Module1 != 0)
+            {
+                Instantiate(ModuleManager.Instance.objectModule1, transform.position, Quaternion.identity);
+                Destroy(ModuleManager.Instance.objectModule1);
+            }
+            
+            ModuleManager.Instance.objectModule1 = Instantiate(gameObject, new Vector3(-10000, -10000, 0), Quaternion.identity);
+            
             ModuleManager.Instance.Module1 = numberEffect;
             ModuleManager.Instance.levelModule1 = levelEffect;
 
@@ -131,6 +139,14 @@ public class Module : MonoBehaviour
 
         else
         {
+            if(ModuleManager.Instance.Module2 != 0)
+            {
+                Instantiate(ModuleManager.Instance.objectModule2, transform.position, Quaternion.identity);
+                Destroy(ModuleManager.Instance.objectModule2);
+            }
+            
+            ModuleManager.Instance.objectModule2 = Instantiate(gameObject, new Vector3(-10000, -10000, 0), Quaternion.identity);
+            
             ModuleManager.Instance.Module2 = numberEffect;
             ModuleManager.Instance.levelModule2 = levelEffect;
             
