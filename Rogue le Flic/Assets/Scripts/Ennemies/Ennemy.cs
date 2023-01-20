@@ -217,6 +217,8 @@ public class Ennemy : MonoBehaviour
     public IEnumerator FeedbackDamage(SpriteRenderer currentSprite)
     {
 
+        
+        hit.pitch = Random.Range(0.8f,1.2f);
         hit.Play();
         
         currentSprite.DOColor(hitColor, 0.12f);
