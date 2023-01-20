@@ -71,7 +71,8 @@ public class Gun : MonoBehaviour
     public AudioSource pickup;
 
     public AudioSource shoot;
-    
+
+    public bool ifbubblegun = false;
     //public AudioSource shoot;
     
 
@@ -360,9 +361,9 @@ public class Gun : MonoBehaviour
                 float angle;
 
                 angle = OrientateGun();
-                
-                //here
 
+
+                //here
                 shoot.Play();
 
                     GameObject refBullet = Instantiate(bullet, ManagerChara.Instance.transform.position, 
@@ -443,6 +444,8 @@ public class Gun : MonoBehaviour
                 ReferenceCamera.Instance.transform.DOShakePosition(gunData.shakeDuration, gunData.shakeAmplitude);
             
             HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, chargeurSize, GetComponent<SpriteRenderer>().sprite);
+            
+
         }
     }
 
@@ -508,6 +511,8 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(currentFireRate);
 
         onCooldown = false;
+        
+
     }
     
 
