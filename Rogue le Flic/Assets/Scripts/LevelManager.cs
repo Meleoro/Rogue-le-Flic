@@ -28,6 +28,10 @@ public class LevelManager : MonoBehaviour
     [Header("Save Weapons")]
     public GameObject activeGun;
     public GameObject stockedGun;
+    
+    [Header("Save Module")]
+    public GameObject module1;
+    public GameObject module2;
 
 
 

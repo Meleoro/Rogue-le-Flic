@@ -127,7 +127,7 @@ public class Module : MonoBehaviour
                 Destroy(ModuleManager.Instance.objectModule1);
             }
             
-            ModuleManager.Instance.objectModule1 = Instantiate(gameObject, new Vector3(-10000, -10000, 0), Quaternion.identity);
+            ModuleManager.Instance.objectModule1 = Instantiate(gameObject, new Vector3(-10000, -10000, 0), Quaternion.identity, LevelManager.Instance.transform);
             
             ModuleManager.Instance.Module1 = numberEffect;
             ModuleManager.Instance.levelModule1 = levelEffect;
@@ -145,7 +145,7 @@ public class Module : MonoBehaviour
                 Destroy(ModuleManager.Instance.objectModule2);
             }
             
-            ModuleManager.Instance.objectModule2 = Instantiate(gameObject, new Vector3(-10000, -10000, 0), Quaternion.identity);
+            ModuleManager.Instance.objectModule2 = Instantiate(gameObject, new Vector3(-10000, -10000, 0), Quaternion.identity, LevelManager.Instance.transform);
             
             ModuleManager.Instance.Module2 = numberEffect;
             ModuleManager.Instance.levelModule2 = levelEffect;
