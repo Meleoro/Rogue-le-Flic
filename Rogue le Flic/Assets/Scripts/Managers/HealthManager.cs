@@ -25,7 +25,8 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private float shakeAmplitude;
     [SerializeField] private float shakeDuration;
     private float timerEffects;
-    
+
+    public AudioSource damagetaken;
     
 
     private void Awake()
@@ -63,8 +64,14 @@ public class HealthManager : MonoBehaviour
 
     public void LoseHealth(Vector2 direction)
     {
+        
         if (!isInvincible && currentHealth > 0 && !ManagerChara.Instance.isDashing && !immortel)
         {
+            
+            
+            damagetaken.Play();
+            
+            
             currentHealth -= 1;
 
             if(currentHealth % 2 == 1)
@@ -123,6 +130,10 @@ public class HealthManager : MonoBehaviour
 
     public void HitEffect()
     {
+        
+
+        
+        
         timerEffects -= Time.deltaTime * speedEffects;
         
         if (timerEffects > 0.93f)

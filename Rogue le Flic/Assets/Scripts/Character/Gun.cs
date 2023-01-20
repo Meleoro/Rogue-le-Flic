@@ -68,6 +68,13 @@ public class Gun : MonoBehaviour
 
     private Sprite spriteWeapon;
 
+    public AudioSource pickup;
+
+    public AudioSource shoot;
+    
+    //public AudioSource shoot;
+    
+
 
     private void Awake()
     {
@@ -290,6 +297,12 @@ public class Gun : MonoBehaviour
     {
         if (canBePicked)
         {
+                            
+                
+            pickup.Play();
+
+
+            
             isHeld = true;
             canBePicked = false;
 
@@ -313,6 +326,7 @@ public class Gun : MonoBehaviour
 
             else if (ManagerChara.Instance.stockWeapon != null)
             {
+
                 ManagerChara.Instance.activeGun.GetComponent<Gun>().isHeld = false;
                 ManagerChara.Instance.activeGun.GetComponent<Gun>().canBePicked = false;
                 
@@ -347,7 +361,11 @@ public class Gun : MonoBehaviour
 
                 angle = OrientateGun();
                 
-                GameObject refBullet = Instantiate(bullet, ManagerChara.Instance.transform.position, 
+                //here
+
+                shoot.Play();
+
+                    GameObject refBullet = Instantiate(bullet, ManagerChara.Instance.transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
 
                 

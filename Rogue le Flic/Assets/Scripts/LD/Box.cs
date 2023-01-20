@@ -27,6 +27,10 @@ public class Box : MonoBehaviour
     [HideInInspector] public bool isInvincible;
 
 
+    public AudioSource audiosource1;
+    
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -165,6 +169,13 @@ public class Box : MonoBehaviour
 
     public void Kicked(Vector2 direction)
     {
+        
+        if (!audiosource1.isPlaying)
+        {
+            audiosource1.Play();
+        }
+
+        
         boxCollider2D.enabled = false;
         
         isKicked = true;
