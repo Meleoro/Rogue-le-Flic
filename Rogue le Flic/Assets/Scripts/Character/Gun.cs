@@ -72,6 +72,9 @@ public class Gun : MonoBehaviour
 
     public AudioSource shoot;
 
+    public AudioSource reload;
+    
+    
     public bool ifbubblegun = false;
     //public AudioSource shoot;
     
@@ -265,6 +268,11 @@ public class Gun : MonoBehaviour
             {
                 isReloading = true;
                 timerReload = gunData.reloadTime;
+                
+                //here2
+                
+                reload.Play();
+                
             }
         }
 
