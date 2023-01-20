@@ -55,6 +55,11 @@ public class Shop : MonoBehaviour
     private bool canUseShop;
 
 
+
+    public AudioSource open;
+    public AudioSource close;
+
+
     private void Start()
     {
         originalPosShopkeeper = shopkeeperUI.localPosition;
@@ -98,7 +103,9 @@ public class Shop : MonoBehaviour
     void OpenShop()
     {
         MenuPauseManager.Instance.otherMenuActive = true;
-        
+
+        open.Play(); 
+
         shopkeeperUI.DOLocalMove(posShopkeeper, openingDuration);
         detailsUI.DOLocalMove(posDetails, openingDuration);
         moneyUI.DOLocalMove(posMoney, openingDuration);
@@ -115,6 +122,9 @@ public class Shop : MonoBehaviour
     
     void CloseShop()
     {
+
+        close.Play();
+
         shopkeeperUI.DOLocalMove(originalPosShopkeeper, closingDuration);
         detailsUI.DOLocalMove(originalPosDetails, closingDuration);
         moneyUI.DOLocalMove(originalPosMoney, closingDuration);
