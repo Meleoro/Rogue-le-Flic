@@ -69,6 +69,9 @@ public class Gun : MonoBehaviour
     private Sprite spriteWeapon;
 
     public AudioSource pickup;
+
+    public AudioSource shoot;
+    
     //public AudioSource shoot;
     
 
@@ -358,7 +361,11 @@ public class Gun : MonoBehaviour
 
                 angle = OrientateGun();
                 
-                GameObject refBullet = Instantiate(bullet, ManagerChara.Instance.transform.position, 
+                //here
+
+                shoot.Play();
+
+                    GameObject refBullet = Instantiate(bullet, ManagerChara.Instance.transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
 
                 
