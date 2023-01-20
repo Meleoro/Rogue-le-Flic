@@ -49,6 +49,10 @@ public class Frog : MonoBehaviour
         {
             frogData = niveau3;
         }
+        else
+        {
+            frogData = niveau1;
+        }
 
         currentHealth = frogData.health;
         

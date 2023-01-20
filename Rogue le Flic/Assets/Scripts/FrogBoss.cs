@@ -312,8 +312,11 @@ public class FrogBoss : MonoBehaviour
         
         boss.sprite.transform.DOMoveY(transform.position.y + 20, 0.2f).SetEase(Ease.InCirc);
         
-        boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0);
+        boss.spawnIndicator.transform.DOScale(new Vector3(2.5f, 1.5f, 2f), 0);
         boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1);
+        
+        boss.spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.8f, 0);
+        boss.spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.1f, 1);
 
         transform.DOMove(destination, 2);
         
@@ -323,7 +326,8 @@ public class FrogBoss : MonoBehaviour
         
         yield return new WaitForSeconds(0.8f);
         
-        boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 1f);
+        boss.spawnIndicator.transform.DOScale(new Vector3(2.5f, 1.5f, 2f), 1f);
+        boss.spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.8f, 1);
 
         yield return new WaitForSeconds(1f);
         
@@ -368,8 +372,11 @@ public class FrogBoss : MonoBehaviour
             {
                 boss.sprite.transform.DOMoveY(transform.position.y + 20, 0.1f).SetEase(Ease.InCirc);
 
-                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0);
+                boss.spawnIndicator.transform.DOScale(new Vector3(2.5f, 1.5f, 2f), 0);
                 boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
+                
+                boss.spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.8f, 0);
+                boss.spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.1f, 1);
 
                 transform.DOMove(destination1, 1);
 
@@ -379,7 +386,8 @@ public class FrogBoss : MonoBehaviour
 
                 yield return new WaitForSeconds(0.4f);
 
-                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0.5f);
+                boss.spawnIndicator.transform.DOScale(new Vector3(2.5f, 1.5f, 2f), 0.5f);
+                boss.spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.8f, 1);
 
                 yield return new WaitForSeconds(0.5f);
 
@@ -411,8 +419,11 @@ public class FrogBoss : MonoBehaviour
             {
                 boss.sprite.transform.DOMoveY(transform.position.y + 20, 0.2f).SetEase(Ease.InCirc);
 
-                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 0);
+                boss.spawnIndicator.transform.DOScale(new Vector3(2.5f, 1.5f, 2f), 0);
                 boss.spawnIndicator.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1);
+                
+                boss.spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.8f, 0);
+                boss.spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.1f, 1);
 
                 transform.DOMove(destination2, 2);
 
@@ -422,7 +433,8 @@ public class FrogBoss : MonoBehaviour
 
                 yield return new WaitForSeconds(0.8f);
 
-                boss.spawnIndicator.transform.DOScale(new Vector3(2f, 2f, 2f), 1);
+                boss.spawnIndicator.transform.DOScale(new Vector3(2.5f, 1.5f, 2f), 1);
+                boss.spawnIndicator.GetComponent<SpriteRenderer>().DOFade(0.8f, 1);
 
                 yield return new WaitForSeconds(1f);
 
