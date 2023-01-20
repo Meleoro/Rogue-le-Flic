@@ -249,7 +249,7 @@ public class Gun : MonoBehaviour
             else
                 lightShot.intensity = 0;
 
-            if (controls.Character.Reload.WasPerformedThisFrame() && !isReloading)
+            if (controls.Character.Reload.WasPerformedThisFrame() && !isReloading && currentChargeurAmmo != chargeurSize)
             {
                 isReloading = true;
                 timerReload = gunData.reloadTime;
