@@ -288,16 +288,19 @@ public class Boss : MonoBehaviour
         {
             case boss.Beaver:
                 ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.beaver;
+                ReferenceCamera.Instance.bossName.sprite = ReferenceCamera.Instance.beaverName;
                 break;
 
             
             case boss.Frog:
                 ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.frog;
+                ReferenceCamera.Instance.bossName.sprite = ReferenceCamera.Instance.frogName;
                 break;
 
             
             case boss.Turtle:
                 ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.turtle;
+                ReferenceCamera.Instance.bossName.sprite = ReferenceCamera.Instance.turtleName;
                 break;
         }
     }

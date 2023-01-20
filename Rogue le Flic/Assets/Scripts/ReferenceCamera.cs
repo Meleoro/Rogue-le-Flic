@@ -18,12 +18,17 @@ public class ReferenceCamera : MonoBehaviour
     [Header("Splash")]
     public GameObject splash;
     public SpriteRenderer bossSprite;
-    public TextMeshProUGUI bossName;
+    public SpriteRenderer bossName;
 
     [Header("Différents splash")] 
     public Sprite beaver;
     public Sprite frog;
     public Sprite turtle;
+
+    [Header("Differents noms")] 
+    public Sprite beaverName;
+    public Sprite frogName;
+    public Sprite turtleName;
 
     private void Awake()
     {
