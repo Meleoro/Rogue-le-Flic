@@ -23,6 +23,12 @@ public class IntroManager : MonoBehaviour
     private bool doOnce;
 
 
+    public AudioSource switchOn;
+    public AudioSource switchOff;
+    public AudioSource handStomp;
+    public AudioSource paper;
+    
+
     private void Start()
     {
         fondu.DOFade(0, 2);
@@ -40,6 +46,8 @@ public class IntroManager : MonoBehaviour
         {
             milieu = true;
             anim.SetTrigger("milieu");
+            
+            switchOn.Play();
 
             timer = 0;
         }
@@ -68,6 +76,9 @@ public class IntroManager : MonoBehaviour
         else if(milieu && Input.GetKeyDown(KeyCode.Mouse0) && !fin)
         {
             anim.SetTrigger("fin");
+            
+            handStomp.Play();
+            
             fin = true;
 
             timer = 0;        
