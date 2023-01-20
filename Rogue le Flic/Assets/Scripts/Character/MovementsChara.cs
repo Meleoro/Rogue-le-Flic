@@ -63,10 +63,10 @@ public class MovementsChara : MonoBehaviour
     public void MoveCharacter()
     {
         
-        /*if (!audioSource1.isPlaying)
+        if (!audioSource1.isPlaying)
             {
                 audioSource1.Play();
-            }*/
+            }
 
 
         
