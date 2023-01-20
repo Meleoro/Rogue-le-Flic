@@ -170,7 +170,7 @@ public class Beaver : MonoBehaviour
             col.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsKickedEnnemy, gameObject);
         }
         
-        else if (isKicked && !col.CompareTag("Kick") && !col.CompareTag("Player"))
+        else if (isKicked && !col.CompareTag("Kick") && !col.CompareTag("Player") && !col.CompareTag("Trou"))
         {
             TakeDamages(DegatsManager.Instance.degatsEnnemyIntoWall, gameObject);
             ennemy.Stun();
