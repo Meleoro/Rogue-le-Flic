@@ -53,6 +53,13 @@ public class Ennemy : MonoBehaviour
     [HideInInspector] public bool isKickedBool;
 
 
+    public AudioSource stun;
+    public AudioSource death;
+    public AudioSource hit;
+    public AudioSource kicked;
+
+    
+
     private void Start()
     {
         switch (ennemyType)
@@ -161,11 +168,13 @@ public class Ennemy : MonoBehaviour
     {
         if (infiniteStun)
         {
+            stun.Play();
             stunTimer = 10000;
             VFXStun.SetActive(true);
         }
         else
         {
+            stun.Play();
             stunTimer = stunDuration;
             VFXStun.SetActive(true);
         }
@@ -207,6 +216,9 @@ public class Ennemy : MonoBehaviour
 
     public IEnumerator FeedbackDamage(SpriteRenderer currentSprite)
     {
+
+        hit.Play();
+        
         currentSprite.DOColor(hitColor, 0.12f);
 
         yield return new WaitForSeconds(0.12f);
@@ -219,6 +231,10 @@ public class Ennemy : MonoBehaviour
         if (!isDying)
         {
             isKickedBool = true;
+            
+            //here
+            kicked.Play();
+            
 
             switch (ennemyType)
             {
@@ -269,6 +285,8 @@ public class Ennemy : MonoBehaviour
         isDying = true;
         
         anim.SetTrigger("death");
+        
+        death.Play();
         
         ScoreManager.instance.EnemyKilled();
         
