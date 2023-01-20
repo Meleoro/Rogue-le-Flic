@@ -73,6 +73,9 @@ public class Gun : MonoBehaviour
     public AudioSource shoot;
 
     public AudioSource reload;
+
+    public AudioSource dryshot;
+    
     
     
     public bool ifbubblegun = false;
@@ -270,8 +273,8 @@ public class Gun : MonoBehaviour
                 timerReload = gunData.reloadTime;
                 
                 //here2
-                
                 reload.Play();
+
                 
             }
         }
@@ -437,6 +440,10 @@ public class Gun : MonoBehaviour
 
             if (currentChargeurAmmo <= 0)
             {
+                dryshot.Play();
+                
+                reload.Play();
+
                 isReloading = true;
                 timerReload = gunData.reloadTime;
             }
