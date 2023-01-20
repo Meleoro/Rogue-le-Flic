@@ -25,6 +25,11 @@ public class MovementsChara : MonoBehaviour
     public GameObject sprite;
 
 
+    public bool isPlaying;
+    public AudioSource audioSource;
+    //public AudioClip foosteps;
+
+
     private void Awake()
     {
         controls = new Controls();
@@ -57,6 +62,14 @@ public class MovementsChara : MonoBehaviour
 
     public void MoveCharacter()
     {
+        
+        if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+
+
+        
         direction = controls.Character.Movements.ReadValue<Vector2>();
 
         ManagerChara.Instance.rb.AddForce(new Vector2(direction.x * speedX, direction.y* speedY) * 10, ForceMode2D.Force);
@@ -68,6 +81,8 @@ public class MovementsChara : MonoBehaviour
         else
         {
             ManagerChara.Instance.anim.SetBool("isWalking", false);
+            
+            audioSource.Stop();
         }
     }
 
