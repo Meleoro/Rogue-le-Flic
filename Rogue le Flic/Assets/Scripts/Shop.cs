@@ -102,7 +102,7 @@ public class Shop : MonoBehaviour
         shopkeeperUI.DOLocalMove(posShopkeeper, openingDuration);
         detailsUI.DOLocalMove(posDetails, openingDuration);
         moneyUI.DOLocalMove(posMoney, openingDuration);
-        fond.DOFade(0.8f, 0.5f);
+        fond.DOFade(0.6f, 0.5f);
         
         ManagerChara.Instance.noControl = true;
 
