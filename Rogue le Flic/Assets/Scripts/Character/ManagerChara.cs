@@ -50,6 +50,10 @@ public class ManagerChara : MonoBehaviour
     public GameObject test;
 
 
+    public AudioSource death;
+    public AudioSource fall;
+
+
 
     private void Awake()
     {
@@ -223,6 +227,9 @@ public class ManagerChara : MonoBehaviour
         noControl = true;
         
         anim.SetTrigger("isDying");
+        
+        death.Play();
+        
         ReferenceCamera.Instance.finalCinematicChara = true;
 
         MenuMortManager.Instance.fondMort.DOFade(1, 1);
@@ -251,6 +258,7 @@ public class ManagerChara : MonoBehaviour
 
     public IEnumerator Fall(float fallDuration, Vector2 newPos)
     {
+        fall.Play();
         transform.DOScale(Vector3.zero, fallDuration);
         noControl = true;
         isFalling = true;
