@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 5200508662259682044}
   - component: {fileID: -4102416770093458525}
   - component: {fileID: 1296444255}
+  - component: {fileID: 1503168110456818654}
   m_Layer: 6
   m_Name: ProjectileCarton 4
   m_TagString: Box
@@ -275,7 +276,6 @@ MonoBehaviour:
   fragment: {fileID: 7441002095920963516, guid: a95b5304a68911449acffd4538b892b3, type: 3}
   nbrFragments: 10
   shadow: {fileID: 2019294578}
-  damageFromBox: 25
   piecesSprites:
   - {fileID: 21300000, guid: 0885bdbb1672f3448bcabd464b99d4f6, type: 3}
   - {fileID: 21300000, guid: 8bda09f9787e86e4b9f17c73710d2f44, type: 3}
@@ -361,7 +361,7 @@ MonoBehaviour:
   - {x: 0.48481655, y: -0.7084652, z: 0}
   m_ShapePathHash: 750994325
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1003592
+  m_InstanceId: 409120
 --- !u!114 &-4102416770093458525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,3 +394,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &1503168110456818654
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7521661537025544878}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.10063982}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.468, y: 1.476}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.79872036}
+  m_EdgeRadius: 0
