@@ -40,17 +40,21 @@ public class Box : MonoBehaviour
             && !isFalling && !isInvincible)
         {
             rb.velocity = Vector2.zero;
-
+            
             if (ManagerChara.Instance.isDashing)
             {
                 boxCollider2D.enabled = false;
             }
-
-            else
-            {
+            else 
+            { 
                 boxCollider2D.enabled = true;
             }
         }
+        else if(isKicked)
+        {
+            boxCollider2D.enabled = false;
+        }
+        
     }
 
 
@@ -82,6 +86,11 @@ public class Box : MonoBehaviour
                     Explose();
                 }
             }
+            
+            else if (col.gameObject.CompareTag("Trou"))
+            {
+                
+            }
 
             else if(!col.gameObject.CompareTag("Box") && !isInvincible)
             {
@@ -89,6 +98,53 @@ public class Box : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (isKicked)
+        {
+            if (!col.CompareTag("Player") && !col.CompareTag("Kick"))
+            {
+                if(!isKicked && !isInvincible)
+                    Explose();
+
+                else if(col.gameObject.CompareTag("Ennemy") && !isInvincible)
+                {
+                    col.gameObject.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsBox, gameObject);
+                    col.gameObject.GetComponent<Ennemy>().Stun();
+                    Explose();
+                }
+
+                else if (col.gameObject.CompareTag("Boss"))
+                {
+                    if (isInvincible)
+                    {
+                        col.gameObject.GetComponent<Boss>().TakeDamages(DegatsManager.Instance.degatsBox, gameObject);
+                        col.gameObject.GetComponent<FrogBoss>().Stun();
+                        Explose();
+                    }
+                    else
+                    {
+                        col.gameObject.GetComponent<Boss>().TakeDamages(DegatsManager.Instance.degatsBox, gameObject);
+                        Explose();
+                    }
+                }
+            
+
+                else if(!col.CompareTag("Box") && !col.CompareTag("Trou") && !col.CompareTag("Gun") && !isInvincible)
+                {
+                    Explose();
+                }
+            }
+        }
+    }
+
+
+    public void CollisionWithTrou()
+    {
+        boxCollider2D.enabled = false;
+    }
+    
 
     public void Explose()
     {
@@ -109,12 +165,15 @@ public class Box : MonoBehaviour
 
     public void Kicked(Vector2 direction)
     {
+        boxCollider2D.enabled = false;
+        
         isKicked = true;
         directionKick = direction;
         
         rb.AddForce(directionKick * 25, ForceMode2D.Impulse);
     }
 
+    
     public IEnumerator Fall()
     {
         anim = GetComponent<Animator>();
