@@ -37,6 +37,9 @@ public class Beaver : MonoBehaviour
     private float stunTimer;
     
     public bool isInTuto;
+
+    public AudioSource windUp;
+    
     
 
     private void Start()
@@ -115,6 +118,9 @@ public class Beaver : MonoBehaviour
             {
                 ennemy.anim.SetTrigger("isAttacking");
 
+                //here
+                //windUp.Play();
+                
                 StartCoroutine(Jump(new Vector2(AIPath.destination.x - transform.position.x, AIPath.destination.y - transform.position.y)));
             }
 
@@ -266,6 +272,8 @@ public class Beaver : MonoBehaviour
 
         GetComponent<Ennemy>().isCharging = true;
         
+        windUp.Play();
+
         yield return new WaitForSeconds(0.75f);
 
         rb.AddForce(directionJump.normalized * beaverData.strenghtJump, ForceMode2D.Impulse);
