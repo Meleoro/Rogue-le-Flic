@@ -131,7 +131,7 @@ public class Box : MonoBehaviour
                 }
             
 
-                else if(!col.CompareTag("Box") && !col.CompareTag("Trou") && !isInvincible)
+                else if(!col.CompareTag("Box") && !col.CompareTag("Trou") && !col.CompareTag("Gun") && !isInvincible)
                 {
                     Explose();
                 }
