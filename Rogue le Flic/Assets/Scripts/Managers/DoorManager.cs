@@ -68,7 +68,7 @@ public class DoorManager : MonoBehaviour
 
             else
             {
-                //PortesActivesGreen();
+                PortesActivesGreen();
             }
         }
     }
