@@ -26,7 +26,7 @@ public class MovementsChara : MonoBehaviour
 
 
     public bool isPlaying;
-    public AudioSource audioSource;
+    public AudioSource audioSource1;
     //public AudioClip foosteps;
 
 
@@ -63,9 +63,9 @@ public class MovementsChara : MonoBehaviour
     public void MoveCharacter()
     {
         
-        if (!audioSource.isPlaying)
+        if (!audioSource1.isPlaying)
             {
-                audioSource.Play();
+                audioSource1.Play();
             }
 
 
@@ -77,12 +77,12 @@ public class MovementsChara : MonoBehaviour
         if (Mathf.Abs(direction.x) > 0.1f || Mathf.Abs(direction.y) > 0.1f)
         {
             ManagerChara.Instance.anim.SetBool("isWalking", true);
+
         }
         else
         {
+            audioSource1.Stop();
             ManagerChara.Instance.anim.SetBool("isWalking", false);
-            
-            audioSource.Stop();
         }
     }
 

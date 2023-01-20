@@ -57,6 +57,9 @@ public class KickChara : MonoBehaviour
     [SerializeField] private Animation foot;
 
 
+    public AudioSource audioSource1;
+    
+    
     public void Awake()
     {
         if (Instance != null && Instance != this) 
@@ -150,6 +153,9 @@ public class KickChara : MonoBehaviour
         Vector2 charaPos = ManagerChara.Instance.transform.position;*/
 
         hasKicked = false;
+        
+        
+        audioSource1.Play();
 
         /*if (mouseDirection)
         {
