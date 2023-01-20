@@ -34,6 +34,10 @@ public class DashChara : MonoBehaviour
     private bool doOnce;
 
 
+    public AudioSource audiosource1;
+    
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this) 
@@ -81,6 +85,9 @@ public class DashChara : MonoBehaviour
 
     public void Dash()
     {
+        
+        audiosource1.Play();
+        
         timerForce = dureeAjoutForce;
         timerEffects = noHitTime;
         
