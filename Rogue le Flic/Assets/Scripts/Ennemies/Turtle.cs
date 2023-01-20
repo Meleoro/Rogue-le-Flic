@@ -52,6 +52,10 @@ public class Turtle : MonoBehaviour
         {
             turtleData = niveau3;
         }
+        else
+        {
+            turtleData = niveau1;
+        }
 
         currentHealth = turtleData.health;
         

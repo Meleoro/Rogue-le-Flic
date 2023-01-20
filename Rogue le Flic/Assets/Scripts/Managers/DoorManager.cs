@@ -48,6 +48,9 @@ public class DoorManager : MonoBehaviour
     public bool bossRoom;
     private bool hasExitDoor;
 
+    
+    
+    
 
     private void Start()
     {
@@ -55,15 +58,17 @@ public class DoorManager : MonoBehaviour
         {
             if (ennemyCount != 0 || bossRoom)
             {
-                doorBottom.SetActive(false);
                 doorRight.SetActive(false);
                 doorLeft.SetActive(false);
                 doorUp.SetActive(false);
+                doorBottom.SetActive(false);
+                
+                PortesActivesRed();
             }
 
             else
             {
-                PortesActives();
+                //PortesActivesGreen();
             }
         }
     }
@@ -82,11 +87,14 @@ public class DoorManager : MonoBehaviour
     }
 
 
-    public void PortesActives()
+    public void PortesActivesGreen()
     {
         if (GenerationPro.Instance.map.list[roomPosX + 1].list[roomPosY] != null)
         {
             doorRight.SetActive(true);
+
+            if(doorRight.CompareTag("NewDoor"))
+                doorRight.GetComponent<NewDoor>().isOpen = true;
         }
         else
         {
@@ -106,6 +114,9 @@ public class DoorManager : MonoBehaviour
         if (GenerationPro.Instance.map.list[roomPosX].list[roomPosY - 1] != null)
         {
             doorBottom.SetActive(true);
+            
+            if(doorBottom.CompareTag("NewDoor"))
+                doorBottom.GetComponent<NewDoor>().isOpen = true;
         }
         else
         {
@@ -124,6 +135,9 @@ public class DoorManager : MonoBehaviour
         
         if (GenerationPro.Instance.map.list[roomPosX].list[roomPosY + 1] != null)
         {
+            if(doorUp.CompareTag("NewDoor"))
+                doorUp.GetComponent<NewDoor>().isOpen = true;
+            
             doorUp.SetActive(true);
         }
         else
@@ -143,6 +157,101 @@ public class DoorManager : MonoBehaviour
         
         if (GenerationPro.Instance.map.list[roomPosX - 1].list[roomPosY] != null)
         {
+            if(doorLeft.CompareTag("NewDoor"))
+                doorLeft.GetComponent<NewDoor>().isOpen = true;
+            
+            doorLeft.SetActive(true);
+        }
+        else
+        {
+            if (!hasExitDoor && bossRoom)
+            {
+                hasExitDoor = true;
+
+                doorLeft.SetActive(true);
+                doorLeft.GetComponent<Door>().isFinalDoor = true;
+            }
+            else
+            {
+                doorLeft.SetActive(false);
+            }
+        }
+    }
+
+
+    public void PortesActivesRed()
+    {
+        if (GenerationPro.Instance.map.list[roomPosX + 1].list[roomPosY] != null)
+        {
+            doorRight.SetActive(true);
+
+            if(doorRight.CompareTag("NewDoor"))
+                doorRight.GetComponent<NewDoor>().isOpen = false;
+        }
+        else
+        {
+            if(!hasExitDoor && bossRoom)
+            {
+                hasExitDoor = true;
+
+                doorRight.SetActive(true);
+                doorRight.GetComponent<Door>().isFinalDoor = true;
+            }
+            else
+            {
+                doorRight.SetActive(false);
+            }
+        }
+        
+        if (GenerationPro.Instance.map.list[roomPosX].list[roomPosY - 1] != null)
+        {
+            doorBottom.SetActive(true);
+            
+            if(doorBottom.CompareTag("NewDoor"))
+                doorBottom.GetComponent<NewDoor>().isOpen = false;
+        }
+        else
+        {
+            if (!hasExitDoor && bossRoom)
+            {
+                hasExitDoor = true;
+
+                doorBottom.SetActive(true);
+                doorBottom.GetComponent<Door>().isFinalDoor = true;
+            }
+            else
+            {
+                doorBottom.SetActive(false);
+            }
+        }
+        
+        if (GenerationPro.Instance.map.list[roomPosX].list[roomPosY + 1] != null)
+        {
+            if(doorUp.CompareTag("NewDoor"))
+                doorUp.GetComponent<NewDoor>().isOpen = false;
+            
+            doorUp.SetActive(true);
+        }
+        else
+        {
+            if (!hasExitDoor && bossRoom)
+            {
+                hasExitDoor = true;
+
+                doorUp.SetActive(true);
+                doorUp.GetComponent<Door>().isFinalDoor = true;
+            }
+            else
+            {
+                doorUp.SetActive(false);
+            }
+        }
+        
+        if (GenerationPro.Instance.map.list[roomPosX - 1].list[roomPosY] != null)
+        {
+            if(doorLeft.CompareTag("NewDoor"))
+                doorLeft.GetComponent<NewDoor>().isOpen = false;
+            
             doorLeft.SetActive(true);
         }
         else
@@ -239,7 +348,7 @@ public class DoorManager : MonoBehaviour
             
             LootManager.Instance.EndRoom(posSpawn);
 
-            PortesActives();
+            PortesActivesGreen();
         }
     }
 }

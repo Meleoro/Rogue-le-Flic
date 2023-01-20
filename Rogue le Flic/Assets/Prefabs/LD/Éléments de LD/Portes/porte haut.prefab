@@ -714,7 +714,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: -9999
   m_Sprite: {fileID: 21300000, guid: 1105ee6d45ac6ae49aa4a6e0750a230a, type: 3}
   m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
   m_FlipX: 0
@@ -736,9 +736,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6515308517902734848}
   - component: {fileID: 6515308517902734849}
+  - component: {fileID: -8212397715108216328}
+  - component: {fileID: 128799543576631970}
+  - component: {fileID: 7426089670081405876}
   m_Layer: 0
   m_Name: porte haut
-  m_TagString: Untagged
+  m_TagString: NewDoor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -801,7 +804,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 30
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8409eba6dbf0ddf42b0f51cf63b9f97b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -813,3 +816,61 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-8212397715108216328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515308517902734862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82cef9fa8bdf53f47bff53043b52f536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorNumber: 3
+  isFinalDoor: 0
+--- !u!61 &128799543576631970
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515308517902734862}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.005959511, y: -1.640604}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.2028573, y: 3.5}
+    newSize: {x: 2.57, y: 4.0833335}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.4054809, y: 0.6546192}
+  m_EdgeRadius: 0
+--- !u!114 &7426089670081405876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515308517902734862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c9bfa425f99fba4abab0a68b87abf50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorNumber: 3
+  isFinalDoor: 0
+  lightRed: {fileID: 6515308516506067542}
+  lightGreen: {fileID: 6515308516865929188}
+  isOpen: 0
+  boxCollider2D: {fileID: 128799543576631970}
