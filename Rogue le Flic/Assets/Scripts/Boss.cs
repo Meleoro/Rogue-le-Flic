@@ -584,7 +584,7 @@ public class Boss : MonoBehaviour
         ManagerChara.Instance.noControl = false;
         CameraMovements.Instance.bossEndRoom = false;
 
-        MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
+        MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActivesGreen();
 
         Destroy(gameObject);
     }

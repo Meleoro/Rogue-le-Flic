@@ -333,7 +333,7 @@ public class Ennemy : MonoBehaviour
 
                 yield return new WaitForSeconds(1);
 
-                MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActives();
+                MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActivesGreen();
                 MapManager.Instance.activeRoom.GetComponent<DoorManager>().EndRoom(transform.position);
                 
 

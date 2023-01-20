@@ -65,7 +65,7 @@ public class MapManager : MonoBehaviour
         activeRoom.GetComponent<DoorManager>().roomPosX = playerX;
         activeRoom.GetComponent<DoorManager>().roomPosY = playerY;
         
-        activeRoom.GetComponent<DoorManager>().PortesActives();
+        activeRoom.GetComponent<DoorManager>().PortesActivesGreen();
         
         EnterRoom(activeRoom.GetComponent<DoorManager>().currentEnnemies);
 
