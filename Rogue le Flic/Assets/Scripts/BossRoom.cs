@@ -16,6 +16,10 @@ public class BossRoom : MonoBehaviour
     private GameObject boss2;
     private GameObject boss3;
 
+
+    public AudioSource sweep;
+    
+
     private void Start()
     {
         if (isLastBoss)
@@ -69,6 +73,8 @@ public class BossRoom : MonoBehaviour
         ReferenceCamera.Instance.splash.SetActive(true);
         boss.GetComponent<Boss>().VerifyBossType();
 
+        sweep.Play();
+        
         yield return new WaitForSeconds(3);
         
         ReferenceCamera.Instance.splash.SetActive(false);
