@@ -54,6 +54,10 @@ public class Bullet : MonoBehaviour
 
     private bool isPercing;
 
+    [Header("InvincibilitéBullet")] 
+    private float timerInvincibilite;
+    private bool isInvincible;
+
 
 
     private void Start()
@@ -66,10 +70,22 @@ public class Bullet : MonoBehaviour
 
         currentPerces = 0;
         currentRebonds = 0;
+
+        timerInvincibilite = 0.00f;
     }
 
     void Update()
     {
+        if (timerInvincibilite > 0)
+        {
+            timerInvincibilite -= Time.deltaTime;
+            isInvincible = true;
+        }
+        else
+        {
+            isInvincible = false;
+        }
+        
         // BULLE
         if (isBubble)
         {
@@ -268,7 +284,7 @@ public class Bullet : MonoBehaviour
             bounceWalls.enabled = false;
         }
 
-        else
+        else 
         {
             if (!rebondissante || nbrRebondsMax <= currentRebonds)
             {
@@ -276,7 +292,7 @@ public class Bullet : MonoBehaviour
                 {
                     bounceWalls.enabled = true;
                 }
-                else
+                else if (!collision.CompareTag("Player"))
                 {
                     Destroy(gameObject);
                 }
