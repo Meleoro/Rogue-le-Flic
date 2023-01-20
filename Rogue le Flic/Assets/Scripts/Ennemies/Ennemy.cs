@@ -244,7 +244,7 @@ public class Ennemy : MonoBehaviour
                     if(!beaverScript.isKicked)
                     {
                         beaverScript.isKicked = true;
-                        timerKick = 0.3f;
+                        timerKick = 0.2f;
                     }
                     break;
 
@@ -252,7 +252,7 @@ public class Ennemy : MonoBehaviour
                     if (!frogScript.isKicked)
                     {
                         frogScript.isKicked = true;
-                        timerKick = 0.3f;
+                        timerKick = 0.2f;
                     }
                     break;
 
@@ -260,7 +260,7 @@ public class Ennemy : MonoBehaviour
                     if (!turtleScript.isKicked)
                     {
                         turtleScript.isKicked = true;
-                        timerKick = 0.3f;
+                        timerKick = 0.2f;
                     }
                     break;
             }
