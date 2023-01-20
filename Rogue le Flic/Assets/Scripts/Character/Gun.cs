@@ -78,7 +78,7 @@ public class Gun : MonoBehaviour
     
     
     
-    public bool ifbubblegun = false;
+    public bool isArc = false;
     //public AudioSource shoot;
     
 
@@ -440,9 +440,14 @@ public class Gun : MonoBehaviour
 
             if (currentChargeurAmmo <= 0)
             {
-                dryshot.Play();
+
+                if (isArc == false)
+                {
+                    dryshot.Play();
                 
-                reload.Play();
+                    reload.Play();
+                }
+
 
                 isReloading = true;
                 timerReload = gunData.reloadTime;
