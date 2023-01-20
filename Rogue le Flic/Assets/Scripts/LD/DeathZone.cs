@@ -52,7 +52,9 @@ public class DeathZone : MonoBehaviour
             }
             else
             {
-                StartCoroutine(col.gameObject.GetComponent<Ennemy>().Fall());
+                Vector2 direction = col.contacts[0].point - (Vector2) col.transform.position;
+
+                StartCoroutine(col.gameObject.GetComponent<Ennemy>().Fall(direction));
             }
         }
     }
