@@ -43,6 +43,7 @@ public class Gun : MonoBehaviour
     [HideInInspector] public bool isBoosted;
     private int chargeurSize;
     private float currentFireRate;
+    private float currentdureeChargement;
 
     [Header("Others")]
     private float timerShot;
@@ -91,6 +92,7 @@ public class Gun : MonoBehaviour
 
         chargeurSize = gunData.chargeurSize;
         currentFireRate = gunData.cooldownShot;
+        currentdureeChargement = gunData.dureeChargement;
 
         currentChargeurAmmo = chargeurSize;
 
@@ -161,11 +163,13 @@ public class Gun : MonoBehaviour
                 {
                     chargeurSize = (int) (gunData.chargeurSize * ModuleManager.Instance.multiplicateurChargeur);
                     currentFireRate = gunData.cooldownShot / ModuleManager.Instance.multiplicateurFireRate;
+                    currentdureeChargement = gunData.dureeChargement / ModuleManager.Instance.multiplicateurFireRate;
                 }
                 else
                 {
                     chargeurSize = gunData.chargeurSize;
                     currentFireRate = gunData.cooldownShot;
+                    currentdureeChargement = gunData.dureeChargement;
                 }
                 
                 HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, chargeurSize, spriteWeapon);
@@ -183,24 +187,24 @@ public class Gun : MonoBehaviour
                 {
                     if (gunData.tirChargeable)
                     {
-                        if (timerCharge < gunData.dureeChargement)
+                        if (timerCharge < currentdureeChargement)
                         {
                             timerCharge += Time.deltaTime;
                         }
 
-                        if (timerCharge < gunData.dureeChargement / 3)
+                        if (timerCharge < currentdureeChargement / 3)
                         {
                             bowState = 1;
                             GetComponent<SpriteRenderer>().sprite = gunData.charge1;
                         }
 
-                        else if (timerCharge < (gunData.dureeChargement / 3) * 2)
+                        else if (timerCharge < (currentdureeChargement / 3) * 2)
                         {
                             bowState = 2;
                             GetComponent<SpriteRenderer>().sprite = gunData.charge2;
                         }
 
-                        else if (timerCharge < (gunData.dureeChargement / 3) * 3)
+                        else if (timerCharge < (currentdureeChargement / 3) * 3)
                         {
                             bowState = 3;
                             GetComponent<SpriteRenderer>().sprite = gunData.charge3;
