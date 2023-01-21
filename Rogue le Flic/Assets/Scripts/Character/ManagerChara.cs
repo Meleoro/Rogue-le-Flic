@@ -211,6 +211,8 @@ public class ManagerChara : MonoBehaviour
 
             HUDManager.Instance.UpdateAmmo(activeGun.GetComponent<Gun>().currentChargeurAmmo, activeGun.GetComponent<Gun>().gunData.chargeurSize, 
                 activeGun.GetComponent<SpriteRenderer>().sprite);
+            
+            HUDManager.Instance.ReplaceImage(activeGun.GetComponent<Gun>().gunData.chargeurSize);
         }
     }
 
