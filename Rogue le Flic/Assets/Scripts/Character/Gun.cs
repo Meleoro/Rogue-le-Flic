@@ -45,6 +45,12 @@ public class Gun : MonoBehaviour
     private float currentFireRate;
     private float currentdureeChargement;
 
+    [Header("Colors")] 
+    public Color colorFull;
+    public Color colorEmpty;
+    private bool isRed;
+    private bool isWhite;
+
     [Header("Others")]
     private float timerShot;
     private float timerLight;
@@ -187,6 +193,33 @@ public class Gun : MonoBehaviour
                 }
                 
                 HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, chargeurSize, spriteWeapon);
+                
+                
+                // MANQUE DE MUNITIONS
+                if (currentChargeurAmmo < (int)(chargeurSize * 0.3f))
+                {
+                    if (!isRed)
+                    {
+                        isRed = true;
+                        isWhite = true;
+
+                        HUDManager.Instance.ammo.DOColor(Color.red, 0.1f).OnComplete((() => isWhite = false));
+                    }
+                    
+                    else if (!isWhite)
+                    {
+                        isRed = true;
+                        isWhite = true;
+
+                        HUDManager.Instance.ammo.DOColor(Color.white, 0.3f).OnComplete((() => isRed = false));
+                    }
+                }
+                else
+                {
+                    isRed = false;
+                    
+                    HUDManager.Instance.ammo.DOColor(Color.white, 0);
+                }
             }
 
             else
