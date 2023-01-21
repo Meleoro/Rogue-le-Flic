@@ -490,6 +490,9 @@ public class FrogBoss : MonoBehaviour
             yield return new WaitForSeconds(bossData.shotDuration);
 
             canMove = true;
+
+            if (!canShoot)
+                k = 1000;
         }
 
         //rb.AddForce(-direction.normalized, ForceMode2D.Impulse);
