@@ -340,12 +340,17 @@ public class Gun : MonoBehaviour
     {
         if (canBePicked)
         {
-                            
-                
             pickup.Play();
 
+            if (ModuleManager.Instance.Module1 == 5 || ModuleManager.Instance.Module1 == 5)
+            {
+                chargeurSize = (int)(gunData.chargeurSize * ModuleManager.Instance.multiplicateurChargeur);
+                currentFireRate = gunData.cooldownShot / ModuleManager.Instance.multiplicateurFireRate;
+                currentdureeChargement = gunData.dureeChargement / ModuleManager.Instance.multiplicateurFireRate;
+            }
 
-            
+            currentChargeurAmmo = chargeurSize;
+
             isHeld = true;
             canBePicked = false;
 
@@ -378,13 +383,13 @@ public class Gun : MonoBehaviour
                         
             
             HUDManager.Instance.TakeWeapon();
-            
+
             /*if (ManagerChara.Instance.munitionsActives && !isStocked)
             {
                 HUDManager.Instance.UpdateAmmo(currentAmmo, gunData.maxAmmo, GetComponent<SpriteRenderer>().sprite);
             }*/
-            
-            if(!isStocked)
+
+            if (!isStocked)
             {
                 HUDManager.Instance.UpdateAmmo(currentChargeurAmmo, chargeurSize, GetComponent<SpriteRenderer>().sprite);
             }

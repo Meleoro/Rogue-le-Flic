@@ -68,6 +68,7 @@ public class ModuleManager : MonoBehaviour
     [HideInInspector] public float multiplicateurFireRate;
     
     private Gun gun;
+    private Gun secondGun;
 
     private void Awake()
     {
@@ -298,6 +299,9 @@ public class ModuleManager : MonoBehaviour
     public void Effet5(int nbrEmplacement)
     {
         gun.isBoosted = true;
+
+        if (ManagerChara.Instance.stockWeapon != null)
+            ManagerChara.Instance.stockWeapon.GetComponent<Gun>().isBoosted = true;
 
         if (nbrEmplacement == 1)
         {
