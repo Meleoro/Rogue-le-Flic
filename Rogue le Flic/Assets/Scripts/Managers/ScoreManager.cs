@@ -27,6 +27,10 @@ public class ScoreManager : MonoBehaviour
     public int valeurMax;
     
     public int timerMax = 5;
+
+
+    public AudioSource enemykilled;
+    
     
     
 
@@ -88,6 +92,9 @@ public class ScoreManager : MonoBehaviour
         scoreCountText.DOFade(0, timerMax);
 
         scoreActuel += 100;
+        
+        
+        enemykilled.Play();
     }
 
 
