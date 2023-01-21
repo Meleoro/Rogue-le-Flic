@@ -16,8 +16,8 @@ public class NewDoor : MonoBehaviour
 
     [Header("MaterialPorte")]
     public Material material;
-    public Color red;
-    public Color green;
+    [ColorUsage(true, true)]  public Color red;
+    [ColorUsage(true, true)]  public Color green;
 
 
     private void Update()
