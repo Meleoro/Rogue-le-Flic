@@ -1513,6 +1513,9 @@ MonoBehaviour:
   origin: {x: -100, y: 100, z: 0}
   cameraMini: {fileID: 5830905054022177153}
   room: {fileID: 5917814786928162047, guid: e1e2c9602dde8aa4f8340d8733a46548, type: 3}
+  normalRoom: {fileID: 21300000, guid: 917a55a4e48e44e468c311ec3d20d115, type: 3}
+  shopRoom: {fileID: 21300000, guid: 5bbd8161ec70af944aadd09bc753fe9e, type: 3}
+  bossRoom: {fileID: 21300000, guid: 4e575369d7cafd84bbfefb71edaa2054, type: 3}
 --- !u!114 &2496528394108113514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2764,6 +2767,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8159523867254284515}
     m_Modifications:
+    - target: {fileID: 2529103565746933914, guid: 53371b32e963ec147aa5942f82966cc6, type: 3}
+      propertyPath: orthographic size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2529103565746933918, guid: 53371b32e963ec147aa5942f82966cc6, type: 3}
       propertyPath: m_Name
       value: Mini Map

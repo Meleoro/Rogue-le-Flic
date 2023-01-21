@@ -13,6 +13,10 @@ public class MiniMapManager : MonoBehaviour
     public GameObject room;
     
     List<GameObject> activeRooms = new List<GameObject>();
+    
+    public Sprite normalRoom;
+    public Sprite shopRoom;
+    public Sprite bossRoom;
 
 
     private void Awake()
@@ -43,6 +47,21 @@ public class MiniMapManager : MonoBehaviour
                     activeRooms.Add(newRoom);
 
                     ActivateDoors(i, k, newRoom);
+
+                    if (activeMap.list[i].list[k].CompareTag("BossRoom"))
+                    {
+                        newRoom.GetComponent<SpriteRenderer>().sprite = bossRoom;
+                    }
+                    
+                    else if (activeMap.list[i].list[k].CompareTag("ShopRoom"))
+                    {
+                        newRoom.GetComponent<SpriteRenderer>().sprite = shopRoom;
+                    }
+
+                    else
+                    {
+                        newRoom.GetComponent<SpriteRenderer>().sprite = normalRoom;
+                    }
                 }
             }
         }
