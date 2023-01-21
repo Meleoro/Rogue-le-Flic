@@ -98,12 +98,9 @@ public class DoorManager : MonoBehaviour
         }
         else
         {
-            if(!hasExitDoor && bossRoom)
+            if (doorRight.GetComponent<NewDoor>().isFinalDoor)
             {
-                hasExitDoor = true;
-
-                doorRight.SetActive(true);
-                doorRight.GetComponent<Door>().isFinalDoor = true;
+                doorRight.GetComponent<NewDoor>().isOpen = true;
             }
             else
             {
@@ -120,12 +117,9 @@ public class DoorManager : MonoBehaviour
         }
         else
         {
-            if (!hasExitDoor && bossRoom)
+            if (doorBottom.GetComponent<NewDoor>().isFinalDoor)
             {
-                hasExitDoor = true;
-
-                doorBottom.SetActive(true);
-                doorBottom.GetComponent<Door>().isFinalDoor = true;
+                doorBottom.GetComponent<NewDoor>().isOpen = true;
             }
             else
             {
@@ -142,12 +136,9 @@ public class DoorManager : MonoBehaviour
         }
         else
         {
-            if (!hasExitDoor && bossRoom)
+            if (doorUp.GetComponent<NewDoor>().isFinalDoor)
             {
-                hasExitDoor = true;
-
-                doorUp.SetActive(true);
-                doorUp.GetComponent<Door>().isFinalDoor = true;
+                doorUp.GetComponent<NewDoor>().isOpen = true;
             }
             else
             {
@@ -164,12 +155,9 @@ public class DoorManager : MonoBehaviour
         }
         else
         {
-            if (!hasExitDoor && bossRoom)
+            if (doorLeft.GetComponent<NewDoor>().isFinalDoor)
             {
-                hasExitDoor = true;
-
-                doorLeft.SetActive(true);
-                doorLeft.GetComponent<Door>().isFinalDoor = true;
+                doorLeft.GetComponent<NewDoor>().isOpen = true;
             }
             else
             {
@@ -195,7 +183,9 @@ public class DoorManager : MonoBehaviour
                 hasExitDoor = true;
 
                 doorRight.SetActive(true);
-                doorRight.GetComponent<Door>().isFinalDoor = true;
+                doorRight.GetComponent<NewDoor>().isFinalDoor = true;
+
+                doorRight.GetComponent<NewDoor>().isOpen = false;
             }
             else
             {
@@ -217,7 +207,9 @@ public class DoorManager : MonoBehaviour
                 hasExitDoor = true;
 
                 doorBottom.SetActive(true);
-                doorBottom.GetComponent<Door>().isFinalDoor = true;
+                doorBottom.GetComponent<NewDoor>().isFinalDoor = true;
+                
+                doorBottom.GetComponent<NewDoor>().isOpen = false;
             }
             else
             {
@@ -239,7 +231,9 @@ public class DoorManager : MonoBehaviour
                 hasExitDoor = true;
 
                 doorUp.SetActive(true);
-                doorUp.GetComponent<Door>().isFinalDoor = true;
+                doorUp.GetComponent<NewDoor>().isFinalDoor = true;
+                
+                doorUp.GetComponent<NewDoor>().isOpen = false;
             }
             else
             {
@@ -261,7 +255,9 @@ public class DoorManager : MonoBehaviour
                 hasExitDoor = true;
 
                 doorLeft.SetActive(true);
-                doorLeft.GetComponent<Door>().isFinalDoor = true;
+                doorLeft.GetComponent<NewDoor>().isFinalDoor = true;
+                
+                doorLeft.GetComponent<NewDoor>().isOpen = false;
             }
             else
             {
@@ -270,6 +266,7 @@ public class DoorManager : MonoBehaviour
         }
     }
 
+    
     public void GenerateEnnemies()
     {
         bool stopWhile = false;
