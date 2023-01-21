@@ -35,6 +35,8 @@ public class MenuPrincipalManager : MonoBehaviour
 
     public void OpenOther()
     {
+        options.GetComponent<Animator>().SetTrigger("reset");
+        
         start.GetComponent<Animator>().enabled = false;
         options.GetComponent<Animator>().enabled = false;
         exit.GetComponent<Animator>().enabled = false;
