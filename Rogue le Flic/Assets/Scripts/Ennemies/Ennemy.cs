@@ -58,6 +58,8 @@ public class Ennemy : MonoBehaviour
     public AudioSource hit;
     public AudioSource kicked;
 
+    public GameObject tutoDoor;
+
     
 
     private void Start()
@@ -298,6 +300,9 @@ public class Ennemy : MonoBehaviour
         _collider2D.enabled = false;
 
         yield return new WaitForSeconds(0.5f);
+
+        if (infiniteStun)
+            tutoDoor.GetComponent<NewDoor>().isOpen = true;
 
         Destroy(gameObject);
     }

@@ -77,9 +77,7 @@ public class ScoreManager : MonoBehaviour
         {
             NoTimeLeft();
         }
-        
-        
-        Debug.Log(enemyKill);
+       
     }
 
     public void EnemyKilled()
