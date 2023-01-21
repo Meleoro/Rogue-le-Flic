@@ -224,6 +224,7 @@ public class ManagerChara : MonoBehaviour
     public IEnumerator Death()
     {
         ScoreManager.instance.ActualiseScores();
+        MenuMortManager.Instance.scoretext.text = "Score : " + ScoreManager.instance.scoreActuel;
         
         MenuMortManager.Instance.gameObject.SetActive(true);
         
@@ -236,14 +237,13 @@ public class ManagerChara : MonoBehaviour
         ReferenceCamera.Instance.finalCinematicChara = true;
 
         MenuMortManager.Instance.fondMort.DOFade(1, 1);
+        MenuMortManager.Instance.transform.DOMoveX(transform.position.x - 6.5f, 3).SetEase(Ease.OutSine);
         
         yield return new WaitForSeconds(1f);
 
         CameraMovements.Instance.playerDeath = true;
         CameraMovements.Instance.timeZoom = 2;
         CameraMovements.Instance.posCamera = transform.position + new Vector3(-7, 0, 0);
-
-        MenuMortManager.Instance.transform.DOMoveX(transform.position.x - 6.8f, 1).SetEase(Ease.OutSine);
 
         yield return new WaitForSeconds(2f);
     }
