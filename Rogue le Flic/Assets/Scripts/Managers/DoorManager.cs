@@ -175,7 +175,13 @@ public class DoorManager : MonoBehaviour
 
             if(doorRight.CompareTag("NewDoor"))
                 doorRight.GetComponent<NewDoor>().isOpen = false;
+
+            if (GenerationPro.Instance.map.list[roomPosX + 1].list[roomPosY].CompareTag("BossRoom"))
+            {
+                doorRight.GetComponent<NewDoor>().isBossDoor = true;
+            }
         }
+
         else
         {
             if(!hasExitDoor && bossRoom)
@@ -193,13 +199,20 @@ public class DoorManager : MonoBehaviour
             }
         }
         
+
         if (GenerationPro.Instance.map.list[roomPosX].list[roomPosY - 1] != null)
         {
             doorBottom.SetActive(true);
             
             if(doorBottom.CompareTag("NewDoor"))
                 doorBottom.GetComponent<NewDoor>().isOpen = false;
+
+            if (GenerationPro.Instance.map.list[roomPosX].list[roomPosY - 1].CompareTag("BossRoom"))
+            {
+                doorBottom.GetComponent<NewDoor>().isBossDoor = true;
+            }
         }
+
         else
         {
             if (!hasExitDoor && bossRoom)
@@ -217,13 +230,20 @@ public class DoorManager : MonoBehaviour
             }
         }
         
+
         if (GenerationPro.Instance.map.list[roomPosX].list[roomPosY + 1] != null)
         {
             if(doorUp.CompareTag("NewDoor"))
                 doorUp.GetComponent<NewDoor>().isOpen = false;
             
             doorUp.SetActive(true);
+
+            if (GenerationPro.Instance.map.list[roomPosX].list[roomPosY + 1].CompareTag("BossRoom"))
+            {
+                doorUp.GetComponent<NewDoor>().isBossDoor = true;
+            }
         }
+
         else
         {
             if (!hasExitDoor && bossRoom)
@@ -241,13 +261,20 @@ public class DoorManager : MonoBehaviour
             }
         }
         
+
         if (GenerationPro.Instance.map.list[roomPosX - 1].list[roomPosY] != null)
         {
             if(doorLeft.CompareTag("NewDoor"))
                 doorLeft.GetComponent<NewDoor>().isOpen = false;
             
             doorLeft.SetActive(true);
+
+            if (GenerationPro.Instance.map.list[roomPosX - 1].list[roomPosY].CompareTag("BossRoom"))
+            {
+                doorLeft.GetComponent<NewDoor>().isBossDoor = true;
+            }
         }
+
         else
         {
             if (!hasExitDoor && bossRoom)

@@ -14,22 +14,69 @@ public class NewDoor : MonoBehaviour
 
     public BoxCollider2D boxCollider2D;
 
+    [Header("BossDoor")]
+    public GameObject tagBoss;
+    [ColorUsage(true, true)] public Color colorBoss;
+    public bool isBossDoor;
+
+
+    [Header("NextLevelDoor")]
+    public GameObject tagNextLevelDoor;
+    [ColorUsage(true, true)] public Color colorNext;
+    public bool isNextLevelDoor;
+
+
     [Header("MaterialPorte")]
     public Material material;
     [ColorUsage(true, true)]  public Color red;
     [ColorUsage(true, true)]  public Color green;
 
 
+    private void Start()
+    {
+        if (isBossDoor)
+        {
+            tagBoss.SetActive(true);
+            tagNextLevelDoor.SetActive(false);
+        }
+
+        else if (isFinalDoor)
+        {
+            tagBoss.SetActive(false);
+            tagNextLevelDoor.SetActive(true);
+        }
+
+        else
+        {
+            tagBoss.SetActive(false);
+            tagNextLevelDoor.SetActive(false);
+        }
+    }
+
+
+
     private void Update()
     {
         if (isOpen)
         {
-            lightRed.SetActive(false);
-            lightGreen.SetActive(true);
+            if (!isBossDoor)
+            {
+                lightRed.SetActive(false);
+                lightGreen.SetActive(true);
 
-            material.color = green;
+                material.color = green;
 
-            boxCollider2D.enabled = true;
+                boxCollider2D.enabled = true;
+            }
+            else
+            {
+                lightRed.SetActive(false);
+                lightGreen.SetActive(true);
+
+                material.color = colorBoss;
+
+                boxCollider2D.enabled = true;
+            }
         }
 
         else

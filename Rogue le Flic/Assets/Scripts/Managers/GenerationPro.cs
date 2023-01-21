@@ -79,8 +79,8 @@ public class GenerationPro : MonoBehaviour
             // ON FAIT APPARAITRE LE SPAWN
             if (i == 0)
             {
-                int x = 5;
-                int y = 5;
+                int x = 6;
+                int y = 6;
 
                 map.list[x].list[y] = spawn;
 

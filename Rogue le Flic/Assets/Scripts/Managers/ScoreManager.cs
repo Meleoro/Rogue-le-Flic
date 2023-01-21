@@ -98,9 +98,9 @@ public class ScoreManager : MonoBehaviour
         
         
 
-        enemykilled.Play();
+        /*enemykilled.Play();
         
-        enemykilled.pitch = 0.5f*enemyKill;
+        enemykilled.pitch = 0.5f*enemyKill;*/
 
     }
 
