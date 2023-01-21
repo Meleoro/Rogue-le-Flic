@@ -171,6 +171,8 @@ public class Ennemy : MonoBehaviour
             stun.Play();
             stunTimer = 10000;
             VFXStun.SetActive(true);
+
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * 5, ForceMode2D.Impulse);
         }
         else
         {
@@ -377,7 +379,7 @@ public class Ennemy : MonoBehaviour
     }
 
 
-    private IEnumerator Spawn()
+    public IEnumerator Spawn()
     {
         spawnIndicator.SetActive(true);
         sprite.SetActive(false);
