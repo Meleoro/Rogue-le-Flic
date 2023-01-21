@@ -824,15 +824,21 @@ MonoBehaviour:
   stockWeapon: {fileID: 0}
   noControl: 0
   munitionsActives: 0
+  isInTuto: 0
   isDashing: 0
+  keyboardDirection: 0
   posLeft: {x: 0.6, y: 0}
   posRight: {x: -0.6, y: 0}
+  fondMort: {fileID: 0}
   switchCooldown: 1
   canSwitch: 0
   anim: {fileID: 8925765913394012434}
   reload: {fileID: 1963726879}
   isFalling: 0
   savePosition: {x: 0, y: 0}
+  test: {fileID: 0}
+  death: {fileID: 0}
+  fall: {fileID: 0}
 --- !u!114 &1503478015596987165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,6 +858,8 @@ MonoBehaviour:
   dragDeceleration: 5
   dragMultiplier: 3
   sprite: {fileID: 8925765913394012445}
+  isPlaying: 0
+  audioSource1: {fileID: 0}
 --- !u!114 &1503478015596987153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,6 +886,7 @@ MonoBehaviour:
   dashBlur: {fileID: 1314531381}
   duration: 0.08
   amplitude: 0.01
+  audiosource1: {fileID: 0}
 --- !u!114 &8500281233397896041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,6 +916,7 @@ MonoBehaviour:
   dezoomMoment: 0.262
   kickVolume: {fileID: 1502092900}
   foot: {fileID: 0}
+  audioSource1: {fileID: 0}
 --- !u!114 &1990982738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -933,7 +943,7 @@ MonoBehaviour:
   - {x: 0.32733202, y: -0.82241535, z: 0}
   m_ShapePathHash: 1347242869
   m_Mesh: {fileID: 0}
-  m_InstanceId: 319528
+  m_InstanceId: 166720
 --- !u!1 &8319384481229060628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,3 +1097,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isChara: 1
+  isEnnemi: 0
