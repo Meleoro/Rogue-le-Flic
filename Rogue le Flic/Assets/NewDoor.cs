@@ -14,6 +14,11 @@ public class NewDoor : MonoBehaviour
 
     public BoxCollider2D boxCollider2D;
 
+    [Header("MaterialPorte")]
+    public Material material;
+    public Color red;
+    public Color green;
+
 
     private void Update()
     {
@@ -22,6 +27,8 @@ public class NewDoor : MonoBehaviour
             lightRed.SetActive(false);
             lightGreen.SetActive(true);
 
+            material.color = green;
+
             boxCollider2D.enabled = true;
         }
 
@@ -29,7 +36,9 @@ public class NewDoor : MonoBehaviour
         {
             lightRed.SetActive(true);
             lightGreen.SetActive(false);
-            
+
+            material.color = red;
+
             boxCollider2D.enabled = false;
         }
     }
