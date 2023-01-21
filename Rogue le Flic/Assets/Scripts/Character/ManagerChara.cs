@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Pathfinding;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class ManagerChara : MonoBehaviour
 {
@@ -222,6 +223,8 @@ public class ManagerChara : MonoBehaviour
 
     public IEnumerator Death()
     {
+        ScoreManager.instance.ActualiseScores();
+        
         MenuMortManager.Instance.gameObject.SetActive(true);
         
         noControl = true;

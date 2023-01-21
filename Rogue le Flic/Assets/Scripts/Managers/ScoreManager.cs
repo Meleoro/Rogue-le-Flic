@@ -82,6 +82,8 @@ public class ScoreManager : MonoBehaviour
         enemyKillTxt.alpha = 255;
         enemyKillTxt.DOFade(0, timerMax);
         scoreCountText.DOFade(0, timerMax);
+
+        scoreActuel += 100;
     }
 
 
@@ -135,6 +137,34 @@ public class ScoreManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("bestScore5"))
         {
             PlayerPrefs.SetFloat("bestScore5", 0);
+        }
+    }
+    
+    public void ActualiseScores()
+    {
+        if (PlayerPrefs.GetFloat("bestScore1") < ScoreManager.instance.scoreActuel)
+        {
+            PlayerPrefs.SetFloat("bestScore1", ScoreManager.instance.scoreActuel);
+        }
+        
+        else if (PlayerPrefs.GetFloat("bestScore2") < ScoreManager.instance.scoreActuel)
+        {
+            PlayerPrefs.SetFloat("bestScore2", ScoreManager.instance.scoreActuel);
+        }
+        
+        else if (PlayerPrefs.GetFloat("bestScore3") < ScoreManager.instance.scoreActuel)
+        {
+            PlayerPrefs.SetFloat("bestScore3", ScoreManager.instance.scoreActuel);
+        }
+        
+        else if (PlayerPrefs.GetFloat("bestScore4") < ScoreManager.instance.scoreActuel)
+        {
+            PlayerPrefs.SetFloat("bestScore4", ScoreManager.instance.scoreActuel);
+        }
+        
+        else if (PlayerPrefs.GetFloat("bestScore5") < ScoreManager.instance.scoreActuel)
+        {
+            PlayerPrefs.SetFloat("bestScore5", ScoreManager.instance.scoreActuel);
         }
     }
 }

@@ -96,14 +96,14 @@ public class HealthManager : MonoBehaviour
             if (currentHealth <= 0)
             {
                 ManagerChara.Instance.noControl = true;
-                
+
                 StartCoroutine(ManagerChara.Instance.Death());
             }
 
-            
             timerInvincible = invincibleTime;
         }
     }
+    
 
     public void AddHealth()
     {
