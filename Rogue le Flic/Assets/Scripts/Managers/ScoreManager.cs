@@ -77,6 +77,9 @@ public class ScoreManager : MonoBehaviour
         {
             NoTimeLeft();
         }
+        
+        
+        Debug.Log(enemyKill);
     }
 
     public void EnemyKilled()
@@ -94,7 +97,13 @@ public class ScoreManager : MonoBehaviour
         scoreActuel += 100;
         
         
+        
+        
+
         enemykilled.Play();
+        
+        enemykilled.pitch = 0.5f*enemyKill;
+
     }
 
 

@@ -38,6 +38,9 @@ public class Turtle : MonoBehaviour
     public LayerMask layerInvincible;
 
 
+    public AudioSource windUp;
+    
+
     private void Start()
     {
         if (LevelManager.Instance.currentLevel == 1)
@@ -330,6 +333,8 @@ public class Turtle : MonoBehaviour
 
         ennemy.anim.SetTrigger("StartAttack");
         ennemy.anim.SetBool("isWalking", false);
+        
+        windUp.Play();
 
         transform.DOShakePosition(0.75f, 0.3f);
 

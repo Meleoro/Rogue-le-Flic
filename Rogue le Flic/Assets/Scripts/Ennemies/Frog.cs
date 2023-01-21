@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,6 +34,10 @@ public class Frog : MonoBehaviour
     private bool stopDeath;
 
     [HideInInspector] public bool canShoot;
+
+
+    public AudioSource windUp;
+    
 
 
     private void Start()
@@ -165,6 +170,10 @@ public class Frog : MonoBehaviour
         Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
         Vector2 destination = ManagerChara.Instance.transform.position + direction.normalized * 3;
         
+        
+        windUp.Play();
+        
+        
         transform.DOShakePosition(0.75f, 0.3f);
 
         GetComponent<Ennemy>().isCharging = true;
@@ -173,7 +182,7 @@ public class Frog : MonoBehaviour
         
         GetComponent<Ennemy>().isCharging = false;
         
-        GameObject currentTongue = Instantiate(frogData.tongue, transform.position, Quaternion.identity, transform);
+        GameObject currentTongue = Instantiate(frogData.tongue, transform.position + new Vector3(0, 0.6f, 0), Quaternion.identity, transform);
 
         currentTongue.GetComponent<FrogTongue>().destination = destination;
         currentTongue.GetComponent<FrogTongue>().tongueDuration = frogData.shotDuration;

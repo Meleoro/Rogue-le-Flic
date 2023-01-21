@@ -482,7 +482,7 @@ public class FrogBoss : MonoBehaviour
 
             yield return new WaitForSeconds(0.6f);
 
-            GameObject currentTongue = Instantiate(bossData.tongue, transform.position, Quaternion.identity, transform);
+            GameObject currentTongue = Instantiate(bossData.tongue, transform.position + new Vector3(0, 1f, 0), Quaternion.identity, transform);
 
             currentTongue.GetComponent<BossFrogTongue>().destination = destination;
             currentTongue.GetComponent<BossFrogTongue>().tongueDuration = bossData.shotDuration;
@@ -490,6 +490,9 @@ public class FrogBoss : MonoBehaviour
             yield return new WaitForSeconds(bossData.shotDuration);
 
             canMove = true;
+
+            if (!canShoot)
+                k = 1000;
         }
 
         //rb.AddForce(-direction.normalized, ForceMode2D.Impulse);
