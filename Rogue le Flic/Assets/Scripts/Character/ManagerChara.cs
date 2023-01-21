@@ -197,6 +197,8 @@ public class ManagerChara : MonoBehaviour
         {
             GameObject save = activeGun;
 
+            HUDManager.Instance.ammo.DOColor(Color.white, 0);
+
             activeGun = stockWeapon;
             stockWeapon = save;
 
