@@ -45,6 +45,9 @@ public class ScoreManager : MonoBehaviour
         enemyKill = 1;
         timer = timerMax;
         timerTrue = true;
+        
+        // SAUVEGARDE DES SCORES
+        InitializePlayerPref();
     }
 
 
@@ -53,11 +56,8 @@ public class ScoreManager : MonoBehaviour
         scoreCountText.text = "+" + scoreCount.ToString();
         scoreActuelText.text = scoreActuel.ToString();
         enemyKillTxt.text = "x" + enemyKill.ToString();
-        
 
         timer = timer - Time.deltaTime;
-
-
         
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -106,5 +106,35 @@ public class ScoreManager : MonoBehaviour
     {
         scoreActuel = scoreActuel + 1;
         yield return new WaitForSeconds(0.1f);
+    }
+
+
+
+    public void InitializePlayerPref()
+    {
+        if (!PlayerPrefs.HasKey("bestScore1"))
+        {
+            PlayerPrefs.SetFloat("bestScore1", 0);
+        }
+        
+        if (!PlayerPrefs.HasKey("bestScore2"))
+        {
+            PlayerPrefs.SetFloat("bestScore2", 0);
+        }
+        
+        if (!PlayerPrefs.HasKey("bestScore3"))
+        {
+            PlayerPrefs.SetFloat("bestScore3", 0);
+        }
+        
+        if (!PlayerPrefs.HasKey("bestScore4"))
+        {
+            PlayerPrefs.SetFloat("bestScore4", 0);
+        }
+        
+        if (!PlayerPrefs.HasKey("bestScore5"))
+        {
+            PlayerPrefs.SetFloat("bestScore5", 0);
+        }
     }
 }
