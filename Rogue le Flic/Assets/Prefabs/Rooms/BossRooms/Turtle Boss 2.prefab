@@ -675,7 +675,7 @@ GameObject:
   - component: {fileID: 3079449133540918326}
   m_Layer: 0
   m_Name: Turtle Boss 2
-  m_TagString: Untagged
+  m_TagString: BossRoom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -782,8 +782,10 @@ MonoBehaviour:
   - {fileID: 6114586216619409626}
   - {fileID: 1590777404913450429}
   - {fileID: 3046268134269590373}
+  spotFrog: []
   isLastBoss: 0
   boss: {fileID: 4043055109203538910}
+  sweep: {fileID: 0}
 --- !u!1 &1547605855439420294
 GameObject:
   m_ObjectHideFlags: 0
@@ -5263,6 +5265,10 @@ PrefabInstance:
     - target: {fileID: 7074946344121746031, guid: 6fd19f790e2976845abf2b1813ae79d4, type: 3}
       propertyPath: m_Size.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273427246659327540, guid: 6fd19f790e2976845abf2b1813ae79d4, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1061652188930730977, guid: 6fd19f790e2976845abf2b1813ae79d4, type: 3}

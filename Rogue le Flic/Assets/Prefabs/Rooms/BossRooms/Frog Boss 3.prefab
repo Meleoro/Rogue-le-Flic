@@ -964,7 +964,7 @@ GameObject:
   - component: {fileID: 3079449133540918326}
   m_Layer: 0
   m_Name: Frog Boss 3
-  m_TagString: Untagged
+  m_TagString: BossRoom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1077,6 +1077,7 @@ MonoBehaviour:
   - {fileID: 1271137118}
   isLastBoss: 1
   boss: {fileID: 6301977091852409884}
+  sweep: {fileID: 0}
 --- !u!1 &1547605855439420294
 GameObject:
   m_ObjectHideFlags: 0
@@ -4196,6 +4197,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3671252992116237101, guid: 066419e31370f6c4cb765423dd241697, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6263996166541424039, guid: 066419e31370f6c4cb765423dd241697, type: 3}
       propertyPath: m_Name
       value: FrogBoss
@@ -4263,6 +4268,14 @@ PrefabInstance:
     - target: {fileID: 7074946344121746031, guid: 066419e31370f6c4cb765423dd241697, type: 3}
       propertyPath: m_Size.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7718379624832980979, guid: 066419e31370f6c4cb765423dd241697, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8841453120344934846, guid: 066419e31370f6c4cb765423dd241697, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 066419e31370f6c4cb765423dd241697, type: 3}

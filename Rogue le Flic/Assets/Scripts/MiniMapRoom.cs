@@ -8,4 +8,6 @@ public class MiniMapRoom : MonoBehaviour
     public GameObject leftDoor;
     public GameObject upDoor;
     public GameObject downDoor;
+    
+    
 }

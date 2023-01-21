@@ -45,9 +45,7 @@ public class Gun : MonoBehaviour
     private float currentFireRate;
     private float currentdureeChargement;
 
-    [Header("Colors")] 
-    public Color colorFull;
-    public Color colorEmpty;
+    [Header("Colors")]
     private bool isRed;
     private bool isWhite;
 

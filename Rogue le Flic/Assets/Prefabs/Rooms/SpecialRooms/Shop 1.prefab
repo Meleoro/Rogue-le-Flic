@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 2
+  isFinalDoor: 0
 --- !u!1 &753256907215982966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,6 +2325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 1
+  isFinalDoor: 0
 --- !u!1 &6460342174784775937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2337,7 +2339,7 @@ GameObject:
   - component: {fileID: 6622452753882870427}
   m_Layer: 0
   m_Name: Shop 1
-  m_TagString: Untagged
+  m_TagString: ShopRoom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2399,7 +2401,10 @@ MonoBehaviour:
   currentEnnemies: []
   ennemyCount: 0
   spawnLoots: []
+  healObject: {fileID: 0}
+  probaDropHeal: 0
   isFinished: 0
+  bossRoom: 0
 --- !u!114 &6622452753882870427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2719,6 +2724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 0
+  isFinalDoor: 0
 --- !u!1 &7678672742281139943
 GameObject:
   m_ObjectHideFlags: 0
@@ -2986,6 +2992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 3
+  isFinalDoor: 0
 --- !u!1 &9026518947988747160
 GameObject:
   m_ObjectHideFlags: 0
