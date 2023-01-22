@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,14 @@ public class TriggerTuto : MonoBehaviour
     public Ennemy beaverToSpawn;
 
     public Vector3 posCamera;
+
+    private bool doOnce;
+
+
+    private void Start()
+    {
+        doOnce = false;
+    }
 
 
     IEnumerator SpawnCinematique()
@@ -33,8 +42,9 @@ public class TriggerTuto : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !doOnce)
         {
+            doOnce = true;
             StartCoroutine(SpawnCinematique());
         }
     }
