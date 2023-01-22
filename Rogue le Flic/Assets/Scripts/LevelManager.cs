@@ -105,9 +105,14 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(FonduManager.Instance.ChangeScene(level2, false));
         }
 
-        else
+        else if (currentLevel == 3)
         {
             StartCoroutine(FonduManager.Instance.ChangeScene(level3, false));
+        }
+
+        else
+        {
+            StartCoroutine(FonduManager.Instance.ChangeScene("Outro", false));
         }
     }
 }
