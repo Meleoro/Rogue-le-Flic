@@ -20,7 +20,8 @@ public class Boss : MonoBehaviour
     public boss bossType;
 
     public bool isHurt;
-    
+    public bool isAlone;
+
     [Header("Feedbacks")] 
     public Color hitColor;
 

@@ -39,6 +39,11 @@ public class BossRoom : MonoBehaviour
                 else if (k == 1)
                     boss3.GetComponent<Boss>().bossNumber = k + 1;
             }
+
+            if(LevelManager.Instance.savedBoss.Count == 0)
+            {
+                boss.GetComponent<Boss>().isAlone = true;
+            }
         }
 
         boss.GetComponent<Boss>().bossRoom = gameObject;

@@ -12,6 +12,7 @@ public class BeaverBoss : MonoBehaviour
     public BeaverBossData niveau2;
     public BeaverBossData niveau3;
     public BeaverBossData affaibli;
+    public BeaverBossData alone;
 
     [HideInInspector] public BeaverBossData bossData;
 
@@ -81,6 +82,11 @@ public class BeaverBoss : MonoBehaviour
         if (boss.isHurt)
         {
             bossData = affaibli;
+        }
+
+        else if (boss.isAlone)
+        {
+            bossData = alone;
         }
         
         

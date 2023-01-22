@@ -12,6 +12,7 @@ public class TurtleBoss : MonoBehaviour
     public TurtleBossData niveau2;
     public TurtleBossData niveau3;
     public TurtleBossData affaibli;
+    public TurtleBossData alone;
     
     [HideInInspector] public TurtleBossData bossData;
 
@@ -88,8 +89,12 @@ public class TurtleBoss : MonoBehaviour
         {
             bossData = affaibli;
         }
-        
-        
+        else if (boss.isAlone)
+        {
+            bossData = alone;
+        }
+
+
         canMove = true;
         
         if (boss.bossNumber == 0)
