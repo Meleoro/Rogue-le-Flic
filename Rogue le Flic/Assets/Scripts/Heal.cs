@@ -23,8 +23,7 @@ public class Heal : MonoBehaviour
         {
             if (ManagerChara.Instance.controls.Character.Enter.WasPerformedThisFrame())
             {
-                HealthManager.Instance.AddHealth();
-                Destroy(gameObject);
+                
             }
         }
 
@@ -45,6 +44,8 @@ public class Heal : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            HealthManager.Instance.AddHealth();
+            Destroy(gameObject);
             canInteract = true;
         }
     }
