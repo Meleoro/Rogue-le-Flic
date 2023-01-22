@@ -240,28 +240,25 @@ public class Turtle : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject collider)
     {
-        if (!isSliding)
+        currentHealth -= damages;
+
+        // RECUL
+        if (collider.CompareTag("Bullet"))
+            rb.AddForce(collider.GetComponent<Bullet>().directionBullet * collider.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+        
+        else if (!isSliding) 
         {
-            currentHealth -= damages;
-
-            // RECUL
-            if (collider.CompareTag("Bullet"))
-                rb.AddForce(collider.GetComponent<Bullet>().directionBullet * collider.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
-
-            else
-            {
-                Vector2 directionForce = new Vector2(transform.position.x - collider.transform.position.x, transform.position.y - collider.transform.position.y);
-
-                StopCoroutine();
-
-                rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
-            }
-
-            VerifyDeath();
-
-            hitEffect.Clear();
-            hitEffect.Play();
+            Vector2 directionForce = new Vector2(transform.position.x - collider.transform.position.x, transform.position.y - collider.transform.position.y);
+            
+            StopCoroutine();
+            
+            rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
         }
+
+        VerifyDeath();
+
+        hitEffect.Clear();
+        hitEffect.Play();
     }
     
     

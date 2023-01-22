@@ -30,6 +30,6 @@ public class Viseur : MonoBehaviour
 
     public void GrossissementShoot(float duree)
     {
-        transform.DOScale(new Vector3(0.6f, 0.6f, 1), duree/3).OnComplete((() => transform.DOScale(new Vector3(0.5f, 0.5f, 1), (duree/3) * 2))); 
+        transform.DOScale(new Vector3(0.7f, 0.7f, 1), duree/3).OnComplete((() => transform.DOScale(new Vector3(0.5f, 0.5f, 1), (duree/3) * 2))); 
     }
 }

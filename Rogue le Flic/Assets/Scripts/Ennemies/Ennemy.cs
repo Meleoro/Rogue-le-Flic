@@ -220,12 +220,10 @@ public class Ennemy : MonoBehaviour
 
     public IEnumerator FeedbackDamage(SpriteRenderer currentSprite)
     {
-
+        currentSprite.DOColor(hitColor, 0.12f);
         
         hit.pitch = Random.Range(0.4f,1.6f);
         hit.Play();
-        
-        currentSprite.DOColor(hitColor, 0.12f);
 
         yield return new WaitForSeconds(0.12f);
         
