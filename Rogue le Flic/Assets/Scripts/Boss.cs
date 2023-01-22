@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class Boss : MonoBehaviour
@@ -42,6 +44,9 @@ public class Boss : MonoBehaviour
     public GameObject spawnIndicator;
     public BoxCollider2D _collider2D;
     [HideInInspector] public GameObject bossRoom;
+
+    public GameObject moneyBag;
+    private GameObject money;
     
 
     private void Start()
@@ -458,17 +463,33 @@ public class Boss : MonoBehaviour
         ReferenceChoice.Instance.kick.DOLocalMoveX(350, 2);
         ReferenceChoice.Instance.spare.DOLocalMoveX(-350, 2);
 
+        if (lookLeft)
+        {
+            money = Instantiate(moneyBag, transform.position, Quaternion.Euler(0, 180, 0), transform);
+            money.transform.DOMove(money.transform.position + new Vector3(-0.8f, 0, 0), 2);
+        }
+
+        else
+        {
+            money = Instantiate(moneyBag, transform.position, Quaternion.Euler(0, 0, 0), transform);
+            money.transform.DOMove(money.transform.position + new Vector3(0.8f, 0, 0), 2);
+        }
+
         yield return new WaitForSeconds(2);
 
 
         ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = true;
         ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = true;
+
+        Viseur.Instance.viseurActif = false;
     }
     
 
     public IEnumerator EndCinematicDeath()
     {
         DOTween.KillAll();
+        
+        Viseur.Instance.viseurActif = true;
         
         if (lookLeft)
         {
@@ -495,6 +516,7 @@ public class Boss : MonoBehaviour
         ReferenceChoice.Instance.kick.DOLocalMoveX(800, 1);
         ReferenceChoice.Instance.spare.DOLocalMoveX(-800, 1);
         
+        Destroy(money);
         
         // ON CHOISI DE KICK
         if (ReferenceChoice.Instance.kicked)
