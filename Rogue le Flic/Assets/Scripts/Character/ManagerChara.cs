@@ -245,7 +245,7 @@ public class ManagerChara : MonoBehaviour
         
         yield return new WaitForSeconds(1f);
 
-        Cursor.visible = true;
+        Viseur.Instance.viseurActif = false;
 
         CameraMovements.Instance.playerDeath = true;
         CameraMovements.Instance.timeZoom = 2;

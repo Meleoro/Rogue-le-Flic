@@ -76,6 +76,9 @@ public class Shop : MonoBehaviour
         {
             CloseShop();
         }
+
+        if (isOpen)
+            ManagerChara.Instance.noControl = true;
         
         if (ManagerChara.Instance.controls.Character.Enter.WasPressedThisFrame() && canUseShop)
         {
@@ -117,11 +120,14 @@ public class Shop : MonoBehaviour
         CameraMovements.Instance.canMove = false;
 
         timerEnter = 4f;
+
+        Viseur.Instance.viseurActif = false;
     }
 
     
     void CloseShop()
     {
+        Viseur.Instance.viseurActif = true;
 
         close.Play();
 
@@ -130,11 +136,11 @@ public class Shop : MonoBehaviour
         moneyUI.DOLocalMove(originalPosMoney, closingDuration);
         fond.DOFade(0f, 0.5f);
         
+        isOpen = false;
+        
         ManagerChara.Instance.noControl = false;
         CameraMovements.Instance.canMove = true;
 
-        isOpen = false;
-        
         CameraMovements.Instance.timerTransition = 1;
         CameraMovements.Instance.isInTransition = true;
         CameraMovements.Instance.departTransition = CameraMovements.Instance.transform.position;

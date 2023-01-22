@@ -52,6 +52,8 @@ public class Module : MonoBehaviour
     
     public void OpenChoice()
     {
+        Viseur.Instance.viseurActif = false;
+        
         canBeGrab = false;
         
         UIActive = true;
@@ -93,6 +95,8 @@ public class Module : MonoBehaviour
 
     public void CloseChoice()
     {
+        Viseur.Instance.viseurActif = true;
+        
         UIExplications.SetActive(true);
         UIChoix.SetActive(false);
 

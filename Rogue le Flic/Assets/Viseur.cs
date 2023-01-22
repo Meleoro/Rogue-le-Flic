@@ -8,6 +8,8 @@ public class Viseur : MonoBehaviour
 {
     public static Viseur Instance;
 
+    public bool viseurActif;
+
     private void Awake()
     {
         if (Instance == null)
@@ -20,12 +22,22 @@ public class Viseur : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
+        viseurActif = true;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         transform.position = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>()) + new Vector3(0, 0, 10);
+
+        if (viseurActif)
+        {
+            Cursor.visible = false;
+        }
+
+        else
+        {
+            Cursor.visible = true;
+        }
     }
 
     public void GrossissementShoot(float duree)
