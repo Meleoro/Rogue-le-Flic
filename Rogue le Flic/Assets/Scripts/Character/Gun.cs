@@ -204,6 +204,7 @@ public class Gun : MonoBehaviour
                         isWhite = true;
 
                         HUDManager.Instance.ammo.DOColor(Color.red, 0.1f).OnComplete((() => isWhite = false));
+                        HUDManager.Instance.ammo.transform.DOScale(new Vector3(0.55f, 0.55f, 0.55f), 0.1f);
                     }
                     
                     else if (!isWhite)
@@ -212,6 +213,7 @@ public class Gun : MonoBehaviour
                         isWhite = true;
 
                         HUDManager.Instance.ammo.DOColor(Color.white, 0.3f).OnComplete((() => isRed = false));
+                        HUDManager.Instance.ammo.transform.DOScale(new Vector3(0.45f, 0.45f, 0.45f), 0.3f);
                     }
                 }
                 else
@@ -219,6 +221,7 @@ public class Gun : MonoBehaviour
                     isRed = false;
                     
                     HUDManager.Instance.ammo.DOColor(Color.white, 0);
+                    HUDManager.Instance.ammo.transform.DOScale(new Vector3(0.45f, 0.45f, 0.45f), 0f);
                 }
             }
 
@@ -413,7 +416,7 @@ public class Gun : MonoBehaviour
 
 
                 //here
-                gunData.shoot.Play();
+                shoot.Play();
 
                     GameObject refBullet = Instantiate(bullet, ManagerChara.Instance.transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
