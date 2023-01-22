@@ -50,6 +50,7 @@ public class BossRoom : MonoBehaviour
     {
         if (boss2 is not null)
         {
+            Debug.Log(12);
             boss2.GetComponent<Boss>().canMove = false;
         }
         if (boss3 is not null)

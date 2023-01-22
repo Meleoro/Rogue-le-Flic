@@ -51,6 +51,8 @@ public class Boss : MonoBehaviour
             case boss.Beaver:
                 beaverScript = GetComponent<BeaverBoss>();
 
+                beaverScript.InitialiseBoss();
+
                 if (isHurt)
                 {
                     beaverScript.currentHealth = beaverScript.bossData.health / 2;
@@ -66,6 +68,8 @@ public class Boss : MonoBehaviour
             case boss.Frog:
                 frogScript = GetComponent<FrogBoss>();
                 
+                frogScript.InitialiseBoss();
+                
                 if (isHurt)
                 {
                     frogScript.currentHealth = frogScript.bossData.health / 2;
@@ -80,6 +84,8 @@ public class Boss : MonoBehaviour
             
             case boss.Turtle:
                 turtleScript = GetComponent<TurtleBoss>();
+                
+                turtleScript.InitialiseBoss();
                 
                 if (isHurt)
                 {
