@@ -413,8 +413,10 @@ public class Gun : MonoBehaviour
 
 
                 //here
-                gunData.shoot.Play();
-
+                //gunData.shoot.Play();
+                
+                shoot.Play();
+                
                     GameObject refBullet = Instantiate(bullet, ManagerChara.Instance.transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
 
