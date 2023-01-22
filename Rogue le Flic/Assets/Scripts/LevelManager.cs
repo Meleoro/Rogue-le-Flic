@@ -112,7 +112,7 @@ public class LevelManager : MonoBehaviour
 
         else
         {
-            StartCoroutine(FonduManager.Instance.ChangeScene("Outro", false));
+            StartCoroutine(FonduManager.Instance.ChangeScene("Outro", true));
         }
     }
 }
