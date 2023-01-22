@@ -47,6 +47,8 @@ public class Boss : MonoBehaviour
 
     public GameObject moneyBag;
     private GameObject money;
+    private bool doOnceEnd;
+    private bool doOnceEnd2;
     
 
     private void Start()
@@ -485,141 +487,159 @@ public class Boss : MonoBehaviour
     }
     
 
+    
     public IEnumerator EndCinematicDeath()
     {
-        DOTween.KillAll();
-        
-        Viseur.Instance.viseurActif = true;
-        
-        if (lookLeft)
+        if (!doOnceEnd)
         {
-            ManagerChara.Instance.transform.position = bossRoom.transform.position + new Vector3(-4.5f, 6, 0);
-            transform.position = bossRoom.transform.position + new Vector3(5.5f, 6, 0);
-            CameraMovements.Instance.transform.position = bossRoom.transform.position + new Vector3(0.5f, 6, 0);
-        }
-        else
-        {
-            ManagerChara.Instance.transform.position = bossRoom.transform.position + new Vector3(5.5f, 6, 0);
-            transform.position = bossRoom.transform.position + new Vector3(-4.5f, 6, 0);
-            CameraMovements.Instance.transform.position = bossRoom.transform.position + new Vector3(0.5f, 6, 0);
-        }
-
-        yield return new WaitForSeconds(0.1f);
+            doOnceEnd = true;
+            
+            DOTween.KillAll();
         
-
-        ChooseLoot(ReferenceChoice.Instance.kicked);
-        
-        
-        ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = false;
-        ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = false;
-        
-        ReferenceChoice.Instance.kick.DOLocalMoveX(800, 1);
-        ReferenceChoice.Instance.spare.DOLocalMoveX(-800, 1);
-        
-        Destroy(money);
-        
-        // ON CHOISI DE KICK
-        if (ReferenceChoice.Instance.kicked)
-        {
-            ManagerChara.Instance.anim.SetBool("isWalking", true);
+            Viseur.Instance.viseurActif = true;
             
             if (lookLeft)
             {
-                ManagerChara.Instance.transform.DOMoveX(transform.position.x - 5, 1).SetEase(Ease.Linear);
+                ManagerChara.Instance.transform.position = bossRoom.transform.position + new Vector3(-4.5f, 6, 0);
+                transform.position = bossRoom.transform.position + new Vector3(5.5f, 6, 0);
+                CameraMovements.Instance.transform.position = bossRoom.transform.position + new Vector3(0.5f, 6, 0);
             }
             else
             {
-                ManagerChara.Instance.transform.DOMoveX(transform.position.x + 5, 1).SetEase(Ease.Linear);
+                ManagerChara.Instance.transform.position = bossRoom.transform.position + new Vector3(5.5f, 6, 0);
+                transform.position = bossRoom.transform.position + new Vector3(-4.5f, 6, 0);
+                CameraMovements.Instance.transform.position = bossRoom.transform.position + new Vector3(0.5f, 6, 0);
             }
-            
-            yield return new WaitForSeconds(1f);
-            
-            ManagerChara.Instance.anim.SetBool("isWalking", false);
-            
-            yield return new WaitForSeconds(0.2f);
-            
-            ManagerChara.Instance.anim.SetTrigger("isKicking");
-            
-            if (ManagerChara.Instance.transform.position.x > transform.position.x)
-            {
-                StartCoroutine(KickChara.Instance.Kick(Vector2.right));
-            }
-            else
-            {
-                StartCoroutine(KickChara.Instance.Kick(Vector2.left));
-            }
-            
+
             yield return new WaitForSeconds(0.1f);
             
-            anim.SetTrigger("death");
-            
-            yield return new WaitForSeconds(1f);
-        }
 
-        // ON CHOISI DE SPARE
-        else
-        {
-            canShake = false;
+            ChooseLoot(ReferenceChoice.Instance.kicked);
             
-            StartCoroutine(JumpChoroutine());
+            
+            ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = false;
+            ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = false;
+            
+            ReferenceChoice.Instance.kick.DOLocalMoveX(800, 1);
+            ReferenceChoice.Instance.spare.DOLocalMoveX(-800, 1);
+            
+            Destroy(money);
+            
+            // ON CHOISI DE KICK
+            if (ReferenceChoice.Instance.kicked)
+            {
+                ManagerChara.Instance.anim.SetBool("isWalking", true);
+                
+                if (lookLeft)
+                {
+                    ManagerChara.Instance.transform.DOMoveX(transform.position.x - 5, 1).SetEase(Ease.Linear);
+                }
+                else
+                {
+                    ManagerChara.Instance.transform.DOMoveX(transform.position.x + 5, 1).SetEase(Ease.Linear);
+                }
+                
+                yield return new WaitForSeconds(1f);
+                
+                ManagerChara.Instance.anim.SetBool("isWalking", false);
+                
+                yield return new WaitForSeconds(0.2f);
+                
+                ManagerChara.Instance.anim.SetTrigger("isKicking");
+                
+                if (ManagerChara.Instance.transform.position.x > transform.position.x)
+                {
+                    StartCoroutine(KickChara.Instance.Kick(Vector2.right));
+                }
+                else
+                {
+                    StartCoroutine(KickChara.Instance.Kick(Vector2.left));
+                }
+                
+                yield return new WaitForSeconds(0.1f);
+                
+                anim.SetTrigger("death");
+                
+                yield return new WaitForSeconds(1f);
+            }
+
+            // ON CHOISI DE SPARE
+            else if(ReferenceChoice.Instance.spared)
+            {
+                canShake = false;
+
+                if (!doOnceEnd2)
+                {
+                    doOnceEnd2 = true;
+                    
+                    switch (bossType)
+                    {
+                        case boss.Beaver:
+                            if(!LevelManager.Instance.savedBoss.Contains(LevelManager.Instance.beaverHurt))
+                                LevelManager.Instance.savedBoss.Add(LevelManager.Instance.beaverHurt);
+                            break;
+
+                        case boss.Frog:
+                            if(!LevelManager.Instance.savedBoss.Contains(LevelManager.Instance.frogBoss))
+                                LevelManager.Instance.savedBoss.Add(LevelManager.Instance.frogBoss);
+                            break;
+
+                        case boss.Turtle:
+                            if(!LevelManager.Instance.savedBoss.Contains(LevelManager.Instance.turtleBoss))
+                                LevelManager.Instance.savedBoss.Add(LevelManager.Instance.turtleBoss);
+                            break;
+                    }
+                
+                    StartCoroutine(JumpChoroutine());
+
+                    yield return new WaitForSeconds(1f);
+                }
+            }
+
+
+            Vector2 offsetCamera = ManagerChara.Instance.transform.position - CameraMovements.Instance.transform.position;
+
+            //ManagerChara.Instance.transform.position = ManagerChara.Instance.savePosition;
+            //CameraMovements.Instance.transform.position = ManagerChara.Instance.savePosition + offsetCamera;
+            
+            CameraMovements.Instance.posCamera = ManagerChara.Instance.transform.position;
+            CameraMovements.Instance.timeZoom = 0.2f;
+            CameraMovements.Instance.Reboot();
+
+            ReferenceCamera.Instance.fondNoir.DOFade(0, 1);
+
+            yield return new WaitForSeconds(1);
+
 
             switch (bossType)
             {
                 case boss.Beaver:
-                    LevelManager.Instance.savedBoss.Add(LevelManager.Instance.beaverHurt);
+                    LevelManager.Instance.banishedRooms.Add(0);
                     break;
 
                 case boss.Frog:
-                    LevelManager.Instance.savedBoss.Add(LevelManager.Instance.frogBoss);
+                    LevelManager.Instance.banishedRooms.Add(1);
                     break;
 
                 case boss.Turtle:
-                    LevelManager.Instance.savedBoss.Add(LevelManager.Instance.turtleBoss);
+                    LevelManager.Instance.banishedRooms.Add(2);
                     break;
             }
+            
+            ReferenceCamera.Instance.finalCinematic = false;
+            ReferenceCamera.Instance.finalCinematicChara = false;
 
-            yield return new WaitForSeconds(1f);
+            ManagerChara.Instance.noControl = false;
+            CameraMovements.Instance.bossEndRoom = false;
+
+            MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActivesGreen();
+
+            Destroy(gameObject);
         }
-
-
-        Vector2 offsetCamera = ManagerChara.Instance.transform.position - CameraMovements.Instance.transform.position;
-
-        //ManagerChara.Instance.transform.position = ManagerChara.Instance.savePosition;
-        //CameraMovements.Instance.transform.position = ManagerChara.Instance.savePosition + offsetCamera;
-        
-        CameraMovements.Instance.posCamera = ManagerChara.Instance.transform.position;
-        CameraMovements.Instance.timeZoom = 0.2f;
-        CameraMovements.Instance.Reboot();
-
-        ReferenceCamera.Instance.fondNoir.DOFade(0, 1);
-
-        yield return new WaitForSeconds(1);
-
-
-        switch (bossType)
+        else
         {
-            case boss.Beaver:
-                LevelManager.Instance.banishedRooms.Add(0);
-                break;
-
-            case boss.Frog:
-                LevelManager.Instance.banishedRooms.Add(1);
-                break;
-
-            case boss.Turtle:
-                LevelManager.Instance.banishedRooms.Add(2);
-                break;
+            yield break;
         }
-        
-        ReferenceCamera.Instance.finalCinematic = false;
-        ReferenceCamera.Instance.finalCinematicChara = false;
-
-        ManagerChara.Instance.noControl = false;
-        CameraMovements.Instance.bossEndRoom = false;
-
-        MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActivesGreen();
-
-        Destroy(gameObject);
     }
     
     
