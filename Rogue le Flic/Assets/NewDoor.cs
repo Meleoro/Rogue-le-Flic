@@ -32,6 +32,10 @@ public class NewDoor : MonoBehaviour
     [ColorUsage(true, true)]  public Color green;
 
 
+    public AudioSource ding;
+    public AudioSource open;
+    
+
     private void Start()
     {
         if (isBossDoor)
@@ -77,6 +81,8 @@ public class NewDoor : MonoBehaviour
 
                 boxCollider2D.enabled = true;
             }
+            
+            ding.Play();
         }
 
         else
