@@ -116,6 +116,8 @@ public class Module : MonoBehaviour
     
     public void ChoiceSlot(int slot)
     {
+        Viseur.Instance.viseurActif = true;
+
         CameraMovements.Instance.timerTransition = 1;
         CameraMovements.Instance.isInTransition = true;
         CameraMovements.Instance.departTransition = CameraMovements.Instance.transform.position;
