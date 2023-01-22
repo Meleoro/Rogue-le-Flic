@@ -27,16 +27,9 @@ public class MenuMortManager : MonoBehaviour
         } 
     }
 
-    void Start()
-    {
-        
-    }
-
 
     public void Restart()
     {
-        SceneManager.LoadScene("Level 1");
-        
-        Destroy(DontDestroyOnLoadScript2.Instance.gameObject);
+        StartCoroutine(FonduManager.Instance.ChangeScene("Level 1", true));
     }
 }

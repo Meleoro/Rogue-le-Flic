@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using DG.Tweening;
+using Image = UnityEngine.UI.Image;
 
 public class LevelManager : MonoBehaviour
 {
@@ -88,24 +91,23 @@ public class LevelManager : MonoBehaviour
 
         ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = false;
         DashChara.Instance.dashEffects.weight = 0;
-
-
+        
+        
         currentLevel += 1;
 
         if(currentLevel == 1)
         {
-            SceneManager.LoadScene(level1);
+            StartCoroutine(FonduManager.Instance.ChangeScene(level1, false));
         }
 
         else if (currentLevel == 2)
         {
-            SceneManager.LoadScene(level2);
+            StartCoroutine(FonduManager.Instance.ChangeScene(level2, false));
         }
 
         else
         {
-            SceneManager.LoadScene(level3);
+            StartCoroutine(FonduManager.Instance.ChangeScene(level3, false));
         }
-
     }
 }
