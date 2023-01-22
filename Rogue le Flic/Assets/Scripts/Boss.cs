@@ -434,7 +434,7 @@ public class Boss : MonoBehaviour
 
             ManagerChara.Instance.transform.DOMoveX(transform.position.x - 10, 2).SetEase(Ease.Linear);
             
-            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
         else
@@ -443,7 +443,7 @@ public class Boss : MonoBehaviour
 
             ManagerChara.Instance.transform.DOMoveX(transform.position.x + 10, 2).SetEase(Ease.Linear);
             
-            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         
         ManagerChara.Instance.anim.SetBool("isWalking", true);
@@ -455,8 +455,8 @@ public class Boss : MonoBehaviour
         
         ManagerChara.Instance.anim.SetBool("isWalking", false);
 
-        ReferenceChoice.Instance.kick.DOLocalMoveX(400, 2);
-        ReferenceChoice.Instance.spare.DOLocalMoveX(-400, 2);
+        ReferenceChoice.Instance.kick.DOLocalMoveX(350, 2);
+        ReferenceChoice.Instance.spare.DOLocalMoveX(-350, 2);
 
         yield return new WaitForSeconds(2);
 
