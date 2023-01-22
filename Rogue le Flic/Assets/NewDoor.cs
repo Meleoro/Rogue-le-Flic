@@ -86,6 +86,7 @@ public class NewDoor : MonoBehaviour
 
             if (!doOnce)
             {
+                
                 ding.Play();
                 doOnce = true;
             }
