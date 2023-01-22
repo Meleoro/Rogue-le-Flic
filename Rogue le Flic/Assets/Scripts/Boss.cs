@@ -57,6 +57,9 @@ public class Boss : MonoBehaviour
 
     private void Start()
     {
+        
+        objetquigerelamusique = GameObject.FindGameObjectWithTag("AudioMusique");
+
         switch (bossType)
         {
             case boss.Beaver:
@@ -373,6 +376,8 @@ public class Boss : MonoBehaviour
 
 
         //HERE DO FADE LA MUSIQUE
+
+        objetquigerelamusique.GetComponent<AudioSource>().DOFade(0.5f, 1);
         //GetComponent<AudioSource>();
         //musique.DOFade
 
@@ -603,6 +608,9 @@ public class Boss : MonoBehaviour
                     StartCoroutine(JumpChoroutine());
 
                     yield return new WaitForSeconds(1f);
+                    
+                    objetquigerelamusique.GetComponent<AudioSource>().DOFade(1, 1);
+
                 }
             }
 
