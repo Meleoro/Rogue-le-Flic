@@ -41,7 +41,11 @@ public class GunData : ScriptableObject
     public float lightShotDuration;
     public float lightShotIntensity;
 
-    //[Header("Modules")] 
+
+    [Header("Son")] public AudioSource shoot;
     
+
+    //[Header("Modules")] 
+
 }
 

@@ -65,6 +65,8 @@ public class Gun : MonoBehaviour
     private bool stopStock;
     private float bowState;
 
+    public float trajetArrow;
+
     public GameObject explanation;
 
     public bool isDontDestoy;
@@ -411,7 +413,7 @@ public class Gun : MonoBehaviour
 
 
                 //here
-                shoot.Play();
+                gunData.shoot.Play();
 
                     GameObject refBullet = Instantiate(bullet, ManagerChara.Instance.transform.position, 
                     Quaternion.AngleAxis(angle + dispersion, Vector3.forward));
@@ -423,7 +425,7 @@ public class Gun : MonoBehaviour
                 }
                 else if (refBullet.GetComponent<Bullet>().isArrow)
                 {
-                    refBullet.GetComponent<Bullet>().timerArrow = bowState / 3;
+                    refBullet.GetComponent<Bullet>().timerArrow = bowState / trajetArrow;
 
                     refBullet.GetComponent<Bullet>().bulletSpeed = bowState * 10;
                 }
