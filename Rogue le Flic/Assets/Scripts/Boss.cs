@@ -417,6 +417,7 @@ public class Boss : MonoBehaviour
 
 
         transform.position = transform.position + new Vector3(0, -5000, 0);
+        
         CameraMovements.Instance.transform.position = CameraMovements.Instance.transform.position + new Vector3(0, -5000, 0);
 
         ReferenceCamera.Instance.finalCinematicChara = true;
@@ -426,6 +427,8 @@ public class Boss : MonoBehaviour
             ManagerChara.Instance.transform.position = transform.position + new Vector3(-20, 0, 0);
 
             ManagerChara.Instance.transform.DOMoveX(transform.position.x - 10, 2).SetEase(Ease.Linear);
+            
+            ManagerChara.Instance.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         else
@@ -433,6 +436,8 @@ public class Boss : MonoBehaviour
             ManagerChara.Instance.transform.position = transform.position + new Vector3(20, 0, 0);
 
             ManagerChara.Instance.transform.DOMoveX(transform.position.x + 10, 2).SetEase(Ease.Linear);
+            
+            ManagerChara.Instance.transform.rotation = Quaternion.Euler(0, 0, 180);
         }
         
         ManagerChara.Instance.anim.SetBool("isWalking", true);
