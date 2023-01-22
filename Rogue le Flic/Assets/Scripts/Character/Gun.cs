@@ -405,6 +405,8 @@ public class Gun : MonoBehaviour
     {
         if (!onCooldown && !isReloading && isHeld)
         {
+            Viseur.Instance.GrossissementShoot(gunData.cooldownShot);
+            
             // BOUCLE QUI GENERE TOUTES LES BALLES
             for (int k = 0; k < gunData.nbrBulletPerShot; k++)
             {
