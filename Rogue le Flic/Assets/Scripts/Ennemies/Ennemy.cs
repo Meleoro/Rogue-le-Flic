@@ -60,6 +60,10 @@ public class Ennemy : MonoBehaviour
 
     public GameObject tutoDoor;
 
+
+    public AudioSource stomp;
+    
+
     
 
     private void Start()
@@ -409,6 +413,8 @@ public class Ennemy : MonoBehaviour
         
         spawnIndicator.SetActive(false);
 
+        stomp.Play();
+        
         GetComponent<BoxCollider2D>().enabled = true;
         _collider2D.enabled = true;
         
