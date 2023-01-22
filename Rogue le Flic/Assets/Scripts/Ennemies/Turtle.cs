@@ -152,9 +152,12 @@ public class Turtle : MonoBehaviour
         {
             if(!isKicked)
                 rb.AddForce(slideDirection * turtleData.speedSlide, ForceMode2D.Force);
-            
+
             else
+            {
+                Debug.Log(12);
                 rb.AddForce(slideDirection * turtleData.speedSlide * 1.5f, ForceMode2D.Force);
+            }
         }
     }
 
@@ -162,7 +165,7 @@ public class Turtle : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (!col.gameObject.CompareTag("Ennemy") && isSliding)
+        if (col.gameObject.CompareTag("Wall") && isSliding)
         {
             currentNbrRebonds += 1;
 
@@ -170,8 +173,12 @@ public class Turtle : MonoBehaviour
 
             if (isKicked)
             {
+                Debug.Log("collideWall");
+
                 TakeDamages(5, col.gameObject);
                 ennemy.anim.SetTrigger("reset");
+
+                currentNbrRebonds = turtleData.nbrRebonds;
             }
 
             // ON STOP SON COMPORTEMENT DE SLIDE
@@ -236,25 +243,28 @@ public class Turtle : MonoBehaviour
 
     public void TakeDamages(int damages, GameObject collider)
     {
-        currentHealth -= damages;
-
-        // RECUL
-        if(collider.CompareTag("Bullet")) 
-            rb.AddForce(collider.GetComponent<Bullet>().directionBullet * collider.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
-
-        else
+        if (!isSliding)
         {
-            Vector2 directionForce = new Vector2(transform.position.x - collider.transform.position.x, transform.position.y - collider.transform.position.y);
+            currentHealth -= damages;
 
-            StopCoroutine();
-            
-            rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
+            // RECUL
+            if (collider.CompareTag("Bullet"))
+                rb.AddForce(collider.GetComponent<Bullet>().directionBullet * collider.GetComponent<Bullet>().bulletKnockback, ForceMode2D.Impulse);
+
+            else
+            {
+                Vector2 directionForce = new Vector2(transform.position.x - collider.transform.position.x, transform.position.y - collider.transform.position.y);
+
+                StopCoroutine();
+
+                rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
+            }
+
+            VerifyDeath();
+
+            hitEffect.Clear();
+            hitEffect.Play();
         }
-        
-        VerifyDeath();
-
-        hitEffect.Clear();
-        hitEffect.Play();
     }
     
     
