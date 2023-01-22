@@ -263,6 +263,18 @@ public class TurtleBoss : MonoBehaviour
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(20, gameObject);
         }
 
+        else if (col.gameObject.CompareTag("Boss") && isSliding)
+        {
+            if (!isKicked)
+            {
+                col.gameObject.GetComponent<Boss>().TakeDamages(2, gameObject);
+                StartCoroutine(SetInvincible2(col.gameObject));
+            }
+
+            else
+                col.gameObject.GetComponent<Boss>().TakeDamages(20, gameObject);
+        }
+
         else if (col.gameObject.CompareTag("Box") && isSliding)
         {
             col.gameObject.GetComponent<Box>().Explose();
@@ -278,7 +290,9 @@ public class TurtleBoss : MonoBehaviour
             TakeDamages(5, gameObject);
         }
     }
-    
+
+
+
     IEnumerator SetInvincible(GameObject collider)
     {
         collider.GetComponent<Ennemy>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall2");
@@ -286,6 +300,15 @@ public class TurtleBoss : MonoBehaviour
         yield return new WaitForSeconds(1f);
         
         collider.GetComponent<Ennemy>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall");;
+    }
+
+    IEnumerator SetInvincible2(GameObject collider)
+    {
+        collider.GetComponent<Boss>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall2");
+
+        yield return new WaitForSeconds(1.5f);
+
+        collider.GetComponent<Boss>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall"); ;
     }
 
 
