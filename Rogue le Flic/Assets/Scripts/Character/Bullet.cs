@@ -136,12 +136,17 @@ public class Bullet : MonoBehaviour
                     }
 
                     if(bulletSpeed > 0)
-                        bulletSpeed -= Time.deltaTime * arrowDeceleration * 2;
+                        bulletSpeed -= Time.deltaTime * arrowDeceleration * 1.8f;
                 }
                 
                 else
                 {
                     rb.velocity = direction * bulletSpeed;
+
+                    if (bulletSpeed <= 0.23f)
+                    {
+                        timerArrow = 0.3f;
+                    }
 
                     bulletSpeed -= Time.deltaTime * arrowDeceleration;
                 }
