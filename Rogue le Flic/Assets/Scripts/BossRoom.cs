@@ -16,6 +16,9 @@ public class BossRoom : MonoBehaviour
     private GameObject boss2;
     private GameObject boss3;
 
+    private int boss2Int;
+    private int boss3Int;
+
 
     public AudioSource sweep;
     
@@ -55,14 +58,57 @@ public class BossRoom : MonoBehaviour
     {
         if (boss2 is not null)
         {
-            Debug.Log(12);
             boss2.GetComponent<Boss>().canMove = false;
+
+
+            switch (boss2.GetComponent<Boss>().bossType)
+            {
+                case Boss.boss.Beaver:
+                    boss2Int = 0;
+                    break;
+
+                case Boss.boss.Frog:
+                    boss2Int = 1;
+                    break;
+
+                case Boss.boss.Turtle:
+                    boss2Int = 2;
+                    break;
+            }
         }
+
+        else
+        {
+            boss2Int = 3;
+        }
+
+
         if (boss3 is not null)
         {
             boss3.GetComponent<Boss>().canMove = false;
+
+            switch (boss3.GetComponent<Boss>().bossType)
+            {
+                case Boss.boss.Beaver:
+                    boss3Int = 0;
+                    break;
+
+                case Boss.boss.Frog:
+                    boss3Int = 1;
+                    break;
+
+                case Boss.boss.Turtle:
+                    boss3Int = 2;
+                    break;
+            }
+        }
+
+        else
+        {
+            boss3Int = 3;
         }
         
+
         CameraMovements.Instance.transform.position = ManagerChara.Instance.transform.position;
         CameraMovements.Instance._camera.orthographicSize = GetComponent<CameraManager>().cameraSize;
 
@@ -77,7 +123,11 @@ public class BossRoom : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         ReferenceCamera.Instance.splash.SetActive(true);
-        boss.GetComponent<Boss>().VerifyBossType();
+
+
+        if(boss2)
+
+        boss.GetComponent<Boss>().VerifyBossType(boss2Int, boss3Int);
 
         sweep.Play();
         

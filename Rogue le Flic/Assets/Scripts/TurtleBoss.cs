@@ -256,7 +256,7 @@ public class TurtleBoss : MonoBehaviour
             HealthManager.Instance.LoseHealth(directionProj);
         }
 
-        else if (col.gameObject.CompareTag("Ennemy") && isSliding)
+        else if (col.gameObject.CompareTag("Ennemy") && (isSliding || isGigaSliding))
         {
             if (!isKicked)
             {
@@ -265,19 +265,27 @@ public class TurtleBoss : MonoBehaviour
             }
 
             else
+            {
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(20, gameObject);
+                StartCoroutine(SetInvincible(col.gameObject));
+            }
         }
 
-        else if (col.gameObject.CompareTag("Boss") && isSliding)
+        else if (col.gameObject.CompareTag("Boss") && (isSliding || isGigaSliding))
         {
             if (!isKicked)
             {
+                Debug.Log(12);
+
                 col.gameObject.GetComponent<Boss>().TakeDamages(2, gameObject);
                 StartCoroutine(SetInvincible2(col.gameObject));
             }
 
             else
+            {
                 col.gameObject.GetComponent<Boss>().TakeDamages(20, gameObject);
+                StartCoroutine(SetInvincible2(col.gameObject));
+            }
         }
 
         else if (col.gameObject.CompareTag("Box") && isSliding)

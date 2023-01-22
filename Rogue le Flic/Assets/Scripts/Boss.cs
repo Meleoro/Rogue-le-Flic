@@ -303,25 +303,64 @@ public class Boss : MonoBehaviour
     }
 
 
-    public void VerifyBossType()
+    public void VerifyBossType(int other1, int other2)
     {
         switch (bossType)
         {
             case boss.Beaver:
                 ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.beaver;
                 ReferenceCamera.Instance.bossName.sprite = ReferenceCamera.Instance.beaverName;
+
+                if(other1 == 1 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.frogBeaver;
+                }
+                else if(other1 == 2 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.beaverTurtle;
+                }
+                else if((other1 == 1 && other2 == 2) || (other1 == 2 && other2 == 1))
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.all;
+                }
                 break;
 
             
             case boss.Frog:
                 ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.frog;
                 ReferenceCamera.Instance.bossName.sprite = ReferenceCamera.Instance.frogName;
+
+                if (other1 == 0 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.frogBeaver;
+                }
+                else if (other1 == 2 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.turtleFrog;
+                } 
+                else if ((other1 == 0 && other2 == 2) || (other1 == 2 && other2 == 0))
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.all;
+                }
                 break;
 
             
             case boss.Turtle:
                 ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.turtle;
                 ReferenceCamera.Instance.bossName.sprite = ReferenceCamera.Instance.turtleName;
+
+                if (other1 == 0 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.beaverTurtle;
+                }
+                else if (other1 == 1 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.turtleFrog;
+                }
+                else if ((other1 == 0 && other2 == 1) || (other1 == 1 && other2 == 0))
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.all;
+                }
                 break;
         }
     }
