@@ -34,6 +34,8 @@ public class NewDoor : MonoBehaviour
 
     public AudioSource ding;
     public AudioSource open;
+
+    private bool doOnce;
     
 
     private void Start()
@@ -81,8 +83,12 @@ public class NewDoor : MonoBehaviour
 
                 boxCollider2D.enabled = true;
             }
-            
-            ding.Play();
+
+            if (!doOnce)
+            {
+                ding.Play();
+                doOnce = true;
+            }
         }
 
         else
