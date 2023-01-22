@@ -71,6 +71,7 @@ public class NewDoor : MonoBehaviour
                 material.color = green;
 
                 boxCollider2D.enabled = true;
+                ding.Play();
             }
             else
             {
@@ -80,9 +81,10 @@ public class NewDoor : MonoBehaviour
                 material.color = colorBoss;
 
                 boxCollider2D.enabled = true;
+                ding.Play();
             }
             
-            ding.Play();
+
         }
 
         else
