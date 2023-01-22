@@ -37,8 +37,8 @@ public class EdgeColliderBossFrog : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs((ManagerChara.Instance.transform.position - transform.position).x) > 16 ||
-            Mathf.Abs((ManagerChara.Instance.transform.position - transform.position).y) > 9)
+        if (Mathf.Abs((ManagerChara.Instance.transform.position - transform.position).x) > 12 ||
+            Mathf.Abs((ManagerChara.Instance.transform.position - transform.position).y) > 6)
         {
             frog.canShoot = false;
         }
