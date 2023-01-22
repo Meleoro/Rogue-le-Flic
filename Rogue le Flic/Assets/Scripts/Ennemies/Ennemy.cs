@@ -413,7 +413,11 @@ public class Ennemy : MonoBehaviour
         
         spawnIndicator.SetActive(false);
 
-        stomp.Play();
+        if (!stomp.isPlaying)
+        {
+            stomp.Play();
+        }
+        
         
         GetComponent<BoxCollider2D>().enabled = true;
         _collider2D.enabled = true;
