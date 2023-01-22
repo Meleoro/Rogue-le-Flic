@@ -412,10 +412,13 @@ MonoBehaviour:
   isHurt: 1
   hitColor: {r: 1, g: 0.5921569, b: 0.5921569, a: 1}
   bossNumber: 0
+  canMove: 0
   anim: {fileID: 7884083170439973675}
   sprite: {fileID: 7884083170439973674}
   spawnIndicator: {fileID: 3818875234604287438}
   _collider2D: {fileID: 9025909382825710552}
+  bossRoom: {fileID: 0}
+  moneyBag: {fileID: 1703516860263850361, guid: 453684e03657e25458a7d264c206b738, type: 3}
 --- !u!114 &5297101395759883289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +443,7 @@ MonoBehaviour:
   bossRoom: {fileID: 0}
   healthBar: {fileID: 0}
   VFXStun: {fileID: 6644599168443299526}
+  ennemies: []
 --- !u!1 &6855633920649893502
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,6 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isChara: 0
+  isEnnemi: 0
 --- !u!95 &7884083170439973675 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7985632225957842365, guid: 4156696091c404b43866aab9ddaa28d1, type: 3}
