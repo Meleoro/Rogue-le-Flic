@@ -27,11 +27,10 @@ public class Viseur : MonoBehaviour
 
     void Update()
     {
-        transform.position = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>()) + new Vector3(0, 0, 10);
-
         if (viseurActif)
         {
             Cursor.visible = false;
+            transform.position = ReferenceCamera.Instance._camera.ScreenToWorldPoint(ManagerChara.Instance.controls.Character.MousePosition.ReadValue<Vector2>()) + new Vector3(0, 0, 10);
         }
 
         else
