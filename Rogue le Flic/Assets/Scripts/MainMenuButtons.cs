@@ -28,7 +28,7 @@ public class MainMenuButtons : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Tuto");
+        StartCoroutine(FonduManager.Instance.ChangeScene("Tuto", false));
         //Ici faire une référence à ClosePause();
     }
 

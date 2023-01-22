@@ -95,9 +95,7 @@ public class MenuPauseManager : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        Destroy(DontDestroyOnLoadScript2.Instance.gameObject);
-
-        SceneManager.LoadScene("Level 1");
+        StartCoroutine(FonduManager.Instance.ChangeScene("Level 1", true));
     }
 
 
@@ -105,8 +103,6 @@ public class MenuPauseManager : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        Destroy(DontDestroyOnLoadScript2.Instance.gameObject);
-
-        SceneManager.LoadScene("MAIN MENU");
+        StartCoroutine(FonduManager.Instance.ChangeScene("MAIN MENU", true));
     }
 }

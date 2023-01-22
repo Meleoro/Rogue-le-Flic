@@ -86,42 +86,46 @@ public class CameraMovements : MonoBehaviour
 
     void Update()
     {
-        if (isInTransition)
+        if (MapManager.Instance.activeRoom != null)
         {
-            Transition(NormalBehavior());
-        }
-        
-        else if (playerDeath)
-        {
-            DeathBeahvior();
-        }
-        
-        else if (bossStartRoom)
-        {
-            StartRoomBehavior();
-        }
-        
-        else
-        {
-            if (!endRoom && canMove && !bossEndRoom)
+            if (isInTransition)
             {
-                transform.position = NormalBehavior();
-
-                originalSize = _camera.orthographicSize;
-                originalPos = _camera.transform.position;
+                Transition(NormalBehavior());
             }
+        
+            else if (playerDeath)
+            {
+                DeathBeahvior();
+            }
+        
+            else if (bossStartRoom)
+            {
+                StartRoomBehavior();
+            }
+        
+            else
+            {
+                if (!endRoom && canMove && !bossEndRoom)
+                {
+                    transform.position = NormalBehavior();
 
-            else if (canMove && !bossEndRoom)
-                EndRoomBehavior();
+                    originalSize = _camera.orthographicSize;
+                    originalPos = _camera.transform.position;
+                }
 
-            else if (canMove)
-                BossEndRoomBehavior();
+                else if (canMove && !bossEndRoom)
+                    EndRoomBehavior();
+
+                else if (canMove)
+                    BossEndRoomBehavior();
+            }
         }
     }
 
 
     Vector2 NormalBehavior()
     {
+        
         Vector3 charaPos = ManagerChara.Instance.transform.position;
         GameObject activeRoom = MapManager.Instance.activeRoom;
         
