@@ -66,6 +66,9 @@ public class MenuPauseManager : MonoBehaviour
 
         menuPause.GetComponent<Image>().DOFade(0.5f, 0);
 
+        Viseur.Instance.viseurActif = false;
+        ManagerChara.Instance.noControl = true;
+
         menuPause.SetActive(true);
 
         CameraMovements.Instance.canMove = false;
@@ -74,6 +77,9 @@ public class MenuPauseManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        Viseur.Instance.viseurActif = true;
+        ManagerChara.Instance.noControl = false;
+        
         Time.timeScale = 1;
         pausedGame = false;
 

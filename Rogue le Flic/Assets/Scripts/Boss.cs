@@ -51,6 +51,8 @@ public class Boss : MonoBehaviour
             case boss.Beaver:
                 beaverScript = GetComponent<BeaverBoss>();
 
+                beaverScript.InitialiseBoss();
+
                 if (isHurt)
                 {
                     beaverScript.currentHealth = beaverScript.bossData.health / 2;
@@ -66,6 +68,8 @@ public class Boss : MonoBehaviour
             case boss.Frog:
                 frogScript = GetComponent<FrogBoss>();
                 
+                frogScript.InitialiseBoss();
+                
                 if (isHurt)
                 {
                     frogScript.currentHealth = frogScript.bossData.health / 2;
@@ -80,6 +84,8 @@ public class Boss : MonoBehaviour
             
             case boss.Turtle:
                 turtleScript = GetComponent<TurtleBoss>();
+                
+                turtleScript.InitialiseBoss();
                 
                 if (isHurt)
                 {
@@ -428,7 +434,7 @@ public class Boss : MonoBehaviour
 
             ManagerChara.Instance.transform.DOMoveX(transform.position.x - 10, 2).SetEase(Ease.Linear);
             
-            ManagerChara.Instance.transform.rotation = Quaternion.Euler(0, 0, 0);
+            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         else
@@ -437,7 +443,7 @@ public class Boss : MonoBehaviour
 
             ManagerChara.Instance.transform.DOMoveX(transform.position.x + 10, 2).SetEase(Ease.Linear);
             
-            ManagerChara.Instance.transform.rotation = Quaternion.Euler(0, 0, 180);
+            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         
         ManagerChara.Instance.anim.SetBool("isWalking", true);

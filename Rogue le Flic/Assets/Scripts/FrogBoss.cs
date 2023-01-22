@@ -58,6 +58,26 @@ public class FrogBoss : MonoBehaviour
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+        rb.drag = bossData.dragDeceleration * bossData.dragMultiplier;
+
+        AIDestination.target = ManagerChara.Instance.transform;
+
+        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
+        currentAttack = 0;
+
+        cooldownSpawn = Random.Range(2, 4);
+        mustJump = true;
+
+        boss.anim.SetBool("isWalking", false);
+
+        bossRoom = GetComponentInParent<BossRoom>();
+        spotsJump = bossRoom.spotFrog;
+    }
+
+
+    public void InitialiseBoss()
+    {
         if (LevelManager.Instance.currentLevel == 1)
         {
             bossData = niveau1;
@@ -95,27 +115,10 @@ public class FrogBoss : MonoBehaviour
             ReferenceBossUI.Instance.object3.SetActive(true);
             healthBar = ReferenceBossUI.Instance.healthBar3;
         }
-        
-        
-        rb = GetComponent<Rigidbody2D>();
-        rb.drag = bossData.dragDeceleration * bossData.dragMultiplier;
 
-        canMove = true;
-
-        AIDestination.target = ManagerChara.Instance.transform;
-
-        timer = Random.Range(bossData.cooldownMin, bossData.cooldownMax);
-        currentAttack = 0;
-
-        cooldownSpawn = Random.Range(2, 4);
-        mustJump = true;
-
-        boss.anim.SetBool("isWalking", false);
-
-        bossRoom = GetComponentInParent<BossRoom>();
-        spotsJump = bossRoom.spotFrog;
-        
         healthBar.fillAmount = (float) currentHealth / bossData.health;
+        
+        canMove = true;
     }
 
 
