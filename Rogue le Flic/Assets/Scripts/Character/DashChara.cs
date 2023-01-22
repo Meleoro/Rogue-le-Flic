@@ -23,7 +23,7 @@ public class DashChara : MonoBehaviour
     public LayerMask invincibleLayer;
 
     [Header("Effets")] 
-    [SerializeField] private Volume dashEffects;
+    public Volume dashEffects;
     [SerializeField] private Volume dashBlur;
     private float timerEffects;
 

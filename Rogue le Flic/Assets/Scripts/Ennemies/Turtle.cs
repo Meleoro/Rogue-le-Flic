@@ -155,7 +155,6 @@ public class Turtle : MonoBehaviour
 
             else
             {
-                Debug.Log(12);
                 rb.AddForce(slideDirection * turtleData.speedSlide * 1.5f, ForceMode2D.Force);
             }
         }
@@ -173,8 +172,6 @@ public class Turtle : MonoBehaviour
 
             if (isKicked)
             {
-                Debug.Log("collideWall");
-
                 TakeDamages(5, col.gameObject);
                 ennemy.anim.SetTrigger("reset");
 
@@ -218,8 +215,8 @@ public class Turtle : MonoBehaviour
             else
             {
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsTurtleKicked, gameObject);
-                
-                ennemy.Stun();
+
+                col.gameObject.GetComponent<Ennemy>().Stun();
             }
         }
         

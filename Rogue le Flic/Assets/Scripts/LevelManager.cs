@@ -64,6 +64,8 @@ public class LevelManager : MonoBehaviour
         {
             activeGun = Instantiate(ManagerChara.Instance.activeGun, ManagerChara.Instance.transform.position, Quaternion.identity, transform);
 
+            Destroy(ManagerChara.Instance.activeGun);
+
             ManagerChara.Instance.activeGun = activeGun;
             ManagerChara.Instance.activeGun.GetComponent<Gun>().isHeld = true;
             ManagerChara.Instance.activeGun.GetComponent<Gun>().isDontDestoy = true;
@@ -76,11 +78,16 @@ public class LevelManager : MonoBehaviour
             {
                 stockedGun = Instantiate(ManagerChara.Instance.stockWeapon, ManagerChara.Instance.transform.position, Quaternion.identity, transform);
 
+                Destroy(ManagerChara.Instance.stockWeapon);
+
                 ManagerChara.Instance.stockWeapon = stockedGun;
                 ManagerChara.Instance.stockWeapon.GetComponent<Gun>().isStocked = true;
                 ManagerChara.Instance.stockWeapon.GetComponent<Gun>().isDontDestoy = true;
             }
         }
+
+        ManagerChara.Instance.reload.GetComponentInParent<Canvas>().enabled = false;
+        DashChara.Instance.dashEffects.weight = 0;
 
 
         currentLevel += 1;
