@@ -49,6 +49,10 @@ public class Boss : MonoBehaviour
     private GameObject money;
     private bool doOnceEnd;
     private bool doOnceEnd2;
+
+
+    public GameObject objetquigerelamusique;
+    
     
 
     private void Start()
@@ -366,6 +370,12 @@ public class Boss : MonoBehaviour
                 }
                 break;
         }
+
+
+        //HERE DO FADE LA MUSIQUE
+        //GetComponent<AudioSource>();
+        //musique.DOFade
+
         
         CameraMovements.Instance.CancelShake();
         

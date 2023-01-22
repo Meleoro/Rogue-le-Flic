@@ -53,6 +53,11 @@ public class ManagerChara : MonoBehaviour
 
     public AudioSource death;
     public AudioSource fall;
+    public AudioSource spot;
+
+    public GameObject spotSprite;
+    
+    
 
 
 
@@ -245,6 +250,10 @@ public class ManagerChara : MonoBehaviour
         
         yield return new WaitForSeconds(1f);
 
+        //Spot
+        spotSprite.SetActive(true);
+        spot.Play();
+        
         Viseur.Instance.viseurActif = false;
 
         CameraMovements.Instance.playerDeath = true;

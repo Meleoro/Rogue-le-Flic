@@ -413,9 +413,9 @@ public class Ennemy : MonoBehaviour
         
         spawnIndicator.SetActive(false);
 
-        if (!stomp.isPlaying)
+        //if (!stomp.isPlaying)
         {
-            stomp.Play();
+            //stomp.Play();
         }
         
         
