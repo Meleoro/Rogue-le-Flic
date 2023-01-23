@@ -287,16 +287,28 @@ public class Boss : MonoBehaviour
             death = true;
             StartCoroutine(CinematicDeath());
         }
-        else if(isHurt)
+        else if(isHurt && !death)
         {
+            death = true;
+
             if(bossNumber == 1)
                 ReferenceBossUI.Instance.object2.SetActive(false);
             
             else if(bossNumber == 2)
                 ReferenceBossUI.Instance.object3.SetActive(false);
-            
-            Destroy(gameObject);
+
+            StartCoroutine(HurtDeath());
         }
+    }
+
+
+    public IEnumerator HurtDeath()
+    {
+        anim.SetTrigger("death");
+
+        yield return new WaitForSeconds(0.5f);
+
+        Destroy(gameObject);
     }
 
 

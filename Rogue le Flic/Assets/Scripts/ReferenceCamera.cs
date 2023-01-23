@@ -43,12 +43,12 @@ public class ReferenceCamera : MonoBehaviour
         
         else
             Destroy(gameObject);
+
+        _camera = GetComponent<Camera>();
     }
 
     private void Start()
     {
-        _camera = GetComponent<Camera>();
-
         CameraMovements.Instance._camera = _camera;
 
         ReferenceUI.Instance.canvas.worldCamera = _camera;
