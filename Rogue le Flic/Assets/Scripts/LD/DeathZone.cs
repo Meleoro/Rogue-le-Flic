@@ -7,6 +7,8 @@ public class DeathZone : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D _boxCollider2D;
     [SerializeField] private EdgeCollider2D _edgeCollider2D;
+
+    public bool isInTuto;
     
     private void OnTriggerStay2D(Collider2D col)
     {
@@ -14,7 +16,10 @@ public class DeathZone : MonoBehaviour
         {
             if (!ManagerChara.Instance.isDashing)
             {
-                Vector2 newPos =  col.transform.position + (col.transform.position - transform.position).normalized * 2;
+                Vector2 newPos =  col.transform.position + (col.transform.position - transform.position).normalized * 2.5f;
+
+                if(isInTuto)
+                    newPos = transform.position - new Vector3(0, 3, 0);
 
                 StartCoroutine(ManagerChara.Instance.Fall(1, newPos));
             }
@@ -33,7 +38,10 @@ public class DeathZone : MonoBehaviour
         {
             if (!ManagerChara.Instance.isDashing)
             {
-                Vector2 newPos =  col.transform.position + (col.transform.position - transform.position).normalized * 2;
+                Vector2 newPos =  col.transform.position + (col.transform.position - transform.position).normalized * 2.5f;
+
+                if (isInTuto)
+                    newPos = transform.position - new Vector3(0, 3, 0);
 
                 StartCoroutine(ManagerChara.Instance.Fall(1, newPos));
             }
