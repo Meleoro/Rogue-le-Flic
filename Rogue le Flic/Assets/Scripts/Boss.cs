@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using UnityEngine;
 using DG.Tweening;
 using Unity.Mathematics;
@@ -50,6 +51,11 @@ public class Boss : MonoBehaviour
     private GameObject money;
     private bool doOnceEnd;
     private bool doOnceEnd2;
+
+    public AudioSource hit;
+    public AudioSource dying;
+    
+    
 
 
     public GameObject objetquigerelamusique;
@@ -224,7 +230,13 @@ public class Boss : MonoBehaviour
     {
         currentSprite.DOColor(hitColor, 0.12f);
 
+        
+        hit.Play();
+        
+        
         yield return new WaitForSeconds(0.12f);
+        
+        
         
         currentSprite.DOColor(Color.white, 0.12f);
     }
@@ -294,6 +306,8 @@ public class Boss : MonoBehaviour
         {
             int index = Random.Range(0, MoneyManager.Instance.itemsKick.Count);
 
+            dying.PlayDelayed(2);
+            //hereee
             //Instantiate(MoneyManager.Instance.itemsKick[index], transform.position, Quaternion.identity);
         }
 

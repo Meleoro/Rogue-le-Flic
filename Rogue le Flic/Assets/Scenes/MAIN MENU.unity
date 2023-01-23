@@ -402,6 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1626370217}
   m_MyAudioSource: {fileID: 51308431}
+  objetdelamusique: {fileID: 0}
 --- !u!114 &51308428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1577,7 +1578,7 @@ GameObject:
   - component: {fileID: 176148179}
   m_Layer: 0
   m_Name: Audio - Musique
-  m_TagString: Untagged
+  m_TagString: AudioMusique
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2031,6 +2032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1160809367}
   m_MyAudioSource: {fileID: 0}
+  objetdelamusique: {fileID: 0}
 --- !u!114 &260103507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4440,6 +4442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 115976567}
   m_MyAudioSource: {fileID: 0}
+  objetdelamusique: {fileID: 176148178}
 --- !u!114 &850769817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4487,6 +4490,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1132751551}
         m_TargetAssemblyTypeName: MainMenuButtons, Assembly-CSharp
         m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 850769816}
+        m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
+        m_MethodName: Fade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
