@@ -57,6 +57,8 @@ public class FrogTongue : MonoBehaviour
 
         if (frog.stopTongue || frog.canMove)
         {
+            box.GetComponent<Box>().isInvincible = false;
+            
             Destroy(gameObject);
         }
         
