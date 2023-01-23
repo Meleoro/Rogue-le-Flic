@@ -701,7 +701,7 @@ public class Boss : MonoBehaviour
 
             ReferenceCamera.Instance.fondNoir.DOFade(0, 1);
 
-            yield return new WaitForSeconds(1);
+            //yield return new WaitForSeconds(1);
 
 
             switch (bossType)
