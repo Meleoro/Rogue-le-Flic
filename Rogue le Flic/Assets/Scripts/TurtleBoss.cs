@@ -206,7 +206,7 @@ public class TurtleBoss : MonoBehaviour
             stunTimer -= Time.deltaTime;
             
             
-            stun.Play();
+            //stun.Play();
             
             
             VFXStun.SetActive(true);
@@ -343,7 +343,7 @@ public class TurtleBoss : MonoBehaviour
         boss.anim.SetTrigger("StartAttack");
         boss.anim.SetBool("isWalking", false);
 
-        windup.Play();
+        //windup.Play();
         
         
         transform.DOShakePosition(0.75f, 0.3f);
@@ -423,7 +423,7 @@ public class TurtleBoss : MonoBehaviour
         timerShake = bossData.chargemementDuree;
 
 
-        windup.Play();
+        //windup.Play();
         
         yield return new WaitForSeconds(bossData.chargemementDuree);
         

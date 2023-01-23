@@ -194,7 +194,7 @@ public class BeaverBoss : MonoBehaviour
             
             VFXStun.SetActive(true);
             
-            stun.Play();
+            //stun.Play();
         }
     }
     
@@ -249,7 +249,7 @@ public class BeaverBoss : MonoBehaviour
     {
         rb.AddForce(-directionJump.normalized * (bossData.strenghtJump / 5), ForceMode2D.Impulse);
 
-        windUp.Play();
+        //windUp.Play();
         
         
         yield return new WaitForSeconds(0.6f);
@@ -300,7 +300,7 @@ public class BeaverBoss : MonoBehaviour
     {
         rb.AddForce(-directionJump.normalized * (bossData.strenghtGigaJump / 5), ForceMode2D.Impulse);
 
-        windUp.Play();
+        //windUp.Play();
         
         
         yield return new WaitForSeconds(1f);

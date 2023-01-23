@@ -493,7 +493,7 @@ public class FrogBoss : MonoBehaviour
             Vector2 destination = ManagerChara.Instance.transform.position + direction.normalized * 3;
             
             
-            windup.Play();
+            //windup.Play();
             transform.DOShakePosition(0.6f, 0.3f);
             
             
@@ -524,7 +524,7 @@ public class FrogBoss : MonoBehaviour
     {
         stunTimer = bossData.stunDuration;
 
-        stun.Play();
+        //stun.Play();
         
         StopAllCoroutines();
 
