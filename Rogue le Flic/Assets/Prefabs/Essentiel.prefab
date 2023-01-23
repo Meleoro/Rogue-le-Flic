@@ -272,8 +272,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -380,7 +380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ACCEPTER RANCON
+  m_text: ACCEPTER POT-DE-VIN
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eb90ff8c4342bdf40b603f20cb60f28f, type: 2}
   m_sharedMaterial: {fileID: -3482165764214071426, guid: eb90ff8c4342bdf40b603f20cb60f28f, type: 2}
@@ -482,7 +482,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6384605246844949232}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -882,7 +882,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6384605246844949232}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 28.73}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937a648b4726dd649a2c61ae6f79cea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testLDMode: 0
+  testLDMode: 1
   bossFloor: 0
   roomNumber: 10
   map:
@@ -2102,7 +2102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.32156864, g: 0.25490198, b: 0.24705882, a: 0}
+  m_Color: {r: 0.24528301, g: 0.22792807, b: 0.22792807, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2152,8 +2152,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1968926792}
-  - {fileID: 1969732590}
   - {fileID: 4544669397094645421}
+  - {fileID: 1969732590}
   m_Father: {fileID: 7653274232115626081}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -13.8}
@@ -2654,7 +2654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2100511857533267299, guid: 8f22b1fb5af19704c93a0c8c04f61c77, type: 3}
       propertyPath: m_InstanceId
-      value: -5183716
+      value: -195442
       objectReference: {fileID: 0}
     - target: {fileID: 3025178831263106920, guid: 8f22b1fb5af19704c93a0c8c04f61c77, type: 3}
       propertyPath: all
@@ -2842,6 +2842,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8159523867254284515}
     m_Modifications:
+    - target: {fileID: 133589695, guid: 1ba351e73124cee468a71f1ed19d6a9c, type: 3}
+      propertyPath: uniqueID
+      value: 3957894638160153522
+      objectReference: {fileID: 0}
     - target: {fileID: 2540995599726756493, guid: 1ba351e73124cee468a71f1ed19d6a9c, type: 3}
       propertyPath: m_RootOrder
       value: 7

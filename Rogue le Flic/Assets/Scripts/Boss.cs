@@ -270,11 +270,19 @@ public class Boss : MonoBehaviour
         
         if (!death && !isHurt)
         {
+            ReferenceBossUI.Instance.object1.SetActive(false);
+            
             death = true;
             StartCoroutine(CinematicDeath());
         }
         else if(isHurt)
         {
+            if(bossNumber == 1)
+                ReferenceBossUI.Instance.object2.SetActive(false);
+            
+            else if(bossNumber == 2)
+                ReferenceBossUI.Instance.object3.SetActive(false);
+            
             Destroy(gameObject);
         }
     }
@@ -412,6 +420,8 @@ public class Boss : MonoBehaviour
 
         else
         {
+            _collider2D.enabled = false;
+            
             transform.localScale = Vector3.one;
 
             switch (bossType)

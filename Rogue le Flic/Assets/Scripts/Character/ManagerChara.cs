@@ -186,6 +186,12 @@ public class ManagerChara : MonoBehaviour
                 SwitchWeapons();
             }
         }
+
+        else
+        {
+            if(!ReferenceCamera.Instance.finalCinematicChara)
+                anim.SetBool("isWalking", false);
+        }
     }
 
 
