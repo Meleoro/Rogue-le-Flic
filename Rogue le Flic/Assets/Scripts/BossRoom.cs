@@ -127,8 +127,6 @@ public class BossRoom : MonoBehaviour
         ReferenceCamera.Instance.splash.SetActive(true);
 
 
-        if(boss2)
-
         boss.GetComponent<Boss>().VerifyBossType(boss2Int, boss3Int);
 
         sweep.Play();

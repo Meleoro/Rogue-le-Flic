@@ -163,7 +163,9 @@ public class Box : MonoBehaviour
             if(Random.Range(0, 2) == 0)
                 currentFragment.GetComponent<Fragment>().goLeft = true;
         }
-        
+
+        ManagerChara.Instance.ActualisePath();
+
         Destroy(gameObject);
     }
 

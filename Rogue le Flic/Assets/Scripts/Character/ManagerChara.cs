@@ -111,11 +111,8 @@ public class ManagerChara : MonoBehaviour
         if (!doOnce)
         {
             doOnce = true;
-            
-            var guo = new GraphUpdateObject(test.GetComponent<BoxCollider2D>().bounds);
-            // Set some settings
-            guo.updatePhysics = true;
-            AstarPath.active.UpdateGraphs (guo);
+
+            ActualisePath();
         }
         
         if (Input.GetKeyDown(KeyCode.A))
@@ -192,6 +189,15 @@ public class ManagerChara : MonoBehaviour
             if(!ReferenceCamera.Instance.finalCinematicChara)
                 anim.SetBool("isWalking", false);
         }
+    }
+
+    
+    public void ActualisePath()
+    {
+        var guo = new GraphUpdateObject(test.GetComponent<BoxCollider2D>().bounds);
+        // Set some settings
+        guo.updatePhysics = true;
+        AstarPath.active.UpdateGraphs(guo);
     }
 
 

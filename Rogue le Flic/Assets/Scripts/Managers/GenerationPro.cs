@@ -129,6 +129,8 @@ public class GenerationPro : MonoBehaviour
 
                             roomsCreated[roomsCreated.Count - 1].x = newSaveX;
                             roomsCreated[roomsCreated.Count - 1].y = newSaveY;
+
+                            basicRooms.RemoveAt(generatedRoom);
                         }
                     }
                     
@@ -151,6 +153,8 @@ public class GenerationPro : MonoBehaviour
 
                             roomsCreated[roomsCreated.Count - 1].x = newSaveX;
                             roomsCreated[roomsCreated.Count - 1].y = newSaveY;
+
+                            basicRooms.RemoveAt(generatedRoom);
                         }
                     }
                     
@@ -173,6 +177,8 @@ public class GenerationPro : MonoBehaviour
 
                             roomsCreated[roomsCreated.Count - 1].x = newSaveX;
                             roomsCreated[roomsCreated.Count - 1].y = newSaveY;
+
+                            basicRooms.RemoveAt(generatedRoom);
                         }
                     }
 
@@ -195,6 +201,8 @@ public class GenerationPro : MonoBehaviour
 
                             roomsCreated[roomsCreated.Count - 1].x = newSaveX;
                             roomsCreated[roomsCreated.Count - 1].y = newSaveY;
+
+                            basicRooms.RemoveAt(generatedRoom);
                         }
                     }
                 }
