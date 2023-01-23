@@ -45,6 +45,11 @@ public class BeaverBoss : MonoBehaviour
     private Boss boss;
 
     public List<GameObject> ennemies = new List<GameObject>();
+
+
+    public AudioSource stun;
+    public AudioSource windUp;
+    
     
     
 
@@ -188,6 +193,8 @@ public class BeaverBoss : MonoBehaviour
             stunTimer -= Time.deltaTime;
             
             VFXStun.SetActive(true);
+            
+            //stun.Play();
         }
     }
     
@@ -242,6 +249,9 @@ public class BeaverBoss : MonoBehaviour
     {
         rb.AddForce(-directionJump.normalized * (bossData.strenghtJump / 5), ForceMode2D.Impulse);
 
+        //windUp.Play();
+        
+        
         yield return new WaitForSeconds(0.6f);
 
         isCharging = true;
@@ -290,6 +300,9 @@ public class BeaverBoss : MonoBehaviour
     {
         rb.AddForce(-directionJump.normalized * (bossData.strenghtGigaJump / 5), ForceMode2D.Impulse);
 
+        //windUp.Play();
+        
+        
         yield return new WaitForSeconds(1f);
 
         isGigaCharging = true;

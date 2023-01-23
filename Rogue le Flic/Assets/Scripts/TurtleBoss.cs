@@ -53,6 +53,11 @@ public class TurtleBoss : MonoBehaviour
     public List<GameObject> ennemies = new List<GameObject>();
 
 
+    public AudioSource stun;
+    public AudioSource windup;
+    
+
+
 
     private void Start()
     {
@@ -200,6 +205,10 @@ public class TurtleBoss : MonoBehaviour
         {
             stunTimer -= Time.deltaTime;
             
+            
+            //stun.Play();
+            
+            
             VFXStun.SetActive(true);
             //boss.anim.SetTrigger("reset");
         }
@@ -334,6 +343,9 @@ public class TurtleBoss : MonoBehaviour
         boss.anim.SetTrigger("StartAttack");
         boss.anim.SetBool("isWalking", false);
 
+        //windup.Play();
+        
+        
         transform.DOShakePosition(0.75f, 0.3f);
 
         directionSlide = -direction.normalized;
@@ -409,6 +421,9 @@ public class TurtleBoss : MonoBehaviour
 
         canShake = true;
         timerShake = bossData.chargemementDuree;
+
+
+        //windup.Play();
         
         yield return new WaitForSeconds(bossData.chargemementDuree);
         
