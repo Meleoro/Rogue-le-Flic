@@ -412,6 +412,8 @@ public class Boss : MonoBehaviour
 
         else
         {
+            _collider2D.enabled = false;
+            
             transform.localScale = Vector3.one;
 
             switch (bossType)

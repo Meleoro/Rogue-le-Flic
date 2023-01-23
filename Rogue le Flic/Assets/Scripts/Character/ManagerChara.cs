@@ -189,7 +189,8 @@ public class ManagerChara : MonoBehaviour
 
         else
         {
-            anim.SetBool("isWalking", false);
+            if(!ReferenceCamera.Instance.finalCinematicChara)
+                anim.SetBool("isWalking", false);
         }
     }
 
