@@ -21,6 +21,9 @@ public class FrogTongue : MonoBehaviour
     private EdgeCollider2D edgeCollider;
     private List<Vector2> edgeColliderPoints = new List<Vector2>();
 
+    [Header("Box")] private bool boxStuck;
+    private GameObject box;
+
     
     private void Start()
     {
@@ -50,15 +53,27 @@ public class FrogTongue : MonoBehaviour
         
         transform.position = new Vector2(Mathf.Lerp(retour.x, destination.x, frog.frogData.tonguePatern.Evaluate(avancée)),
             Mathf.Lerp(retour.y, destination.y, frog.frogData.tonguePatern.Evaluate(avancée)));
-
-        if (avancée >= 1)
-        {
-            Destroy(gameObject);
-        }
+        
 
         if (frog.stopTongue || frog.canMove)
         {
             Destroy(gameObject);
+        }
+        
+        if (avancée >= 1)
+        {
+            Destroy(gameObject);
+
+            if (boxStuck)
+            {
+                Destroy(box);
+                frog.GetComponent<Ennemy>().Stun();
+            }
+        }
+
+        else if (boxStuck)
+        {
+            box.transform.position = transform.position;
         }
     }
 
@@ -69,6 +84,14 @@ public class FrogTongue : MonoBehaviour
             Vector2 direction = col.transform.position - transform.position;
             
             HealthManager.Instance.LoseHealth(direction);
+        }
+        
+        if (col.gameObject.CompareTag("Box") && !boxStuck)
+        { 
+            box = col.gameObject;
+            boxStuck = true;
+
+            box.GetComponent<Box>().isInvincible = true;
         }
     }
 }
