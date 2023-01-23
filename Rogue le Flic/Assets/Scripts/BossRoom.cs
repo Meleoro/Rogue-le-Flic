@@ -60,6 +60,8 @@ public class BossRoom : MonoBehaviour
         {
             boss2.GetComponent<Boss>().canMove = false;
 
+            Debug.Log(12);
+
 
             switch (boss2.GetComponent<Boss>().bossType)
             {
