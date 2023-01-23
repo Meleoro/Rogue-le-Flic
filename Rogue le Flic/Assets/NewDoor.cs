@@ -12,6 +12,10 @@ public class NewDoor : MonoBehaviour
 
     public bool isOpen;
 
+    [Header("UpDoor")]
+    public bool isUpDoor;
+    public Animator anim;
+
     public BoxCollider2D boxCollider2D;
 
     [Header("BossDoor")]
@@ -86,7 +90,10 @@ public class NewDoor : MonoBehaviour
 
             if (!doOnce)
             {
-                
+
+                if (isUpDoor)
+                    anim.enabled = true;
+
                 ding.Play();
                 doOnce = true;
             }
