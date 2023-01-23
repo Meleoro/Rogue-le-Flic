@@ -40,7 +40,11 @@ public class IntroManagerTuto : MonoBehaviour
         CameraMovements.Instance.canMove = true;
         ReferenceCamera.Instance._camera.DOOrthoSize(finalZoom / 2, 0);
 
-        ManagerChara.Instance.transform.position = posCharaFInal + new Vector3(20, 0, 0);
+        ManagerChara.Instance.transform.position = posCharaFInal + new Vector3(-20, 0, 0);
+
+        ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+        MovementsChara.Instance.sprite.transform.localPosition = ManagerChara.Instance.posRight;
+
         ManagerChara.Instance.anim.SetBool("isWalking", true);
 
         ManagerChara.Instance.transform.DOMove(posCharaFInal, 3).SetEase(Ease.Linear);
@@ -65,6 +69,8 @@ public class IntroManagerTuto : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         ReferenceCamera.Instance.finalCinematicChara = false;
+
+        fond.gameObject.SetActive(false);
     }
 
     private void Update()

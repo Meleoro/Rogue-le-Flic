@@ -268,6 +268,8 @@ public class ManagerChara : MonoBehaviour
         
         Viseur.Instance.viseurActif = false;
 
+        Viseur.Instance.gameObject.SetActive(false);
+
         CameraMovements.Instance.playerDeath = true;
         CameraMovements.Instance.timeZoom = 2;
         CameraMovements.Instance.posCamera = transform.position + new Vector3(-7, 0, 0);
