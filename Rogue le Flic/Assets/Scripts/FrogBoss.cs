@@ -57,6 +57,12 @@ public class FrogBoss : MonoBehaviour
     public List<GameObject> ennemies = new List<GameObject>();
 
 
+
+    public AudioSource stun;
+    public AudioSource windup;
+    
+    
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -485,9 +491,13 @@ public class FrogBoss : MonoBehaviour
 
             Vector3 direction = ManagerChara.Instance.transform.position - transform.position;
             Vector2 destination = ManagerChara.Instance.transform.position + direction.normalized * 3;
-
+            
+            
+            windup.Play();
             transform.DOShakePosition(0.6f, 0.3f);
-
+            
+            
+            
             yield return new WaitForSeconds(0.6f);
 
             GameObject currentTongue = Instantiate(bossData.tongue, transform.position + new Vector3(0, 1f, 0), Quaternion.identity, transform);
@@ -514,6 +524,8 @@ public class FrogBoss : MonoBehaviour
     {
         stunTimer = bossData.stunDuration;
 
+        stun.Play();
+        
         StopAllCoroutines();
 
         isAttacking = false;
