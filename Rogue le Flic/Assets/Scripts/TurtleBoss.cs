@@ -12,6 +12,7 @@ public class TurtleBoss : MonoBehaviour
     public TurtleBossData niveau2;
     public TurtleBossData niveau3;
     public TurtleBossData affaibli;
+    public TurtleBossData alone;
     
     [HideInInspector] public TurtleBossData bossData;
 
@@ -88,8 +89,12 @@ public class TurtleBoss : MonoBehaviour
         {
             bossData = affaibli;
         }
-        
-        
+        else if (boss.isAlone)
+        {
+            bossData = alone;
+        }
+
+
         canMove = true;
         
         if (boss.bossNumber == 0)
@@ -251,7 +256,7 @@ public class TurtleBoss : MonoBehaviour
             HealthManager.Instance.LoseHealth(directionProj);
         }
 
-        else if (col.gameObject.CompareTag("Ennemy") && isSliding)
+        else if (col.gameObject.CompareTag("Ennemy") && (isSliding || isGigaSliding))
         {
             if (!isKicked)
             {
@@ -260,7 +265,27 @@ public class TurtleBoss : MonoBehaviour
             }
 
             else
+            {
                 col.gameObject.GetComponent<Ennemy>().TakeDamages(20, gameObject);
+                StartCoroutine(SetInvincible(col.gameObject));
+            }
+        }
+
+        else if (col.gameObject.CompareTag("Boss") && (isSliding || isGigaSliding))
+        {
+            if (!isKicked)
+            {
+                Debug.Log(12);
+
+                col.gameObject.GetComponent<Boss>().TakeDamages(2, gameObject);
+                StartCoroutine(SetInvincible2(col.gameObject));
+            }
+
+            else
+            {
+                col.gameObject.GetComponent<Boss>().TakeDamages(20, gameObject);
+                StartCoroutine(SetInvincible2(col.gameObject));
+            }
         }
 
         else if (col.gameObject.CompareTag("Box") && isSliding)
@@ -278,7 +303,9 @@ public class TurtleBoss : MonoBehaviour
             TakeDamages(5, gameObject);
         }
     }
-    
+
+
+
     IEnumerator SetInvincible(GameObject collider)
     {
         collider.GetComponent<Ennemy>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall2");
@@ -286,6 +313,15 @@ public class TurtleBoss : MonoBehaviour
         yield return new WaitForSeconds(1f);
         
         collider.GetComponent<Ennemy>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall");;
+    }
+
+    IEnumerator SetInvincible2(GameObject collider)
+    {
+        collider.GetComponent<Boss>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall2");
+
+        yield return new WaitForSeconds(1.5f);
+
+        collider.GetComponent<Boss>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall"); ;
     }
 
 

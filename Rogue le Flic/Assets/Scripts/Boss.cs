@@ -20,7 +20,8 @@ public class Boss : MonoBehaviour
     public boss bossType;
 
     public bool isHurt;
-    
+    public bool isAlone;
+
     [Header("Feedbacks")] 
     public Color hitColor;
 
@@ -49,10 +50,17 @@ public class Boss : MonoBehaviour
     private GameObject money;
     private bool doOnceEnd;
     private bool doOnceEnd2;
+
+
+    public GameObject objetquigerelamusique;
+    
     
 
     private void Start()
     {
+        
+        objetquigerelamusique = GameObject.FindGameObjectWithTag("AudioMusique");
+
         switch (bossType)
         {
             case boss.Beaver:
@@ -278,7 +286,7 @@ public class Boss : MonoBehaviour
         {
             int index = Random.Range(0, MoneyManager.Instance.itemsKick.Count);
 
-            Instantiate(MoneyManager.Instance.itemsKick[index], transform.position, Quaternion.identity);
+            //Instantiate(MoneyManager.Instance.itemsKick[index], transform.position, Quaternion.identity);
         }
 
         else
@@ -295,25 +303,64 @@ public class Boss : MonoBehaviour
     }
 
 
-    public void VerifyBossType()
+    public void VerifyBossType(int other1, int other2)
     {
         switch (bossType)
         {
             case boss.Beaver:
                 ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.beaver;
                 ReferenceCamera.Instance.bossName.sprite = ReferenceCamera.Instance.beaverName;
+
+                if(other1 == 1 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.frogBeaver;
+                }
+                else if(other1 == 2 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.beaverTurtle;
+                }
+                else if((other1 == 1 && other2 == 2) || (other1 == 2 && other2 == 1))
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.all;
+                }
                 break;
 
             
             case boss.Frog:
                 ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.frog;
                 ReferenceCamera.Instance.bossName.sprite = ReferenceCamera.Instance.frogName;
+
+                if (other1 == 0 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.frogBeaver;
+                }
+                else if (other1 == 2 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.turtleFrog;
+                } 
+                else if ((other1 == 0 && other2 == 2) || (other1 == 2 && other2 == 0))
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.all;
+                }
                 break;
 
             
             case boss.Turtle:
                 ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.turtle;
                 ReferenceCamera.Instance.bossName.sprite = ReferenceCamera.Instance.turtleName;
+
+                if (other1 == 0 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.beaverTurtle;
+                }
+                else if (other1 == 1 && other2 == 3)
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.turtleFrog;
+                }
+                else if ((other1 == 0 && other2 == 1) || (other1 == 1 && other2 == 0))
+                {
+                    ReferenceCamera.Instance.bossSprite.sprite = ReferenceCamera.Instance.all;
+                }
                 break;
         }
     }
@@ -341,149 +388,182 @@ public class Boss : MonoBehaviour
     
     IEnumerator CinematicDeath()
     {
-        transform.localScale = Vector3.one;
-        
-        switch (bossType)
+        if (bossRoom.GetComponent<BossRoom>().isLastBoss && !isHurt)
         {
-            case boss.Beaver:
-                foreach (GameObject k in beaverScript.ennemies)
-                {
-                    Destroy(k);
-                }
-                break;
+            _collider2D.enabled = false;
 
-            case boss.Frog:
-                foreach (GameObject k in frogScript.ennemies)
-                {
-                    Destroy(k);
-                }
-                break;
+            transform.DOShakePosition(2, 2);
+            MapManager.Instance.activeRoom.GetComponent<DoorManager>().isFinished = true;
 
-            case boss.Turtle:
-                foreach (GameObject k in turtleScript.ennemies)
-                {
-                    Destroy(k);
-                }
-                break;
-        }
-        
-        CameraMovements.Instance.CancelShake();
-        
-        anim.SetBool("isWalking", false);
-        
-        ManagerChara.Instance.savePosition = ManagerChara.Instance.transform.position;
+            // CAMERA
+            CameraMovements.Instance.endRoom = true;
 
-        ReferenceCamera.Instance.fondNoir.DOFade(1, 2f);
-        ReferenceCamera.Instance.finalCinematic = true;
+            CameraMovements.Instance.timerZoom = 2f;
+            CameraMovements.Instance.timeZoom = 2f;
+            CameraMovements.Instance.ennemyPos = transform.position;
 
-        ManagerChara.Instance.noControl = true;
+            yield return new WaitForSeconds(2);
 
-        CameraMovements.Instance.bossEndRoom = true;
-        CameraMovements.Instance.timeZoom = 2f;
+            MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActivesGreen();
+            MapManager.Instance.activeRoom.GetComponent<DoorManager>().EndRoom(transform.position);
 
-        switch (bossType)
-        {
-            case boss.Beaver:
-                if (!beaverScript.lookLeft)
-                {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(4.5f, 0, 0);
-                    lookLeft = false;
-                }
-                else
-                {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-4.5f, 0, 0);
-                    lookLeft = true;
-                }
-                break;
-
-            case boss.Frog:
-                if (!frogScript.lookLeft)
-                {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(4.5f, 0, 0);
-                    lookLeft = false;
-                }
-                else
-                {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-4.5f, 0, 0);
-                    lookLeft = true;
-                }
-                break;
-
-            case boss.Turtle:
-                if (!turtleScript.lookLeft)
-                {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(4.5f, 0, 0);
-                    lookLeft = false;
-                }
-                else
-                {
-                    CameraMovements.Instance.posCamera = transform.position + new Vector3(-4.5f, 0, 0);
-                    lookLeft = true;
-                }
-                break;
-        }
-
-        yield return new WaitForSeconds(2);
-        
-        ManagerChara.Instance.StopChoroutines();
-        ManagerChara.Instance.noControl = true;
-
-
-        transform.position = transform.position + new Vector3(0, -5000, 0);
-        
-        CameraMovements.Instance.transform.position = CameraMovements.Instance.transform.position + new Vector3(0, -5000, 0);
-
-        ReferenceCamera.Instance.finalCinematicChara = true;
-
-        if (lookLeft)
-        {
-            ManagerChara.Instance.transform.position = transform.position + new Vector3(-20, 0, 0);
-
-            ManagerChara.Instance.transform.DOMoveX(transform.position.x - 10, 2).SetEase(Ease.Linear);
-            
-            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+            Destroy(gameObject);
         }
 
         else
         {
-            ManagerChara.Instance.transform.position = transform.position + new Vector3(20, 0, 0);
+            transform.localScale = Vector3.one;
 
-            ManagerChara.Instance.transform.DOMoveX(transform.position.x + 10, 2).SetEase(Ease.Linear);
-            
-            ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            switch (bossType)
+            {
+                case boss.Beaver:
+                    foreach (GameObject k in beaverScript.ennemies)
+                    {
+                        Destroy(k);
+                    }
+                    break;
+
+                case boss.Frog:
+                    foreach (GameObject k in frogScript.ennemies)
+                    {
+                        Destroy(k);
+                    }
+                    break;
+
+                case boss.Turtle:
+                    foreach (GameObject k in turtleScript.ennemies)
+                    {
+                        Destroy(k);
+                    }
+                    break;
+            }
+
+
+            //HERE DO FADE LA MUSIQUE
+
+            objetquigerelamusique.GetComponent<AudioSource>().DOFade(0.5f, 1);
+            //GetComponent<AudioSource>();
+            //musique.DOFade
+
+
+            CameraMovements.Instance.CancelShake();
+
+            anim.SetBool("isWalking", false);
+
+            ManagerChara.Instance.savePosition = ManagerChara.Instance.transform.position;
+
+            ReferenceCamera.Instance.fondNoir.DOFade(1, 2f);
+            ReferenceCamera.Instance.finalCinematic = true;
+
+            ManagerChara.Instance.noControl = true;
+
+            CameraMovements.Instance.bossEndRoom = true;
+            CameraMovements.Instance.timeZoom = 2f;
+
+            switch (bossType)
+            {
+                case boss.Beaver:
+                    if (!beaverScript.lookLeft)
+                    {
+                        CameraMovements.Instance.posCamera = transform.position + new Vector3(4.5f, 0, 0);
+                        lookLeft = false;
+                    }
+                    else
+                    {
+                        CameraMovements.Instance.posCamera = transform.position + new Vector3(-4.5f, 0, 0);
+                        lookLeft = true;
+                    }
+                    break;
+
+                case boss.Frog:
+                    if (!frogScript.lookLeft)
+                    {
+                        CameraMovements.Instance.posCamera = transform.position + new Vector3(4.5f, 0, 0);
+                        lookLeft = false;
+                    }
+                    else
+                    {
+                        CameraMovements.Instance.posCamera = transform.position + new Vector3(-4.5f, 0, 0);
+                        lookLeft = true;
+                    }
+                    break;
+
+                case boss.Turtle:
+                    if (!turtleScript.lookLeft)
+                    {
+                        CameraMovements.Instance.posCamera = transform.position + new Vector3(4.5f, 0, 0);
+                        lookLeft = false;
+                    }
+                    else
+                    {
+                        CameraMovements.Instance.posCamera = transform.position + new Vector3(-4.5f, 0, 0);
+                        lookLeft = true;
+                    }
+                    break;
+            }
+
+            yield return new WaitForSeconds(2);
+
+            ManagerChara.Instance.StopChoroutines();
+            ManagerChara.Instance.noControl = true;
+
+
+            transform.position = transform.position + new Vector3(0, -5000, 0);
+
+            CameraMovements.Instance.transform.position = CameraMovements.Instance.transform.position + new Vector3(0, -5000, 0);
+
+            ReferenceCamera.Instance.finalCinematicChara = true;
+
+            if (lookLeft)
+            {
+                ManagerChara.Instance.transform.position = transform.position + new Vector3(-20, 0, 0);
+
+                ManagerChara.Instance.transform.DOMoveX(transform.position.x - 10, 2).SetEase(Ease.Linear);
+
+                ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+
+            else
+            {
+                ManagerChara.Instance.transform.position = transform.position + new Vector3(20, 0, 0);
+
+                ManagerChara.Instance.transform.DOMoveX(transform.position.x + 10, 2).SetEase(Ease.Linear);
+
+                ManagerChara.Instance.anim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+
+            ManagerChara.Instance.anim.SetBool("isWalking", true);
+
+            canShake = true;
+
+            yield return new WaitForSeconds(2);
+
+
+            ManagerChara.Instance.anim.SetBool("isWalking", false);
+
+            ReferenceChoice.Instance.kick.DOLocalMoveX(350, 2);
+            ReferenceChoice.Instance.spare.DOLocalMoveX(-350, 2);
+
+            if (lookLeft)
+            {
+                money = Instantiate(moneyBag, transform.position, Quaternion.Euler(0, 180, 0), transform);
+                money.transform.DOMove(money.transform.position + new Vector3(-0.8f, 0, 0), 2);
+            }
+
+            else
+            {
+                money = Instantiate(moneyBag, transform.position, Quaternion.Euler(0, 0, 0), transform);
+                money.transform.DOMove(money.transform.position + new Vector3(0.8f, 0, 0), 2);
+            }
+
+            yield return new WaitForSeconds(2);
+
+
+            ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = true;
+            ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = true;
+
+            Viseur.Instance.viseurActif = false;
         }
-        
-        ManagerChara.Instance.anim.SetBool("isWalking", true);
-
-        canShake = true;
-
-        yield return new WaitForSeconds(2);
-
-        
-        ManagerChara.Instance.anim.SetBool("isWalking", false);
-
-        ReferenceChoice.Instance.kick.DOLocalMoveX(350, 2);
-        ReferenceChoice.Instance.spare.DOLocalMoveX(-350, 2);
-
-        if (lookLeft)
-        {
-            money = Instantiate(moneyBag, transform.position, Quaternion.Euler(0, 180, 0), transform);
-            money.transform.DOMove(money.transform.position + new Vector3(-0.8f, 0, 0), 2);
-        }
-
-        else
-        {
-            money = Instantiate(moneyBag, transform.position, Quaternion.Euler(0, 0, 0), transform);
-            money.transform.DOMove(money.transform.position + new Vector3(0.8f, 0, 0), 2);
-        }
-
-        yield return new WaitForSeconds(2);
-
-
-        ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = true;
-        ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = true;
-
-        Viseur.Instance.viseurActif = false;
     }
     
 
@@ -593,6 +673,9 @@ public class Boss : MonoBehaviour
                     StartCoroutine(JumpChoroutine());
 
                     yield return new WaitForSeconds(1f);
+                    
+                    objetquigerelamusique.GetComponent<AudioSource>().DOFade(1, 1);
+
                 }
             }
 

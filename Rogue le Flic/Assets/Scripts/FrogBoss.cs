@@ -12,6 +12,7 @@ public class FrogBoss : MonoBehaviour
     public FrogBossData niveau2;
     public FrogBossData niveau3;
     public FrogBossData affaibli;
+    public FrogBossData alone;
 
     [HideInInspector] public FrogBossData bossData;
     
@@ -98,8 +99,12 @@ public class FrogBoss : MonoBehaviour
         {
             bossData = affaibli;
         }
-        
-        
+        else if (boss.isAlone)
+        {
+            bossData = alone;
+        }
+
+
         if (boss.bossNumber == 0)
         {
             ReferenceBossUI.Instance.object1.SetActive(true);

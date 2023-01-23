@@ -105,7 +105,7 @@ public class Module : MonoBehaviour
         ManagerChara.Instance.noControl = false;
         CameraMovements.Instance.canMove = true;
         
-        MenuPauseManager.Instance.otherMenuActive = true;
+        MenuPauseManager.Instance.otherMenuActive = false;
 
         CameraMovements.Instance.departTransition = CameraMovements.Instance.transform.position;
         CameraMovements.Instance.timerTransition = 1;
@@ -116,11 +116,13 @@ public class Module : MonoBehaviour
     
     public void ChoiceSlot(int slot)
     {
+        Viseur.Instance.viseurActif = true;
+
         CameraMovements.Instance.timerTransition = 1;
         CameraMovements.Instance.isInTransition = true;
         CameraMovements.Instance.departTransition = CameraMovements.Instance.transform.position;
         
-        MenuPauseManager.Instance.otherMenuActive = true;
+        MenuPauseManager.Instance.otherMenuActive = false;
         CameraMovements.Instance.canMove = true;
 
         if (slot == 1)

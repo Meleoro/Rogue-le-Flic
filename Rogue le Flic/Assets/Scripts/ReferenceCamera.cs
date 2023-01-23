@@ -30,6 +30,12 @@ public class ReferenceCamera : MonoBehaviour
     public Sprite frogName;
     public Sprite turtleName;
 
+    public Sprite beaverTurtle;
+    public Sprite turtleFrog;
+    public Sprite frogBeaver;
+
+    public Sprite all;
+
     private void Awake()
     {
         if (Instance == null)
