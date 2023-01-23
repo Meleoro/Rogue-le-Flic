@@ -70,22 +70,22 @@ public class NewDoor : MonoBehaviour
     {
         if (isOpen)
         {
-            if (!isBossDoor)
-            {
-                lightRed.SetActive(false);
-                lightGreen.SetActive(true);
-
-                material.color = green;
-
-                boxCollider2D.enabled = true;
-            }
-
-            else if (isFinalDoor)
+            if (isFinalDoor)
             {
                 lightRed.SetActive(false);
                 lightBlue.SetActive(true);
 
                 material.color = colorNext;
+
+                boxCollider2D.enabled = true;
+            }
+
+            else if (!isBossDoor)
+            {
+                lightRed.SetActive(false);
+                lightGreen.SetActive(true);
+
+                material.color = green;
 
                 boxCollider2D.enabled = true;
             }
