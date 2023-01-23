@@ -9,6 +9,7 @@ public class NewDoor : MonoBehaviour
 
     public GameObject lightRed;
     public GameObject lightGreen;
+    public GameObject lightBlue;
 
     public bool isOpen;
 
@@ -78,12 +79,23 @@ public class NewDoor : MonoBehaviour
 
                 boxCollider2D.enabled = true;
             }
+
+            else if (isFinalDoor)
+            {
+                lightRed.SetActive(false);
+                lightBlue.SetActive(true);
+
+                material.color = colorNext;
+
+                boxCollider2D.enabled = true;
+            }
+
             else
             {
                 lightRed.SetActive(false);
                 lightGreen.SetActive(true);
 
-                material.color = colorBoss;
+                material.color = green;
 
                 boxCollider2D.enabled = true;
             }
