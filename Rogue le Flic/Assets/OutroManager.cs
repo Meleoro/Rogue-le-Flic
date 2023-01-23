@@ -25,6 +25,9 @@ public class OutroManager : MonoBehaviour
     private float timer2;
 
     private bool doOnce;
+    
+    public GameObject objetquigerelamusique2;
+
 
 
     private void Start()
@@ -32,6 +35,9 @@ public class OutroManager : MonoBehaviour
         fondu.DOFade(0, 1f);
 
         doOnce = false;
+        
+        objetquigerelamusique2 = GameObject.FindGameObjectWithTag("AudioMusique");
+
     }
 
 
