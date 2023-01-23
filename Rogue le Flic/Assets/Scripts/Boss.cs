@@ -306,7 +306,7 @@ public class Boss : MonoBehaviour
         {
             int index = Random.Range(0, MoneyManager.Instance.itemsKick.Count);
 
-            dying.Play();
+            dying.PlayDelayed(2);
             //hereee
             //Instantiate(MoneyManager.Instance.itemsKick[index], transform.position, Quaternion.identity);
         }
