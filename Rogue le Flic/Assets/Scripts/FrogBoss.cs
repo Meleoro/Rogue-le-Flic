@@ -555,6 +555,8 @@ public class FrogBoss : MonoBehaviour
             }
 
             ennemies.Add(Instantiate(bossData.frog, bossRoom.spawnPoints[newIndex].position, Quaternion.identity));
+            
+            ennemies[ennemies.Count - 1].GetComponent<Ennemy>().bossSpawned = true;
             indexSelected.Add(newIndex);
         }
 
