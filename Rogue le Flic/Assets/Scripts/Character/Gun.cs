@@ -432,7 +432,7 @@ public class Gun : MonoBehaviour
                 {
                     refBullet.GetComponent<Bullet>().timerArrow = bowState / 3;
 
-                    refBullet.GetComponent<Bullet>().bulletSpeed = bowState * 6;
+                    refBullet.GetComponent<Bullet>().bulletSpeed = bowState * 10;
                 }
 
                 

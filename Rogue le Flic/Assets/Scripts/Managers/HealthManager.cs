@@ -27,6 +27,9 @@ public class HealthManager : MonoBehaviour
     private float timerEffects;
 
     public AudioSource damagetaken;
+
+    public Volume healVolume;
+    private float timer2;
     
 
     private void Awake()
@@ -52,6 +55,14 @@ public class HealthManager : MonoBehaviour
     {
         if (timerEffects > 0)
             HitEffect();
+        else
+            volume.enabled = false;
+
+        if (timer2 > 0)
+            HealEffect();
+        else
+            healVolume.enabled = false;
+        
 
         if (timerInvincible > 0)
             timerInvincible -= Time.deltaTime;
@@ -126,13 +137,13 @@ public class HealthManager : MonoBehaviour
                 hearts[k].SetActive(true);
             }
         }
+
+        timer2 = 1;
     }
 
     public void HitEffect()
     {
-        
-
-        
+        volume.enabled = true;
         
         timerEffects -= Time.deltaTime * speedEffects;
         
@@ -149,5 +160,15 @@ public class HealthManager : MonoBehaviour
         }
 
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
+    }
+    
+    
+    public void HealEffect()
+    {
+        healVolume.enabled = true;
+        
+        timer2 -= Time.deltaTime * 1.5f;
+        
+        healVolume.weight = Mathf.Lerp(0, 1f, timer2);
     }
 }
