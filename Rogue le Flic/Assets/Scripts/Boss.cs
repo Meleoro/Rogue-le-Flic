@@ -609,7 +609,7 @@ public class Boss : MonoBehaviour
     {
         if (!doOnceEnd)
         {
-            //DOTween.Kill(this);
+            DOTween.KillAll();
             
             ReferenceChoice.Instance.kick.DOLocalMoveX(800, 1);
             ReferenceChoice.Instance.spare.DOLocalMoveX(-800, 1);
