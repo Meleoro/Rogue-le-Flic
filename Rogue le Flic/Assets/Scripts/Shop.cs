@@ -58,6 +58,10 @@ public class Shop : MonoBehaviour
 
     public AudioSource open;
     public AudioSource close;
+    public AudioSource cling;
+    public AudioSource dzit;
+    
+    
 
 
     private void Start()
@@ -213,11 +217,13 @@ public class Shop : MonoBehaviour
                 item1.enabled = false;
                 
                 //jouer le son cling
+                cling.Play();
                 
             }
             else
             {
                 //jouer le son dzit
+                dzit.Play();
             }
         }
 
@@ -232,11 +238,13 @@ public class Shop : MonoBehaviour
             item2.enabled = false;
             
             //jouer le son cling
+            cling.Play();
             
         }
         else
         {
             //jouer le son dzit
+            dzit.Play();
         }
         
         if (itemID == 3 && CoinManager.Instance.currentCoins >= MoneyManager.Instance.healthPrice)
@@ -248,10 +256,12 @@ public class Shop : MonoBehaviour
             item3.enabled = false;
             
             //jouer le son cling
+            cling.Play();
         }
         else
         {
             //jouer le son dzit
+            dzit.Play();
         }
     }
 

@@ -26,8 +26,9 @@ public class BossRoom : MonoBehaviour
     private void Start()
     {
         
-        //faire une instance pour accéder au code
-        
+        //Lancer la musique du boss
+        Music.Instance.CombatABoss();
+
         if (isLastBoss)
         {
             for (int k = 0; k < LevelManager.Instance.savedBoss.Count; k++)

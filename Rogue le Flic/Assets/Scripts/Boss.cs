@@ -71,7 +71,7 @@ public class Boss : MonoBehaviour
             ReferenceChoice.Instance.boss = gameObject;
         }
         
-        objetquigerelamusique = GameObject.FindGameObjectWithTag("AudioMusique");
+        //objetquigerelamusique = GameObject.FindGameObjectWithTag("AudioMusique");
 
         switch (bossType)
         {
@@ -478,7 +478,9 @@ public class Boss : MonoBehaviour
 
             //HERE DO FADE LA MUSIQUE
 
-            objetquigerelamusique.GetComponent<AudioSource>().DOFade(0.5f, 1);
+            
+            
+            //objetquigerelamusique.GetComponent<AudioSource>().DOFade(0.5f, 1);
             //GetComponent<AudioSource>();
             //musique.DOFade
 
@@ -711,7 +713,7 @@ public class Boss : MonoBehaviour
 
                     yield return new WaitForSeconds(1f);
                     
-                    objetquigerelamusique.GetComponent<AudioSource>().DOFade(1, 1);
+                    //objetquigerelamusique.GetComponent<AudioSource>().DOFade(1, 1);
 
                 }
             }
@@ -754,6 +756,10 @@ public class Boss : MonoBehaviour
 
             MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActivesGreen();
 
+            //Transition avec la musique du tuto
+            Music.Instance.BossACombat();
+            
+            
             Destroy(gameObject);
         
 }

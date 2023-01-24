@@ -68,6 +68,12 @@ public class GenerationPro : MonoBehaviour
 
             boucleNbr = 0;
         }
+
+        if (!testLDMode)
+        {
+            //Lancer la musique de combat
+            Music.Instance.TutoACombat();
+        }
     }
     
     public void GenerateMap()
