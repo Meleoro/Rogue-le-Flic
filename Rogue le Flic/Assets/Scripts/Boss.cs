@@ -423,6 +423,30 @@ public class Boss : MonoBehaviour
     {
         if (bossRoom.GetComponent<BossRoom>().isLastBoss && !isHurt)
         {
+            switch (bossType)
+            {
+                case boss.Beaver:
+                    foreach (GameObject k in beaverScript.ennemies)
+                    {
+                        Destroy(k);
+                    }
+                    break;
+
+                case boss.Frog:
+                    foreach (GameObject k in frogScript.ennemies)
+                    {
+                        Destroy(k);
+                    }
+                    break;
+
+                case boss.Turtle:
+                    foreach (GameObject k in turtleScript.ennemies)
+                    {
+                        Destroy(k);
+                    }
+                    break;
+            }
+            
             bossRoom.GetComponent<BossRoom>().DestroyWhatIsLeft();
             
             _collider2D.enabled = false;
