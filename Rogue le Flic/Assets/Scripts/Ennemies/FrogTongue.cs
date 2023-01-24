@@ -69,8 +69,10 @@ public class FrogTongue : MonoBehaviour
 
             if (boxStuck)
             {
-                Destroy(box);
+                frog.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsBox, box);
                 frog.GetComponent<Ennemy>().Stun();
+                
+                Destroy(box);
             }
         }
 
