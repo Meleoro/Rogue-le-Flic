@@ -6,6 +6,8 @@ using UnityEngine;
 public class HeightSorting : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
+
+    public bool upDoor;
     
     private void Start()
     {
@@ -14,6 +16,10 @@ public class HeightSorting : MonoBehaviour
 
     void Update()
     {
-        _spriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 2) * -1;
+        if(upDoor)
+            _spriteRenderer.sortingOrder = (Mathf.RoundToInt(transform.position.y * 2) * -1) - 1;
+        
+        else
+            _spriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * 2) * -1;
     }
 }
