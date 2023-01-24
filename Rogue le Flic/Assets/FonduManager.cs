@@ -14,6 +14,11 @@ public class FonduManager : MonoBehaviour
     
     public Image fondu;
 
+    public bool fonduActif;
+
+    private float timer;
+    private bool doOnce;
+
 
     private void Awake()
     {
@@ -24,9 +29,15 @@ public class FonduManager : MonoBehaviour
         else 
         { 
             Instance = this; 
-        } 
+        }
         
         DontDestroyOnLoad(gameObject);
+    }
+
+
+    private void Start()
+    {
+        fonduActif = false;
     }
 
 
@@ -41,18 +52,34 @@ public class FonduManager : MonoBehaviour
         if(destroy)
             Destroy(DontDestroyOnLoadScript2.Instance.gameObject);
 
-        fondu.DOFade(0, 0.5f);
+        fonduActif = true;
+        doOnce = false;
 
         SceneManager.LoadScene(sceneName);
-        
-        yield return new WaitForSeconds(0.5f);
-
-        fondu.gameObject.SetActive(false);
     }
 
     public void Gestionfondu()
     {
         fondu.DOFade(1, 0.5f)
             .OnComplete((() => fondu.DOFade(0, 0.5f).OnComplete(() => fondu.gameObject.SetActive(false))));
+    }
+
+
+    private void Update()
+    {
+        if (fonduActif)
+        {
+            timer += Time.deltaTime;
+            
+            if(!doOnce)
+                fondu.DOFade(0, 0.5f);
+
+            if (timer > 0.5f)
+            {
+                fonduActif = false;
+                fondu.gameObject.SetActive(false);
+            }
+
+        }
     }
 }

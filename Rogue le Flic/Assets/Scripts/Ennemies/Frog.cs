@@ -240,6 +240,9 @@ public class Frog : MonoBehaviour
         
         else if (isKicked && (col.CompareTag("Wall") || col.CompareTag("Box")))
         {
+            if(col.CompareTag("Box"))
+                col.GetComponent<Box>().Explose();
+            
             TakeDamages(DegatsManager.Instance.degatsEnnemyIntoWall, gameObject);
             ennemy.Stun();
         }

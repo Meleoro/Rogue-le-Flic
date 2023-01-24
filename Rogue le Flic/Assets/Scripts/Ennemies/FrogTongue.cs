@@ -55,9 +55,10 @@ public class FrogTongue : MonoBehaviour
             Mathf.Lerp(retour.y, destination.y, frog.frogData.tonguePatern.Evaluate(avancée)));
         
 
-        if (frog.stopTongue || frog.canMove)
+        if (frog.stopTongue || frog.canMove || frog.isKicked || frog.GetComponent<Ennemy>().isStunned)
         {
-            box.GetComponent<Box>().isInvincible = false;
+            if(box != null)
+                box.GetComponent<Box>().isInvincible = false;
             
             Destroy(gameObject);
         }
@@ -68,8 +69,10 @@ public class FrogTongue : MonoBehaviour
 
             if (boxStuck)
             {
-                Destroy(box);
+                frog.GetComponent<Ennemy>().TakeDamages(DegatsManager.Instance.degatsBox, box);
                 frog.GetComponent<Ennemy>().Stun();
+                
+                Destroy(box);
             }
         }
 
