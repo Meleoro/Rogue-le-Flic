@@ -756,7 +756,10 @@ public class Boss : MonoBehaviour
 
             MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActivesGreen();
 
+            //refaire le dofade dans l'autre sens
             Destroy(gameObject);
+            
+            
         }
         else
         {

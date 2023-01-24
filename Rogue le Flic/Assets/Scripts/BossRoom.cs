@@ -25,6 +25,9 @@ public class BossRoom : MonoBehaviour
 
     private void Start()
     {
+        
+        //faire une instance pour accéder au code
+        
         if (isLastBoss)
         {
             for (int k = 0; k < LevelManager.Instance.savedBoss.Count; k++)

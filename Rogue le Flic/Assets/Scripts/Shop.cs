@@ -211,10 +211,17 @@ public class Shop : MonoBehaviour
                 newGun.GetComponent<Gun>().PickWeapon();
             
                 item1.enabled = false;
+                
+                //jouer le son cling
+                
+            }
+            else
+            {
+                //jouer le son dzit
             }
         }
 
-        else if(itemID == 2 && CoinManager.Instance.currentCoins >= MoneyManager.Instance.modulePrice)
+        if(itemID == 2 && CoinManager.Instance.currentCoins >= MoneyManager.Instance.modulePrice)
         {
             GameObject newModule = Instantiate(currentItems[itemID - 1]);
 
@@ -223,15 +230,28 @@ public class Shop : MonoBehaviour
             newModule.GetComponent<Module>().OpenChoice();
             
             item2.enabled = false;
+            
+            //jouer le son cling
+            
+        }
+        else
+        {
+            //jouer le son dzit
         }
         
-        else if (itemID == 3 && CoinManager.Instance.currentCoins >= MoneyManager.Instance.healthPrice)
+        if (itemID == 3 && CoinManager.Instance.currentCoins >= MoneyManager.Instance.healthPrice)
         {
             HealthManager.Instance.AddHealth();
             
             CoinManager.Instance.currentCoins -= MoneyManager.Instance.healthPrice;
             
             item3.enabled = false;
+            
+            //jouer le son cling
+        }
+        else
+        {
+            //jouer le son dzit
         }
     }
 

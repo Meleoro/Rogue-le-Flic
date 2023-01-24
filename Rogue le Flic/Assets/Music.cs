@@ -7,19 +7,23 @@ public class Music : MonoBehaviour
 {
 
 
+    public bool inTuto = false;
     public bool inCombat = false;
+    public bool inBoss = false;
     
 
 
-public AudioSource musiqueExplo;
+public AudioSource musiqueTuto;
 public AudioSource musiqueCombat;
 public AudioSource musiqueBoss;
 
     // Start is called before the first frame update
     void Start()
     {
-        musiqueExplo.Play();
+        musiqueTuto.Play();
         musiqueCombat.Play();
+        musiqueBoss.Play();
+        
     }
 
     // Update is called once per frame
@@ -43,7 +47,7 @@ public AudioSource musiqueBoss;
 
         if (inCombat == true)
         {
-            musiqueExplo.DOFade(0, 1);
+            musiqueTuto.DOFade(0, 1);
             musiqueCombat.DOFade(1, 1);
 
         }
@@ -51,7 +55,7 @@ public AudioSource musiqueBoss;
 
         if (inCombat == false)
         {
-            musiqueExplo.DOFade(1, 1);
+            musiqueTuto.DOFade(1, 1);
             musiqueCombat.DOFade(0, 1);
         }
     }
