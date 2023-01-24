@@ -18,11 +18,13 @@ public class IntroManagerTuto : MonoBehaviour
     void Start()
     {
         isInIntro = true;
+        
+        CameraMovements.Instance.canMove = false;
 
         posCharaFInal = ManagerChara.Instance.transform.position;
         finalZoom = ReferenceCamera.Instance._camera.orthographicSize;
 
-        CameraMovements.Instance.transform.position = posCharaFInal;
+        CameraMovements.Instance.transform.position = ManagerChara.Instance.transform.position;
 
         ReferenceCamera.Instance.finalCinematicChara = true;
 
@@ -36,8 +38,6 @@ public class IntroManagerTuto : MonoBehaviour
 
     IEnumerator Intro()
     {
-
-        CameraMovements.Instance.canMove = true;
         ReferenceCamera.Instance._camera.DOOrthoSize(finalZoom / 2, 0);
 
         ManagerChara.Instance.transform.position = posCharaFInal + new Vector3(-20, 0, 0);
