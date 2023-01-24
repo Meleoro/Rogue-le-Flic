@@ -112,6 +112,8 @@ public class LevelManager : MonoBehaviour
 
         else
         {
+            //Do fade de la musique du combat
+            Music.Instance.musiqueBoss.DOFade(0, 1);
             StartCoroutine(FonduManager.Instance.ChangeScene("Outro", true));
         }
     }
