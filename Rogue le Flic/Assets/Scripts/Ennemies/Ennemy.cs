@@ -51,6 +51,7 @@ public class Ennemy : MonoBehaviour
     private float stunTimer;
     public bool infiniteStun;
     [HideInInspector] public bool isKickedBool;
+    public bool isStunned;
 
 
     public AudioSource stun;
@@ -93,6 +94,8 @@ public class Ennemy : MonoBehaviour
         {
             if (stunTimer <= 0)
             {
+                isStunned = false;
+                
                 VFXStun.SetActive(false);
             
                 if (!isSpawning)
@@ -116,6 +119,8 @@ public class Ennemy : MonoBehaviour
         
             else
             {
+
+                isStunned = true;
                 stunTimer -= Time.deltaTime;
             }
         
