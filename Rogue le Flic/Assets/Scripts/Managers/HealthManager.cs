@@ -29,7 +29,9 @@ public class HealthManager : MonoBehaviour
     public AudioSource damagetaken;
 
     public Volume healVolume;
-    private float timer2;
+    public float timer2;
+
+    public bool godMode;
     
 
     private void Awake()
@@ -75,43 +77,45 @@ public class HealthManager : MonoBehaviour
 
     public void LoseHealth(Vector2 direction)
     {
-        
-        if (!isInvincible && currentHealth > 0 && !ManagerChara.Instance.isDashing && !immortel)
+        if (!godMode)
         {
-            
-            
-            damagetaken.Play();
-            
-            
-            currentHealth -= 1;
-
-            if(currentHealth % 2 == 1)
+            if (!isInvincible && currentHealth > 0 && !ManagerChara.Instance.isDashing && !immortel)
             {
-                hearts[currentHealth].SetActive(false);
-                hearts[currentHealth - 1].SetActive(true);
-            }
+            
+            
+                damagetaken.Play();
+            
+            
+                currentHealth -= 1;
 
-            else
-            {
-                hearts[currentHealth].SetActive(false);
-            }
+                if(currentHealth % 2 == 1)
+                {
+                    hearts[currentHealth].SetActive(false);
+                    hearts[currentHealth - 1].SetActive(true);
+                }
 
-            isInvincible = true;
+                else
+                {
+                    hearts[currentHealth].SetActive(false);
+                }
 
-            CameraMovements.Instance.CameraShake(shakeDuration, shakeAmplitude);
+                isInvincible = true;
+
+                CameraMovements.Instance.CameraShake(shakeDuration, shakeAmplitude);
                 
-            ManagerChara.Instance.rb.AddForce(direction.normalized * reculForce, ForceMode2D.Impulse);
+                ManagerChara.Instance.rb.AddForce(direction.normalized * reculForce, ForceMode2D.Impulse);
         
-            timerEffects = 1;
+                timerEffects = 1;
 
-            if (currentHealth <= 0)
-            {
-                ManagerChara.Instance.noControl = true;
+                if (currentHealth <= 0)
+                {
+                    ManagerChara.Instance.noControl = true;
 
-                StartCoroutine(ManagerChara.Instance.Death());
+                    StartCoroutine(ManagerChara.Instance.Death());
+                }
+
+                timerInvincible = invincibleTime;
             }
-
-            timerInvincible = invincibleTime;
         }
     }
     

@@ -115,10 +115,10 @@ public class ManagerChara : MonoBehaviour
             ActualisePath();
         }
         
-        if (Input.GetKeyDown(KeyCode.A))
+        /*if (Input.GetKeyDown(KeyCode.A))
         {
             StartCoroutine(Death());
-        }
+        }*/
         
         if (!noControl)
         {
