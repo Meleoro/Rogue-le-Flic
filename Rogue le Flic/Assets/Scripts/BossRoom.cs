@@ -168,11 +168,14 @@ public class BossRoom : MonoBehaviour
     {
         if (boss2 is not null)
         {
-            StartCoroutine(boss2.GetComponent<Boss>().HurtDeath());
+            //StartCoroutine(boss2.GetComponent<Boss>().HurtDeath());
+            
+            Destroy(boss2);
         }
         if (boss3 is not null)
         {
-            StartCoroutine(boss3.GetComponent<Boss>().HurtDeath());
+            //StartCoroutine(boss3.GetComponent<Boss>().HurtDeath());
+            Destroy(boss3);
         }
     }
 }

@@ -18,12 +18,16 @@ public class OptionsManager : MonoBehaviour
     public UnityEngine.UI.Slider sliderMusic;
     public UnityEngine.UI.Slider sliderSFX;
 
+    private bool fullScreenOn;
+
 
     private void Start()
     {
         textMaster.text = Mathf.RoundToInt(sliderMaster.value + 80).ToString();
         textMusic.text = Mathf.RoundToInt(sliderMusic.value + 80).ToString();
         textSFX.text = Mathf.RoundToInt(sliderSFX.value + 80).ToString();
+
+        fullScreenOn = true;
     }
 
 
@@ -47,6 +51,8 @@ public class OptionsManager : MonoBehaviour
     
     public void SetFullScreen(bool fullscreen)
     {
-        Screen.fullScreen = fullscreen;
+        fullScreenOn = !fullScreenOn;
+        
+        Screen.fullScreen = fullScreenOn;
     }
 }
