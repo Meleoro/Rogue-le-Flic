@@ -27,6 +27,8 @@ public class OutroManager : MonoBehaviour
     private bool doOnce;
     
     public GameObject objetquigerelamusique2;
+    public AudioSource switchOn;
+    
 
 
 
@@ -53,6 +55,7 @@ public class OutroManager : MonoBehaviour
         {
             milieu = true;
             imageLampeAllumee.SetActive(true);
+            switchOn.Play();
 
             timer = 0;
         }
@@ -130,6 +133,8 @@ public class OutroManager : MonoBehaviour
             fondu.DOFade(1, 1);
 
             StartCoroutine(Fin());
+
+            objetquigerelamusique2.GetComponent<AudioSource>().DOFade(0, 1);
         }
     }
 
