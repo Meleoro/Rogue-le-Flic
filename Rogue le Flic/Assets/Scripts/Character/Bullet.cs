@@ -136,19 +136,19 @@ public class Bullet : MonoBehaviour
                     }
 
                     if(bulletSpeed > 0)
-                        bulletSpeed -= Time.deltaTime * arrowDeceleration * 1.8f;
+                        bulletSpeed -= Time.deltaTime * arrowDeceleration * 3f;
                 }
                 
                 else
-                {
-                    rb.velocity = direction * bulletSpeed;
-
+                { 
                     if (bulletSpeed <= 0.23f)
                     {
                         timerArrow = 0.3f;
                     }
 
-                    bulletSpeed -= Time.deltaTime * arrowDeceleration;
+                    bulletSpeed -= Time.deltaTime * arrowDeceleration * 0.8f;
+                    
+                    Debug.Log(timerArrow);
                 }
             }
 
@@ -172,7 +172,7 @@ public class Bullet : MonoBehaviour
                 }
 
                 if (bulletSpeed > 0)
-                    bulletSpeed -= Time.deltaTime * arrowDeceleration;
+                    bulletSpeed -= Time.deltaTime * arrowDeceleration * 1.5f;
 
                 if (timerArrow <= 0)
                 {
