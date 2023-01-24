@@ -268,7 +268,7 @@ public class ManagerChara : MonoBehaviour
         
         Viseur.Instance.viseurActif = false;
 
-        Viseur.Instance.gameObject.SetActive(false);
+        Viseur.Instance.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 
         CameraMovements.Instance.playerDeath = true;
         CameraMovements.Instance.timeZoom = 2;
