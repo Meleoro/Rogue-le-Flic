@@ -6,6 +6,6 @@ public class ventilo : MonoBehaviour
 {
     void Update()
     {
-        transform.Rotate(new Vector3(0f, 0f, 50f) * Time.deltaTime);
+        transform.Rotate(new Vector3(0f, 0f, 65f) * Time.deltaTime);
     }
 }
