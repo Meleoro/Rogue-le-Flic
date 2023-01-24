@@ -60,8 +60,6 @@ public class BossRoom : MonoBehaviour
         {
             boss2.GetComponent<Boss>().canMove = false;
 
-            Debug.Log(12);
-
 
             switch (boss2.GetComponent<Boss>().bossType)
             {
@@ -158,6 +156,20 @@ public class BossRoom : MonoBehaviour
         if (boss3 is not null)
         {
             boss3.GetComponent<Boss>().canMove = true;
+        }
+    }
+
+
+
+    public void DestroyWhatIsLeft()
+    {
+        if (boss2 is not null)
+        {
+            StartCoroutine(boss2.GetComponent<Boss>().HurtDeath());
+        }
+        if (boss3 is not null)
+        {
+            StartCoroutine(boss3.GetComponent<Boss>().HurtDeath());
         }
     }
 }

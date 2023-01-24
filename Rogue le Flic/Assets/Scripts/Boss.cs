@@ -424,6 +424,8 @@ public class Boss : MonoBehaviour
     {
         if (bossRoom.GetComponent<BossRoom>().isLastBoss && !isHurt)
         {
+            bossRoom.GetComponent<BossRoom>().DestroyWhatIsLeft();
+            
             _collider2D.enabled = false;
 
             transform.DOShakePosition(2, 2);

@@ -326,7 +326,7 @@ public class TurtleBoss : MonoBehaviour
     {
         collider.GetComponent<Boss>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall2");
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         collider.GetComponent<Boss>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall"); ;
     }
