@@ -45,7 +45,7 @@ private void Awake()
     public void TutoACombat()
     {
         musiqueTuto.DOFade(0, 1.5f);
-        musiqueCombat.DOFade(0.75f, 1.5f);
+        musiqueCombat.DOFade(0.5f, 1.5f);
         Debug.Log("Tuto = 0");
         Debug.Log("Combat = 1");
     }
@@ -63,7 +63,7 @@ private void Awake()
     public void BossACombat()
     {
         musiqueBoss.DOFade(0, 1.5f);
-        musiqueCombat.DOFade(0.75f, 1.5f);
+        musiqueCombat.DOFade(0.5f, 1.5f);
 
         Debug.Log("Boss = 0");
         Debug.Log("Combat = 1");
