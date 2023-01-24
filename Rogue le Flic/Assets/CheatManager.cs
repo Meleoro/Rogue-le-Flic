@@ -19,7 +19,9 @@ public class CheatManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.G) && Input.GetKeyDown(KeyCode.M))
         {
-            
+            HealthManager.Instance.godMode = !HealthManager.Instance.godMode;
+
+            HealthManager.Instance.timer2 = 1;
         }
 
         if (Input.GetKey(KeyCode.G) && Input.GetKeyDown(KeyCode.C))
@@ -29,12 +31,12 @@ public class CheatManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.G) && Input.GetKeyDown(KeyCode.K))
         {
-            
+            StartCoroutine(ManagerChara.Instance.Death());
         }
 
         if (Input.GetKey(KeyCode.G) && Input.GetKeyDown(KeyCode.L))
         {
-            
+            LevelManager.Instance.ChangeScene();
         }
         
         
