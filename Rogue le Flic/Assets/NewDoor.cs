@@ -106,7 +106,10 @@ public class NewDoor : MonoBehaviour
             {
 
                 if (isUpDoor)
+                {
                     anim.enabled = true;
+                    anim.SetTrigger("openDoor");
+                }
 
                 ding.Play();
                 doOnce = true;
