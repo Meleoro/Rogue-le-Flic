@@ -20,6 +20,7 @@ public class MenuPrincipalManager : MonoBehaviour
 
     [Header("Menu2")] 
     public GameObject menu2;
+    public Button retourButton;
     
     
     public void Quit()
@@ -52,6 +53,8 @@ public class MenuPrincipalManager : MonoBehaviour
         optionButton.enabled = false;
         exitButton.enabled = false;
 
+        retourButton.enabled = true;
+
         StartCoroutine(Zoom(_camera.orthographicSize));
     }
 
@@ -67,6 +70,8 @@ public class MenuPrincipalManager : MonoBehaviour
         startButton.enabled = true;
         optionButton.enabled = true;
         exitButton.enabled = true;
+
+        retourButton.enabled = false;
 
         StartCoroutine(Zoom(_camera.orthographicSize));
 
