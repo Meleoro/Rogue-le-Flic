@@ -393,6 +393,29 @@ public class Ennemy : MonoBehaviour
 
                 Destroy(gameObject);
             }
+            
+            else if (MapManager.Instance.activeRoom.GetComponent<DoorManager>().bossRoom)
+            {
+                int index = Random.Range(0, 100);
+            
+                if(index < 50)
+                    Instantiate(MoneyManager.Instance.health, transform.position, Quaternion.identity);
+                
+                isDying = true;
+        
+                anim.SetTrigger("death");
+        
+                death.Play();
+        
+                ScoreManager.instance.EnemyKilled();
+        
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                _collider2D.enabled = false;
+
+                yield return new WaitForSeconds(0.5f);
+
+                Destroy(gameObject);
+            }
 
             else
             {
