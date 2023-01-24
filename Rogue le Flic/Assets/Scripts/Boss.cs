@@ -599,6 +599,7 @@ public class Boss : MonoBehaviour
             ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = true;
 
             Viseur.Instance.viseurActif = false;
+            doOnceEnd = false;
         }
     }
     
@@ -608,10 +609,13 @@ public class Boss : MonoBehaviour
     {
         if (!doOnceEnd)
         {
-            doOnceEnd = true;
-            
             DOTween.KillAll();
-        
+            
+            ReferenceChoice.Instance.kick.DOLocalMoveX(800, 1);
+            ReferenceChoice.Instance.spare.DOLocalMoveX(-800, 1);
+            
+            doOnceEnd = true;
+
             Viseur.Instance.viseurActif = true;
             
             if (lookLeft)
@@ -635,10 +639,7 @@ public class Boss : MonoBehaviour
             
             ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = false;
             ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = false;
-            
-            ReferenceChoice.Instance.kick.DOLocalMoveX(800, 1);
-            ReferenceChoice.Instance.spare.DOLocalMoveX(-800, 1);
-            
+
             Destroy(money);
             
             // ON CHOISI DE KICK
