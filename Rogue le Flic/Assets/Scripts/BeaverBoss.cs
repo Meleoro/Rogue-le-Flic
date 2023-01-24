@@ -286,6 +286,8 @@ public class BeaverBoss : MonoBehaviour
             }
 
             ennemies.Add(Instantiate(bossData.castor, bossRoom.spawnPoints[newIndex].position, Quaternion.identity));
+
+            ennemies[ennemies.Count - 1].GetComponent<Ennemy>().bossSpawned = true;
             indexSelected.Add(newIndex);
         }
 

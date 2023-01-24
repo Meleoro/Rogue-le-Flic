@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public class Ennemy : MonoBehaviour
 {
     public bool dontMove;
+    public bool bossSpawned;
     
     public enum ennemies
     {
@@ -290,9 +291,19 @@ public class Ennemy : MonoBehaviour
 
     public IEnumerator Death()
     {
-        for (int k = 0; k < MoneyManager.Instance.moneyDropPerEnnemy; k++)
+        if (bossSpawned)
         {
-            Instantiate(MoneyManager.Instance.coin,transform.position, Quaternion.identity);
+            int index = Random.Range(0, 100);
+            
+            if(index < 50)
+                Instantiate(MoneyManager.Instance.health, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            for (int k = 0; k < MoneyManager.Instance.moneyDropPerEnnemy; k++)
+            {
+                Instantiate(MoneyManager.Instance.coin,transform.position, Quaternion.identity);
+            }
         }
 
         isDying = true;
