@@ -284,8 +284,6 @@ public class TurtleBoss : MonoBehaviour
         {
             if (!isKicked)
             {
-                Debug.Log(12);
-
                 col.gameObject.GetComponent<Boss>().TakeDamages(2, gameObject);
                 StartCoroutine(SetInvincible2(col.gameObject));
             }
@@ -473,6 +471,8 @@ public class TurtleBoss : MonoBehaviour
             }
 
             ennemies.Add(Instantiate(bossData.turtle, bossRoom.spawnPoints[newIndex].position, Quaternion.identity));
+            
+            ennemies[ennemies.Count - 1].GetComponent<Ennemy>().bossSpawned = true;
             indexSelected.Add(newIndex);
         }
 

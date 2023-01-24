@@ -62,6 +62,8 @@ public class NewDoor : MonoBehaviour
             tagBoss.SetActive(false);
             tagNextLevelDoor.SetActive(false);
         }
+
+        doOnce = false;
     }
 
 
