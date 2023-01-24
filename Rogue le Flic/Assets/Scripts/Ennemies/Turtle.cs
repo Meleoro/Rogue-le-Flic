@@ -220,6 +220,21 @@ public class Turtle : MonoBehaviour
             }
         }
         
+        else if (col.gameObject.CompareTag("Boss") && isSliding)
+        {
+            if (!isKicked)
+            {
+                col.gameObject.GetComponent<Boss>().TakeDamages(2, gameObject);
+                StartCoroutine(SetInvincible2(col.gameObject));
+            }
+
+            else
+            {
+                col.gameObject.GetComponent<Boss>().TakeDamages(20, gameObject);
+                StartCoroutine(SetInvincible2(col.gameObject));
+            }
+        }
+        
         else if (col.gameObject.CompareTag("Box") && isSliding)
         {
             col.gameObject.GetComponent<Box>().Explose();
@@ -311,6 +326,15 @@ public class Turtle : MonoBehaviour
         yield return new WaitForSeconds(1f);
         
         collider.GetComponent<Ennemy>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall");;
+    }
+    
+    IEnumerator SetInvincible2(GameObject collider)
+    {
+        collider.GetComponent<Boss>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall2");
+
+        yield return new WaitForSeconds(1f);
+
+        collider.GetComponent<Boss>()._collider2D.gameObject.layer = LayerMask.NameToLayer("EnnemiesWall"); ;
     }
 
     public void Kicked(Vector2 direction)
