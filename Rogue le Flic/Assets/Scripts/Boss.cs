@@ -316,9 +316,11 @@ public class Boss : MonoBehaviour
     {
         if (kicked)
         {
-            int index = Random.Range(0, MoneyManager.Instance.itemsKick.Count);
+            //int index = Random.Range(0, MoneyManager.Instance.itemsKick.Count);
 
-            dying.PlayDelayed(1.8f);
+            //
+            //
+            //dying.PlayDelayed(1.8f);
             //hereee
             //Instantiate(MoneyManager.Instance.itemsKick[index], transform.position, Quaternion.identity);
         }
@@ -613,6 +615,9 @@ public class Boss : MonoBehaviour
         {
             DOTween.KillAll();
             
+            ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = false;
+            ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = false;
+            
             ReferenceChoice.Instance.kick.DOLocalMoveX(800, 1);
             ReferenceChoice.Instance.spare.DOLocalMoveX(-800, 1);
             
@@ -637,10 +642,6 @@ public class Boss : MonoBehaviour
             
 
             ChooseLoot(ReferenceChoice.Instance.kicked);
-            
-            
-            ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = false;
-            ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = false;
 
             Destroy(money);
             
@@ -676,6 +677,8 @@ public class Boss : MonoBehaviour
                 }
                 
                 yield return new WaitForSeconds(0.1f);
+                
+                dying.Play();
                 
                 anim.SetTrigger("death");
                 
