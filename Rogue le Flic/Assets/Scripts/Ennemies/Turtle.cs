@@ -257,6 +257,11 @@ public class Turtle : MonoBehaviour
             
             rb.AddForce(directionForce.normalized * 10, ForceMode2D.Impulse);
         }
+        
+        else if (isSliding && collider.CompareTag("Box"))
+        {
+            StopCoroutine();
+        }
 
         VerifyDeath();
 
