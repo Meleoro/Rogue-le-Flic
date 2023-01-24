@@ -12,6 +12,8 @@ public class ReferenceChoice : MonoBehaviour
     public bool kicked;
     public bool spared;
 
+    public GameObject boss;
+
 
     private void Awake()
     {
@@ -24,11 +26,13 @@ public class ReferenceChoice : MonoBehaviour
 
     public void Kicked()
     {
+        StartCoroutine(boss.GetComponent<Boss>().EndCinematicDeath(true));
         kicked = true;
     }
 
     public void Spared()
     {
+        StartCoroutine(boss.GetComponent<Boss>().EndCinematicDeath(false));
         spared = true;
     }
 }

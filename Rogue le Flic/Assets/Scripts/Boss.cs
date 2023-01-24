@@ -52,6 +52,8 @@ public class Boss : MonoBehaviour
     private bool doOnceEnd;
     private bool doOnceEnd2;
 
+    private bool doOnceEnd3;
+
     public AudioSource hit;
     public AudioSource dying;
     
@@ -64,6 +66,10 @@ public class Boss : MonoBehaviour
 
     private void Start()
     {
+        if (!isHurt)
+        {
+            ReferenceChoice.Instance.boss = gameObject;
+        }
         
         objetquigerelamusique = GameObject.FindGameObjectWithTag("AudioMusique");
 
@@ -174,7 +180,7 @@ public class Boss : MonoBehaviour
                 
                 }
             
-                StartCoroutine(EndCinematicDeath());
+                //StartCoroutine(EndCinematicDeath());
             }
         }
     }
@@ -314,18 +320,9 @@ public class Boss : MonoBehaviour
 
     void ChooseLoot(bool kicked)
     {
-        if (kicked)
-        {
-            //int index = Random.Range(0, MoneyManager.Instance.itemsKick.Count);
 
-            //
-            //
-            //dying.PlayDelayed(1.8f);
-            //hereee
-            //Instantiate(MoneyManager.Instance.itemsKick[index], transform.position, Quaternion.identity);
-        }
 
-        else
+        if (!kicked)
         {
             for (int k = 0; k < MoneyManager.Instance.moneyBossSpare; k++)
             {
@@ -609,11 +606,9 @@ public class Boss : MonoBehaviour
     
 
     
-    public IEnumerator EndCinematicDeath()
+    public IEnumerator EndCinematicDeath(bool kicked)
     {
-        if (!doOnceEnd)
-        {
-            DOTween.KillAll();
+        DOTween.KillAll();
             
             ReferenceChoice.Instance.kick.GetComponent<Animator>().enabled = false;
             ReferenceChoice.Instance.spare.GetComponent<Animator>().enabled = false;
@@ -641,12 +636,12 @@ public class Boss : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             
 
-            ChooseLoot(ReferenceChoice.Instance.kicked);
+            ChooseLoot(kicked);
 
             Destroy(money);
             
             // ON CHOISI DE KICK
-            if (ReferenceChoice.Instance.kicked)
+            if (kicked)
             {
                 ManagerChara.Instance.anim.SetBool("isWalking", true);
                 
@@ -686,7 +681,7 @@ public class Boss : MonoBehaviour
             }
 
             // ON CHOISI DE SPARE
-            else if(ReferenceChoice.Instance.spared)
+            else if(!kicked)
             {
                 canShake = false;
 
@@ -760,12 +755,8 @@ public class Boss : MonoBehaviour
             MapManager.Instance.activeRoom.GetComponent<DoorManager>().PortesActivesGreen();
 
             Destroy(gameObject);
-        }
-        else
-        {
-            yield break;
-        }
-    }
+        
+}
     
     
     IEnumerator JumpChoroutine()
